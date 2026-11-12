@@ -75,7 +75,102 @@ En månedlig budgetalarm på ressourcegruppen `Kontraktbridge`, 50 kr., med mail
 
 ## Afklaret
 
-(Udfyldes af Claude Code.)
+Trin 1–6 er bygget 12. november 2026. **Status: stoppet før merge, før udrulning af funktionen og før budgetalarmen.**
+
+**Tags og grene.** `postmortem`: `main` (`3365756`) er tagget `v-foer-app`, og arbejdet ligger på grenen `app`. Forside: `main` (`eece597`) er tagget `v-foer-postmortem-kort`, og arbejdet ligger på grenen `postmortem-kort`. Intet er pushet.
+
+**Testdata.** Funktionens `analyser` er kørt mod de anonymiserede sider i `api/tests/data/` og gemt i `src/test/data/`: `par-452.json` (par 1, 62,28 %), `hold-450.json` (bord 2 NS, −15 imp) og desuden `hold-450-vaelg.json`, holdlisten til testen af holdvalget. Kommandoen står i README. `api/tests/test_ingen_navne.py` tjekker nu også de tre filer mod de rigtige navne i `_lab`, og testen er grøn. Ingen af de to svar har et spil med `spillet: false`. Testene laver derfor et af spil 7 i samme form, som funktionen bruger (`_ikke_spillet`).
+
+**Tests.** Accepttestene blev skrevet først og var røde:
+
+- Appen: `src/test/start`, `hold`, `aften`, `spil`, `sprog` og `tilgaengelighed.test.tsx`, i alt 51 tests.
+- Funktionen: `api/tests/test_graense.py`, 8 tests.
+- Bredden: `tools/tjek_bredde.mjs` (accepttest 6) kører i Chrome over Vites udviklingsserver. Den lægger svarene i `sessionStorage` og måler start, holdvalg og retning, aftenen (også med Tabte point) og alle 48 spil. Den måler ved 320, 390 og 1280 px:
+  - ingen vandret rulning;
+  - alle synlige knapper og links er mindst 44 × 44 px;
+  - ingen hånd eller noget pladsnavn ligger oven i kompasset;
+  - ved 1280 px står bordet til venstre.
+
+Nu er `npm test` grøn (`tsc` og 51 tests), `pytest` er grøn (86 tests) og `tjek_bredde.mjs` er grøn.
+
+**Rettet fra mockuppen og specen, fordi husets regel om beskrivende form gælder** (`tjek_bydeform.py` fejler på "Indsæt"). Frank bør læse teksterne:
+
+- **Forsidens kort:**
+  - Teksten er "Med linket til jeres klubaften fra bridge.dk viser analysen, hvor pointene gik tabt." På engelsk: "With the link to your club evening from bridge.dk, the analysis shows where the points went."
+  - Mobilteksten er "Klubaftenen fra bridge.dk, spil for spil." (engelsk: "Your club evening from bridge.dk, board by board.").
+  - Linket hedder "Åbn analysen →", som allerede står på listen over undtagelser.
+  - Billedet er "−1" med pillen "stik".
+- **Appens intro:** "Med et link fra resultater.bridge.dk bliver klubaftenens spil gennemgået: hvad der kunne vindes med åbne kort, og hvor pointene gik tabt." Slutspil og skvis er udeladt, til 1b viser dem.
+- **Guidens tre trin:**
+  - "Linket findes på **resultater.bridge.dk** under klubben og turneringen."
+  - "Siden er **Bordresultater** for jeres hold eller **Personligt regnskab** for jeres par."
+  - "Hele adressen fra adresselinjen (linjen med `filename=…`) kopieres og sættes ind ovenfor."
+- **Spillene:** "tryk for analysen" over listen er erstattet af "Hele rækken er et link."
+
+Appen har sin egen fagords- og bydeformtest i `npm test` (`src/sprog/` med Fordelingstrænerens lister). Testen læser al tekst på alle skærme med begge svar og hele `src/tekster.ts`. Undtagelser er knappen "Analysér" og "Prøv igen om lidt."
+
+**Valg i appen:**
+
+- **Mærket i listen** kommer fra spillets mest negative del af faktorerne: spilføring, udspil (parrets udspil, `udspilseffekt`), resten af modspillet og meldinger, i den rækkefølge ved lighed.
+  - Er ingen negativ, vises den største positive spilføring eller modspil ("Spilføring +1 stik").
+  - Ellers vises "Bedste kontrakt" (parret var spilfører) eller "Bedste modspil".
+  - Held giver ikke et mærke.
+  - Stiktallet er forskellen mellem stik og DD efter udspillet (før udspillet, når udspillet er ukendt).
+  - "Meldinger: X var bedre" nævner par-kontrakten med siden, når den er modpartens (fx "Ø–V 4♥").
+- **Procenten i listen** er orange-brun under 40 % og grøn over 60 %. Imp er farvet efter fortegnet.
+- **DD-tabellen** har fire rækker (N, S, Ø, V) i stedet for mockuppens to, fordi de to hænder i en side kan tage forskelligt (fx spil 1 i 450: Ø 4 og V 5 i klør). Kontraktens felt er fremhævet.
+- **Feltet** viser score og antal, ikke kontrakten, fordi svaret kun har scorerne (`felt`). Jeres række tæller jer med ("+120 (jer) ×2").
+- **Held og uheld:** linjen om feltet følger par-delen af held. Modpartens udspil står for sig ("Modpartens udspil gav jer et stik.").
+- **Doblet og redoblet** skrives "D" og "RD" som i mockuppen ("4♠ D"). Kort skrives med E K D B 10.
+- **Topbjælken:** pilen tilbage står før 7NT-logoet som i mockuppen. "Spil 7 af 24" fra mockuppens topbjælke står under overskriften ("7 af 32 · Giver Syd · Alle i zonen"), fordi der ikke er plads ved siden af logoet. Under 380 px er navnet "Kontraktbridge" skjult ved siden af pilen, men skærmlæseren læser det stadig.
+- **44 px:** alle knapper og links har mindst 44 px. Det gælder også sidefodens links, så sidefoden er højere end Fordelingstrænerens og forsidens (26 px rækker), og filterpillerne, som er 44 px i stedet for mockuppens 36. Ønsker Frank sidefoden som i Fordelingstræneren, er det én regel i `src/styles.css`.
+- **Bordet:** kompasset er 84 px under 380 px, 112 px op til 480 px og 132 px derover (som Fordelingstrænerens). Hænderne er 1, 1,15 og 1,25 rem. Pladsnavnene ombrydes, og Nord og Syd står midt over kompasset.
+- **Fra 1000 px** står analysevinduet i to spalter med bordet til venstre, og bordet bliver stående, når man ruller.
+- **Fejl i nettet:** når funktionen ikke svarer, vises "Analysen kunne ikke hentes lige nu. Prøv igen om lidt.". Et tomt felt giver "Linket mangler."
+- **Lagring:** svaret ligger i `sessionStorage` under nøglen `postmortem` (link, holdliste og analyse). En adresse, der mangler sit svar, går tilbage til start, og et ukendt spilnummer går til aftenen.
+
+**Grænsen pr. IP** står i `api/function_app.py`, med 8 tests i `test_graense.py` og en linje i `SVAR.md`:
+
+- Vinduet starter ved den første analyse, som i kontakt-API'et.
+- Alle kald tæller undtagen holdlisten. Holdlisten er et link til `multihold_bordresultater.php` uden `hold`. Også et kald, der ender med en fejl, tæller, fordi det også henter fra bridge.dk.
+- IP'en tages fra `X-Forwarded-For` (første adresse, uden port) eller `X-Client-IP`. Uden IP er der ingen grænse, som i kontakt-API'et og funktionens øvrige tests.
+- Hukommelsen har højst 5000 adresser. Svaret har `Retry-After`, og loggen skriver "postmortem: 429 graense" uden IP.
+- Beregningen, svaret og cachen er ikke ændret.
+
+**Forsiden (grenen `postmortem-kort`):**
+
+- Det sjette kort, den nye ledetekst, Post Mortem i sidefoden på alle fire sider og `/postmortem/` i `sitemap.xml`.
+- Sidefoden bygges også af `tools/build_ordbog.py` og `tools/build_scoring.py`. Linjen er tilføjet dér, og siderne er bygget igen; de giver samme fil.
+- Mobilmenuen er ikke ændret (specen). Post Mortem står derfor ikke i menuen.
+- Rettede tests:
+  - `tjek_ny_forside.mjs`: seks kort med Post Mortem sidst og `/postmortem/`, kortets kicker, tekst og mærket "Ny", ledeteksten, seks billeder ved 390 px, sidefoden med Post Mortem på alle fire sider og sitemap.
+  - `tjek_kun_siden.mjs`: `/postmortem/` er et andet repo, som `ANDRE_REPOER` springer over.
+  - `tjek_engelsk_om_mig.mjs`: "Post Mortem" er det samme på begge sprog og står nu på listen over navne.
+- Disse tjek er grønne: `tjek_ny_forside`, `tjek_kun_siden`, `tjek_fagord`, `tjek_bydeform`, `tjek_bredde`, `tjek_ordbog`, `tjek_skrifttyper` (begge), `tjek_scoring`, `tjek_om_mig`, `tjek_privatliv` (begge), `tjek_engelsk_om_mig` og `tjek_kontakt` (begge).
+- `tjek_mappe.py` fejler også på `main`. Den venter fire mapper i `Kontraktbridge.code-workspace`, og Postmortem kom med som femte i vindue 1a. Fejlen er uden for denne spec og er ikke rettet.
+
+**Udgivelse (trin 7, ikke gjort):**
+
+- `.github/workflows/pages.yml` er som Fordelingstrænerens: `npm ci`, `npm test` og `npx vite build --base=/postmortem/`. Bygget er prøvet lokalt, og stierne er `/postmortem/…`.
+- Produktionsbygget kalder Azure-adressen, og udviklingsserveren bruger proxyen. Funktionens CORS er ikke ændret.
+- Pages skal slås til med GitHub Actions som kilde.
+
+**Budgetalarmen (trin 7, ikke kørt):**
+
+- `az consumption budget create-with-rg` findes (preview) og tager notifikationer.
+- Abonnementet har i forvejen budgettet "LoginProjekt" (300 pr. måned, på abonnementet). Valutaen kunne ikke læses med `az`. Beløbet er i abonnementets faktureringsvaluta, så det skal ses i portalen, at det er kr.
+- Kommandoen, der vises Frank før kørsel (mailadressen indsættes ved kørslen og skrives ikke her):
+
+```bash
+MSYS_NO_PATHCONV=1 az consumption budget create-with-rg -g Kontraktbridge -n kontraktbridge-maaned \
+  --amount 50 --category Cost --time-grain Monthly --time-period "{start-date:2026-11-01T00:00:00Z}" \
+  --notifications "{Faktisk80:{enabled:true,operator:GreaterThanOrEqualTo,threshold:80,contact-emails:[<mail>]},Faktisk100:{enabled:true,operator:GreaterThanOrEqualTo,threshold:100,contact-emails:[<mail>]}}"
+az consumption budget show-with-rg -g Kontraktbridge -n kontraktbridge-maaned
+```
+
+- Afviser `az` kommandoen, gøres det i portalen: Ressourcegruppen Kontraktbridge → Cost Management → Budgets → Add. Budgettet er månedligt med 50 og alarmer ved 80 % og 100 % (Actual) til Franks mail.
+
+**Skærmbilleder** fra `tools/tjek_bredde.mjs --billeder` ligger i `Kontraktbridge\skaermbilleder\app\` (390 og 1280 px: start, hold, aften par og hold, spil 7 og hold spil 4).
 
 ## Besked til Claude Code
 

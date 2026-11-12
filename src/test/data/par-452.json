@@ -1,0 +1,3842 @@
+{
+ "turnering": {
+  "navn": "Klubsølv, 04.11.2026, aften, A-rækken",
+  "titel": null,
+  "dato": "2026-11-04",
+  "form": "par",
+  "skala": "matchpoint",
+  "top": 14,
+  "id": "452",
+  "sektion": "1",
+  "runde": null,
+  "halvleg": null
+ },
+ "deltager": {
+  "type": "par",
+  "nummer": 1
+ },
+ "resultat": {
+  "procent": 62.28,
+  "point": 279,
+  "top": 448,
+  "imp": null
+ },
+ "faktorer": {
+  "meldinger": 23,
+  "spilfoering": 12,
+  "modspil": -2,
+  "held": 22
+ },
+ "stoersteForbedring": "modspil",
+ "spil": [
+  {
+   "nummer": 1,
+   "giver": "N",
+   "zone": "None",
+   "haender": {
+    "N": "97652.AJ7.T84.T6",
+    "E": "JT.9832.KJ9.KQ72",
+    "S": "Q83.Q65.AQ732.J5",
+    "W": "AK4.KT4.65.A9843"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 4,
+     "D": 6,
+     "H": 4,
+     "S": 6,
+     "NT": 4
+    },
+    "E": {
+     "C": 9,
+     "D": 7,
+     "H": 9,
+     "S": 7,
+     "NT": 9
+    },
+    "S": {
+     "C": 4,
+     "D": 6,
+     "H": 4,
+     "S": 6,
+     "NT": 4
+    },
+    "W": {
+     "C": 9,
+     "D": 7,
+     "H": 9,
+     "S": 7,
+     "NT": 9
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 4,
+     "S": 6,
+     "H": 4,
+     "D": 6,
+     "C": 4
+    },
+    "S": {
+     "NT": 4,
+     "S": 6,
+     "H": 4,
+     "D": 6,
+     "C": 4
+    },
+    "E": {
+     "NT": 9,
+     "S": 7,
+     "H": 9,
+     "D": 7,
+     "C": 9
+    },
+    "W": {
+     "NT": 9,
+     "S": 7,
+     "H": 9,
+     "D": 7,
+     "C": 9
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -400,
+    "score": -400,
+    "kontrakter": [
+     "3NT OV="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "E",
+   "udspil": "D3",
+   "stik": 8,
+   "score": 50,
+   "point": 9,
+   "top": 14,
+   "procent": 64.3,
+   "felt": [
+    100,
+    90,
+    50,
+    -110,
+    -110,
+    -110,
+    -150
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 9,
+   "scorer": {
+    "faktisk": 50,
+    "ddEfter": -400,
+    "ddFoer": -400,
+    "par": -400
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 9,
+    "held": -7
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 2,
+   "giver": "E",
+   "zone": "NS",
+   "haender": {
+    "N": "62.K65.T763.AQT6",
+    "E": "AK97543.A73.J.93",
+    "S": "JT8.QT2.852.J872",
+    "W": "Q.J984.AKQ94.K54"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 4,
+     "D": 0,
+     "H": 3,
+     "S": 1,
+     "NT": 0
+    },
+    "E": {
+     "C": 7,
+     "D": 9,
+     "H": 9,
+     "S": 11,
+     "NT": 9
+    },
+    "S": {
+     "C": 4,
+     "D": 0,
+     "H": 3,
+     "S": 1,
+     "NT": 0
+    },
+    "W": {
+     "C": 8,
+     "D": 9,
+     "H": 10,
+     "S": 11,
+     "NT": 9
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 0,
+     "S": 1,
+     "H": 3,
+     "D": 0,
+     "C": 4
+    },
+    "S": {
+     "NT": 0,
+     "S": 1,
+     "H": 3,
+     "D": 0,
+     "C": 4
+    },
+    "E": {
+     "NT": 9,
+     "S": 11,
+     "H": 9,
+     "D": 9,
+     "C": 7
+    },
+    "W": {
+     "NT": 9,
+     "S": 11,
+     "H": 10,
+     "D": 9,
+     "C": 8
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -450,
+    "score": -450,
+    "kontrakter": [
+     "4S OV+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "4S",
+   "spilfoerer": "E",
+   "udspil": "D5",
+   "stik": 12,
+   "score": -480,
+   "point": 2,
+   "top": 14,
+   "procent": 14.3,
+   "felt": [
+    50,
+    -420,
+    -450,
+    -450,
+    -450,
+    -480,
+    -480
+   ],
+   "holdkammerater": null,
+   "ddFoer": 11,
+   "ddEfter": 11,
+   "scorer": {
+    "faktisk": -480,
+    "ddEfter": -450,
+    "ddFoer": -450,
+    "par": -450
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": -5,
+    "held": 0
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 3,
+   "giver": "S",
+   "zone": "EW",
+   "haender": {
+    "N": "K92.KT985.J84.T2",
+    "E": "864.73.962.98743",
+    "S": "J75.AJ.AKQ7.QJ65",
+    "W": "AQT3.Q642.T53.AK"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 8,
+     "D": 9,
+     "H": 9,
+     "S": 8,
+     "NT": 8
+    },
+    "E": {
+     "C": 4,
+     "D": 3,
+     "H": 4,
+     "S": 4,
+     "NT": 3
+    },
+    "S": {
+     "C": 8,
+     "D": 10,
+     "H": 9,
+     "S": 8,
+     "NT": 9
+    },
+    "W": {
+     "C": 4,
+     "D": 3,
+     "H": 4,
+     "S": 4,
+     "NT": 3
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 8,
+     "S": 8,
+     "H": 9,
+     "D": 9,
+     "C": 8
+    },
+    "S": {
+     "NT": 9,
+     "S": 8,
+     "H": 9,
+     "D": 10,
+     "C": 8
+    },
+    "E": {
+     "NT": 3,
+     "S": 4,
+     "H": 4,
+     "D": 3,
+     "C": 4
+    },
+    "W": {
+     "NT": 3,
+     "S": 4,
+     "H": 4,
+     "D": 3,
+     "C": 4
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 400,
+    "score": 400,
+    "kontrakter": [
+     "3NT NS="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "2NT",
+   "spilfoerer": "N",
+   "udspil": "C8",
+   "stik": 10,
+   "score": 180,
+   "point": 6,
+   "top": 14,
+   "procent": 42.9,
+   "felt": [
+    430,
+    400,
+    200,
+    200,
+    110,
+    100,
+    90
+   ],
+   "holdkammerater": null,
+   "ddFoer": 8,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": 180,
+    "ddEfter": 180,
+    "ddFoer": 120,
+    "par": 400
+   },
+   "faktorer": {
+    "meldinger": -5,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": 4
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 4,
+   "giver": "W",
+   "zone": "All",
+   "haender": {
+    "N": "AQ84.92.AJ9.Q754",
+    "E": "T92.A53.52.AJT93",
+    "S": "76.J84.KQT73.862",
+    "W": "KJ53.KQT76.864.K"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 6,
+     "D": 7,
+     "H": 4,
+     "S": 5,
+     "NT": 6
+    },
+    "E": {
+     "C": 7,
+     "D": 5,
+     "H": 8,
+     "S": 7,
+     "NT": 6
+    },
+    "S": {
+     "C": 6,
+     "D": 7,
+     "H": 4,
+     "S": 5,
+     "NT": 6
+    },
+    "W": {
+     "C": 7,
+     "D": 5,
+     "H": 8,
+     "S": 7,
+     "NT": 6
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 6,
+     "S": 5,
+     "H": 4,
+     "D": 7,
+     "C": 6
+    },
+    "S": {
+     "NT": 6,
+     "S": 5,
+     "H": 4,
+     "D": 7,
+     "C": 6
+    },
+    "E": {
+     "NT": 6,
+     "S": 7,
+     "H": 8,
+     "D": 5,
+     "C": 7
+    },
+    "W": {
+     "NT": 6,
+     "S": 7,
+     "H": 8,
+     "D": 5,
+     "C": 7
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -110,
+    "score": -110,
+    "kontrakter": [
+     "1H OV+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "4H",
+   "spilfoerer": "W",
+   "udspil": "H9",
+   "stik": 8,
+   "score": 200,
+   "point": 13,
+   "top": 14,
+   "procent": 92.9,
+   "felt": [
+    200,
+    100,
+    100,
+    -100,
+    -110,
+    -140,
+    -140
+   ],
+   "holdkammerater": null,
+   "ddFoer": 8,
+   "ddEfter": 9,
+   "scorer": {
+    "faktisk": 200,
+    "ddEfter": 100,
+    "ddFoer": 200,
+    "par": -110
+   },
+   "faktorer": {
+    "meldinger": 8,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -2
+   },
+   "udspilseffekt": {
+    "point": -3,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 5,
+   "giver": "N",
+   "zone": "NS",
+   "haender": {
+    "N": "JT543.542.6.AKQ9",
+    "E": "KQ86.763.QT943.T",
+    "S": "A9.AQ.AJ82.J7642",
+    "W": "72.KJT98.K75.853"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 11,
+     "D": 6,
+     "H": 6,
+     "S": 9,
+     "NT": 8
+    },
+    "E": {
+     "C": 2,
+     "D": 7,
+     "H": 7,
+     "S": 4,
+     "NT": 4
+    },
+    "S": {
+     "C": 11,
+     "D": 6,
+     "H": 6,
+     "S": 9,
+     "NT": 9
+    },
+    "W": {
+     "C": 2,
+     "D": 7,
+     "H": 7,
+     "S": 4,
+     "NT": 4
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 8,
+     "S": 9,
+     "H": 6,
+     "D": 6,
+     "C": 11
+    },
+    "S": {
+     "NT": 9,
+     "S": 9,
+     "H": 6,
+     "D": 6,
+     "C": 11
+    },
+    "E": {
+     "NT": 4,
+     "S": 4,
+     "H": 7,
+     "D": 7,
+     "C": 2
+    },
+    "W": {
+     "NT": 4,
+     "S": 4,
+     "H": 7,
+     "D": 7,
+     "C": 2
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 600,
+    "score": 600,
+    "kontrakter": [
+     "5C NS="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "S",
+   "udspil": "H8",
+   "stik": 12,
+   "score": 690,
+   "point": 14,
+   "top": 14,
+   "procent": 100.0,
+   "felt": [
+    630,
+    600,
+    150,
+    130,
+    120,
+    -200,
+    -200
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": 690,
+    "ddEfter": 630,
+    "ddFoer": 600,
+    "par": 600
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 1,
+    "modspil": 0,
+    "held": 6
+   },
+   "udspilseffekt": {
+    "point": 2,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 6,
+   "giver": "E",
+   "zone": "EW",
+   "haender": {
+    "N": "Q5.J965.T7.AK852",
+    "E": "93.AK42.KJ852.Q6",
+    "S": "T8764.Q3.AQ6.973",
+    "W": "AKJ2.T87.943.JT4"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 8,
+     "D": 4,
+     "H": 6,
+     "S": 7,
+     "NT": 6
+    },
+    "E": {
+     "C": 5,
+     "D": 8,
+     "H": 7,
+     "S": 6,
+     "NT": 7
+    },
+    "S": {
+     "C": 8,
+     "D": 4,
+     "H": 6,
+     "S": 7,
+     "NT": 6
+    },
+    "W": {
+     "C": 5,
+     "D": 8,
+     "H": 7,
+     "S": 6,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 6,
+     "S": 7,
+     "H": 6,
+     "D": 4,
+     "C": 8
+    },
+    "S": {
+     "NT": 6,
+     "S": 7,
+     "H": 6,
+     "D": 4,
+     "C": 8
+    },
+    "E": {
+     "NT": 7,
+     "S": 6,
+     "H": 7,
+     "D": 8,
+     "C": 5
+    },
+    "W": {
+     "NT": 7,
+     "S": 6,
+     "H": 7,
+     "D": 8,
+     "C": 5
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -90,
+    "score": -90,
+    "kontrakter": [
+     "2D OV="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "2H",
+   "spilfoerer": "E",
+   "udspil": "C9",
+   "stik": 6,
+   "score": 200,
+   "point": 12,
+   "top": 14,
+   "procent": 85.7,
+   "felt": [
+    200,
+    200,
+    100,
+    90,
+    -100,
+    -110,
+    -150
+   ],
+   "holdkammerater": null,
+   "ddFoer": 7,
+   "ddEfter": 7,
+   "scorer": {
+    "faktisk": 200,
+    "ddEfter": 100,
+    "ddFoer": 100,
+    "par": -90
+   },
+   "faktorer": {
+    "meldinger": 3,
+    "spilfoering": 0,
+    "modspil": 3,
+    "held": -1
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 7,
+   "giver": "S",
+   "zone": "All",
+   "haender": {
+    "N": "J84.A8.9543.J987",
+    "E": "T72.J743.QT62.T2",
+    "S": "KQ6.T962.AJ87.AK",
+    "W": "A953.KQ5.K.Q6543"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 8,
+     "D": 9,
+     "H": 7,
+     "S": 7,
+     "NT": 8
+    },
+    "E": {
+     "C": 5,
+     "D": 3,
+     "H": 5,
+     "S": 6,
+     "NT": 5
+    },
+    "S": {
+     "C": 8,
+     "D": 9,
+     "H": 7,
+     "S": 7,
+     "NT": 8
+    },
+    "W": {
+     "C": 5,
+     "D": 3,
+     "H": 5,
+     "S": 6,
+     "NT": 5
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 8,
+     "S": 7,
+     "H": 7,
+     "D": 9,
+     "C": 8
+    },
+    "S": {
+     "NT": 8,
+     "S": 7,
+     "H": 7,
+     "D": 9,
+     "C": 8
+    },
+    "E": {
+     "NT": 5,
+     "S": 6,
+     "H": 5,
+     "D": 3,
+     "C": 5
+    },
+    "W": {
+     "NT": 5,
+     "S": 6,
+     "H": 5,
+     "D": 3,
+     "C": 5
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 120,
+    "score": 120,
+    "kontrakter": [
+     "1NT NS+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "2NT",
+   "spilfoerer": "S",
+   "udspil": "H3",
+   "stik": 8,
+   "score": 120,
+   "point": 11,
+   "top": 14,
+   "procent": 78.6,
+   "felt": [
+    500,
+    120,
+    90,
+    90,
+    -100,
+    -100,
+    -100
+   ],
+   "holdkammerater": null,
+   "ddFoer": 8,
+   "ddEfter": null,
+   "scorer": {
+    "faktisk": 120,
+    "ddEfter": 120,
+    "ddFoer": 120,
+    "par": 120
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": 4
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": true
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 8,
+   "giver": "W",
+   "zone": "None",
+   "haender": {
+    "N": "KJT9.Q986.KJ86.5",
+    "E": "87.AKJT.A93.QT94",
+    "S": "652.73.QT7542.J3",
+    "W": "AQ43.542..AK8762"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 1,
+     "D": 7,
+     "H": 0,
+     "S": 5,
+     "NT": 1
+    },
+    "E": {
+     "C": 12,
+     "D": 5,
+     "H": 13,
+     "S": 8,
+     "NT": 12
+    },
+    "S": {
+     "C": 1,
+     "D": 7,
+     "H": 0,
+     "S": 5,
+     "NT": 1
+    },
+    "W": {
+     "C": 12,
+     "D": 5,
+     "H": 13,
+     "S": 8,
+     "NT": 12
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 1,
+     "S": 5,
+     "H": 0,
+     "D": 7,
+     "C": 1
+    },
+    "S": {
+     "NT": 1,
+     "S": 5,
+     "H": 0,
+     "D": 7,
+     "C": 1
+    },
+    "E": {
+     "NT": 12,
+     "S": 8,
+     "H": 13,
+     "D": 5,
+     "C": 12
+    },
+    "W": {
+     "NT": 12,
+     "S": 8,
+     "H": 13,
+     "D": 5,
+     "C": 12
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -1510,
+    "score": -1510,
+    "kontrakter": [
+     "7H OV="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "5C",
+   "spilfoerer": "W",
+   "udspil": "C5",
+   "stik": 12,
+   "score": -420,
+   "point": 13,
+   "top": 14,
+   "procent": 92.9,
+   "felt": [
+    -420,
+    -430,
+    -460,
+    -490,
+    -490,
+    -490,
+    -490
+   ],
+   "holdkammerater": null,
+   "ddFoer": 12,
+   "ddEfter": 12,
+   "scorer": {
+    "faktisk": -420,
+    "ddEfter": -420,
+    "ddFoer": -420,
+    "par": -1510
+   },
+   "faktorer": {
+    "meldinger": 13,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -7
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 9,
+   "giver": "N",
+   "zone": "EW",
+   "haender": {
+    "N": "653.T52.K973.AT6",
+    "E": "AQT94.9.A62.J982",
+    "S": "J82.J87.QJ84.KQ7",
+    "W": "K7.AKQ643.T5.543"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 4,
+     "D": 6,
+     "H": 1,
+     "S": 1,
+     "NT": 1
+    },
+    "E": {
+     "C": 9,
+     "D": 7,
+     "H": 10,
+     "S": 10,
+     "NT": 10
+    },
+    "S": {
+     "C": 4,
+     "D": 6,
+     "H": 1,
+     "S": 1,
+     "NT": 1
+    },
+    "W": {
+     "C": 9,
+     "D": 7,
+     "H": 10,
+     "S": 10,
+     "NT": 10
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 1,
+     "S": 1,
+     "H": 1,
+     "D": 6,
+     "C": 4
+    },
+    "S": {
+     "NT": 1,
+     "S": 1,
+     "H": 1,
+     "D": 6,
+     "C": 4
+    },
+    "E": {
+     "NT": 10,
+     "S": 10,
+     "H": 10,
+     "D": 7,
+     "C": 9
+    },
+    "W": {
+     "NT": 10,
+     "S": 10,
+     "H": 10,
+     "D": 7,
+     "C": 9
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -630,
+    "score": -630,
+    "kontrakter": [
+     "3NT OV+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3H",
+   "spilfoerer": "W",
+   "udspil": "S5",
+   "stik": 12,
+   "score": -230,
+   "point": 10,
+   "top": 14,
+   "procent": 71.4,
+   "felt": [
+    100,
+    -200,
+    -630,
+    -680,
+    -680,
+    -690,
+    -690
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 12,
+   "scorer": {
+    "faktisk": -230,
+    "ddEfter": -230,
+    "ddFoer": -170,
+    "par": -630
+   },
+   "faktorer": {
+    "meldinger": 3,
+    "spilfoering": 0,
+    "modspil": -2,
+    "held": 2
+   },
+   "udspilseffekt": {
+    "point": -2,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 10,
+   "giver": "E",
+   "zone": "All",
+   "haender": {
+    "N": "74.K764.32.J6543",
+    "E": "KT965.Q85.97.Q72",
+    "S": "AQ82.A93.AKT8.AT",
+    "W": "J3.JT2.QJ654.K98"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 10,
+     "D": 8,
+     "H": 9,
+     "S": 8,
+     "NT": 8
+    },
+    "E": {
+     "C": 3,
+     "D": 4,
+     "H": 3,
+     "S": 5,
+     "NT": 5
+    },
+    "S": {
+     "C": 10,
+     "D": 8,
+     "H": 10,
+     "S": 8,
+     "NT": 8
+    },
+    "W": {
+     "C": 3,
+     "D": 4,
+     "H": 3,
+     "S": 5,
+     "NT": 5
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 8,
+     "S": 8,
+     "H": 9,
+     "D": 8,
+     "C": 10
+    },
+    "S": {
+     "NT": 8,
+     "S": 8,
+     "H": 10,
+     "D": 8,
+     "C": 10
+    },
+    "E": {
+     "NT": 5,
+     "S": 5,
+     "H": 3,
+     "D": 4,
+     "C": 3
+    },
+    "W": {
+     "NT": 5,
+     "S": 5,
+     "H": 3,
+     "D": 4,
+     "C": 3
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 620,
+    "score": 620,
+    "kontrakter": [
+     "4H NS="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "S",
+   "udspil": "D5",
+   "stik": 9,
+   "score": 600,
+   "point": 13,
+   "top": 14,
+   "procent": 92.9,
+   "felt": [
+    600,
+    180,
+    180,
+    150,
+    -100,
+    -100,
+    -200
+   ],
+   "holdkammerater": null,
+   "ddFoer": 8,
+   "ddEfter": 9,
+   "scorer": {
+    "faktisk": 600,
+    "ddEfter": 600,
+    "ddFoer": -100,
+    "par": 620
+   },
+   "faktorer": {
+    "meldinger": -10,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": 16
+   },
+   "udspilseffekt": {
+    "point": 9,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 11,
+   "giver": "S",
+   "zone": "None",
+   "haender": {
+    "N": "5.T74.J98432.743",
+    "E": "K6432.KQ63..AKT9",
+    "S": "JT87.AJ.KQT6.Q82",
+    "W": "AQ9.9852.A75.J65"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 3,
+     "D": 8,
+     "H": 2,
+     "S": 3,
+     "NT": 4
+    },
+    "E": {
+     "C": 10,
+     "D": 5,
+     "H": 11,
+     "S": 10,
+     "NT": 7
+    },
+    "S": {
+     "C": 3,
+     "D": 8,
+     "H": 2,
+     "S": 3,
+     "NT": 4
+    },
+    "W": {
+     "C": 10,
+     "D": 5,
+     "H": 11,
+     "S": 10,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 4,
+     "S": 3,
+     "H": 2,
+     "D": 8,
+     "C": 3
+    },
+    "S": {
+     "NT": 4,
+     "S": 3,
+     "H": 2,
+     "D": 8,
+     "C": 3
+    },
+    "E": {
+     "NT": 7,
+     "S": 10,
+     "H": 11,
+     "D": 5,
+     "C": 10
+    },
+    "W": {
+     "NT": 7,
+     "S": 10,
+     "H": 11,
+     "D": 5,
+     "C": 10
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -450,
+    "score": -450,
+    "kontrakter": [
+     "4H OV+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "5DX",
+   "spilfoerer": "S",
+   "udspil": "CK",
+   "stik": 8,
+   "score": -500,
+   "point": 0,
+   "top": 14,
+   "procent": 0.0,
+   "felt": [
+    50,
+    50,
+    -150,
+    -200,
+    -300,
+    -450,
+    -450
+   ],
+   "holdkammerater": null,
+   "ddFoer": 8,
+   "ddEfter": null,
+   "scorer": {
+    "faktisk": -500,
+    "ddEfter": -500,
+    "ddFoer": -500,
+    "par": -450
+   },
+   "faktorer": {
+    "meldinger": -2,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -5
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": true
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 12,
+   "giver": "W",
+   "zone": "NS",
+   "haender": {
+    "N": "T2.KJ64.A8.AJ963",
+    "E": "J965.3.KQJ5.KQT5",
+    "S": "8743.987.97642.7",
+    "W": "AKQ.AQT52.T3.842"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 4,
+     "D": 4,
+     "H": 6,
+     "S": 3,
+     "NT": 2
+    },
+    "E": {
+     "C": 9,
+     "D": 8,
+     "H": 6,
+     "S": 9,
+     "NT": 10
+    },
+    "S": {
+     "C": 4,
+     "D": 4,
+     "H": 6,
+     "S": 3,
+     "NT": 2
+    },
+    "W": {
+     "C": 9,
+     "D": 9,
+     "H": 6,
+     "S": 9,
+     "NT": 11
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 2,
+     "S": 3,
+     "H": 6,
+     "D": 4,
+     "C": 4
+    },
+    "S": {
+     "NT": 2,
+     "S": 3,
+     "H": 6,
+     "D": 4,
+     "C": 4
+    },
+    "E": {
+     "NT": 10,
+     "S": 9,
+     "H": 6,
+     "D": 8,
+     "C": 9
+    },
+    "W": {
+     "NT": 11,
+     "S": 9,
+     "H": 6,
+     "D": 9,
+     "C": 9
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -460,
+    "score": -460,
+    "kontrakter": [
+     "3NT OV+2"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "E",
+   "udspil": "C7",
+   "stik": 11,
+   "score": -460,
+   "point": 6,
+   "top": 14,
+   "procent": 42.9,
+   "felt": [
+    50,
+    -460,
+    -460,
+    -460,
+    -460,
+    -460,
+    -460
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 11,
+   "scorer": {
+    "faktisk": -460,
+    "ddEfter": -460,
+    "ddFoer": -430,
+    "par": -460
+   },
+   "faktorer": {
+    "meldinger": 6,
+    "spilfoering": 0,
+    "modspil": -6,
+    "held": -1
+   },
+   "udspilseffekt": {
+    "point": -6,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 13,
+   "giver": "N",
+   "zone": "All",
+   "haender": {
+    "N": "T.QT54.AJT9.Q432",
+    "E": "KJ8742.J832.KQ8.",
+    "S": "63.AK6.542.KJ875",
+    "W": "AQ95.97.763.AT96"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 8,
+     "D": 7,
+     "H": 7,
+     "S": 3,
+     "NT": 4
+    },
+    "E": {
+     "C": 5,
+     "D": 6,
+     "H": 6,
+     "S": 10,
+     "NT": 7
+    },
+    "S": {
+     "C": 8,
+     "D": 7,
+     "H": 7,
+     "S": 3,
+     "NT": 4
+    },
+    "W": {
+     "C": 5,
+     "D": 6,
+     "H": 6,
+     "S": 10,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 4,
+     "S": 3,
+     "H": 7,
+     "D": 7,
+     "C": 8
+    },
+    "S": {
+     "NT": 4,
+     "S": 3,
+     "H": 7,
+     "D": 7,
+     "C": 8
+    },
+    "E": {
+     "NT": 7,
+     "S": 10,
+     "H": 6,
+     "D": 6,
+     "C": 5
+    },
+    "W": {
+     "NT": 7,
+     "S": 10,
+     "H": 6,
+     "D": 6,
+     "C": 5
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -620,
+    "score": -620,
+    "kontrakter": [
+     "4S OV="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "4S",
+   "spilfoerer": "E",
+   "udspil": "HA",
+   "stik": 10,
+   "score": -620,
+   "point": 5,
+   "top": 14,
+   "procent": 35.7,
+   "felt": [
+    100,
+    -170,
+    -620,
+    -620,
+    -620,
+    -620,
+    -620
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": -620,
+    "ddEfter": -620,
+    "ddFoer": -620,
+    "par": -620
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -2
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 14,
+   "giver": "E",
+   "zone": "None",
+   "haender": {
+    "N": "J.KQ32.J75.KJ854",
+    "E": "Q5.J865.K96.Q932",
+    "S": "T8762.T9.AQT42.6",
+    "W": "AK943.A74.83.AT7"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 6,
+     "D": 8,
+     "H": 6,
+     "S": 6,
+     "NT": 6
+    },
+    "E": {
+     "C": 7,
+     "D": 4,
+     "H": 6,
+     "S": 7,
+     "NT": 6
+    },
+    "S": {
+     "C": 6,
+     "D": 8,
+     "H": 6,
+     "S": 6,
+     "NT": 6
+    },
+    "W": {
+     "C": 7,
+     "D": 5,
+     "H": 6,
+     "S": 7,
+     "NT": 6
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 6,
+     "S": 6,
+     "H": 6,
+     "D": 8,
+     "C": 6
+    },
+    "S": {
+     "NT": 6,
+     "S": 6,
+     "H": 6,
+     "D": 8,
+     "C": 6
+    },
+    "E": {
+     "NT": 6,
+     "S": 7,
+     "H": 6,
+     "D": 4,
+     "C": 7
+    },
+    "W": {
+     "NT": 6,
+     "S": 7,
+     "H": 6,
+     "D": 5,
+     "C": 7
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 90,
+    "score": 90,
+    "kontrakter": [
+     "2D NS="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "1NT",
+   "spilfoerer": "E",
+   "udspil": "D4",
+   "stik": 8,
+   "score": -120,
+   "point": 3,
+   "top": 14,
+   "procent": 21.4,
+   "felt": [
+    100,
+    50,
+    50,
+    50,
+    -110,
+    -120,
+    -140
+   ],
+   "holdkammerater": null,
+   "ddFoer": 6,
+   "ddEfter": 8,
+   "scorer": {
+    "faktisk": -120,
+    "ddEfter": -120,
+    "ddFoer": 50,
+    "par": 90
+   },
+   "faktorer": {
+    "meldinger": -3,
+    "spilfoering": 0,
+    "modspil": -6,
+    "held": 5
+   },
+   "udspilseffekt": {
+    "point": -6,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 15,
+   "giver": "S",
+   "zone": "NS",
+   "haender": {
+    "N": "K9875.632.8543.9",
+    "E": "A42.Q985.AJ9.643",
+    "S": "T6.A4.T762.AQJ87",
+    "W": "QJ3.KJT7.KQ.KT52"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 5,
+     "D": 6,
+     "H": 4,
+     "S": 6,
+     "NT": 3
+    },
+    "E": {
+     "C": 8,
+     "D": 6,
+     "H": 9,
+     "S": 7,
+     "NT": 9
+    },
+    "S": {
+     "C": 5,
+     "D": 6,
+     "H": 4,
+     "S": 6,
+     "NT": 4
+    },
+    "W": {
+     "C": 8,
+     "D": 6,
+     "H": 9,
+     "S": 7,
+     "NT": 9
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 3,
+     "S": 6,
+     "H": 4,
+     "D": 6,
+     "C": 5
+    },
+    "S": {
+     "NT": 4,
+     "S": 6,
+     "H": 4,
+     "D": 6,
+     "C": 5
+    },
+    "E": {
+     "NT": 9,
+     "S": 7,
+     "H": 9,
+     "D": 6,
+     "C": 8
+    },
+    "W": {
+     "NT": 9,
+     "S": 7,
+     "H": 9,
+     "D": 6,
+     "C": 8
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -400,
+    "score": -400,
+    "kontrakter": [
+     "3NT OV="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "W",
+   "udspil": "S7",
+   "stik": 9,
+   "score": -400,
+   "point": 3,
+   "top": 14,
+   "procent": 21.4,
+   "felt": [
+    100,
+    50,
+    50,
+    50,
+    -170,
+    -400,
+    -430
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 9,
+   "scorer": {
+    "faktisk": -400,
+    "ddEfter": -400,
+    "ddFoer": -400,
+    "par": -400
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -4
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 16,
+   "giver": "W",
+   "zone": "EW",
+   "haender": {
+    "N": "54.J9.JT76.QJT76",
+    "E": "KQ6.AT832.Q53.K4",
+    "S": "AJT3.76.AK984.93",
+    "W": "9872.KQ54.2.A852"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 6,
+     "D": 8,
+     "H": 3,
+     "S": 5,
+     "NT": 4
+    },
+    "E": {
+     "C": 7,
+     "D": 5,
+     "H": 10,
+     "S": 8,
+     "NT": 8
+    },
+    "S": {
+     "C": 6,
+     "D": 8,
+     "H": 3,
+     "S": 5,
+     "NT": 4
+    },
+    "W": {
+     "C": 7,
+     "D": 5,
+     "H": 10,
+     "S": 7,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 4,
+     "S": 5,
+     "H": 3,
+     "D": 8,
+     "C": 6
+    },
+    "S": {
+     "NT": 4,
+     "S": 5,
+     "H": 3,
+     "D": 8,
+     "C": 6
+    },
+    "E": {
+     "NT": 8,
+     "S": 8,
+     "H": 10,
+     "D": 5,
+     "C": 7
+    },
+    "W": {
+     "NT": 7,
+     "S": 7,
+     "H": 10,
+     "D": 5,
+     "C": 7
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -500,
+    "score": -500,
+    "kontrakter": [
+     "5DX NS-3"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "4H",
+   "spilfoerer": "W",
+   "udspil": "DA",
+   "stik": 9,
+   "score": 100,
+   "point": 14,
+   "top": 14,
+   "procent": 100.0,
+   "felt": [
+    -170,
+    -170,
+    -200,
+    -200,
+    -620,
+    -620,
+    -650
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": null,
+   "scorer": {
+    "faktisk": 100,
+    "ddEfter": -620,
+    "ddFoer": -620,
+    "par": -500
+   },
+   "faktorer": {
+    "meldinger": -2,
+    "spilfoering": 0,
+    "modspil": 10,
+    "held": -1
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": true
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 17,
+   "giver": "N",
+   "zone": "None",
+   "haender": {
+    "N": "A3.9643.A943.KJ9",
+    "E": "K2.AJT852.QJ86.8",
+    "S": "Q9754..T72.AT765",
+    "W": "JT86.KQ7.K5.Q432"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 9,
+     "D": 7,
+     "H": 3,
+     "S": 9,
+     "NT": 5
+    },
+    "E": {
+     "C": 3,
+     "D": 6,
+     "H": 10,
+     "S": 4,
+     "NT": 7
+    },
+    "S": {
+     "C": 9,
+     "D": 7,
+     "H": 3,
+     "S": 9,
+     "NT": 5
+    },
+    "W": {
+     "C": 3,
+     "D": 6,
+     "H": 10,
+     "S": 4,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 5,
+     "S": 9,
+     "H": 3,
+     "D": 7,
+     "C": 9
+    },
+    "S": {
+     "NT": 5,
+     "S": 9,
+     "H": 3,
+     "D": 7,
+     "C": 9
+    },
+    "E": {
+     "NT": 7,
+     "S": 4,
+     "H": 10,
+     "D": 6,
+     "C": 3
+    },
+    "W": {
+     "NT": 7,
+     "S": 4,
+     "H": 10,
+     "D": 6,
+     "C": 3
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -100,
+    "score": -100,
+    "kontrakter": [
+     "4SX NS-1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3H",
+   "spilfoerer": "E",
+   "udspil": "D7",
+   "stik": 9,
+   "score": -140,
+   "point": 12,
+   "top": 14,
+   "procent": 85.7,
+   "felt": [
+    -50,
+    -170,
+    -170,
+    -420,
+    -420,
+    -420,
+    -500
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": -140,
+    "ddEfter": -170,
+    "ddFoer": -170,
+    "par": -100
+   },
+   "faktorer": {
+    "meldinger": -2,
+    "spilfoering": 0,
+    "modspil": 2,
+    "held": 5
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 18,
+   "giver": "E",
+   "zone": "NS",
+   "haender": {
+    "N": "AJT2.AJ7.AJ95.K8",
+    "E": "83.KT963.QT86.Q7",
+    "S": "K54.Q85.73.AT962",
+    "W": "Q976.42.K42.J543"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 11,
+     "D": 9,
+     "H": 9,
+     "S": 10,
+     "NT": 10
+    },
+    "E": {
+     "C": 2,
+     "D": 4,
+     "H": 4,
+     "S": 3,
+     "NT": 3
+    },
+    "S": {
+     "C": 10,
+     "D": 8,
+     "H": 8,
+     "S": 10,
+     "NT": 9
+    },
+    "W": {
+     "C": 2,
+     "D": 4,
+     "H": 4,
+     "S": 3,
+     "NT": 3
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 10,
+     "S": 10,
+     "H": 9,
+     "D": 9,
+     "C": 11
+    },
+    "S": {
+     "NT": 9,
+     "S": 10,
+     "H": 8,
+     "D": 8,
+     "C": 10
+    },
+    "E": {
+     "NT": 3,
+     "S": 3,
+     "H": 4,
+     "D": 4,
+     "C": 2
+    },
+    "W": {
+     "NT": 3,
+     "S": 3,
+     "H": 4,
+     "D": 4,
+     "C": 2
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 630,
+    "score": 630,
+    "kontrakter": [
+     "3NT NS+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "S",
+   "udspil": "S6",
+   "stik": 11,
+   "score": 660,
+   "point": 13,
+   "top": 14,
+   "procent": 92.9,
+   "felt": [
+    660,
+    630,
+    630,
+    600,
+    600,
+    300,
+    -100
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": 660,
+    "ddEfter": 630,
+    "ddFoer": 600,
+    "par": 630
+   },
+   "faktorer": {
+    "meldinger": -4,
+    "spilfoering": 3,
+    "modspil": 0,
+    "held": 7
+   },
+   "udspilseffekt": {
+    "point": 4,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 19,
+   "giver": "S",
+   "zone": "EW",
+   "haender": {
+    "N": "96.KJ8.T96.JT752",
+    "E": "AKQJ87.93.J8.K84",
+    "S": "T.AT652.742.A963",
+    "W": "5432.Q74.AKQ53.Q"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 7,
+     "D": 2,
+     "H": 8,
+     "S": 1,
+     "NT": 2
+    },
+    "E": {
+     "C": 5,
+     "D": 10,
+     "H": 5,
+     "S": 10,
+     "NT": 7
+    },
+    "S": {
+     "C": 7,
+     "D": 2,
+     "H": 8,
+     "S": 1,
+     "NT": 2
+    },
+    "W": {
+     "C": 5,
+     "D": 10,
+     "H": 5,
+     "S": 10,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 2,
+     "S": 1,
+     "H": 8,
+     "D": 2,
+     "C": 7
+    },
+    "S": {
+     "NT": 2,
+     "S": 1,
+     "H": 8,
+     "D": 2,
+     "C": 7
+    },
+    "E": {
+     "NT": 7,
+     "S": 10,
+     "H": 5,
+     "D": 10,
+     "C": 5
+    },
+    "W": {
+     "NT": 7,
+     "S": 10,
+     "H": 5,
+     "D": 10,
+     "C": 5
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -500,
+    "score": -500,
+    "kontrakter": [
+     "5HX NS-3"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "4S",
+   "spilfoerer": "E",
+   "udspil": "HA",
+   "stik": 11,
+   "score": -650,
+   "point": 8,
+   "top": 14,
+   "procent": 57.1,
+   "felt": [
+    -620,
+    -620,
+    -650,
+    -650,
+    -680,
+    -680,
+    -680
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": -650,
+    "ddEfter": -620,
+    "ddFoer": -620,
+    "par": -500
+   },
+   "faktorer": {
+    "meldinger": -2,
+    "spilfoering": 0,
+    "modspil": -4,
+    "held": 7
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 20,
+   "giver": "W",
+   "zone": "All",
+   "haender": {
+    "N": "QJ.8.JT54.KT8754",
+    "E": "97532.KJ42.6.932",
+    "S": "T.T93.AKQ873.AQJ",
+    "W": "AK864.AQ765.92.6"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 11,
+     "D": 11,
+     "H": 2,
+     "S": 1,
+     "NT": 3
+    },
+    "E": {
+     "C": 1,
+     "D": 1,
+     "H": 11,
+     "S": 11,
+     "NT": 1
+    },
+    "S": {
+     "C": 11,
+     "D": 11,
+     "H": 2,
+     "S": 1,
+     "NT": 3
+    },
+    "W": {
+     "C": 1,
+     "D": 1,
+     "H": 11,
+     "S": 11,
+     "NT": 1
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 3,
+     "S": 1,
+     "H": 2,
+     "D": 11,
+     "C": 11
+    },
+    "S": {
+     "NT": 3,
+     "S": 1,
+     "H": 2,
+     "D": 11,
+     "C": 11
+    },
+    "E": {
+     "NT": 1,
+     "S": 11,
+     "H": 11,
+     "D": 1,
+     "C": 1
+    },
+    "W": {
+     "NT": 1,
+     "S": 11,
+     "H": 11,
+     "D": 1,
+     "C": 1
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -200,
+    "score": -200,
+    "kontrakter": [
+     "6CX NS-1",
+     "6DX NS-1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "6CX",
+   "spilfoerer": "N",
+   "udspil": "D9",
+   "stik": 12,
+   "score": 1540,
+   "point": 14,
+   "top": 14,
+   "procent": 100.0,
+   "felt": [
+    950,
+    620,
+    -170,
+    -200,
+    -680,
+    -680,
+    -680
+   ],
+   "holdkammerater": null,
+   "ddFoer": 11,
+   "ddEfter": null,
+   "scorer": {
+    "faktisk": 1540,
+    "ddEfter": -200,
+    "ddFoer": -200,
+    "par": -200
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 7,
+    "modspil": 0,
+    "held": 0
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": true
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 21,
+   "giver": "N",
+   "zone": "NS",
+   "haender": {
+    "N": "QT7.J932.94.K765",
+    "E": "865.AK876.AQ5.93",
+    "S": "32.Q54.K83.AQ842",
+    "W": "AKJ94.T.JT762.JT"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 7,
+     "D": 3,
+     "H": 6,
+     "S": 3,
+     "NT": 6
+    },
+    "E": {
+     "C": 5,
+     "D": 9,
+     "H": 7,
+     "S": 9,
+     "NT": 7
+    },
+    "S": {
+     "C": 7,
+     "D": 3,
+     "H": 6,
+     "S": 3,
+     "NT": 6
+    },
+    "W": {
+     "C": 5,
+     "D": 9,
+     "H": 7,
+     "S": 9,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 6,
+     "S": 3,
+     "H": 6,
+     "D": 3,
+     "C": 7
+    },
+    "S": {
+     "NT": 6,
+     "S": 3,
+     "H": 6,
+     "D": 3,
+     "C": 7
+    },
+    "E": {
+     "NT": 7,
+     "S": 9,
+     "H": 7,
+     "D": 9,
+     "C": 5
+    },
+    "W": {
+     "NT": 7,
+     "S": 9,
+     "H": 7,
+     "D": 9,
+     "C": 5
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -140,
+    "score": -140,
+    "kontrakter": [
+     "1S OV+2"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3S",
+   "spilfoerer": "W",
+   "udspil": "CK",
+   "stik": 9,
+   "score": -140,
+   "point": 0,
+   "top": 14,
+   "procent": 0.0,
+   "felt": [
+    100,
+    100,
+    50,
+    50,
+    50,
+    50,
+    -110
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 9,
+   "scorer": {
+    "faktisk": -140,
+    "ddEfter": -140,
+    "ddFoer": -140,
+    "par": -140
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -7
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 22,
+   "giver": "E",
+   "zone": "EW",
+   "haender": {
+    "N": "3.K873.JT7654.93",
+    "E": "KT962.T.982.AQ75",
+    "S": "QJ8.AQ9652.K.K62",
+    "W": "A754.J4.AQ3.JT84"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 3,
+     "D": 8,
+     "H": 10,
+     "S": 3,
+     "NT": 7
+    },
+    "E": {
+     "C": 9,
+     "D": 5,
+     "H": 3,
+     "S": 10,
+     "NT": 6
+    },
+    "S": {
+     "C": 3,
+     "D": 8,
+     "H": 10,
+     "S": 3,
+     "NT": 7
+    },
+    "W": {
+     "C": 9,
+     "D": 5,
+     "H": 3,
+     "S": 10,
+     "NT": 6
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 7,
+     "S": 3,
+     "H": 10,
+     "D": 8,
+     "C": 3
+    },
+    "S": {
+     "NT": 7,
+     "S": 3,
+     "H": 10,
+     "D": 8,
+     "C": 3
+    },
+    "E": {
+     "NT": 6,
+     "S": 10,
+     "H": 3,
+     "D": 5,
+     "C": 9
+    },
+    "W": {
+     "NT": 6,
+     "S": 10,
+     "H": 3,
+     "D": 5,
+     "C": 9
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -100,
+    "score": -100,
+    "kontrakter": [
+     "5HX NS-1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "4H",
+   "spilfoerer": "N",
+   "udspil": "S2",
+   "stik": 10,
+   "score": 420,
+   "point": 13,
+   "top": 14,
+   "procent": 92.9,
+   "felt": [
+    420,
+    -50,
+    -50,
+    -100,
+    -140,
+    -300,
+    -620
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": 420,
+    "ddEfter": 420,
+    "ddFoer": 420,
+    "par": -100
+   },
+   "faktorer": {
+    "meldinger": 6,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": 0
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 23,
+   "giver": "S",
+   "zone": "All",
+   "haender": {
+    "N": "98.Q9876.T75.A82",
+    "E": "K.KJ43.KQJ4.T653",
+    "S": "J764.A5.A986.Q94",
+    "W": "AQT532.T2.32.KJ7"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 5,
+     "D": 5,
+     "H": 6,
+     "S": 4,
+     "NT": 5
+    },
+    "E": {
+     "C": 8,
+     "D": 8,
+     "H": 7,
+     "S": 9,
+     "NT": 8
+    },
+    "S": {
+     "C": 5,
+     "D": 5,
+     "H": 6,
+     "S": 4,
+     "NT": 5
+    },
+    "W": {
+     "C": 8,
+     "D": 8,
+     "H": 7,
+     "S": 9,
+     "NT": 8
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 5,
+     "S": 4,
+     "H": 6,
+     "D": 5,
+     "C": 5
+    },
+    "S": {
+     "NT": 5,
+     "S": 4,
+     "H": 6,
+     "D": 5,
+     "C": 5
+    },
+    "E": {
+     "NT": 8,
+     "S": 9,
+     "H": 7,
+     "D": 8,
+     "C": 8
+    },
+    "W": {
+     "NT": 8,
+     "S": 9,
+     "H": 7,
+     "D": 8,
+     "C": 8
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -140,
+    "score": -140,
+    "kontrakter": [
+     "1S OV+2"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "2S",
+   "spilfoerer": "W",
+   "udspil": "D7",
+   "stik": 9,
+   "score": -140,
+   "point": 4,
+   "top": 14,
+   "procent": 28.6,
+   "felt": [
+    200,
+    -110,
+    -120,
+    -140,
+    -140,
+    -140,
+    -140
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 9,
+   "scorer": {
+    "faktisk": -140,
+    "ddEfter": -140,
+    "ddFoer": -140,
+    "par": -140
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -3
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 24,
+   "giver": "W",
+   "zone": "None",
+   "haender": {
+    "N": "75.AT652.AKJ4.86",
+    "E": "AKT43.73.T2.JT92",
+    "S": "Q98.J.753.AKQ743",
+    "W": "J62.KQ984.Q986.5"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 10,
+     "D": 9,
+     "H": 6,
+     "S": 6,
+     "NT": 8
+    },
+    "E": {
+     "C": 3,
+     "D": 4,
+     "H": 6,
+     "S": 7,
+     "NT": 4
+    },
+    "S": {
+     "C": 10,
+     "D": 9,
+     "H": 6,
+     "S": 6,
+     "NT": 8
+    },
+    "W": {
+     "C": 3,
+     "D": 4,
+     "H": 6,
+     "S": 7,
+     "NT": 4
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 8,
+     "S": 6,
+     "H": 6,
+     "D": 9,
+     "C": 10
+    },
+    "S": {
+     "NT": 8,
+     "S": 6,
+     "H": 6,
+     "D": 9,
+     "C": 10
+    },
+    "E": {
+     "NT": 4,
+     "S": 7,
+     "H": 6,
+     "D": 4,
+     "C": 3
+    },
+    "W": {
+     "NT": 4,
+     "S": 7,
+     "H": 6,
+     "D": 4,
+     "C": 3
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 130,
+    "score": 130,
+    "kontrakter": [
+     "3C NS+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3C",
+   "spilfoerer": "S",
+   "udspil": "S6",
+   "stik": 10,
+   "score": 130,
+   "point": 12,
+   "top": 14,
+   "procent": 85.7,
+   "felt": [
+    130,
+    130,
+    -100,
+    -100,
+    -100,
+    -100,
+    -100
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": 130,
+    "ddEfter": 130,
+    "ddFoer": 130,
+    "par": 130
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": 5
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 25,
+   "giver": "N",
+   "zone": "EW",
+   "haender": {
+    "N": "AJT3.Q8.Q7.J9742",
+    "E": "Q542.J.AT542.Q53",
+    "S": "98.AT632.983.T86",
+    "W": "K76.K9754.KJ6.AK"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 5,
+     "D": 2,
+     "H": 4,
+     "S": 4,
+     "NT": 3
+    },
+    "E": {
+     "C": 7,
+     "D": 11,
+     "H": 9,
+     "S": 9,
+     "NT": 10
+    },
+    "S": {
+     "C": 5,
+     "D": 2,
+     "H": 4,
+     "S": 4,
+     "NT": 3
+    },
+    "W": {
+     "C": 8,
+     "D": 11,
+     "H": 9,
+     "S": 9,
+     "NT": 10
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 3,
+     "S": 4,
+     "H": 4,
+     "D": 2,
+     "C": 5
+    },
+    "S": {
+     "NT": 3,
+     "S": 4,
+     "H": 4,
+     "D": 2,
+     "C": 5
+    },
+    "E": {
+     "NT": 10,
+     "S": 9,
+     "H": 9,
+     "D": 11,
+     "C": 7
+    },
+    "W": {
+     "NT": 10,
+     "S": 9,
+     "H": 9,
+     "D": 11,
+     "C": 8
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -630,
+    "score": -630,
+    "kontrakter": [
+     "3NT OV+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "W",
+   "udspil": "C4",
+   "stik": 10,
+   "score": -630,
+   "point": 3,
+   "top": 14,
+   "procent": 21.4,
+   "felt": [
+    100,
+    -140,
+    -150,
+    -180,
+    -630,
+    -630,
+    -630
+   ],
+   "holdkammerater": null,
+   "ddFoer": 10,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": -630,
+    "ddEfter": -630,
+    "ddFoer": -630,
+    "par": -630
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -4
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 26,
+   "giver": "E",
+   "zone": "All",
+   "haender": {
+    "N": "9864.T72.KT3.KT2",
+    "E": "AKQJ.83.A752.J98",
+    "S": "53.AKJ65.QJ.A754",
+    "W": "T72.Q94.9864.Q63"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 7,
+     "D": 6,
+     "H": 8,
+     "S": 6,
+     "NT": 7
+    },
+    "E": {
+     "C": 5,
+     "D": 7,
+     "H": 5,
+     "S": 7,
+     "NT": 6
+    },
+    "S": {
+     "C": 7,
+     "D": 6,
+     "H": 8,
+     "S": 6,
+     "NT": 7
+    },
+    "W": {
+     "C": 5,
+     "D": 7,
+     "H": 5,
+     "S": 7,
+     "NT": 6
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 7,
+     "S": 6,
+     "H": 8,
+     "D": 6,
+     "C": 7
+    },
+    "S": {
+     "NT": 7,
+     "S": 6,
+     "H": 8,
+     "D": 6,
+     "C": 7
+    },
+    "E": {
+     "NT": 6,
+     "S": 7,
+     "H": 5,
+     "D": 7,
+     "C": 5
+    },
+    "W": {
+     "NT": 6,
+     "S": 7,
+     "H": 5,
+     "D": 7,
+     "C": 5
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 110,
+    "score": 110,
+    "kontrakter": [
+     "2H NS="
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "2H",
+   "spilfoerer": "S",
+   "udspil": "S7",
+   "stik": 8,
+   "score": 110,
+   "point": 10,
+   "top": 14,
+   "procent": 71.4,
+   "felt": [
+    200,
+    110,
+    110,
+    100,
+    100,
+    -100,
+    -180
+   ],
+   "holdkammerater": null,
+   "ddFoer": 8,
+   "ddEfter": 8,
+   "scorer": {
+    "faktisk": 110,
+    "ddEfter": 110,
+    "ddFoer": 110,
+    "par": 110
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": 3
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 27,
+   "giver": "S",
+   "zone": "None",
+   "haender": {
+    "N": "A94.AKT2.T7.K985",
+    "E": "J532.8765.AK85.3",
+    "S": "T.J943.J94.AQ742",
+    "W": "KQ876.Q.Q632.JT6"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 11,
+     "D": 4,
+     "H": 11,
+     "S": 3,
+     "NT": 9
+    },
+    "E": {
+     "C": 2,
+     "D": 8,
+     "H": 1,
+     "S": 9,
+     "NT": 3
+    },
+    "S": {
+     "C": 11,
+     "D": 4,
+     "H": 11,
+     "S": 3,
+     "NT": 9
+    },
+    "W": {
+     "C": 2,
+     "D": 8,
+     "H": 1,
+     "S": 9,
+     "NT": 3
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 9,
+     "S": 3,
+     "H": 11,
+     "D": 4,
+     "C": 11
+    },
+    "S": {
+     "NT": 9,
+     "S": 3,
+     "H": 11,
+     "D": 4,
+     "C": 11
+    },
+    "E": {
+     "NT": 3,
+     "S": 9,
+     "H": 1,
+     "D": 8,
+     "C": 2
+    },
+    "W": {
+     "NT": 3,
+     "S": 9,
+     "H": 1,
+     "D": 8,
+     "C": 2
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 300,
+    "score": 300,
+    "kontrakter": [
+     "5SX OV-2"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "1NT",
+   "spilfoerer": "N",
+   "udspil": "H8",
+   "stik": 9,
+   "score": 150,
+   "point": 9,
+   "top": 14,
+   "procent": 64.3,
+   "felt": [
+    400,
+    180,
+    150,
+    140,
+    50,
+    -170,
+    -420
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": 150,
+    "ddEfter": 180,
+    "ddFoer": 150,
+    "par": 300
+   },
+   "faktorer": {
+    "meldinger": -3,
+    "spilfoering": -2,
+    "modspil": 0,
+    "held": 7
+   },
+   "udspilseffekt": {
+    "point": 2,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 28,
+   "giver": "W",
+   "zone": "NS",
+   "haender": {
+    "N": "AT9762.5.AK654.T",
+    "E": "4.AKJT82.9.85432",
+    "S": "J53.943.QJ32.AK6",
+    "W": "KQ8.Q76.T87.QJ97"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 4,
+     "D": 11,
+     "H": 4,
+     "S": 11,
+     "NT": 7
+    },
+    "E": {
+     "C": 9,
+     "D": 1,
+     "H": 8,
+     "S": 1,
+     "NT": 5
+    },
+    "S": {
+     "C": 4,
+     "D": 11,
+     "H": 4,
+     "S": 11,
+     "NT": 7
+    },
+    "W": {
+     "C": 9,
+     "D": 1,
+     "H": 8,
+     "S": 1,
+     "NT": 5
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 7,
+     "S": 11,
+     "H": 4,
+     "D": 11,
+     "C": 4
+    },
+    "S": {
+     "NT": 7,
+     "S": 11,
+     "H": 4,
+     "D": 11,
+     "C": 4
+    },
+    "E": {
+     "NT": 5,
+     "S": 1,
+     "H": 8,
+     "D": 1,
+     "C": 9
+    },
+    "W": {
+     "NT": 5,
+     "S": 1,
+     "H": 8,
+     "D": 1,
+     "C": 9
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 500,
+    "score": 500,
+    "kontrakter": [
+     "6CX OV-3"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "4S",
+   "spilfoerer": "N",
+   "udspil": "HA",
+   "stik": 11,
+   "score": 650,
+   "point": 7,
+   "top": 14,
+   "procent": 50.0,
+   "felt": [
+    790,
+    680,
+    680,
+    650,
+    600,
+    150,
+    -100
+   ],
+   "holdkammerater": null,
+   "ddFoer": 11,
+   "ddEfter": 11,
+   "scorer": {
+    "faktisk": 650,
+    "ddEfter": 650,
+    "ddFoer": 650,
+    "par": 500
+   },
+   "faktorer": {
+    "meldinger": 3,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": -3
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 29,
+   "giver": "N",
+   "zone": "All",
+   "haender": {
+    "N": "AK8765.J32.K64.8",
+    "E": "Q3.5.JT8532.AKJ3",
+    "S": "J42.KQ97.A9.T962",
+    "W": "T9.AT864.Q7.Q754"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 4,
+     "D": 5,
+     "H": 7,
+     "S": 9,
+     "NT": 8
+    },
+    "E": {
+     "C": 8,
+     "D": 8,
+     "H": 5,
+     "S": 2,
+     "NT": 5
+    },
+    "S": {
+     "C": 4,
+     "D": 5,
+     "H": 7,
+     "S": 9,
+     "NT": 8
+    },
+    "W": {
+     "C": 8,
+     "D": 8,
+     "H": 5,
+     "S": 2,
+     "NT": 5
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 8,
+     "S": 9,
+     "H": 7,
+     "D": 5,
+     "C": 4
+    },
+    "S": {
+     "NT": 8,
+     "S": 9,
+     "H": 7,
+     "D": 5,
+     "C": 4
+    },
+    "E": {
+     "NT": 5,
+     "S": 2,
+     "H": 5,
+     "D": 8,
+     "C": 8
+    },
+    "W": {
+     "NT": 5,
+     "S": 2,
+     "H": 5,
+     "D": 8,
+     "C": 8
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 140,
+    "score": 140,
+    "kontrakter": [
+     "2S NS+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3S",
+   "spilfoerer": "N",
+   "udspil": "CA",
+   "stik": 11,
+   "score": 200,
+   "point": 10,
+   "top": 14,
+   "procent": 71.4,
+   "felt": [
+    650,
+    200,
+    200,
+    170,
+    100,
+    -90,
+    -110
+   ],
+   "holdkammerater": null,
+   "ddFoer": 9,
+   "ddEfter": 10,
+   "scorer": {
+    "faktisk": 200,
+    "ddEfter": 170,
+    "ddFoer": 140,
+    "par": 140
+   },
+   "faktorer": {
+    "meldinger": 0,
+    "spilfoering": 3,
+    "modspil": 0,
+    "held": 0
+   },
+   "udspilseffekt": {
+    "point": 1,
+    "udspilAf": "modparten",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 30,
+   "giver": "E",
+   "zone": "None",
+   "haender": {
+    "N": "K73.AQ75.A54.T52",
+    "E": "AQT94.98.QJ6.QJ4",
+    "S": "865.KJ4.T832.A73",
+    "W": "J2.T632.K97.K986"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 5,
+     "D": 5,
+     "H": 6,
+     "S": 4,
+     "NT": 6
+    },
+    "E": {
+     "C": 8,
+     "D": 7,
+     "H": 7,
+     "S": 9,
+     "NT": 7
+    },
+    "S": {
+     "C": 5,
+     "D": 5,
+     "H": 6,
+     "S": 4,
+     "NT": 6
+    },
+    "W": {
+     "C": 8,
+     "D": 7,
+     "H": 7,
+     "S": 9,
+     "NT": 7
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 6,
+     "S": 4,
+     "H": 6,
+     "D": 5,
+     "C": 5
+    },
+    "S": {
+     "NT": 6,
+     "S": 4,
+     "H": 6,
+     "D": 5,
+     "C": 5
+    },
+    "E": {
+     "NT": 7,
+     "S": 9,
+     "H": 7,
+     "D": 7,
+     "C": 8
+    },
+    "W": {
+     "NT": 7,
+     "S": 9,
+     "H": 7,
+     "D": 7,
+     "C": 8
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -140,
+    "score": -140,
+    "kontrakter": [
+     "2S OV+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "1NT",
+   "spilfoerer": "W",
+   "udspil": "DA",
+   "stik": 10,
+   "score": -180,
+   "point": 2,
+   "top": 14,
+   "procent": 14.3,
+   "felt": [
+    50,
+    50,
+    -50,
+    -90,
+    -120,
+    -140,
+    -200
+   ],
+   "holdkammerater": null,
+   "ddFoer": 7,
+   "ddEfter": 7,
+   "scorer": {
+    "faktisk": -180,
+    "ddEfter": -90,
+    "ddFoer": -90,
+    "par": -140
+   },
+   "faktorer": {
+    "meldinger": 4,
+    "spilfoering": 0,
+    "modspil": -5,
+    "held": -4
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 31,
+   "giver": "S",
+   "zone": "NS",
+   "haender": {
+    "N": "AQJ72.QJ8.654.97",
+    "E": ".KT653.KQ873.KQ3",
+    "S": "T9.A974.AJ9.JT84",
+    "W": "K86543.2.T2.A652"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 6,
+     "D": 4,
+     "H": 6,
+     "S": 7,
+     "NT": 8
+    },
+    "E": {
+     "C": 7,
+     "D": 8,
+     "H": 7,
+     "S": 6,
+     "NT": 5
+    },
+    "S": {
+     "C": 5,
+     "D": 4,
+     "H": 6,
+     "S": 7,
+     "NT": 8
+    },
+    "W": {
+     "C": 7,
+     "D": 7,
+     "H": 6,
+     "S": 6,
+     "NT": 5
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 8,
+     "S": 7,
+     "H": 6,
+     "D": 4,
+     "C": 6
+    },
+    "S": {
+     "NT": 8,
+     "S": 7,
+     "H": 6,
+     "D": 4,
+     "C": 5
+    },
+    "E": {
+     "NT": 5,
+     "S": 6,
+     "H": 7,
+     "D": 8,
+     "C": 7
+    },
+    "W": {
+     "NT": 5,
+     "S": 6,
+     "H": 6,
+     "D": 7,
+     "C": 7
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": 100,
+    "score": 100,
+    "kontrakter": [
+     "3DX OV-1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "3NT",
+   "spilfoerer": "E",
+   "udspil": "CJ",
+   "stik": 4,
+   "score": 250,
+   "point": 14,
+   "top": 14,
+   "procent": 100.0,
+   "felt": [
+    100,
+    100,
+    50,
+    50,
+    -120,
+    -120,
+    -140
+   ],
+   "holdkammerater": null,
+   "ddFoer": 5,
+   "ddEfter": 5,
+   "scorer": {
+    "faktisk": 250,
+    "ddEfter": 200,
+    "ddFoer": 200,
+    "par": 100
+   },
+   "faktorer": {
+    "meldinger": 2,
+    "spilfoering": 0,
+    "modspil": 0,
+    "held": 5
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  },
+  {
+   "nummer": 32,
+   "giver": "W",
+   "zone": "EW",
+   "haender": {
+    "N": "QJ852.86.543.764",
+    "E": "AKT76.Q2.AKJ6.KJ",
+    "S": "43.AK54.Q7.AQT95",
+    "W": "9.JT973.T982.832"
+   },
+   "ddTabel": {
+    "N": {
+     "C": 7,
+     "D": 3,
+     "H": 4,
+     "S": 6,
+     "NT": 6
+    },
+    "E": {
+     "C": 6,
+     "D": 10,
+     "H": 9,
+     "S": 7,
+     "NT": 7
+    },
+    "S": {
+     "C": 7,
+     "D": 3,
+     "H": 4,
+     "S": 5,
+     "NT": 6
+    },
+    "W": {
+     "C": 5,
+     "D": 9,
+     "H": 8,
+     "S": 7,
+     "NT": 6
+    }
+   },
+   "ddSide": {
+    "N": {
+     "NT": 6,
+     "S": 6,
+     "H": 4,
+     "D": 3,
+     "C": 7
+    },
+    "S": {
+     "NT": 6,
+     "S": 5,
+     "H": 4,
+     "D": 3,
+     "C": 7
+    },
+    "E": {
+     "NT": 7,
+     "S": 7,
+     "H": 9,
+     "D": 10,
+     "C": 6
+    },
+    "W": {
+     "NT": 6,
+     "S": 7,
+     "H": 8,
+     "D": 9,
+     "C": 5
+    }
+   },
+   "ddAfvigelse": false,
+   "par": {
+    "scoreNS": -140,
+    "score": -140,
+    "kontrakter": [
+     "2H OV+1"
+    ]
+   },
+   "retning": "NS",
+   "spillet": true,
+   "kontrakt": "2S",
+   "spilfoerer": "E",
+   "udspil": "HA",
+   "stik": 6,
+   "score": 200,
+   "point": 14,
+   "top": 14,
+   "procent": 100.0,
+   "felt": [
+    100,
+    100,
+    -130,
+    -130,
+    -130,
+    -500,
+    -500
+   ],
+   "holdkammerater": null,
+   "ddFoer": 7,
+   "ddEfter": 7,
+   "scorer": {
+    "faktisk": 200,
+    "ddEfter": 100,
+    "ddFoer": 100,
+    "par": -140
+   },
+   "faktorer": {
+    "meldinger": 8,
+    "spilfoering": 0,
+    "modspil": 2,
+    "held": -3
+   },
+   "udspilseffekt": {
+    "point": 0,
+    "udspilAf": "parret",
+    "ukendt": false
+   },
+   "maerker": []
+  }
+ ]
+}

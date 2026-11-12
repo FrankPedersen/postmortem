@@ -22,6 +22,14 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
 - Svaret er beskrevet i `api/SVAR.md`. Ingen spillernavne i svaret, i loggen eller i cachen; kun holdlisten til valg af hold har holdnavne.
 - Hemmeligheder (forbindelsesstrenge) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`.
 
+## Appen (roden)
+
+- Vite, React og TypeScript som Fordelingstræneren (SPEC-postmortem-1c-app.md). `npm test` kører `tsc` og vitest: accepttestene i `src/test/` bruger svarene i `src/test/data/`, som er lavet af funktionen på de anonymiserede sider (README viser hvordan); `api/tests/test_ingen_navne.py` tjekker også dem.
+- `node tools/tjek_bredde.mjs` tjekker i Chrome eller Edge, at ingen skærm ruller vandret ved 320, 390 og 1280 px, at knapper og links har 44 px trykflade, og at bordet står i to spalter fra 1000 px; `--billeder=mappe` gemmer skærmbilleder.
+- Alle tekster står i `src/tekster.ts`. Funktionens adresse står kun i `src/api.ts`. Ingen PWA og ingen gemte aftener; svaret ligger kun i `sessionStorage`.
+- `.github/workflows/pages.yml` udgiver appen ved push til `main`; funktionen udrulles kun med zip (README).
+
 ## Sprog
 
 - Dansk tekst følger husets ord og beskrivende form (`../CLAUDE.md`): bordet, slutspil, skvis, kipning, forbindelser, indkassere, toppe farven.
+- Fagordstesten og bydeformtesten er `src/test/sprog.test.tsx` (i `npm test`) med listerne i `src/sprog/fagord.ts` og `src/sprog/bydeform.ts`; de læser al tekst på alle skærme og hele `src/tekster.ts`. En ny knap i bydeform kommer på `UNDTAGELSER`.
