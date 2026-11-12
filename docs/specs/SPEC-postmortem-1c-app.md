@@ -75,7 +75,25 @@ En månedlig budgetalarm på ressourcegruppen `Kontraktbridge`, 50 kr., med mail
 
 ## Afklaret
 
-Trin 1–6 er bygget 12. november 2026. **Status: stoppet før merge, før udrulning af funktionen og før budgetalarmen.**
+Trin 1–6 er bygget 12. november 2026, og Franks rettelser før merge er lavet samme dag (afsnittet nedenfor). **Status: stoppet før merge, før udrulning af funktionen og før budgetalarmen.**
+
+**Franks rettelser før merge (12. november 2026):**
+
+- **Udspil, der står forkert på bridge.dk:** når siden viser et udspil, som udspilleren ikke har (`udspil` er sat, og `udspilseffekt.ukendt` er sand), står det ens alle steder.
+  - Kompasset, "Ved jeres bord", spillisten og bordets navn for skærmlæseren skriver "♥3 (står forkert på bridge.dk)". I kompasset og flisen står bemærkningen på sin egen linje med mindre skrift.
+  - DD-feltet skriver "Max efter udspil: ukendt udspil".
+  - Testet med spil 7 i 452 (♥3 sidder hos Øst, udspilleren er Vest). Spil 1 viser, at et rigtigt udspil (♦3) ikke får bemærkningen. I 452 står udspillet også forkert i spil 11, 16 og 20.
+- **Modpartens fejl (ændringen i funktionen er godkendt af Frank):**
+  - Spilføring og modspil er højst 0. Den positive del af `P(S_faktisk) − P(S_ddEfter)`, hvor modparten fejlede, lægges til held og uheld og står for sig i det nye felt `spil[].modpartensFejl`. Det er rettet i `SVAR.md` og `api/postmortem/analyse.py`.
+  - Summen er stadig resultatet mod middel: par 1 er 23 − 2 − 31 + 65 = +55 (heraf modpartens fejl +43), og bord 2 NS er 8 − 6 − 8 − 9 = −15.
+  - Største forbedring er nu modspil (−31) for par 1 og stadig modspil for bord 2 NS.
+  - Nye tests i `api/tests/test_modpartens_fejl.py` (11 tests). Spil 31 i 452 viser, at et stik mere ikke altid giver point: 250 og 200 slår de samme scorer, så modpartens fejl er 0 dér.
+  - I appen hedder Meldinger "Meldinger (begge sider)". Aftenen har linjen "Heraf modpartens fejl" under Held og uheld.
+  - Spillisten skriver "Modpartens fejl +N stik" (gråt mærke som held) i stedet for "Spilføring +N stik" og "Modspil +N stik".
+  - I analysevinduet skriver linjen under Spilføring eller Modspil "Modpartens fejl står under Held og uheld." Linjen under Held og uheld forklarer fejlen, fx "Modpartens fejl: spilfører tog 8 stik, hvor 9 kunne tages (+9)." (spil 1 i 452).
+  - Testdataene i `src/test/data/` er lavet igen med den nye funktion.
+- **Forsiden:** Post Mortem står i mobilmenuen under Trænere med kategorien Analyse, og `tjek_ny_forside.mjs` tjekker det. `tools/tjek_mappe.py` har nu fem mapper med Postmortem som fjerde repo. `.venv` og `.pytest_cache` springes over.
+- **Budgetalarmen** sender til den adresse, Frank gav 12. november 2026. Den indsættes ved kørslen og skrives ikke i git (som modtageradresserne under Hemmeligheder i `../CLAUDE.md`).
 
 **Tags og grene.** `postmortem`: `main` (`3365756`) er tagget `v-foer-app`, og arbejdet ligger på grenen `app`. Forside: `main` (`eece597`) er tagget `v-foer-postmortem-kort`, og arbejdet ligger på grenen `postmortem-kort`. Intet er pushet.
 
@@ -91,7 +109,7 @@ Trin 1–6 er bygget 12. november 2026. **Status: stoppet før merge, før udrul
   - ingen hånd eller noget pladsnavn ligger oven i kompasset;
   - ved 1280 px står bordet til venstre.
 
-Nu er `npm test` grøn (`tsc` og 51 tests), `pytest` er grøn (86 tests) og `tjek_bredde.mjs` er grøn.
+Efter Franks rettelser er `npm test` grøn (`tsc` og 55 tests), `pytest` er grøn (97 tests) og `tjek_bredde.mjs` er grøn.
 
 **Rettet fra mockuppen og specen, fordi husets regel om beskrivende form gælder** (`tjek_bydeform.py` fejler på "Indsæt"). Frank bør læse teksterne:
 
@@ -112,15 +130,15 @@ Appen har sin egen fagords- og bydeformtest i `npm test` (`src/sprog/` med Forde
 **Valg i appen:**
 
 - **Mærket i listen** kommer fra spillets mest negative del af faktorerne: spilføring, udspil (parrets udspil, `udspilseffekt`), resten af modspillet og meldinger, i den rækkefølge ved lighed.
-  - Er ingen negativ, vises den største positive spilføring eller modspil ("Spilføring +1 stik").
+  - Er ingen negativ, og har modparten fejlet, vises "Modpartens fejl +N stik".
   - Ellers vises "Bedste kontrakt" (parret var spilfører) eller "Bedste modspil".
-  - Held giver ikke et mærke.
+  - Held giver ellers ikke et mærke.
   - Stiktallet er forskellen mellem stik og DD efter udspillet (før udspillet, når udspillet er ukendt).
   - "Meldinger: X var bedre" nævner par-kontrakten med siden, når den er modpartens (fx "Ø–V 4♥").
 - **Procenten i listen** er orange-brun under 40 % og grøn over 60 %. Imp er farvet efter fortegnet.
 - **DD-tabellen** har fire rækker (N, S, Ø, V) i stedet for mockuppens to, fordi de to hænder i en side kan tage forskelligt (fx spil 1 i 450: Ø 4 og V 5 i klør). Kontraktens felt er fremhævet.
 - **Feltet** viser score og antal, ikke kontrakten, fordi svaret kun har scorerne (`felt`). Jeres række tæller jer med ("+120 (jer) ×2").
-- **Held og uheld:** linjen om feltet følger par-delen af held. Modpartens udspil står for sig ("Modpartens udspil gav jer et stik.").
+- **Held og uheld:** linjen om feltet følger par-delen af held. Modpartens udspil og modpartens fejl står hver for sig ("Modpartens udspil gav jer et stik.").
 - **Doblet og redoblet** skrives "D" og "RD" som i mockuppen ("4♠ D"). Kort skrives med E K D B 10.
 - **Topbjælken:** pilen tilbage står før 7NT-logoet som i mockuppen. "Spil 7 af 24" fra mockuppens topbjælke står under overskriften ("7 af 32 · Giver Syd · Alle i zonen"), fordi der ikke er plads ved siden af logoet. Under 380 px er navnet "Kontraktbridge" skjult ved siden af pilen, men skærmlæseren læser det stadig.
 - **44 px:** alle knapper og links har mindst 44 px. Det gælder også sidefodens links, så sidefoden er højere end Fordelingstrænerens og forsidens (26 px rækker), og filterpillerne, som er 44 px i stedet for mockuppens 36. Ønsker Frank sidefoden som i Fordelingstræneren, er det én regel i `src/styles.css`.
@@ -135,19 +153,19 @@ Appen har sin egen fagords- og bydeformtest i `npm test` (`src/sprog/` med Forde
 - Alle kald tæller undtagen holdlisten. Holdlisten er et link til `multihold_bordresultater.php` uden `hold`. Også et kald, der ender med en fejl, tæller, fordi det også henter fra bridge.dk.
 - IP'en tages fra `X-Forwarded-For` (første adresse, uden port) eller `X-Client-IP`. Uden IP er der ingen grænse, som i kontakt-API'et og funktionens øvrige tests.
 - Hukommelsen har højst 5000 adresser. Svaret har `Retry-After`, og loggen skriver "postmortem: 429 graense" uden IP.
-- Beregningen, svaret og cachen er ikke ændret.
+- Grænsen ændrer ikke beregningen, svaret eller cachen. Svaret er kun ændret med modpartens fejl, som Frank har godkendt (afsnittet øverst).
 
 **Forsiden (grenen `postmortem-kort`):**
 
 - Det sjette kort, den nye ledetekst, Post Mortem i sidefoden på alle fire sider og `/postmortem/` i `sitemap.xml`.
 - Sidefoden bygges også af `tools/build_ordbog.py` og `tools/build_scoring.py`. Linjen er tilføjet dér, og siderne er bygget igen; de giver samme fil.
-- Mobilmenuen er ikke ændret (specen). Post Mortem står derfor ikke i menuen.
+- Mobilmenuen har Post Mortem under Trænere (Franks rettelse før merge).
 - Rettede tests:
-  - `tjek_ny_forside.mjs`: seks kort med Post Mortem sidst og `/postmortem/`, kortets kicker, tekst og mærket "Ny", ledeteksten, seks billeder ved 390 px, sidefoden med Post Mortem på alle fire sider og sitemap.
+  - `tjek_ny_forside.mjs`: seks kort med Post Mortem sidst og `/postmortem/`, kortets kicker, tekst og mærket "Ny", ledeteksten, seks billeder ved 390 px, Post Mortem i menuen, sidefoden med Post Mortem på alle fire sider og sitemap.
+  - `tjek_mappe.py`: fem mapper (Franks rettelse før merge).
   - `tjek_kun_siden.mjs`: `/postmortem/` er et andet repo, som `ANDRE_REPOER` springer over.
   - `tjek_engelsk_om_mig.mjs`: "Post Mortem" er det samme på begge sprog og står nu på listen over navne.
 - Disse tjek er grønne: `tjek_ny_forside`, `tjek_kun_siden`, `tjek_fagord`, `tjek_bydeform`, `tjek_bredde`, `tjek_ordbog`, `tjek_skrifttyper` (begge), `tjek_scoring`, `tjek_om_mig`, `tjek_privatliv` (begge), `tjek_engelsk_om_mig` og `tjek_kontakt` (begge).
-- `tjek_mappe.py` fejler også på `main`. Den venter fire mapper i `Kontraktbridge.code-workspace`, og Postmortem kom med som femte i vindue 1a. Fejlen er uden for denne spec og er ikke rettet.
 
 **Udgivelse (trin 7, ikke gjort):**
 
@@ -159,7 +177,7 @@ Appen har sin egen fagords- og bydeformtest i `npm test` (`src/sprog/` med Forde
 
 - `az consumption budget create-with-rg` findes (preview) og tager notifikationer.
 - Abonnementet har i forvejen budgettet "LoginProjekt" (300 pr. måned, på abonnementet). Valutaen kunne ikke læses med `az`. Beløbet er i abonnementets faktureringsvaluta, så det skal ses i portalen, at det er kr.
-- Kommandoen, der vises Frank før kørsel (mailadressen indsættes ved kørslen og skrives ikke her):
+- Kommandoen, der vises Frank før kørsel (adressen, Frank gav, indsættes ved kørslen og skrives ikke her):
 
 ```bash
 MSYS_NO_PATHCONV=1 az consumption budget create-with-rg -g Kontraktbridge -n kontraktbridge-maaned \

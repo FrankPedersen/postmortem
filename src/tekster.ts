@@ -61,6 +61,7 @@ export const T = {
     faktorTitel: 'Hvor gik pointene?',
     faktorEnhed: { par: 'point mod middel', hold: 'imp' },
     iAlt: { par: 'I alt mod middel', hold: 'I alt' },
+    herafFejl: 'Heraf modpartens fejl',
     stoersteTitel: 'Største forbedring',
     stoerste: {
       meldinger: (n: string, enhed: string) => `Meldingerne kostede ${n} ${enhed} i forhold til par.`,
@@ -90,6 +91,7 @@ export const T = {
     spilfoering: (stik: string) => `Spilføring ${stik} stik`,
     udspil: (stik: string) => `Udspil ${stik} stik`,
     modspil: (stik: string) => `Modspil ${stik} stik`,
+    modpartensFejl: (stik: string) => `Modpartens fejl ${stik} stik`,
     bedsteKontrakt: 'Bedste kontrakt',
     bedsteModspil: 'Bedste modspil',
     ikkeSpillet: 'Ikke spillet',
@@ -110,7 +112,8 @@ export const T = {
     udspilLabel: 'Udspil',
     stik: 'Stik',
     score: 'Score',
-    ukendtUdspil: 'ukendt',
+    forkert: '(står forkert på bridge.dk)',
+    forkertUdspil: (u: string) => `${u} (står forkert på bridge.dk)`,
     point: (point: string, top: string) => `${point} af ${top} point`,
     impMod: 'Imp mod jeres andet bord',
     andetBord: (score: string) => `Jeres andet bord: ${score}`,
@@ -151,9 +154,14 @@ export const T = {
     heldPar: { plus: 'Feltet gjorde det dårligere end par, og det gav jer point.', minus: 'Feltet gjorde det bedre end par, og det kostede jer point.', nul: 'Feltet gjorde det som par.' },
     heldHold: { plus: 'Jeres andet bord gjorde det bedre end par.', minus: 'Jeres andet bord gjorde det dårligere end par.', nul: 'Jeres andet bord gjorde det som par.' },
     udspilHjalp: ' Modpartens udspil gav jer et stik.',
+    flyttet: ' Modpartens fejl står under Held og uheld.',
+    fejlSpilfoerer: (tog: number, kunne: number, point: string) =>
+      ` Modpartens fejl: spilfører tog ${tog} stik, hvor ${kunne} kunne tages (${point}).`,
+    fejlModspil: (tog: number, kunne: number, point: string) =>
+      ` Modpartens fejl: I tog ${tog} stik, hvor modspillet kunne holde jer på ${kunne} (${point}).`,
   },
 
-  faktor: { meldinger: 'Meldinger', spilfoering: 'Spilføring', modspil: 'Modspil', held: 'Held og uheld' } satisfies Record<Faktor, string>,
+  faktor: { meldinger: 'Meldinger (begge sider)', spilfoering: 'Spilføring', modspil: 'Modspil', held: 'Held og uheld' } satisfies Record<Faktor, string>,
   plads: { N: 'Nord', E: 'Øst', S: 'Syd', W: 'Vest' } satisfies Record<Plads, string>,
   pladsKort: { N: 'N', E: 'Ø', S: 'S', W: 'V' } satisfies Record<Plads, string>,
   retning: { NS: 'Nord–Syd', OV: 'Øst–Vest' } satisfies Record<Retning, string>,

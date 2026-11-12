@@ -1,7 +1,7 @@
-import { kontrakt, kort, kortene } from '../format';
+import { kontrakt, kortene } from '../format';
 import { T } from '../tekster';
 import type { Plads, Spil } from '../typer';
-import { hp } from '../udledt';
+import { forkertUdspil, hp, udspilTekst } from '../udledt';
 import { Farver } from './Ramme';
 
 const FARVER = ['S', 'H', 'D', 'C'] as const;
@@ -27,7 +27,7 @@ export function Bridgebord({ spil }: { spil: Spil }) {
     ? [T.spil.ikkeSpillet]
     : s.kontrakt === 'Pas' || !spilfoerer
       ? [T.pas]
-      : [`${kontrakt(s.kontrakt!)} · ${T.plads[spilfoerer]}`, ...(s.udspil ? [T.spil.udspil(kort(s.udspil))] : [])];
+      : [`${kontrakt(s.kontrakt!)} · ${T.plads[spilfoerer]}`, ...(udspilTekst(s) ? [T.spil.udspil(udspilTekst(s)!)] : [])];
   const pladser: Plads[] = ['N', 'E', 'S', 'W'];
   const label =
     `${T.spil.bordet}. ` +
@@ -60,11 +60,21 @@ export function Bridgebord({ spil }: { spil: Spil }) {
         <span className="kompas-n">{T.pladsKort.N}</span>
         <span className="kompas-v">{T.pladsKort.W}</span>
         <span className="kompas-midte">
-          {midte.map((m, i) => (
-            <span key={i}>
-              <Farver>{m}</Farver>
-            </span>
-          ))}
+          {midte.map((m, i) => {
+            // "(står forkert på bridge.dk)" står på sin egen linje med mindre skrift, så kompasset ikke bliver trangt.
+            const note = forkertUdspil(s) && m.endsWith(T.spil.forkert);
+            return (
+              <span key={i}>
+                <Farver>{note ? m.slice(0, -T.spil.forkert.length - 1) : m}</Farver>
+                {note && (
+                  <>
+                    {' '}
+                    <span className="kompas-note">{T.spil.forkert}</span>
+                  </>
+                )}
+              </span>
+            );
+          })}
         </span>
         <span className="kompas-oe">{T.pladsKort.E}</span>
         <span className="kompas-s">{T.pladsKort.S}</span>

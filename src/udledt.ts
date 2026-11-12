@@ -1,5 +1,5 @@
 /** Det, appen udleder af svaret: middel, summer, mærker, feltets grupper og hp. Ingen beregning af bridge her. */
-import { kontrakt, medFortegn, parKontrakt } from './format';
+import { kontrakt, kort, medFortegn, parKontrakt } from './format';
 import { T } from './tekster';
 import type { Analyse, Faktorer, Plads, Spil } from './typer';
 import { FAKTORER } from './typer';
@@ -29,10 +29,26 @@ export type Art = 'miss' | 'ok' | 'neutral';
 /** Stik efter udspillet med åbne kort; med ukendt udspil max før udspil (som scorer.ddEfter i SVAR.md). */
 const efterUdspil = (s: Spil) => s.ddEfter ?? s.ddFoer;
 
+/** Udspillet står forkert på bridge.dk: siden viser et kort, udspilleren ikke har (udspilseffekt.ukendt med et udspil). */
+export const forkertUdspil = (s: Spil) => !!s.udspil && !!s.udspilseffekt?.ukendt;
+
+/** Udspillet, som det vises alle steder: "♥3", eller "♥3 (står forkert på bridge.dk)". Null uden udspil. */
+export function udspilTekst(s: Spil): string | null {
+  if (!s.udspil) return null;
+  return forkertUdspil(s) ? T.spil.forkertUdspil(kort(s.udspil)) : kort(s.udspil);
+}
+
+/** Stik, modparten gav væk: flere stik til parret som spilfører, færre til modpartens spilfører. */
+export function modpartensStik(s: Spil): number | null {
+  const efter = efterUdspil(s);
+  if (s.stik === null || efter === null || !s.spilfoerer) return null;
+  return viSpillede(s) ? s.stik - efter : efter - s.stik;
+}
+
 /**
- * Mærket for spillets største faktor (SPEC-postmortem-1c-app.md, skærm 3): den mest negative af spilføring, udspil,
- * resten af modspillet og meldinger; er ingen negativ, den største positive spilføring eller modspil; ellers Bedste
- * kontrakt eller Bedste modspil. Held tæller ikke: det er ikke noget, parret gjorde.
+ * Mærket i spillisten (SPEC-postmortem-1c-app.md, skærm 3 og Afklaret): den mest negative af spilføring, udspil, resten
+ * af modspillet og meldinger; er ingen negativ, modpartens fejl ("Modpartens fejl +1 stik"); ellers Bedste kontrakt
+ * eller Bedste modspil. Spilføring og modspil er aldrig positive: modpartens fejl står under held og uheld.
  */
 export function maerke(s: Spil): { tekst: string; art: Art } {
   if (!s.spillet || !s.faktorer) return { tekst: T.maerke.ikkeSpillet, art: 'neutral' };
@@ -42,7 +58,6 @@ export function maerke(s: Spil): { tekst: string; art: Art } {
     ['spilfoering', f.spilfoering], ['udspil', udspil], ['modspil', f.modspil - udspil], ['meldinger', f.meldinger],
   ];
   const mindst = dele.reduce((m, d) => (d[1] < m[1] ? d : m));
-  const størst = dele.reduce((m, d) => (d[1] > m[1] ? d : m));
   const efter = efterUdspil(s);
   const kendt = s.stik !== null && efter !== null;
   if (mindst[1] < 0) {
@@ -51,8 +66,8 @@ export function maerke(s: Spil): { tekst: string; art: Art } {
     if (mindst[0] === 'udspil' && s.ddFoer !== null && efter !== null) return { tekst: T.maerke.udspil(medFortegn(s.ddFoer - efter)), art: 'miss' };
     if (mindst[0] === 'modspil' && kendt) return { tekst: T.maerke.modspil(medFortegn(efter! - s.stik!)), art: 'miss' };
   }
-  if (størst[1] > 0 && størst[0] === 'spilfoering' && kendt) return { tekst: T.maerke.spilfoering(medFortegn(s.stik! - efter!)), art: 'ok' };
-  if (størst[1] > 0 && størst[0] === 'modspil' && kendt) return { tekst: T.maerke.modspil(medFortegn(efter! - s.stik!)), art: 'ok' };
+  const gavVæk = modpartensStik(s);
+  if ((s.modpartensFejl ?? 0) > 0 && gavVæk !== null && gavVæk > 0) return { tekst: T.maerke.modpartensFejl(medFortegn(gavVæk)), art: 'neutral' };
   return { tekst: viSpillede(s) || s.kontrakt === 'Pas' ? T.maerke.bedsteKontrakt : T.maerke.bedsteModspil, art: 'ok' };
 }
 

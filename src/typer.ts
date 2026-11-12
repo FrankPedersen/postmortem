@@ -65,6 +65,8 @@ export interface Spil {
   ddEfter: number | null;
   scorer: { faktisk: number; ddEfter: number; ddFoer: number; par: number } | null;
   faktorer: Faktorer | null;
+  /** Den del af held, hvor modparten fejlede: max(0, P(S_faktisk) − P(S_ddEfter)) (SVAR.md). */
+  modpartensFejl: number | null;
   udspilseffekt: { point: number; udspilAf: 'parret' | 'modparten'; ukendt: boolean } | null;
   maerker: unknown[];
 }

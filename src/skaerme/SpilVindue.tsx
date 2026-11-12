@@ -1,7 +1,7 @@
 import { kontrakt, kort, medFortegn, parKontrakt, tal } from '../format';
 import { T } from '../tekster';
 import type { Analyse, Benaevnelse, Plads, Spil } from '../typer';
-import { feltGrupper, viSpillede } from '../udledt';
+import { feltGrupper, forkertUdspil, viSpillede } from '../udledt';
 import { Bridgebord } from '../ui/Bridgebord';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
 
@@ -23,24 +23,26 @@ function faktorLinjer(a: Analyse, s: Spil) {
   });
   const meldinger =
     f.meldinger < 0 ? T.forklaring.meldingerBedre(par.join(T.spil.eller)) : f.meldinger > 0 ? T.forklaring.meldingerOver : T.forklaring.meldingerSom;
+  // Modpartens fejl er flyttet fra spilføringen eller modspillet til held og uheld (SVAR.md, modpartensFejl).
+  const fejl = s.modpartensFejl ?? 0;
+  const flyttet = fejl > 0 ? T.forklaring.flyttet : '';
   const spilfoering = pas
     ? T.forklaring.pas
     : vi
-      ? efter !== null
-        ? T.forklaring.spilfoering(efter, s.stik!)
-        : T.forklaring.spilfoeringUkendt(s.ddFoer!, s.stik!)
+      ? (efter !== null ? T.forklaring.spilfoering(efter, s.stik!) : T.forklaring.spilfoeringUkendt(s.ddFoer!, s.stik!)) + flyttet
       : T.forklaring.iModspil;
   const modspil = pas
     ? T.forklaring.pas
     : !vi
-      ? efter !== null
-        ? T.forklaring.modspil(s.ddFoer!, efter, s.stik!)
-        : T.forklaring.modspilUkendt(s.ddFoer!, s.stik!)
+      ? (efter !== null ? T.forklaring.modspil(s.ddFoer!, efter, s.stik!) : T.forklaring.modspilUkendt(s.ddFoer!, s.stik!)) + flyttet
       : T.forklaring.iSpilfoering;
-  // Held er P(S_par) − middel plus modpartens udspil, når parret var spilfører (SVAR.md); sætningen om feltet følger den første del.
+  // Held er P(S_par) − middel plus modpartens udspil, når parret var spilfører, plus modpartens fejl (SVAR.md);
+  // sætningen om feltet følger den første del.
   const udspilHjalp = vi && s.udspilseffekt?.udspilAf === 'modparten' ? s.udspilseffekt.point : 0;
-  const feltet = (a.turnering.form === 'par' ? T.forklaring.heldPar : T.forklaring.heldHold)[tegn(f.held - udspilHjalp)];
-  const held = feltet + (udspilHjalp > 0 ? T.forklaring.udspilHjalp : '');
+  const feltet = (a.turnering.form === 'par' ? T.forklaring.heldPar : T.forklaring.heldHold)[tegn(f.held - udspilHjalp - fejl)];
+  const kunne = efter ?? s.ddFoer!;
+  const fejlTekst = fejl > 0 ? (vi ? T.forklaring.fejlModspil(s.stik!, kunne, medFortegn(fejl)) : T.forklaring.fejlSpilfoerer(s.stik!, kunne, medFortegn(fejl))) : '';
+  const held = feltet + (udspilHjalp > 0 ? T.forklaring.udspilHjalp : '') + fejlTekst;
   return [
     { navn: T.faktor.meldinger, linje: meldinger, v: f.meldinger, relevant: true },
     { navn: T.faktor.spilfoering, linje: spilfoering, v: f.spilfoering, relevant: !pas && vi },
@@ -109,6 +111,12 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
                       <span className="flise-vaerdi">
                         <Farver>{s.udspil ? kort(s.udspil) : T.spil.ikkeRelevant}</Farver>
                       </span>
+                      {forkertUdspil(s) && (
+                        <>
+                          {' '}
+                          <span className="flise-note">{T.spil.forkert}</span>
+                        </>
+                      )}
                     </div>
                     <div className="flise">
                       <span className="flise-navn">{T.spil.stik}</span>{' '}

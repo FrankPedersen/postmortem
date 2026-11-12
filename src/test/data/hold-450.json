@@ -25,11 +25,11 @@
  },
  "faktorer": {
   "meldinger": 8,
-  "spilfoering": -3,
-  "modspil": 9,
-  "held": -29
+  "spilfoering": -6,
+  "modspil": -8,
+  "held": -9
  },
- "stoersteForbedring": "spilfoering",
+ "stoersteForbedring": "modspil",
  "spil": [
   {
    "nummer": 1,
@@ -141,6 +141,7 @@
     "modspil": 0,
     "held": 0
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 1,
     "udspilAf": "modparten",
@@ -258,6 +259,7 @@
     "modspil": 0,
     "held": -2
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "modparten",
@@ -375,6 +377,7 @@
     "modspil": 0,
     "held": 10
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 6,
     "udspilAf": "modparten",
@@ -492,6 +495,7 @@
     "modspil": 0,
     "held": -17
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",
@@ -605,10 +609,11 @@
    },
    "faktorer": {
     "meldinger": 0,
-    "spilfoering": 1,
+    "spilfoering": 0,
     "modspil": 0,
-    "held": 0
+    "held": 1
    },
+   "modpartensFejl": 1,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "modparten",
@@ -726,6 +731,7 @@
     "modspil": 0,
     "held": -6
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",
@@ -843,6 +849,7 @@
     "modspil": 0,
     "held": -1
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",
@@ -960,6 +967,7 @@
     "modspil": 0,
     "held": 1
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "modparten",
@@ -1079,6 +1087,7 @@
     "modspil": 0,
     "held": -17
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",
@@ -1193,9 +1202,10 @@
    "faktorer": {
     "meldinger": 0,
     "spilfoering": 0,
-    "modspil": 5,
-    "held": 2
+    "modspil": -1,
+    "held": 8
    },
+   "modpartensFejl": 6,
    "udspilseffekt": {
     "point": -1,
     "udspilAf": "parret",
@@ -1313,6 +1323,7 @@
     "modspil": 0,
     "held": 0
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",
@@ -1430,6 +1441,7 @@
     "modspil": 0,
     "held": -2
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",
@@ -1547,6 +1559,7 @@
     "modspil": 0,
     "held": 17
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "modparten",
@@ -1664,6 +1677,7 @@
     "modspil": -7,
     "held": 0
    },
+   "modpartensFejl": 0,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",
@@ -1777,10 +1791,11 @@
    },
    "faktorer": {
     "meldinger": -7,
-    "spilfoering": 2,
+    "spilfoering": 0,
     "modspil": 0,
-    "held": 0
+    "held": 2
    },
+   "modpartensFejl": 2,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "modparten",
@@ -1896,9 +1911,10 @@
    "faktorer": {
     "meldinger": 0,
     "spilfoering": 0,
-    "modspil": 11,
-    "held": -14
+    "modspil": 0,
+    "held": -3
    },
+   "modpartensFejl": 11,
    "udspilseffekt": {
     "point": 0,
     "udspilAf": "parret",

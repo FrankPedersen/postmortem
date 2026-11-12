@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { dato, kontrakt, kort, medFortegn, tal } from '../format';
+import { dato, kontrakt, medFortegn, tal } from '../format';
 import { T } from '../tekster';
 import type { Analyse, Spil, VaelgSvar } from '../typer';
 import { FAKTORER } from '../typer';
-import { faktorSum, holdNavn, maerke, resultatArt, spilSum } from '../udledt';
+import { faktorSum, holdNavn, maerke, resultatArt, spilSum, udspilTekst } from '../udledt';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
 
 /** Linjen for et spil i listen: "S 4♠ · udspil ♣B · 10 stik · +620". */
@@ -12,8 +12,9 @@ function spilLinje(s: Spil) {
   if (s.kontrakt === 'Pas' || !s.spilfoerer) return `${T.aften.pasLinje} · ${medFortegn(s.score ?? 0)}`;
   const k = kontrakt(s.kontrakt!);
   const plads = T.pladsKort[s.spilfoerer];
-  return s.udspil
-    ? T.aften.linje(plads, k, kort(s.udspil), s.stik!, medFortegn(s.score!))
+  const udspil = udspilTekst(s);
+  return udspil
+    ? T.aften.linje(plads, k, udspil, s.stik!, medFortegn(s.score!))
     : T.aften.linjeUdenUdspil(plads, k, s.stik!, medFortegn(s.score!));
 }
 
@@ -30,6 +31,7 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
   const enhed = T.aften.enhed[form];
   const retning = a.deltager.retning ? T.retning[a.deltager.retning] : '';
   const navn = holdNavn(a, vaelg);
+  const modpartensFejl = a.spil.reduce((sum, s) => sum + (s.modpartensFejl ?? 0), 0);
 
   return (
     <>
@@ -77,6 +79,12 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
                 </li>
               );
             })}
+            {modpartensFejl > 0 && (
+              <li className="del">
+                <span className="navn">{T.aften.herafFejl}</span>{' '}
+                <span className="vaerdi held">{medFortegn(modpartensFejl)}</span>
+              </li>
+            )}
             <li className="i-alt">
               <span className="navn">{T.aften.iAlt[form]}</span>{' '}
               <span className="vaerdi">{medFortegn(iAlt)}</span>

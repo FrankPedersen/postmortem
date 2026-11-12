@@ -27,7 +27,9 @@ describe('Analysevinduet, spil 7 i 452', () => {
     }
     expect(tekst(bordet.querySelector('[data-plads="S"] .plads-navn'))).toContain('spilfører');
     expect(tekst(bordet.querySelector('.kompas'))).toContain('2NT · Syd');
-    expect(tekst(bordet.querySelector('.kompas'))).toContain('udspil ♥3');
+    // ♥3 sidder hos Øst, ikke hos udspilleren Vest: udspillet står forkert på bridge.dk (udspilseffekt.ukendt).
+    expect(tekst(bordet.querySelector('.kompas'))).toContain('udspil ♥3 (står forkert på bridge.dk)');
+    expect(bordet.getAttribute('aria-label')).toContain('udspil ♥3 (står forkert på bridge.dk)');
     // Skærmlæseren får hænderne i figurens navn.
     expect(bordet.getAttribute('aria-label')).toContain('Nord: spar B 8 4, hjerter E 8, ruder 9 5 4 3, klør B 9 8 7');
   });
@@ -57,7 +59,7 @@ describe('Analysevinduet, spil 7 i 452', () => {
     const s = spil7();
     const bord = screen.getByRole('region', { name: 'Ved jeres bord' });
     expect(tekst(bord)).toContain('Kontrakt S 2NT');
-    expect(tekst(bord)).toContain('Udspil ♥3');
+    expect(tekst(bord)).toContain('Udspil ♥3 (står forkert på bridge.dk)');
     expect(tekst(bord)).toContain('Stik 8');
     expect(tekst(bord)).toContain('Score +120');
     expect(tekst(bord)).toContain('11 af 14 point 78,6 %');
@@ -77,7 +79,7 @@ describe('Analysevinduet, spil 7 i 452', () => {
     const s = spil7();
     const område = screen.getByRole('region', { name: 'Hvor gik pointene?' });
     const rækker = within(område).getAllByRole('listitem');
-    expect(rækker.map((r) => tekst(r.querySelector('.navn')))).toEqual(['Meldinger', 'Spilføring', 'Modspil', 'Held og uheld']);
+    expect(rækker.map((r) => tekst(r.querySelector('.navn')))).toEqual(['Meldinger (begge sider)', 'Spilføring', 'Modspil', 'Held og uheld']);
     expect(tekst(rækker[0].querySelector('.vaerdi'))).toBe(fmt(s.faktorer!.meldinger, true));
     expect(tekst(rækker[1].querySelector('.vaerdi'))).toBe(fmt(s.faktorer!.spilfoering, true));
     expect(tekst(rækker[2].querySelector('.vaerdi'))).toBe('–');
@@ -86,6 +88,34 @@ describe('Analysevinduet, spil 7 i 452', () => {
     expect(tekst(rækker[1].querySelector('.linje'))).toBe('8 stik kunne tages med åbne kort; I tog 8.');
     expect(tekst(rækker[2].querySelector('.linje'))).toBe('I var spilfører.');
     for (const r of rækker) expect(tekst(r.querySelector('.linje')).length).toBeGreaterThan(5);
+  });
+
+  it('det forkerte udspil står ens i listen, kompasset, Ved jeres bord og DD-feltet', () => {
+    vis('#/aften', par());
+    const række7 = within(screen.getByRole('list', { name: 'Spillene' })).getAllByRole('link')[6];
+    expect(tekst(række7)).toContain('udspil ♥3 (står forkert på bridge.dk)');
+    cleanup();
+    // Et udspil, der passer med hænderne, får ingen bemærkning (spil 1: ♦3 fra Syd mod Østs 3NT).
+    vis('#/spil/1', par());
+    expect(tekst(document.querySelector('.kompas'))).toContain('udspil ♦3');
+    expect(document.body.textContent).not.toContain('står forkert');
+    expect(tekst(screen.getByRole('region', { name: 'Dobbeltdummy' }))).toContain('Max efter ♦3 9 stik');
+  });
+
+  it('modpartens fejl står under Held og uheld, og modspillet er 0 (spil 1: Øst tog 8 af 9 stik)', () => {
+    vis('#/spil/1', par());
+    const s = par().spil[0];
+    expect(s.faktorer!.modspil).toBe(0);
+    expect(s.modpartensFejl).toBe(9);
+    const rækker = within(screen.getByRole('region', { name: 'Hvor gik pointene?' })).getAllByRole('listitem');
+    expect(tekst(rækker[2].querySelector('.vaerdi'))).toBe('0');
+    expect(tekst(rækker[2].querySelector('.linje'))).toContain('Modpartens fejl står under Held og uheld.');
+    expect(tekst(rækker[3].querySelector('.vaerdi'))).toBe(fmt(s.faktorer!.held, true));
+    expect(tekst(rækker[3].querySelector('.linje'))).toContain('Modpartens fejl: spilfører tog 8 stik, hvor 9 kunne tages (+9).');
+    cleanup();
+    vis('#/aften', par());
+    const række1 = within(screen.getByRole('list', { name: 'Spillene' })).getAllByRole('link')[0];
+    expect(tekst(række1.querySelector('.maerke'))).toBe('Modpartens fejl +1 stik');
   });
 
   it('forrige og næste spil virker', async () => {

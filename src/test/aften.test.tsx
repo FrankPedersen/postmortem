@@ -13,7 +13,7 @@ const fmt = (n: number, fortegn = false) =>
   (n < 0 ? '−' : fortegn && n > 0 ? '+' : '') + String(Math.abs(Math.round(n * 100) / 100)).replace('.', ',');
 
 const FAKTORER = [
-  ['meldinger', 'Meldinger'],
+  ['meldinger', 'Meldinger (begge sider)'],
   ['spilfoering', 'Spilføring'],
   ['modspil', 'Modspil'],
   ['held', 'Held og uheld'],
@@ -60,6 +60,17 @@ describe.each([
     expect(tekst(række(område, iAlt))).toBe(`${iAlt} ${fmt(sum, true)}`);
   });
 
+  it('spilføring og modspil er højst 0, og modpartens fejl står under Held og uheld', () => {
+    vísAften();
+    const a = data();
+    expect(a.faktorer.spilfoering).toBeLessThanOrEqual(0);
+    expect(a.faktorer.modspil).toBeLessThanOrEqual(0);
+    const fejl = a.spil.reduce((s, x) => s + (x.modpartensFejl ?? 0), 0);
+    expect(fejl).toBeGreaterThan(0);
+    const område = screen.getByRole('region', { name: 'Hvor gik pointene?' });
+    expect(tekst(række(område, 'Heraf modpartens fejl'))).toBe(`Heraf modpartens fejl ${fmt(fejl, true)}`);
+  });
+
   it('boksen Største forbedring nævner den faktor, svaret peger på', () => {
     vísAften();
     const a = data();
@@ -100,7 +111,7 @@ describe.each([
     expect(spilListe()).toHaveLength(a.spil.length);
   });
 
-  it('mærket viser spillets største faktor: det mest negative, ellers det største positive', () => {
+  it('mærket viser spillets mest negative faktor, ellers modpartens fejl, ellers bedste kontrakt eller modspil', () => {
     vísAften();
     const a = data();
     const links = spilListe();
@@ -116,7 +127,6 @@ describe.each([
         ['Spilføring', f.spilfoering], ['Udspil', udspil], ['Modspil', f.modspil - udspil], ['Meldinger', f.meldinger],
       ];
       const mindst = dele.reduce((m, d) => (d[1] < m[1] ? d : m));
-      const størst = dele.reduce((m, d) => (d[1] > m[1] ? d : m));
       const efter = s.ddEfter ?? s.ddFoer!;
       let ventet: string | RegExp;
       if (mindst[1] < 0) {
@@ -126,9 +136,10 @@ describe.each([
           Modspil: `Modspil ${fmt(efter - s.stik!)} stik`,
           Meldinger: /^Meldinger: .+ var bedre$/,
         }[mindst[0]]!;
-      } else if (størst[1] > 0 && størst[0] === 'Spilføring') ventet = `Spilføring ${fmt(s.stik! - efter, true)} stik`;
-      else if (størst[1] > 0 && størst[0] === 'Modspil') ventet = `Modspil ${fmt(efter - s.stik!, true)} stik`;
+      } else if (s.modpartensFejl! > 0) ventet = `Modpartens fejl ${fmt(vi ? s.stik! - efter : efter - s.stik!, true)} stik`;
       else ventet = vi ? 'Bedste kontrakt' : 'Bedste modspil';
+      // Spilføring og modspil er aldrig positive (modpartens fejl står under held).
+      expect(mærker[0]).not.toMatch(/^(Spilføring|Modspil) \+/);
       if (typeof ventet === 'string') expect(mærker[0], `spil ${s.nummer}`).toBe(ventet);
       else expect(mærker[0], `spil ${s.nummer}`).toMatch(ventet);
       sete.add(mærker[0].split(/[ :]/)[0]);

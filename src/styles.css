@@ -864,7 +864,7 @@ h1:focus {
 
 .faktorer li {
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr) 52px;
+  grid-template-columns: 112px minmax(0, 1fr) 52px;
   align-items: center;
   gap: 10px;
   font-size: 0.92rem;
@@ -874,6 +874,15 @@ h1:focus {
   font-weight: 600;
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+/* "Heraf modpartens fejl" under Held og uheld: en del af held, ikke en femte faktor. */
+.faktorer .del {
+  grid-template-columns: minmax(0, 1fr) 52px;
+  margin-top: -6px;
+  padding-left: 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .faktorer .i-alt {
@@ -1211,6 +1220,17 @@ h1:focus {
   color: #ffb4b4;
 }
 
+.kompas {
+  gap: 4px;
+}
+
+.kompas-note {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
 .kompas-midte {
   display: flex;
   flex-direction: column;
@@ -1303,6 +1323,12 @@ h1:focus {
 .flise-vaerdi {
   font-weight: 600;
   overflow-wrap: anywhere;
+}
+
+.flise-note {
+  color: var(--fb-miss-text);
+  font-size: 0.7rem;
+  line-height: 1.2;
 }
 
 .point-linje {
