@@ -1,0 +1,44 @@
+% Testspil til Post Mortem, vindue 0 (afprøvning). Tre hele spil med kendt facit fra lektionerne i
+% C:\Users\frank\Downloads\BerlingskeBridge\ (Berlingskes bridgeskole). Lektionerne har ingen skvis og kun én
+% bemærkning om slutspil (lek29), så spil 2 og 3 er et frafald og en almindelig etablering.
+% Lektionerne viser ikke giver og zone; de er sat til Syd og ingen i zonen.
+% Feltet Facit er ikke PBN-standard; det er lektionens ord om, hvad spilfører får.
+
+% Spil 1 (slutspil): lek29.pdf side 6, kapitel 82 "Stik ikke automatisk". 3UT i Syd, udspil hjerter dame.
+% Facit: Øst falder fra med klør konge første gang og med ruder es to gange; så får Syd 7 stik ad den
+% naturlige vej, men "Syd kan stadigvæk få otte stik vredet ud af det ved at slutspille Øst til at give
+% bordet et klørstik". Tager Øst klør konge med det samme, får Syd 10 stik.
+[Event "lek29 side 6, kapitel 82"]
+[Board "1"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "N:532.87.Q94.AJT42 QJ97.543.A87.K98 AK84.AK62.KJ5.Q7 T6.QJT9.T632.653"]
+[Declarer "S"]
+[Contract "3NT"]
+[Lead "HQ"]
+[Facit "8 stik mod bedste modspil (slutspil mod Øst); 10 stik, hvis Øst tager klør konge første gang"]
+
+% Spil 2 (frafald): lek28.pdf side 3, kapitel 78 "Frafald med dobbelthold". 3UT i Syd, udspil ruder dame.
+% Facit: syv topstik, klørfarven skal rejses; falder Syd fra på ruder dame, vinder kontrakten (9 stik),
+% uanset om Øst kommer ind på klør konge første eller anden gang.
+[Event "lek28 side 3, kapitel 78"]
+[Board "2"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "N:AT432.K92.K86.T3 J976.J87.93.K762 K5.AQ4.A75.QJ985 Q8.T653.QJT42.A4"]
+[Declarer "S"]
+[Contract "3NT"]
+[Lead "DQ"]
+[Facit "9 stik med frafald på ruder dame"]
+
+% Spil 3 (almindeligt): lek05.pdf side 6, kapitel 19 "Planlægning af spillet", spil 1. 1UT i Syd, udspil ruder dame.
+% Facit: fem topstik og to rejste klørstik = 7 stik, vundet kontrakt. Ingen særlig teknik.
+[Event "lek05 side 6, kapitel 19, spil 1"]
+[Board "3"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "N:742.AT7.543.Q982 JT6.Q983.T86.K75 AK5.J42.AK2.JT63 Q983.K65.QJ97.A4"]
+[Declarer "S"]
+[Contract "1NT"]
+[Lead "DQ"]
+[Facit "7 stik (fem topstik og to rejste klørstik)"]

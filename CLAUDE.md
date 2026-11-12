@@ -17,6 +17,7 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
 
 - Python 3.12, Azure Functions v2-programmeringsmodellen, `endplay` 0.5.12 (DDS). Python 3.14 kan ikke bruges, fordi endplay ikke har hjul til den.
 - Tests: `pytest` i `api/tests/` på gemte sider fra resultater.bridge.dk i `api/tests/data/`. Ingen test henter fra nettet. `.github/workflows/api.yml` kører dem på Linux ved hvert push.
+- **Rigtige navne må aldrig i git.** En ny testside fra bridge.dk gemmes først uden for repoet (fx `../_lab/`), anonymiseres med `api/tests/anonymiser.py` (spillere bliver "Spiller n", hold "Hold n"), og kun den anonymiserede side lægges i `api/tests/data/`. `tests/test_ingen_navne.py` tjekker det lokalt.
 - DDS' stiktal gælder den side, der er i tur: efter udspillet er det spilførersidens og skal ikke vendes (`docs/specs/NOTAT-afproevning.md`).
 - Svaret er beskrevet i `api/SVAR.md`. Ingen spillernavne i svaret, i loggen eller i cachen; kun holdlisten til valg af hold har holdnavne.
 - Hemmeligheder (forbindelsesstrenge) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`.

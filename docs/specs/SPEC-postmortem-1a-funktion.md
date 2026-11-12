@@ -81,7 +81,30 @@ DD-beregningerne (tabel, par, før/efter udspil) gemmes i Function App'ens egen 
 
 ## Afklaret
 
-(Udfyldes af Claude Code.)
+Bygget 12. november 2026 af Claude Code (Opus 5.5) på grenen `funktion`; `main` før er tagget `v-foer-funktion` (`540f6ad`, første commit). Godkendt af Frank 12. november 2026 og flettet ind på `main` (trin 6).
+
+1. **Repoet:** `main` har første commit (README, `.gitignore`, `CLAUDE.md` og de tre dokumenter i `docs/specs/`), tagget og grenen `funktion` med trin 2–5 i ét commit. Claude Codes sikkerhedstjek stoppede oprettelsen af det offentlige repo, så Frank oprettede selv `FrankPedersen/postmortem` og pushede. **GitHub Actions er grøn på `funktion`** (`ubuntu-latest`, Python 3.12, 1 min 6 s): 76 tests bestået, og de 2 tjek af rigtige navne springes over uden `_lab`; 32 spil uden cache tog under 3,5 s på Linux.
+2. **Testene:** 78 tests er grønne på Windows med Python 3.12 (`api/.venv`), også de seks accepttest. Accepttestene blev skrevet før koden og var røde (22 af 22); grenen havde dengang et commit pr. trin, men dens historik er lagt sammen i ét commit oven på `main` (punkt 12).
+3. **Imp i holdturnering regnes mod holdkammeraternes bord**, som specen siger. Bordresultaternes egen imp-kolonne er noget andet: den er regnet mod datum (spil 1: datum 265 = gennemsnittet af de seks scorer). Accepttest 1 holder imp'en op mod scoresheetet for hold 5 mod hold 7 (`scoresheet-450.html`, Franks link): spil for spil og i alt 32–47.
+4. **Et valg i holdlisten er et hold ved et bord** (`id` som `2-NS` og `6-OV`): holdets to par sidder ved hver sit bord, og linket siger ikke, hvilket af dem brugeren er. 8 borde giver 16 valg. Holdkammeraternes bord findes som bordet, hvor holdet sidder i den anden retning mod samme hold.
+5. **Matchpoint på sidens skala:** turnering 452 har 8 resultater pr. spil, så toppen er 14 (2 pr. slået score), ikke 10 som i specens eksempel med 6 borde. Toppen regnes pr. spil som 2 × antal andre resultater. Accepttest 2: parrets point er sidens på alle 32 spil, i alt 279 af 448 = 62,28 %.
+6. **Siderne:**
+   - Scorecellerne viser altid tallet set fra NS; kolonnen (NS eller ØV) siger kun, hvem der fik point.
+   - Hænderne står med danske bogstaver (E, K, D, B), udspillene med engelske (A, K, Q, J).
+   - Personligt regnskab skal have `pairno` (ikke `selectedpair`), og parrets retning står kun i rundens første række.
+   - Spilresultaternes DD-tabel er div'er, ikke en `<table>`; begge læses fra teksten.
+   - endplays DD-tabel er lig sidens på alle 16 + 32 spil (`ddAfvigelse` er falsk overalt), og sidens par (fx "3NT NS+1", 430) er det samme.
+7. **Spil uden resultat:** holdturneringens "(Spillet er fravalgt)" giver `spillet: false` (accepttest 1, bord 4). I parturnering er formatet for et spil uden resultat ikke set på en rigtig side; testen erstatter kontrakten i spil 32 med "M".
+8. **Udspil, der ikke passer:** spil 11 i turnering 452 viser ♣K fra Vest, men Syd har ♣K. Udspillet markeres `ukendt`, `ddEfter` er null, og udspillets pris er 0.
+9. **Fejl:** alle fejl fra bridge.dk (også 4xx) giver 502 "bridge.dk svarer ikke lige nu". En krop over 4 kB giver 413. Funktionen er anonym, og CORS sættes i platformen som for kontakt-API'et.
+10. **Cache:** `postmortem/cache.py` bruger Blob, når `AzureWebJobsStorage` er sat, og ellers en mappe; svigter lagerkontoen, regnes der uden cache. Nøglen er turnering, sektion, spil, et fingeraftryk af hænderne og evt. kontrakt og udspil, uden navne (testet).
+11. **Tid:** 32 spil uden cache tager 2,6–4,6 s på Franks pc, når den ikke er belastet, og op til ca. 20 s, når den er (krav: under 30 s; Actions måler det på Linux). Kørt lokalt med Core Tools mod resultater.bridge.dk: turnering 452, par 1, 5,0 s første gang og 1,0 s med cache; turnering 450, bord 2 NS, 1,6 s og −15 imp.
+12. **Navne** (Franks krav 12. nov. 2026, før noget pushes):
+    - Svaret, loggen og cachen har ingen navne; kun holdlisten har holdnavne.
+    - **Testsiderne er anonymiserede:** `api/tests/anonymiser.py` laver de rigtige sider fra `_lab/postmortem-0/bridgedk/` om, så de 37 spillere hedder "Spiller 1"–"Spiller 37" og de 8 hold "Hold 1"–"Hold 8" (alfabetisk, så scriptet giver de samme filer hver gang). Alt andet er byte for byte uændret, også linjeskift og Bridge Solver-links. Kun de anonymiserede sider ligger i `api/tests/data/`.
+    - Accepttest 5 tjekker, at svaret ikke har pladsholderne uden for holdlisten. `tests/test_ingen_navne.py` læser navnene fra de rigtige sider og tjekker, at ingen fil i `api/tests/data/` har et af dem, og at testdataene er det, scriptet laver; den springes over, hvor `_lab` ikke findes (fx i Actions).
+    - **Historikken er skrevet om:** grenen `funktion` er ét commit oven på `main`, og de gamle commits er fjernet med `git reflog expire` og `git gc --prune=now`, så de rigtige navne aldrig har ligget i git. `git log -p --all` og alle objekter i `.git` er søgt igennem for navnene uden fund. `main` havde ingen navne ("Pedersen" står kun i kontonavnet `FrankPedersen`).
+13. **Ikke gjort:** trin 6 (merge, Function App og deploy) og Linux-testen i Actions.
 
 ## Besked til Claude Code
 
