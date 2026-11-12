@@ -8,6 +8,8 @@ Planen står i [docs/specs/PLAN-postmortem.md](docs/specs/PLAN-postmortem.md), o
 
 ## Funktionen (`api/`)
 
+**Adresse:** `https://kontraktbridge-postmortem.azurewebsites.net/api/analyse`
+
 `POST /api/analyse` med `{ "url": "…" }` (et link til Bordresultater eller Personligt regnskab på resultater.bridge.dk). Svaret er beskrevet i [api/SVAR.md](api/SVAR.md).
 
 - Python 3.12, Azure Functions v2-programmeringsmodellen og `endplay` 0.5.12 (DDS). Python 3.14 kan ikke bruges, fordi `endplay` ikke har hjul til den.
@@ -41,6 +43,26 @@ Uden `AzureWebJobsStorage` gemmes DD-beregningerne i en mappe (`POSTMORTEM_CACHE
 ### Tests på Linux
 
 `.github/workflows/api.yml` kører testene på `ubuntu-latest` med Python 3.12 ved hvert push.
+
+### Azure
+
+Ressourcegruppen `Kontraktbridge` i West Europe:
+
+- Function App `kontraktbridge-postmortem`: Flex Consumption, Linux, Python 3.12, 2048 MB pr. instans og højst 10 instanser. Anonym; CORS kun for `https://www.kontraktbridge.dk` og `https://kontraktbridge.dk`, sat i platformen (`az functionapp cors add`).
+- Lagerkonto `kontraktbridgepostmortem`: funktionens egen (`AzureWebJobsStorage`). DD-cachen ligger i blob-containeren `postmortem-dd`, som funktionen selv opretter ved første kald.
+- Application Insights `kontraktbridge-postmortem` i Log Analytics-arbejdsområdet `kontraktbridge-kontakt-logs` (30 dage). Loggen har kun sidetype, status, antal spil og tid.
+
+### Udrulning
+
+Ikke med push. Zip med `/`-stier og fjernbygning, som kontakt-API'et (`Forside/_kontakt-api/README.md`). Zip-filen skrives uden for repoet:
+
+```bash
+cd api
+python -c "import zipfile,pathlib; z=zipfile.ZipFile('../../postmortem.zip','w',zipfile.ZIP_DEFLATED); [z.write(p,p) for p in ['function_app.py','host.json','requirements.txt',*[f.as_posix() for f in pathlib.Path('postmortem').glob('*.py')]]]; z.close()"
+az functionapp deployment source config-zip -g Kontraktbridge -n kontraktbridge-postmortem --src ../../postmortem.zip --build-remote true
+```
+
+Windows PowerShells `Compress-Archive` skriver `\` i stierne, og så finder Azure (Linux) ingen funktioner. I Git Bash skal `MSYS_NO_PATHCONV=1` sættes, når `az` får ressource-id'er.
 
 ## Licenser
 

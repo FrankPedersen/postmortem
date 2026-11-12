@@ -104,7 +104,16 @@ Bygget 12. november 2026 af Claude Code (Opus 5.5) på grenen `funktion`; `main`
     - **Testsiderne er anonymiserede:** `api/tests/anonymiser.py` laver de rigtige sider fra `_lab/postmortem-0/bridgedk/` om, så de 37 spillere hedder "Spiller 1"–"Spiller 37" og de 8 hold "Hold 1"–"Hold 8" (alfabetisk, så scriptet giver de samme filer hver gang). Alt andet er byte for byte uændret, også linjeskift og Bridge Solver-links. Kun de anonymiserede sider ligger i `api/tests/data/`.
     - Accepttest 5 tjekker, at svaret ikke har pladsholderne uden for holdlisten. `tests/test_ingen_navne.py` læser navnene fra de rigtige sider og tjekker, at ingen fil i `api/tests/data/` har et af dem, og at testdataene er det, scriptet laver; den springes over, hvor `_lab` ikke findes (fx i Actions).
     - **Historikken er skrevet om:** grenen `funktion` er ét commit oven på `main`, og de gamle commits er fjernet med `git reflog expire` og `git gc --prune=now`, så de rigtige navne aldrig har ligget i git. `git log -p --all` og alle objekter i `.git` er søgt igennem for navnene uden fund. `main` havde ingen navne ("Pedersen" står kun i kontonavnet `FrankPedersen`).
-13. **Ikke gjort:** trin 6 (merge, Function App og deploy) og Linux-testen i Actions.
+13. **Trin 6, udrullet 12. november 2026** (Franks godkendelse; az-kommandoerne vist og godkendt først):
+    - `funktion` er flettet ind på `main` (`2001496`) og pushet.
+    - **Oprettet i ressourcegruppen `Kontraktbridge` (West Europe):** lagerkontoen `kontraktbridgepostmortem` (Standard_LRS, TLS 1.2, ingen offentlig blobadgang), Application Insights `kontraktbridge-postmortem` i Log Analytics-arbejdsområdet `kontraktbridge-kontakt-logs` (30 dage), og Function App `kontraktbridge-postmortem` på Flex Consumption med Linux, Python 3.12 og 2048 MB pr. instans.
+    - **Højst 10 instanser** (Franks valg): Azure accepterede `--maximum-instance-count 10`, så der var ikke brug for en anden værdi.
+    - CORS kun for `https://www.kontraktbridge.dk` og `https://kontraktbridge.dk`, sat i platformen. Zip-udrullet med fjernbygning som kontakt-API'et (`function_app.py`, `host.json`, `requirements.txt` og `postmortem/*.py`).
+    - **Adressen er `https://kontraktbridge-postmortem.azurewebsites.net/api/analyse`.**
+    - **Kaldt mod resultater.bridge.dk og sammenlignet med `analyser()` lokalt mod de samme sider: alle svar er ens.** Turnering 452, par 1: 62,28 % (to kald); turnering 450: holdlisten med 16 valg og bord 2 NS med −15 imp (to kald); et link uden for bridge.dk giver 400. Svarene har `Access-Control-Allow-Origin: https://www.kontraktbridge.dk`.
+    - **Tid i funktionen** (Application Insights): par 452 5,2 s uden cache og 1,8 s med; hold 450 2,2 s og 1,0 s; holdlisten 0,7 s. Et kald fra pc'en med `curl` tager 0,1–0,7 s ud over det.
+    - **Cachen oprettede selv containeren `postmortem-dd`** ved første kald og skrev 96 blobs (DD og par samt DD efter udspil for 32 + 16 spil). De 37 rigtige navne og pladsholderne findes ikke i dem.
+14. **Ikke gjort:** appen (vindue 1c) og mærkerne (vindue 1b).
 
 ## Besked til Claude Code
 
