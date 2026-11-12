@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Azure Functions lokalt
+local.settings.json
+.python_packages/
+__azurite_db*
+__blobstorage__/
+__queuestorage__/
+.cache/
+
+# Node (appen i vindue 1c)
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
