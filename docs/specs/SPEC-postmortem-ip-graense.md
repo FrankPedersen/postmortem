@@ -43,7 +43,24 @@ Grene: `ip-graense` i `postmortem` (tag `v-foer-ip-graense`) og `privatliv-postm
 
 ## Afklaret
 
-Bygget 13. november 2026. **Status: stoppet før merge, før udrulning og før az-kommandoerne til nøglen og tabellen.**
+Bygget 13. november 2026, godkendt af Frank med én rettelse af sætningen om IP-adressen og udgivet samme dag. **Status: udgivet; live-testen er bestået.**
+
+**Udgivelse (13. november 2026):**
+
+- **Rettelsen:** sætningen om IP-adressen er rettet, som Frank skrev, i appens note og forsidens afsnit på dansk og engelsk, og testene er rettet. Commits: `2d9d6db` i `ip-graense` og `1ef92cb` i `privatliv-postmortem`.
+- **Nøglen:** `IP_HASH_KEY` er sat med `az functionapp config appsettings set … -o none`. Værdien blev lavet i en underskal (`secrets.token_hex(32)`) og er aldrig skrevet ud. Listen over navne viser `IP_HASH_KEY` ved siden af de tre andre indstillinger.
+- **Tabellen:** `ipgraense` er oprettet med `az storage table create --auth-mode key`, og `exists` er `true`.
+- **Fletning:**
+  - `postmortem`: `ip-graense` er flettet ind på `main` (`5295331`) og pushet med grenen og tagget.
+  - Forside: `privatliv-postmortem` er flettet ind på `main` (`2908dad`) og pushet med grenen og tagget.
+- **Actions:** `api` er grøn på `main` og `ip-graense`. Linux-testen kørte testene mod Azurite: 101 bestod, og de 2 navnetjek, som kræver `_lab`, blev sprunget over. "Udgiv på GitHub Pages" er grøn, og forsidens Pages-byg af `2908dad` er færdigt. Sætningen står live på Om mig (dansk og engelsk) og i appen.
+- **Funktionen:** udrullet med zip og fjernbygning ("Deployment was successful."). Funktionerne `analyse` og `slet_ip_vinduer` er på plads.
+- **Live-testen** kørte kl. 06:41:04–06:41:56 UTC, midt i vinduet 06:40–06:50.
+  - De 11 analyser af 452 fra samme IP gav 200 ti gange og 429 den 11. gang, med "For mange analyser lige nu. Prøv igen om lidt." og `Retry-After: 485` (vinduets slut). Holdlisten gav bagefter 200.
+  - Tabellen havde derefter én række: vinduet `202611130640` med `antal` 10. Rækken har hashen som RowKey og ingen IP.
+  - Loggen (Application Insights, uden IP) viser de 10 analyser fordelt på 6 instanser: `17dadd6b`, `49655283`, `52c0626b`, `62d62c1a`, `dbe4a7b7` og `199343b4`, med 1–2 analyser hver.
+  - 429 kom fra en syvende instans (`975e7e36`), som ikke havde haft nogen af de 10. Tælleren holder altså på tværs af instanser.
+- **Sletningen:** timer-funktionen kørte kl. 06:40, 06:45, 06:50, 06:55 og 07:00 og loggede "postmortem: slettede N gamle vinduer". Kl. 06:55:00 slettede den 1 vindue, nemlig 06:40, så rækken stod ca. 14 minutter (fra 06:41:11). Kl. 07:02:30, 20½ minut efter testen, var tabellen `ipgraense` tom (0 rækker).
 
 **Tags og grene.** `postmortem`: `main` (`7757af1`) er tagget `v-foer-ip-graense`, og arbejdet ligger på grenen `ip-graense`. Forside: `main` (`8d953b2`) er tagget `v-foer-privatliv-postmortem`, og arbejdet ligger på grenen `privatliv-postmortem`.
 
