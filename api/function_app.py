@@ -1,7 +1,8 @@
 """Azure Function `POST /api/analyse` (Python v2-programmeringsmodellen). Al logik ligger i pakken `postmortem`.
 
 Anonym som kontakt-API'et; CORS sættes i Function App'ens platformsindstillinger. Loggen har kun sidetype, status,
-antal spil og tid, aldrig navne og aldrig IP-adresser.
+antal spil og tid, aldrig navne og aldrig IP-adresser eller deres hash. Timer-funktionen `slet_ip_vinduer` rydder op i
+grænsens tabel (postmortem/graense.py).
 """
 import json
 import logging
@@ -12,6 +13,7 @@ import urllib.parse
 import azure.functions as func
 
 from postmortem import cache as cache_modul
+from postmortem import graense as graense_modul
 from postmortem.analyse import analyser
 from postmortem.hent import hent_side
 
@@ -24,37 +26,18 @@ FOR_MANGE = 'For mange analyser lige nu. Prøv igen om lidt.'
 HOLDLISTE_SIDE = 'multihold_bordresultater.php'
 
 
-class Graense:
-    """Højst `maks` analyser pr. IP pr. `vindue` sekunder, i hukommelsen pr. instans som i kontakt-API'et
-    (Forside/_kontakt-api/src/contact-protection.js): vinduet starter ved den første analyse. IP'en ligger kun her og
-    logges ikke; tabellen har højst `maks_ip` adresser, og udløbne poster fjernes, når den er fuld
-    (SPEC-postmortem-1c-app.md)."""
-
-    def __init__(self, maks=10, vindue=600, maks_ip=5000, ur=time.monotonic):
-        self.maks, self.vindue, self.maks_ip, self.ur = maks, vindue, maks_ip, ur
-        self._ip = {}
-
-    def tillad(self, ip):
-        """None, når analysen må køre; ellers antal sekunder, til der er plads igen."""
-        if not ip:
-            return None
-        nu = self.ur()
-        post = self._ip.get(ip)
-        if post is None or post[1] <= nu:
-            if len(self._ip) >= self.maks_ip:
-                for k in [k for k, (_, udloeb) in self._ip.items() if udloeb <= nu]:
-                    del self._ip[k]
-            if len(self._ip) >= self.maks_ip:
-                return self.vindue
-            self._ip[ip] = [1, nu + self.vindue]
-            return None
-        if post[0] >= self.maks:
-            return max(1, int(post[1] - nu + 0.999))
-        post[0] += 1
-        return None
+# Grænsen pr. IP på tværs af instanser (SPEC-postmortem-ip-graense.md, postmortem/graense.py): tælleren står i Table
+# Storage. Den hentes fra app-indstillingerne første gang, den bruges; testene sætter GRAENSE selv.
+GRAENSE = None
+_graense_hentet = False
 
 
-GRAENSE = Graense()
+def graensen():
+    global GRAENSE, _graense_hentet
+    if GRAENSE is None and not _graense_hentet:
+        _graense_hentet = True
+        GRAENSE = graense_modul.fra_miljoe()
+    return GRAENSE
 
 
 def klient_ip(req):
@@ -98,15 +81,33 @@ def analyse(req: func.HttpRequest) -> func.HttpResponse:
         krop = json.loads(raa.decode('utf-8'))
     except (UnicodeDecodeError, ValueError):
         krop = None
-    if not er_holdliste(krop):
-        vent = GRAENSE.tillad(klient_ip(req))
-        if vent is not None:
-            logging.info('postmortem: 429 graense')
-            ud = svar(429, {'fejl': FOR_MANGE})
-            ud.headers['Retry-After'] = str(vent)
-            return ud
+    ip = klient_ip(req)
+    if ip and not er_holdliste(krop):
+        g = graensen()
+        if g is None:
+            logging.warning('postmortem: graensen er slået fra (IP_HASH_KEY eller lageret mangler)')
+        else:
+            vent = g.tillad(ip)
+            if vent is not None:
+                logging.info('postmortem: 429 graense')
+                ud = svar(429, {'fejl': FOR_MANGE})
+                ud.headers['Retry-After'] = str(vent)
+                return ud
     status, ud = analyser(krop, hent=HENT, cache=cache())
     sidetype = 'vaelg' if 'vaelg' in ud else (ud.get('turnering', {}).get('form') or '-')
     logging.info('postmortem: %s %s, %d spil, %.1f s', status, sidetype, len(ud.get('spil', [])),
                  time.perf_counter() - start)
     return svar(status, ud)
+
+
+@app.timer_trigger(schedule='0 */5 * * * *', arg_name='timer', run_on_startup=False, use_monitor=False)
+def slet_ip_vinduer(timer: func.TimerRequest) -> None:
+    """Sletter tællerens vinduer, når de er mindst 15 minutter gamle, så en hash af en IP står højst 20 minutter."""
+    g = graensen()
+    if g is None:
+        logging.warning('postmortem: graensen er slået fra (IP_HASH_KEY eller lageret mangler)')
+        return
+    try:
+        logging.info('postmortem: slettede %d gamle vinduer', g.slet_gamle())
+    except Exception as e:
+        logging.warning('postmortem: sletning af vinduer fejlede (%s)', type(e).__name__)

@@ -88,4 +88,10 @@ describe('Start', () => {
     expect(within(guide).getByText(/Adresselinjen ser sådan ud/)).toBeTruthy();
     expect(screen.getByText(/ingen navne/)).toBeTruthy();
   });
+
+  it('noten fortæller om IP-tælleren (SPEC-postmortem-ip-graense.md)', () => {
+    vis('#/');
+    const note = tekst(screen.getByText(/ingen navne/));
+    expect(note).toContain('Din IP-adresse gemmes i højst 20 minutter som en kode, der ikke kan føres tilbage til adressen uden en hemmelig nøgle, for at begrænse antallet af analyser.');
+  });
 });

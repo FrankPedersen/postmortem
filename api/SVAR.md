@@ -24,7 +24,7 @@ Status og `{ "fejl": "…" }`:
 | 400 | Holdet findes ikke på siden | `hold` er ikke et id fra holdlisten |
 | 413 | Forespørgslen er for stor | kroppen er over 4 kB |
 | 422 | Siden har ingen spil | siden har ingen spil (fx uden `pairno`) |
-| 429 | For mange analyser lige nu. Prøv igen om lidt. | over 10 analyser fra samme IP inden for 10 minutter (holdlisten tæller ikke); med `Retry-After` i sekunder |
+| 429 | For mange analyser lige nu. Prøv igen om lidt. | over 10 analyser fra samme IP i samme 10-minutters vindue (vinduerne følger uret, 06:00–06:10 osv., og tælles på tværs af instanser i Table Storage); holdlisten tæller ikke; med `Retry-After` i sekunder til vinduets slut |
 | 502 | bridge.dk svarer ikke lige nu | timeout, netværksfejl eller fejlsvar fra bridge.dk |
 
 ## Holdlisten

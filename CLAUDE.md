@@ -20,7 +20,8 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
 - **Rigtige navne må aldrig i git.** En ny testside fra bridge.dk gemmes først uden for repoet (fx `../_lab/`), anonymiseres med `api/tests/anonymiser.py` (spillere bliver "Spiller n", hold "Hold n"), og kun den anonymiserede side lægges i `api/tests/data/`. `tests/test_ingen_navne.py` tjekker det lokalt.
 - DDS' stiktal gælder den side, der er i tur: efter udspillet er det spilførersidens og skal ikke vendes (`docs/specs/NOTAT-afproevning.md`).
 - Svaret er beskrevet i `api/SVAR.md`. Ingen spillernavne i svaret, i loggen eller i cachen; kun holdlisten til valg af hold har holdnavne.
-- Hemmeligheder (forbindelsesstrenge) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`.
+- Hemmeligheder (forbindelsesstrenge og `IP_HASH_KEY`, nøglen til grænsens HMAC af IP'en) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`. Nøglen skrives aldrig ud.
+- Grænsen pr. IP står i Table Storage (`postmortem/graense.py`, SPEC-postmortem-ip-graense.md). Hverken IP'en eller dens hash må logges; derfor logger `azure`- og `urllib3`-loggerne kun advarsler. `tests/test_graense.py` starter Azurite med `npx`.
 
 ## Appen (roden)
 

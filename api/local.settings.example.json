@@ -2,7 +2,8 @@
   "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "python",
-    "AzureWebJobsStorage": "",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "IP_HASH_KEY": "",
     "AzureWebJobsFeatureFlags": "EnableWorkerIndexing"
   }
 }

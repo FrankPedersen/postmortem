@@ -49,3 +49,72 @@ class GemteSider:
 @pytest.fixture
 def gemte_sider():
     return GemteSider()
+
+
+# Azurite, Microsofts lokale udgave af Table Storage, til testene af grænsen pr. IP (SPEC-postmortem-ip-graense.md).
+# Startes med npx første gang, den bruges; kontoen og nøglen er Azurites faste udviklingskonto, ikke en hemmelighed.
+AZURITE = 'azurite@3.37.0'
+AZURITE_KONTO = ('DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;'
+                 'AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;'
+                 'TableEndpoint=http://127.0.0.1:{port}/devstoreaccount1;')
+
+
+def _ledig_port():
+    import socket
+    with socket.socket() as s:
+        s.bind(('127.0.0.1', 0))
+        return s.getsockname()[1]
+
+
+def _svarer(port):
+    import socket
+    try:
+        with socket.create_connection(('127.0.0.1', port), timeout=0.5):
+            return True
+    except OSError:
+        return False
+
+
+@pytest.fixture(scope='session')
+def azurite():
+    """Forbindelsesstrengen til en Azurite-tabeltjeneste, der kører, mens testene kører."""
+    import os
+    import shutil
+    import signal
+    import subprocess
+    import time
+    npx = shutil.which('npx') or shutil.which('npx.cmd')
+    if not npx:
+        pytest.fail('Testene af grænsen kræver Node (npx) til Azurite')
+    port = _ledig_port()
+    kommando = [npx, '--yes', '-p', AZURITE, 'azurite-table', '--inMemoryPersistence', '--tableHost', '127.0.0.1',
+                '--tablePort', str(port), '--skipApiVersionCheck', '--silent', '--disableTelemetry']
+    windows = os.name == 'nt'
+    proc = subprocess.Popen(kommando, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if windows else 0,
+                            start_new_session=not windows)
+    try:
+        for _ in range(240):  # første gang henter npx Azurite
+            if _svarer(port):
+                break
+            if proc.poll() is not None:
+                pytest.fail('Azurite stoppede ved start')
+            time.sleep(0.5)
+        else:
+            pytest.fail('Azurite svarede ikke')
+        yield AZURITE_KONTO.format(port=port)
+    finally:
+        if windows:
+            subprocess.run(['taskkill', '/T', '/F', '/PID', str(proc.pid)], capture_output=True)
+        else:
+            os.killpg(proc.pid, signal.SIGTERM)
+
+
+@pytest.fixture
+def ny_tabel(azurite):
+    """En tom tabel i Azurite for hver test: (forbindelsesstreng, tabelnavn)."""
+    import uuid
+    from azure.data.tables import TableServiceClient
+    navn = 'ipgraense' + uuid.uuid4().hex[:10]
+    TableServiceClient.from_connection_string(azurite).create_table(navn)
+    return azurite, navn
