@@ -24,6 +24,7 @@ Status og `{ "fejl": "…" }`:
 | 400 | Holdet findes ikke på siden | `hold` er ikke et id fra holdlisten |
 | 413 | Forespørgslen er for stor | kroppen er over 4 kB |
 | 422 | Siden har ingen spil | siden har ingen spil (fx uden `pairno`) |
+| 429 | For mange analyser lige nu. Prøv igen om lidt. | over 10 analyser fra samme IP inden for 10 minutter (holdlisten tæller ikke); med `Retry-After` i sekunder |
 | 502 | bridge.dk svarer ikke lige nu | timeout, netværksfejl eller fejlsvar fra bridge.dk |
 
 ## Holdlisten
@@ -136,6 +137,7 @@ Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`.
 | `ddEfter` | tal eller null | spilførersidens max stik efter det faktiske udspil; null, når udspillet er ukendt |
 | `scorer` | objekt eller null | de fire scorer |
 | `faktorer` | objekt eller null | de fire faktorer; null, når spillet ikke er spillet |
+| `modpartensFejl` | tal eller null | den del af `held`, hvor modparten spillede eller spillede modspil dårligere end med åbne kort: `max(0, P(S_faktisk) − P(S_ddEfter))`; 0 ved pas; null, når spillet ikke er spillet |
 | `udspilseffekt` | objekt eller null | udspillets pris |
 | `maerker` | liste | tom indtil vindue 1b (skvis, slutspil, nøglebeslutninger) |
 
@@ -158,14 +160,14 @@ Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`.
 
 ### svar.spil[].faktorer
 
-Teleskopsum: de fire lægger op til `P(S_faktisk) − middel`.
+Teleskopsum: de fire lægger op til `P(S_faktisk) − middel`. Spilføring og modspil er højst 0; den positive del af `P(S_faktisk) − P(S_ddEfter)`, hvor modparten fejlede, står under held og uheld og for sig i `modpartensFejl` (SPEC-postmortem-1c-app.md, Franks godkendelse 12. november 2026).
 
 | Felt | Type | Indhold |
 | --- | --- | --- |
 | `meldinger` | tal | `P(S_ddFoer) − P(S_par)` (begge sider) |
-| `spilfoering` | tal | parret spilfører: `P(S_faktisk) − P(S_ddEfter)`; ellers 0 |
-| `modspil` | tal | parret i modspil: `P(S_faktisk) − P(S_ddEfter)` plus udspillet `P(S_ddEfter) − P(S_ddFoer)`; ellers 0 |
-| `held` | tal | `P(S_par) − middel`, plus modpartens udspil, når parret var spilfører |
+| `spilfoering` | tal | parret spilfører: `min(0, P(S_faktisk) − P(S_ddEfter))`; ellers 0 |
+| `modspil` | tal | parret i modspil: `min(0, P(S_faktisk) − P(S_ddEfter))` plus udspillet `P(S_ddEfter) − P(S_ddFoer)`; ellers 0 |
+| `held` | tal | `P(S_par) − middel`, plus modpartens udspil, når parret var spilfører, plus modpartens fejl (`modpartensFejl`) |
 
 ### svar.spil[].udspilseffekt
 

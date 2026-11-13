@@ -6,6 +6,37 @@ Appen kommer på www.kontraktbridge.dk/postmortem/. Al beregning sker i en Azure
 
 Planen står i [docs/specs/PLAN-postmortem.md](docs/specs/PLAN-postmortem.md), og hvert trin har sin egen spec i `docs/specs/`.
 
+## Appen (roden)
+
+Vite, React og TypeScript som Fordelingstræneren; tests med vitest og Testing Library (SPEC-postmortem-1c-app.md).
+
+- `src/App.tsx` styrer adresserne: `#/` start, `#/hold` valg af hold, `#/aften` aftenens oversigt og `#/spil/<nr>` analysevinduet.
+- `src/api.ts` har funktionens adresse ét sted og tjekker, at linket begynder med `https://resultater.bridge.dk/`. Under udvikling går kaldet gennem Vites proxy (`vite.config.ts`).
+- `src/tekster.ts` har alle tekster (kun dansk i første udgave), `src/format.ts` tal, kort og kontrakter på dansk, og `src/udledt.ts` det, appen udleder af svaret (mærker, middel, feltets grupper, hp).
+- `src/styles.css` har tokens, topbjælke og sidefod kopieret fra Fordelingstræneren; fontene og licenserne ligger i `public/fonts/`.
+- Svaret ligger kun i `sessionStorage` (`src/lager.ts`), så en genindlæsning ikke kræver et nyt kald. Ingen aftener gemmes.
+
+### Lokalt
+
+```bash
+npm install
+npm run dev                  # http://localhost:5173/ – kaldene går gennem proxyen til funktionen i Azure
+npm test                     # tsc og vitest: accepttestene i src/test/ med svarene i src/test/data/
+node tools/tjek_bredde.mjs   # i Chrome eller Edge: ingen vandret rulning ved 320, 390 og 1280 px, 44 px trykflader
+node tools/tjek_bredde.mjs --billeder=../skaermbilleder/app   # gemmer også skærmbilleder af skærmene
+```
+
+`src/test/data/` er svar fra funktionen på de anonymiserede testsider i `api/tests/data/` (ingen rigtige navne). De laves igen fra `api/` med `.venv` sådan:
+
+```bash
+cd api
+.venv/Scripts/python -c "import json,sys; sys.path.insert(0,'tests'); from conftest import GemteSider,PAR_URL,HOLD_URL; from postmortem.analyse import analyser; from postmortem import cache; k=cache.fra_miljoe(); [open(f'../src/test/data/{n}.json','w',encoding='utf-8').write(json.dumps(analyser(b,hent=GemteSider(),cache=k)[1],ensure_ascii=False,indent=1)+'\n') for n,b in [('par-452',{'url':PAR_URL}),('hold-450-vaelg',{'url':HOLD_URL}),('hold-450',{'url':HOLD_URL,'hold':'2-NS'})]]"
+```
+
+### Udgivelse
+
+`.github/workflows/pages.yml` kører `npm test` og bygger med `--base=/postmortem/` ved hvert push til `main` og udgiver på GitHub Pages (Settings → Pages → Source: GitHub Actions). Siden ligger under samme domæne som forsiden, fordi `frankpedersen.github.io` har domænet www.kontraktbridge.dk.
+
 ## Funktionen (`api/`)
 
 **Adresse:** `https://kontraktbridge-postmortem.azurewebsites.net/api/analyse`
@@ -15,6 +46,7 @@ Planen står i [docs/specs/PLAN-postmortem.md](docs/specs/PLAN-postmortem.md), o
 - Python 3.12, Azure Functions v2-programmeringsmodellen og `endplay` 0.5.12 (DDS). Python 3.14 kan ikke bruges, fordi `endplay` ikke har hjul til den.
 - `postmortem/laes.py` læser siderne, `regn.py` regner DD, par, scorer (§ 77), imp (§ 78B) og matchpoint (§ 78A), `analyse.py` samler de fire faktorer, og `cache.py` gemmer DD-beregningerne (Blob i Azure, en mappe lokalt).
 - Ingen spillernavne i svaret, loggen eller cachen; kun holdlisten til valg af hold har holdnavne.
+- Højst 10 analyser pr. IP pr. 10 minutter (holdlisten tæller ikke), i hukommelsen pr. instans som i kontakt-API'et; derover 429 "For mange analyser lige nu. Prøv igen om lidt." med `Retry-After`. IP'en logges ikke (`function_app.py`, `tests/test_graense.py`).
 
 ### Lokalt
 

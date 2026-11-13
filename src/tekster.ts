@@ -1,0 +1,198 @@
+/**
+ * Alle appens tekster ét sted (SPEC-postmortem-1c-app.md: kun dansk i første udgave, så engelsk kan komme senere).
+ * Teksterne følger husets ord og beskrivende form (../CLAUDE.md); knapper og links må stå i bydeform. `**fed**` og
+ * `` `kode` `` i guiden vises som fed skrift og kode.
+ */
+import type { Faktor, Plads, Retning } from './typer';
+
+export const T = {
+  app: 'Post Mortem',
+  brand: 'Kontraktbridge',
+
+  start: {
+    titel: 'Post Mortem',
+    intro:
+      'Med et link fra resultater.bridge.dk bliver klubaftenens spil gennemgået: hvad der kunne vindes med åbne kort, og hvor pointene gik tabt.',
+    label: 'Link til resultatsiden',
+    pladsholder: 'https://resultater.bridge.dk/template/…',
+    hjaelp: 'Bordresultater (holdturnering) eller Personligt regnskab (parturnering).',
+    knap: 'Analysér',
+    regner: 'Regner aftenens spil …',
+    guideTitel: 'Sådan finder du linket',
+    guideMaerke: 'Guide',
+    trin: [
+      'Linket findes på **resultater.bridge.dk** under klubben og turneringen.',
+      'Siden er **Bordresultater** for jeres hold eller **Personligt regnskab** for jeres par.',
+      'Hele adressen fra adresselinjen (linjen med `filename=…`) kopieres og sættes ind ovenfor.',
+    ],
+    eksempelTitel: 'Adresselinjen ser sådan ud',
+    eksempelFoer: 'resultater.bridge.dk/template/personligt_regnskab.php?',
+    eksempelFed: 'filename=1111/MT3252…',
+    eksempelEfter: '&pairno=11',
+    lagring:
+      'Siden hentes én gang. Kun spil, kontrakter og tal gemmes, ingen navne. Appen gemmer ikke dine aftener; makker indsætter samme link.',
+  },
+
+  fejl: {
+    tomt: 'Linket mangler.',
+    ikkeBridgeDk: 'Det er ikke et link fra resultater.bridge.dk',
+    forMange: 'For mange analyser lige nu. Prøv igen om lidt.',
+    net: 'Analysen kunne ikke hentes lige nu. Prøv igen om lidt.',
+  },
+
+  hold: {
+    titel: 'Jeres hold',
+    holdSpm: 'Hvilket hold spillede I på?',
+    retningSpm: 'Sad I Nord–Syd eller Øst–Vest?',
+    bord: (n: number) => `Bord ${n}`,
+    andetHold: 'Et andet hold',
+  },
+
+  aften: {
+    tilbage: 'Tilbage til start',
+    form: { par: 'Parturnering', hold: 'Holdturnering' },
+    skala: { matchpoint: 'matchpoint', imp: 'imp' },
+    par: (nummer: number, antal: number) => `Par ${nummer} · ${antal} spil · `,
+    parPoint: (point: string, top: string) => ` (${point} af ${top} point)`,
+    hold: (navn: string, bord: number, retning: string, antal: number) => `${navn} · bord ${bord}, ${retning} · ${antal} spil · `,
+    holdUdenNavn: (bord: number, retning: string, antal: number) => `Bord ${bord}, ${retning} · ${antal} spil · `,
+    imp: (imp: string) => `${imp} imp`,
+    modAndetBord: ' mod jeres andet bord',
+    faktorTitel: 'Hvor gik pointene?',
+    faktorEnhed: { par: 'point mod middel', hold: 'imp' },
+    iAlt: { par: 'I alt mod middel', hold: 'I alt' },
+    herafFejl: 'Heraf modpartens fejl',
+    stoersteTitel: 'Største forbedring',
+    stoerste: {
+      meldinger: (n: string, enhed: string) => `Meldingerne kostede ${n} ${enhed} i forhold til par.`,
+      spilfoering: (n: string, enhed: string) => `Spilføringen kostede ${n} ${enhed} mod det, der kunne vindes med åbne kort.`,
+      modspil: (n: string, enhed: string) => `Modspillet kostede ${n} ${enhed} mod det, der kunne vindes med åbne kort.`,
+      ingen: 'Hverken meldinger, spilføring eller modspil kostede point i aften.',
+    },
+    enhed: { par: 'point', hold: 'imp' },
+    note: 'Alle fire tal er regnet dobbeltdummy: det, der kunne vindes med åbne kort. Held og uheld er det, feltet gjorde anderledes, uden at I gjorde noget forkert.',
+    spillene: 'Spillene',
+    spilleneHint: 'Hele rækken er et link.',
+    filtre: 'Filter',
+    alle: (n: number) => `Alle ${n}`,
+    tabte: (n: number) => `Tabte point · ${n}`,
+    ingenTabte: 'Ingen spil kostede point.',
+    linje: (spilfoerer: string, kontrakt: string, udspil: string, stik: number, score: string) =>
+      `${spilfoerer} ${kontrakt} · udspil ${udspil} · ${stik} stik · ${score}`,
+    linjeUdenUdspil: (spilfoerer: string, kontrakt: string, stik: number, score: string) =>
+      `${spilfoerer} ${kontrakt} · ${stik} stik · ${score}`,
+    pasLinje: 'Pas hele vejen rundt',
+    ikkeSpillet: 'Ikke spillet ved jeres bord',
+    spilLink: (n: number) => `Spil ${n}`,
+  },
+
+  maerke: {
+    meldinger: (kontrakt: string) => `Meldinger: ${kontrakt} var bedre`,
+    spilfoering: (stik: string) => `Spilføring ${stik} stik`,
+    udspil: (stik: string) => `Udspil ${stik} stik`,
+    modspil: (stik: string) => `Modspil ${stik} stik`,
+    modpartensFejl: (stik: string) => `Modpartens fejl ${stik} stik`,
+    bedsteKontrakt: 'Bedste kontrakt',
+    bedsteModspil: 'Bedste modspil',
+    ikkeSpillet: 'Ikke spillet',
+  },
+
+  spil: {
+    tilbage: 'Tilbage til oversigten',
+    forrige: 'Forrige spil',
+    naeste: 'Næste spil',
+    titel: (n: number) => `Spil ${n}`,
+    under: (pos: number, antal: number, giver: string, zone: string) => `${pos} af ${antal} · Giver ${giver} · ${zone}`,
+    bordet: 'Bordet',
+    hp: (n: number) => `${n} hp`,
+    spilfoerer: 'spilfører',
+    udspil: (u: string) => `udspil ${u}`,
+    vedBordet: 'Ved jeres bord',
+    kontrakt: 'Kontrakt',
+    udspilLabel: 'Udspil',
+    stik: 'Stik',
+    score: 'Score',
+    forkert: '(står forkert på bridge.dk)',
+    forkertUdspil: (u: string) => `${u} (står forkert på bridge.dk)`,
+    point: (point: string, top: string) => `${point} af ${top} point`,
+    impMod: 'Imp mod jeres andet bord',
+    andetBord: (score: string) => `Jeres andet bord: ${score}`,
+    feltet: 'Feltet',
+    jer: '(jer)',
+    gange: (n: number) => `×${n}`,
+    ikkeSpillet: 'Ikke spillet ved jeres bord',
+    dd: 'Dobbeltdummy',
+    ddHint: 'stik med åbne kort',
+    ddTabel: 'Stik med åbne kort',
+    ddAfvigelse: 'bridge.dk viser en anden tabel; tallene her er regnet med DDS.',
+    par: 'Par',
+    parKontrakter: (k: string, score: string) => `${k}, ${score}`,
+    eller: ' eller ',
+    maxFoer: 'Max før udspil',
+    maxEfter: (u: string) => `Max efter ${u}`,
+    maxEfterUkendt: 'Max efter udspil',
+    nStik: (n: number) => `${n} stik`,
+    ukendt: 'ukendt udspil',
+    faktorTitel: 'Hvor gik pointene?',
+    ikkeRelevant: '–',
+    note: 'Dobbeltdummy regnes med DDS (Apache 2.0). Spilføringen kort for kort kendes ikke fra bridge.dk; tallene gælder den bedste linje efter det faktiske udspil.',
+  },
+
+  // Én linje pr. faktor i analysevinduet.
+  forklaring: {
+    meldingerBedre: (par: string) => `${par} var bedre.`,
+    meldingerSom: 'Kontrakten giver det samme som par.',
+    meldingerOver: 'Kontrakten giver mere end par; modparten kunne have gjort det bedre i meldingerne.',
+    pas: 'Spillet blev meldt pas.',
+    spilfoering: (kunne: number, tog: number) => `${kunne} stik kunne tages efter udspillet; I tog ${tog}.`,
+    spilfoeringUkendt: (kunne: number, tog: number) => `${kunne} stik kunne tages med åbne kort; I tog ${tog}.`,
+    iModspil: 'Modparten var spilfører.',
+    modspil: (foer: number, efter: number, tog: number) =>
+      `Med åbne kort ${foer} stik til spilfører før udspillet og ${efter} efter; spilfører tog ${tog}.`,
+    modspilUkendt: (foer: number, tog: number) => `Med åbne kort ${foer} stik til spilfører; spilfører tog ${tog}.`,
+    iSpilfoering: 'I var spilfører.',
+    heldPar: { plus: 'Feltet gjorde det dårligere end par, og det gav jer point.', minus: 'Feltet gjorde det bedre end par, og det kostede jer point.', nul: 'Feltet gjorde det som par.' },
+    heldHold: { plus: 'Jeres andet bord gjorde det bedre end par.', minus: 'Jeres andet bord gjorde det dårligere end par.', nul: 'Jeres andet bord gjorde det som par.' },
+    udspilHjalp: ' Modpartens udspil gav jer et stik.',
+    flyttet: ' Modpartens fejl står under Held og uheld.',
+    fejlSpilfoerer: (tog: number, kunne: number, point: string) =>
+      ` Modpartens fejl: spilfører tog ${tog} stik, hvor ${kunne} kunne tages (${point}).`,
+    fejlModspil: (tog: number, kunne: number, point: string) =>
+      ` Modpartens fejl: I tog ${tog} stik, hvor modspillet kunne holde jer på ${kunne} (${point}).`,
+  },
+
+  faktor: { meldinger: 'Meldinger (begge sider)', spilfoering: 'Spilføring', modspil: 'Modspil', held: 'Held og uheld' } satisfies Record<Faktor, string>,
+  plads: { N: 'Nord', E: 'Øst', S: 'Syd', W: 'Vest' } satisfies Record<Plads, string>,
+  pladsKort: { N: 'N', E: 'Ø', S: 'S', W: 'V' } satisfies Record<Plads, string>,
+  retning: { NS: 'Nord–Syd', OV: 'Øst–Vest' } satisfies Record<Retning, string>,
+  retningKort: { NS: 'N–S', OV: 'Ø–V', EW: 'Ø–V' } as Record<string, string>,
+  zone: { None: 'Ingen i zonen', NS: 'N–S i zonen', EW: 'Ø–V i zonen', All: 'Alle i zonen' },
+  farveNavn: { S: 'spar', H: 'hjerter', D: 'ruder', C: 'klør' },
+  renonce: 'renonce',
+  doblet: 'D',
+  redoblet: 'RD',
+  pas: 'Pas',
+  maaneder: ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december'],
+
+  sidefod: {
+    om: 'Gratis bridgetræning i browseren. Lavet af Frank Pedersen.',
+    kontakt: 'Om mig og kontakt',
+    traenere: 'Trænere',
+    opslag: 'Opslag',
+    traenerLinks: [
+      { href: '/konventionstraener/', titel: 'Konventionstræner' },
+      { href: '/fordelingstraeneren/#fordeling', titel: 'Fordeling' },
+      { href: '/fordelingstraeneren/#pointregnskab', titel: 'Pointregnskab' },
+      { href: '/fordelingstraeneren/#farvebehandling', titel: 'Farvebehandling' },
+      { href: '/fordelingstraeneren/#haandevaluering', titel: 'Håndevaluering' },
+      { href: '/postmortem/', titel: 'Post Mortem' },
+    ],
+    opslagLinks: [
+      { href: '/fordelingstraeneren/#analyse', titel: 'Analyse' },
+      { href: '/ordbog/', titel: 'Bridgeordbog' },
+      { href: '/scoring/', titel: 'Scoring i bridge' },
+    ],
+    legal: '© 2026 Frank Pedersen',
+    legalEkstra: ' · Gratis bridgetræning i browseren',
+  },
+};

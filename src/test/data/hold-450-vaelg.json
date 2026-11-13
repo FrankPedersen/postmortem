@@ -1,0 +1,114 @@
+{
+ "turnering": {
+  "navn": "Holdturnering, A-rækken",
+  "titel": "Multihold Bordresultater for 2. sektion - kamp 2, 1. halvleg",
+  "dato": "2026-11-11",
+  "form": "hold",
+  "skala": "imp",
+  "top": null,
+  "id": "450",
+  "sektion": "2",
+  "runde": "2",
+  "halvleg": "1"
+ },
+ "vaelg": {
+  "hold": [
+   {
+    "id": "1-NS",
+    "hold": "Hold 5",
+    "retning": "NS",
+    "bord": 1
+   },
+   {
+    "id": "1-OV",
+    "hold": "Hold 6",
+    "retning": "OV",
+    "bord": 1
+   },
+   {
+    "id": "2-NS",
+    "hold": "Hold 1",
+    "retning": "NS",
+    "bord": 2
+   },
+   {
+    "id": "2-OV",
+    "hold": "Hold 4",
+    "retning": "OV",
+    "bord": 2
+   },
+   {
+    "id": "3-NS",
+    "hold": "Hold 2",
+    "retning": "NS",
+    "bord": 3
+   },
+   {
+    "id": "3-OV",
+    "hold": "Hold 7",
+    "retning": "OV",
+    "bord": 3
+   },
+   {
+    "id": "4-NS",
+    "hold": "Hold 8",
+    "retning": "NS",
+    "bord": 4
+   },
+   {
+    "id": "4-OV",
+    "hold": "Hold 3",
+    "retning": "OV",
+    "bord": 4
+   },
+   {
+    "id": "5-NS",
+    "hold": "Hold 6",
+    "retning": "NS",
+    "bord": 5
+   },
+   {
+    "id": "5-OV",
+    "hold": "Hold 5",
+    "retning": "OV",
+    "bord": 5
+   },
+   {
+    "id": "6-NS",
+    "hold": "Hold 4",
+    "retning": "NS",
+    "bord": 6
+   },
+   {
+    "id": "6-OV",
+    "hold": "Hold 1",
+    "retning": "OV",
+    "bord": 6
+   },
+   {
+    "id": "7-NS",
+    "hold": "Hold 7",
+    "retning": "NS",
+    "bord": 7
+   },
+   {
+    "id": "7-OV",
+    "hold": "Hold 2",
+    "retning": "OV",
+    "bord": 7
+   },
+   {
+    "id": "8-NS",
+    "hold": "Hold 3",
+    "retning": "NS",
+    "bord": 8
+   },
+   {
+    "id": "8-OV",
+    "hold": "Hold 8",
+    "retning": "OV",
+    "bord": 8
+   }
+  ]
+ }
+}

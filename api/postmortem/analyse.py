@@ -183,7 +183,8 @@ def _ikke_spillet(spil, dd, par, retning):
     x = _grund(spil, dd, par, retning)
     x.update({'spillet': False, 'kontrakt': None, 'spilfoerer': None, 'udspil': None, 'stik': None, 'score': None,
               'point': None, 'top': None, 'procent': None, 'felt': [], 'holdkammerater': None, 'ddFoer': None,
-              'ddEfter': None, 'scorer': None, 'faktorer': None, 'udspilseffekt': None, 'maerker': []})
+              'ddEfter': None, 'scorer': None, 'faktorer': None, 'modpartensFejl': None, 'udspilseffekt': None,
+              'maerker': []})
     return x
 
 
@@ -207,11 +208,16 @@ def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, tu
     pf, pe, pb, pp = P(S_faktisk), P(S_ddEfter), P(S_ddFoer), P(S_par)
     udspil = pe - pb  # udspillets effekt set fra parret
     faktorer = {'meldinger': pb - pp, 'spilfoering': 0, 'modspil': 0, 'held': pp - middel}
+    # Spilføring og modspil er højst 0: den positive del, hvor modparten spillede eller spillede modspil dårligere end
+    # med åbne kort, er modpartens fejl og hører under held og uheld (SPEC-postmortem-1c-app.md, Afklaret).
+    spillet = pf - pe
+    modpartens_fejl = max(0, spillet) if parret_spilfoerer is not None else 0
     if parret_spilfoerer:
-        faktorer['spilfoering'] = pf - pe
-        faktorer['held'] += udspil   # modpartens udspil hører under held og uheld
+        faktorer['spilfoering'] = min(0, spillet)
+        faktorer['held'] += udspil + modpartens_fejl   # modpartens udspil og fejl hører under held og uheld
     elif parret_spilfoerer is False:
-        faktorer['modspil'] = (pf - pe) + udspil
+        faktorer['modspil'] = min(0, spillet) + udspil
+        faktorer['held'] += modpartens_fejl
     x = _grund(spil, dd, par, retning)
     x.update({
         'spillet': True, 'kontrakt': k.tekst(), 'spilfoerer': k.spilfoerer or None, 'udspil': egen.udspil,
@@ -219,7 +225,7 @@ def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, tu
         'procent': round(100 * pf / top, 1) if top else None, 'felt': sorted(felt, reverse=True),
         'holdkammerater': holdkammerater, 'ddFoer': foer, 'ddEfter': efter,
         'scorer': {'faktisk': S_faktisk, 'ddEfter': S_ddEfter, 'ddFoer': S_ddFoer, 'par': S_par},
-        'faktorer': faktorer,
+        'faktorer': faktorer, 'modpartensFejl': modpartens_fejl,
         'udspilseffekt': None if k.pas else {'point': udspil, 'udspilAf': 'modparten' if parret_spilfoerer else 'parret',
                                              'ukendt': efter is None},
         'maerker': [],
