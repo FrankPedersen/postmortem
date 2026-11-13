@@ -75,7 +75,7 @@ En månedlig budgetalarm på ressourcegruppen `Kontraktbridge`, 50 kr., med mail
 
 ## Afklaret
 
-Trin 1–6 er bygget 12. november 2026, og Franks rettelser før merge er lavet samme dag (afsnittet nedenfor). Trin 7 er udført 13. november 2026 efter Franks godkendelse (næste afsnit). **Status: udgivet; budgetalarmen venter på Franks ja til kommandoen, og grænsen pr. IP holder ikke på tværs af instanser (se Trin 7).**
+Trin 1–6 er bygget 12. november 2026, og Franks rettelser før merge er lavet samme dag (afsnittet nedenfor). Trin 7 er udført 13. november 2026 efter Franks godkendelse (næste afsnit). **Status:** appen er udgivet, og budgetalarmen er oprettet. Grænsen pr. IP holder ikke på tværs af instanser, og én instans gav 503 på hvert andet kald, så loftet er tilbage på 10. Løsningen venter på Franks valg (se Trin 7).
 
 **Trin 7 (13. november 2026, godkendt af Frank):**
 
@@ -103,6 +103,22 @@ Trin 1–6 er bygget 12. november 2026, og Franks rettelser før merge er lavet 
     - (a) `az functionapp scale config set -g Kontraktbridge -n kontraktbridge-postmortem --maximum-instance-count 1` (hvis Flex tillader 1) sammen med flere samtidige kald pr. instans. Det er ingen kodeændring, men alle analyser deles om én instans, og tælleren nulstilles, når instansen lukkes efter en stille periode.
     - (b) En fælles tæller i funktionens lagerkonto (Table Storage) med en saltet hash af IP'en, der slettes efter 10 minutter. Den holder på tværs af instanser, men så står en hash af IP'en i 10 minutter uden for hukommelsen, og privatlivsteksten og `SYSTEM.md` skal rettes.
     - (c) Grænsen beholdes som en blød grænse pr. instans. Den reelle beskyttelse er så højst 10 instanser og budgetalarmen. `SVAR.md` og specen skal i så fald sige "pr. instans".
+- **De 18 instans-id'er brød ikke loftet** (Application Insights, alt med host-start og -stop pr. instans).
+  - Højst 9 instanser kørte samtidig (kl. 05:44:38). Testen blev betjent af to hold på 9.
+  - Det første hold (05:41–05:47) stoppede kl. 05:46:46–05:47:08, 2–2½ minut efter det sidste kald. Det andet hold startede kl. 05:47:50 og stoppede kl. 05:50:49–05:51:13.
+  - Hver instans har én host-start og ét host-stop i loggen. Det er altså instanser, der blev lukket, og nye, der blev startet, og der var aldrig flere end 10 på én gang.
+  - Tre instanser fra kl. 05:39–05:41 hører til udrulningen.
+- **Valg (a), én instans (Franks valg 13. november 2026), virker ikke på Flex Consumption.**
+  - Flex accepterede `--maximum-instance-count 1` kl. ca. 05:55 UTC.
+  - Den gentagne test kl. 05:56–06:02 gav skiftevis 200 (ca. 1,5 s) og 503 efter 60 s. Holdlisten gav 503 til sidst. Fire billige kald kl. 06:02–06:04 gav samme mønster.
+  - De 503 nåede ikke funktionen. Application Insights viser kun 200 og 400 på én instans (`c461d4cd`), så det er Azures front, der venter på en instans nummer to, som loftet forbyder.
+  - Kun 6 af de 11 analyser nåede frem, så den 11. kunne ikke give 429. Testen er ikke bestået.
+  - Fordi appen var halvt nede, satte jeg loftet tilbage til 10 (det, Frank godkendte i 1a) kl. 06:04:54 og meldte det straks. Seks kald gav derefter 400 som ventet (de første 5–11 s ved opstart). Analysen af 452 gav 200 og var identisk med den lokale.
+  - Appen var dermed delvis nede fra ca. 05:55 til 06:05 UTC 13. november 2026.
+- **Grænsen kræver stadig Franks valg:**
+  - (b) En fælles tæller i lagerkontoen med en saltet hash af IP'en i 10 minutter. Det er den eneste af løsningerne, der holder på tværs af instanser, men privatlivsteksten skal rettes. Claude anbefaler den nu.
+  - (c) En blød grænse pr. instans.
+  - Én instans, der altid er klar (`alwaysReady`), kunne måske fjerne de 503, men den koster hele tiden og kan sprænge budgettet på 50 kr. Den er ikke prøvet.
 
 **Franks rettelser før merge (12. november 2026):**
 
@@ -200,7 +216,9 @@ Appen har sin egen fagords- og bydeformtest i `npm test` (`src/sprog/` med Forde
 - Produktionsbygget kalder Azure-adressen, og udviklingsserveren bruger proxyen. Funktionens CORS er ikke ændret.
 - Pages skal slås til med GitHub Actions som kilde.
 
-**Budgetalarmen (trin 7, vist Frank 13. november 2026, ikke kørt før hans ja):**
+**Budgetalarmen (trin 7):** oprettet 13. november 2026 efter Franks ja (abonnementet er i kr.). Budgettet `kontraktbridge-maaned` på ressourcegruppen Kontraktbridge er på 50 pr. måned (Cost). Det starter 1. november 2026 og slutter 1. november 2036, som er Azures standard. Mail går til Franks adresse ved 80 % og 100 % (GreaterThanOrEqualTo, aktiv).
+
+Første forsøg fejlede i `az`s shorthand, fordi kolonerne i `2026-11-01T00:00:00Z` skal stå i anførselstegn (`{start-date:'2026-11-01T00:00:00Z'}`). Intet blev oprettet ved det forsøg. Kommandoen, som den blev vist før kørslen:
 
 - `az consumption budget create-with-rg` findes (preview) og tager notifikationer.
 - Abonnementet har i forvejen budgettet "LoginProjekt" (300 pr. måned, på abonnementet). Valutaen kunne ikke læses med `az`. Beløbet er i abonnementets faktureringsvaluta, så det skal ses i portalen, at det er kr.
@@ -208,7 +226,7 @@ Appen har sin egen fagords- og bydeformtest i `npm test` (`src/sprog/` med Forde
 
 ```bash
 MSYS_NO_PATHCONV=1 az consumption budget create-with-rg -g Kontraktbridge -n kontraktbridge-maaned \
-  --amount 50 --category Cost --time-grain Monthly --time-period "{start-date:2026-11-01T00:00:00Z}" \
+  --amount 50 --category Cost --time-grain Monthly --time-period "{start-date:'2026-11-01T00:00:00Z'}" \
   --notifications "{Faktisk80:{enabled:true,operator:GreaterThanOrEqualTo,threshold:80,contact-emails:[<mail>]},Faktisk100:{enabled:true,operator:GreaterThanOrEqualTo,threshold:100,contact-emails:[<mail>]}}"
 az consumption budget show-with-rg -g Kontraktbridge -n kontraktbridge-maaned
 ```
