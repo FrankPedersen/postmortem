@@ -45,6 +45,7 @@ cd api
 
 - Python 3.12, Azure Functions v2-programmeringsmodellen og `endplay` 0.5.12 (DDS). Python 3.14 kan ikke bruges, fordi `endplay` ikke har hjul til den.
 - `postmortem/laes.py` læser siderne, `regn.py` regner DD, par, scorer (§ 77), imp (§ 78B) og matchpoint (§ 78A), `analyse.py` samler de fire faktorer, og `cache.py` gemmer DD-beregningerne (Blob i Azure, en mappe lokalt).
+- Teknik og råd (SPEC-postmortem-1b-maerker.md): `postmortem/linje.py` spiller den bedste linje efter udspillet med DDS efter faste regler, `slutloeser.py` er en dobbeltdummy-løser i ren Python til de sidste seks stik, og `teknik.py` finder mærkerne `skvis` og `indspil`, nøglebeslutningerne og udspillets pris. En teknik er nødvendig, når stiktallet falder i et tænkt spil uden den: uden afkasttvang (skvis) eller uden udspilstvang (indspil). Resultatet gemmes i samme cache som DD-beregningerne.
 - Ingen spillernavne i svaret, loggen eller cachen; kun holdlisten til valg af hold har holdnavne.
 - Højst 10 analyser pr. IP pr. 10-minutters vindue (holdlisten tæller ikke); derover 429 "For mange analyser lige nu. Prøv igen om lidt." med `Retry-After` (SPEC-postmortem-ip-graense.md). Tælleren står i Table Storage (`postmortem/graense.py`, tabellen `ipgraense`), så den holder på tværs af instanser: én række pr. vindue og HMAC-SHA256 af IP'en med nøglen i app-indstillingen `IP_HASH_KEY`, med optimistisk samtidighed (ETag). Timer-funktionen `slet_ip_vinduer` sletter hvert 5. minut vinduer, der er mindst 15 minutter gamle, så en hash står højst 20 minutter. Fejler lageret, eller mangler nøglen, går analysen igennem, og det logges uden IP. Hverken IP'en eller hashen logges.
 
@@ -56,6 +57,8 @@ py -3.12 -m venv .venv            # eller en anden Python 3.12
 .venv/Scripts/python -m pip install -r requirements.txt -r requirements-dev.txt
 .venv/Scripts/python -m pytest -q  # tests på de gemte sider i tests/data/, ingen net
 ```
+
+`tests/data/slutstillinger.pbn` og `helespil.pbn` er testsættet til mærkerne (konstruerede stillinger og spil, som DDS har bekræftet); uden tilvalg skal løseren give DDS' tal, og de to tænkte spil tjekkes mod en langsom reference i `tests/test_slutloeser.py`.
 
 Siderne i `tests/data/` er anonymiserede med `tests/anonymiser.py`: spillerne hedder "Spiller n" og holdene "Hold n", og alt andet er som på bridge.dk. De rigtige sider kommer ikke i repoet.
 

@@ -58,6 +58,7 @@ Holdlisten er det eneste sted i svaret med navne: holdets navn (på siden holdka
 | `resultat` | objekt | aftenens resultat |
 | `faktorer` | objekt | de fire faktorer summeret over de spillede spil |
 | `stoersteForbedring` | tekst eller null | den af `meldinger`, `spilfoering` og `modspil`, der er mest negativ; null, når ingen er negativ |
+| `teknikker` | objekt | teknikker i aftenens spil: antal spil med hvert mærke |
 | `spil` | liste | ét objekt pr. spil |
 
 ### svar.turnering
@@ -139,7 +140,10 @@ Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`.
 | `faktorer` | objekt eller null | de fire faktorer; null, når spillet ikke er spillet |
 | `modpartensFejl` | tal eller null | den del af `held`, hvor modparten spillede eller spillede modspil dårligere end med åbne kort: `max(0, P(S_faktisk) − P(S_ddEfter))`; 0 ved pas; null, når spillet ikke er spillet |
 | `udspilseffekt` | objekt eller null | udspillets pris |
-| `maerker` | liste | tom indtil vindue 1b (skvis, slutspil, nøglebeslutninger) |
+| `maerker` | liste | mærkerne for kontrakten ved bordet: `skvis` og `indspil` i den rækkefølge; tom, når ingen teknik er nødvendig, eller teknikken ikke er beregnet |
+| `teknik` | objekt | mærkerne i detaljer |
+| `raad` | objekt eller null | nøglebeslutningerne og udspillet; null, når teknikken ikke er beregnet |
+| `linje` | liste eller null | den bedste linje som 13 stik; null, når teknikken ikke er beregnet |
 
 ### svar.spil[].par
 
@@ -176,3 +180,118 @@ Teleskopsum: de fire lægger op til `P(S_faktisk) − middel`. Spilføring og mo
 | `point` | tal | `P(S_ddEfter) − P(S_ddFoer)` |
 | `udspilAf` | tekst | `parret` eller `modparten` |
 | `ukendt` | sand/falsk | sand, når siden mangler udspillet, eller kortet ikke er i udspillerens hånd; så er `point` 0 |
+
+## Teknik og råd (vindue 1b)
+
+Mærkerne, rådene og linjen gælder kontrakten ved bordet, uanset om parret var spilfører eller i modspil, og de gælder **den bedste linje efter udspillet**, ikke det, der blev spillet (`SPEC-postmortem-1b-maerker.md`). Linjen er et dobbeltdummy-rigtigt spil, hvor begge sider i hvert kort vælger blandt de kort, der holder DD-tallet, efter faste regler (`postmortem/linje.py`), så den er den samme ved hver kørsel. Funktionen sender felter og ingen sætninger; teksterne skrives i appen.
+
+`P` er stillingen på linjen, når der er seks stik tilbage (efter stik 7). En teknik er nødvendig, når spilførersidens stiktal fra `P` falder i et tænkt spil uden den: uden afkasttvang (modspillerne må passe, når de ikke kan bekende) for skvis, og uden udspilstvang (modspillerne må give udspillet fra sig, og spilfører vælger selv hånd) for indspil. Teknikker, der afgøres før `P`, findes derfor ikke, og et indspil, der kun er nødvendigt, fordi spilfører mangler en indgang, findes heller ikke.
+
+Kort skrives som udspil (`CA`, `HT`), pladser `N`, `E`, `S`, `W`. Alle stiktal er spilførersidens stik i hele spillet, og stiknumre er 1 til 13.
+
+### svar.teknikker
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `skvis` | objekt | spil med mærket `skvis` |
+| `indspil` | objekt | spil med mærket `indspil` |
+| `spilfoerer` | objekt | de spil, hvor parret var spilfører |
+
+### svar.teknikker.maerke
+
+Samme felter for `skvis` og `indspil`.
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `spil` | tal | antal spillede spil med mærket |
+| `somSpilfoerer` | tal | heraf spil, hvor parret var spilfører |
+| `taget` | tal | heraf spil, hvor parret tog mindst `medTeknik` stik |
+
+### svar.teknikker.spilfoerer
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `spil` | tal | antal spil, hvor parret var spilfører |
+| `ddStik` | tal | heraf spil, hvor parret tog mindst DD-stikkene efter udspillet (`ddEfter`, eller `ddFoer`, når udspillet er ukendt) |
+
+### svar.spil[].teknik
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `beregnet` | sand/falsk | falsk, når spillet ikke er spillet, er passet ud, beregningen tog over 10 sekunder, eller den fejlede; så er `maerker` tom, og `raad` og `linje` er null |
+| `grund` | tekst eller null | `ikke spillet`, `pas`, `tid` eller `fejl`, når `beregnet` er falsk; ellers null |
+| `udspilAntaget` | sand/falsk eller null | sand, når udspillet mangler eller står forkert på bridge.dk: linjen bruger modspillets bedste udspil |
+| `stikFoerP` | tal eller null | antal stik før `P` (7 i et helt spil) |
+| `skvis` | objekt eller null | mærket `skvis`; null, når en skvis ikke er nødvendig |
+| `indspil` | objekt eller null | mærket `indspil`; null, når et indspil ikke er nødvendigt |
+| `kastIndSkvis` | sand/falsk | sand, når begge mærker er mod samme modspiller, og skvisstikket ligger før indspilsstikket |
+
+### svar.spil[].teknik.skvis
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `mod` | tekst | den modspiller, skvisen er mod: pladsen (`N`, `E`, `S` eller `W`), når tallet kun falder, hvis han må passe; `begge`, når det falder for hver af dem for sig (dobbeltskvis); `en af dem`, når det kun falder, hvis begge må passe |
+| `stik` | tal eller null | skvisstikket: det sidste stik på linjen efter `P`, hvor den skviste modspiller ikke kan bekende, og hvor tallet stadig falder, hvis han må passe fra det stik og frem; null, hvis linjen ikke har et sådant stik |
+| `kort` | tekst eller null | skviskortet: det kort, der blev spillet ud til skvisstikket |
+| `farver` | liste | de farver, den skviste modspiller har kort i ved skvisstikket (`S`, `H`, `D`, `C`); ved `begge` og `en af dem` farverne hos dem, der ikke kan bekende |
+| `medTeknik` | tal | spilførersidens DD-stik i hele spillet (med skvisen) |
+| `udenTeknik` | tal | stikkene i det tænkte spil, hvor begge modspillere må passe ved afkast |
+
+### svar.spil[].teknik.indspil
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `mod` | tekst | som for skvis: den modspiller, der sættes ind |
+| `stik` | tal eller null | indspilsstikket: det sidste stik på linjen efter `P`, som modspilleren vinder uden selv at have spillet ud, og som han derefter skal spille ud fra, og hvor tallet stadig falder, hvis han må give udspillet fra sig fra det stik og frem. Er han allerede inde ved `P`, er det stikket lige før (stik 7) |
+| `kort` | tekst eller null | indspilskortet: det første kort, spilførersiden lagde i indspilsstikket |
+| `medTeknik` | tal | spilførersidens DD-stik i hele spillet (med indspillet) |
+| `udenTeknik` | tal | stikkene i det tænkte spil, hvor begge modspillere må give udspillet fra sig |
+
+### svar.spil[].raad
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `spilfoering` | liste | spilførersidens nøglebeslutninger på linjen, højst tre: først dem, der hører til et mærke, derefter det tidligste stik først |
+| `modspil` | liste | modspillets nøglebeslutninger på linjen, højst tre, i stikkenes rækkefølge |
+| `udspil` | objekt | udspillets pris og de bedste udspil |
+
+### svar.spil[].raad.noeglebeslutning
+
+Et kort på linjen er en nøglebeslutning, når spilleren har mindst tre muligheder, kun én af dem holder DD-tallet, og den ikke er triviel (at bekende med det eneste kort, der vinder et stik, modparten har, eller at trumfe det). Kort på samme hånd regnes som én mulighed, når intet kort uden for hånden ligger imellem dem. Med præcis to muligheder kun, når kortet hører til et mærke. Dertil kommer (Franks ændringer 14. november 2026):
+
+- **Dyk (frafald og hold-up):** valget mellem at vinde stikket og at dykke tæller altid, når kun det at dykke holder DD-tallet: modparten har stikket, spilleren bekender og kan stikke over, og hvert kort, der stikker, koster. Det gælder også med to muligheder og med flere små kort, der alle holder; `kort` er da linjens kort (det laveste).
+- **Udspil:** et kort, der spilles ud, tæller kun, når det ikke er en topvinder, eller når mindst ét andet kort på hånden også vinder stikket. En topvinder er et kort, modparten hverken kan stikke eller trumfe. Det gælder også skviskortet og indspilskortet.
+
+Det faktiske udspil til spillet er ikke med; det står i `udspil`.
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `stik` | tal | stikkets nummer |
+| `haand` | tekst | den hånd, der spiller kortet |
+| `kort` | tekst | kortet på linjen (det laveste af kort i følge) |
+| `dd` | tal | spilførersidens stik i hele spillet, når kortet spilles (DD-tallet) |
+| `maerke` | tekst eller null | `skvis`, når kortet er skviskortet eller ligger i et stik efter `P`, som afgives før skvisstikket (tællingen rettes); `indspil`, når det er indspilskortet; ellers null |
+| `alternativer` | liste | de to dyreste andre muligheder (færre, hvis der kun er én) |
+
+### svar.spil[].raad.noeglebeslutning.alternativer[]
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `kort` | liste | muligheden: kortene i følge, fra det laveste |
+| `dd` | tal | spilførersidens stik i hele spillet, hvis et af kortene spilles |
+
+### svar.spil[].raad.udspil
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `faktisk` | tekst eller null | det faktiske udspil; null, når det mangler eller står forkert |
+| `pris` | tal eller null | de stik, udspillet gav spilfører i forhold til det bedste udspil (`ddEfter` minus `ddFoer`); null, når udspillet er ukendt |
+| `bedste` | liste | de udspil, der holder spilfører på færrest stik, som muligheder: hver er en liste af kort i følge, fx `[["S3", "S4"], ["HK"]]` |
+
+### svar.spil[].linje[]
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `udspiller` | tekst | den, der spiller ud til stikket |
+| `kort` | liste | de fire kort i den rækkefølge, de spilles |
+| `vinder` | tekst | den, der vinder stikket (og spiller ud til det næste) |

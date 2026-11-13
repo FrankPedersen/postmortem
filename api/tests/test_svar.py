@@ -35,14 +35,33 @@ def test_analysen_har_felterne_fra_svar_md(gemte_sider, krop):
     tjek(svar['deltager'], 'svar.deltager', doc, kun_delmaengde=True)
     tjek(svar['resultat'], 'svar.resultat', doc)
     tjek(svar['faktorer'], 'svar.faktorer', doc)
+    # Vindue 1b (SPEC-postmortem-1b-maerker.md): aftenens teknikker
+    tjek(svar['teknikker'], 'svar.teknikker', doc)
+    for maerke in ('skvis', 'indspil'):
+        tjek(svar['teknikker'][maerke], 'svar.teknikker.maerke', doc)
+    tjek(svar['teknikker']['spilfoerer'], 'svar.teknikker.spilfoerer', doc)
     for spil in svar['spil']:
         tjek(spil, 'svar.spil[]', doc)
         tjek(spil['par'], 'svar.spil[].par', doc)
-        assert spil['maerker'] == []
+        assert set(spil['maerker']) <= {'skvis', 'indspil'}
+        tjek(spil['teknik'], 'svar.spil[].teknik', doc)
+        if spil['teknik']['skvis']:
+            tjek(spil['teknik']['skvis'], 'svar.spil[].teknik.skvis', doc)
+        if spil['teknik']['indspil']:
+            tjek(spil['teknik']['indspil'], 'svar.spil[].teknik.indspil', doc)
         if spil['spillet']:
             tjek(spil['scorer'], 'svar.spil[].scorer', doc)
             tjek(spil['faktorer'], 'svar.spil[].faktorer', doc)
             tjek(spil['udspilseffekt'], 'svar.spil[].udspilseffekt', doc)
+            # Vindue 1b: rådene og linjen
+            tjek(spil['raad'], 'svar.spil[].raad', doc)
+            tjek(spil['raad']['udspil'], 'svar.spil[].raad.udspil', doc)
+            for n in spil['raad']['spilfoering'] + spil['raad']['modspil']:
+                tjek(n, 'svar.spil[].raad.noeglebeslutning', doc)
+                for a in n['alternativer']:
+                    tjek(a, 'svar.spil[].raad.noeglebeslutning.alternativer[]', doc)
+            for stik in spil['linje']:
+                tjek(stik, 'svar.spil[].linje[]', doc)
 
 
 def test_holdlisten_har_felterne_fra_svar_md(gemte_sider):

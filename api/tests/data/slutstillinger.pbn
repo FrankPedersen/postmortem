@@ -1,0 +1,149 @@
+% Slutstillinger til vindue 1b (SPEC-postmortem-1b-maerker.md): testsættet til slutstillingsløseren og mærkerne.
+% Syd er spilfører og skal spille ud. PBN-rækkefølgen er N, Ø, S, V; farverne er spar.hjerter.ruder.klør.
+% Trump er NT eller S, H, D, C. V er spilførersidens dobbeltdummy-stik; DDS har bekræftet tallet i hver stilling
+% (13. november 2026).
+% Felterne Viser, V, Skvis, Indspil, KastIndSkvis og Noeglebeslutning er ikke PBN-standard; de er det, testene forventer.
+%   Skvis:    mod (W, E, begge, en af dem), stik (regnet fra stillingen), kort (skviskortet), farver, uden (stik uden skvisen)
+%   Indspil: mod, stik, kort (indspilskortet), uden
+% En stilling uden Skvis og Indspil skal ikke have noget mærke.
+% T1-T11 er specens. T7, T9 og T10 er rettet (se Afklaret), og specens udgaver står som T7a, T9a og T10a:
+% i T7 gør Vests hjerterafkast bordets femte hjerter god, så indspillet ikke er nødvendigt; i T9 og T10 holdt to kort
+% DD-tallet i stik 1. T12-T17 er tilføjet i vindue 1b.
+
+[Stilling "T1"]
+[Viser "Positionel simpel skvis: Vest vogter spar og hjerter og kaster før bordet"]
+[Deal "N:AJ.K.. ..987. 4.2..A KQ.A.."]
+[Trump "NT"]
+[V "3"]
+[Skvis "mod=W stik=1 kort=CA farver=SH uden=2"]
+
+[Stilling "T2"]
+[Viser "Samme, men holdet sidder hos Øst bag bordet"]
+[Deal "N:AJ.K.. KQ.A.. 4.2..A .5.98."]
+[Trump "NT"]
+[V "2"]
+
+[Stilling "T3"]
+[Viser "Automatisk skvis: bordet har et frit kort, truslen hjerter konge er hos Syd"]
+[Deal "N:AJ..2. KQ.A.. 4.K..A ..987."]
+[Trump "NT"]
+[V "3"]
+[Skvis "mod=E stik=1 kort=CA farver=SH uden=2"]
+
+[Stilling "T4"]
+[Viser "Dobbeltskvis: Vest holder spar, Øst ruder, begge hjerter"]
+[Deal "N:J.A4.. .J8.A. .3.J.A A.Q7.."]
+[Trump "NT"]
+[V "3"]
+[Skvis "mod=begge stik=1 kort=CA farver=SHD uden=2"]
+
+[Stilling "T5"]
+[Viser "Indspil: Vest sættes ind på hjerter es og må spille op i spar es-dame"]
+[Deal "N:43.2.. ..987. AQ.3.. KJ.A.."]
+[Trump "NT"]
+[V "2"]
+[Indspil "mod=W stik=1 kort=H3 uden=1"]
+[Noeglebeslutning "stik=1 haand=S kort=H3"]
+
+[Stilling "T6"]
+[Viser "Samme, men hjerter es sidder hos Øst"]
+[Deal "N:43.2.. .A.87. AQ.3.. KJ..9."]
+[Trump "NT"]
+[V "1"]
+
+[Stilling "T7"]
+[Viser "Kast-ind-skvis: Vest må kaste en hjertervinder på klør es og sættes så ind (rettet: Øst har fået to hjertere over bordets)"]
+[Deal "N:43.54.. .76.98. AQ.3..A KJ.AK.."]
+[Trump "NT"]
+[V "3"]
+[Skvis "mod=W stik=1 kort=CA farver=SH uden=2"]
+[Indspil "mod=W stik=2 kort=H3 uden=2"]
+[KastIndSkvis "ja"]
+
+[Stilling "T7a"]
+[Viser "Specens T7: kaster Vest en hjerter, bliver bordets hjerter 5 god, så Syd får 3 stik uden indspillet; kun skvisen er nødvendig"]
+[Deal "N:43.54.. ..9876. AQ.3..A KJ.AK.."]
+[Trump "NT"]
+[V "3"]
+[Skvis "mod=W stik=1 kort=CA farver=SH uden=2"]
+
+[Stilling "T8"]
+[Viser "Begge modspillere holder spar"]
+[Deal "N:A9.K.. JT8... 4.2..A KQ.A.."]
+[Trump "NT"]
+[V "2"]
+
+[Stilling "T9"]
+[Viser "Vienna Coup: hjerter es skal indkasseres først, ellers er bordet selv i klemme (rettet: Vest har fået to hjertere)"]
+[Deal "N:AJ.A3..2 KQ.K5.9. 4.Q2..AK .76.876."]
+[Trump "NT"]
+[V "5"]
+[Skvis "mod=E stik=3 kort=CA farver=SH uden=4"]
+[Noeglebeslutning "stik=1 haand=S kort=H2"]
+
+[Stilling "T9a"]
+[Viser "Specens T9: hjerter dame holder også 5 stik, fordi Syds hjerter 2 bliver en trussel mod Østs hjerter 5"]
+[Deal "N:AJ.A3..2 KQ.K5.9. 4.Q2..AK ..87654."]
+[Trump "NT"]
+[V "5"]
+[Skvis "mod=E stik=3 kort=CA farver=SH uden=4"]
+
+[Stilling "T10"]
+[Viser "Indspil i trumf: Vest må spille op i hjerter es-dame eller til dobbeltrenonce (rettet: fem kort, og Vest har to rudere, så trumfen ikke kan trækkes først)"]
+[Deal "N:7.43..52 ..QJT98. 8.AQ..43 .KJ.65.A"]
+[Trump "S"]
+[V "4"]
+[Indspil "mod=W stik=1 kort=C3 uden=3"]
+[Noeglebeslutning "stik=1 haand=S kort=C3"]
+
+[Stilling "T10a"]
+[Viser "Specens T10: spar 8 holder også 3 stik (Vest har ingen fri udgang efter trumfen)"]
+[Deal "N:7.43..2 ..9876. 8.AQ..3 .KJ.5.A"]
+[Trump "S"]
+[V "3"]
+[Indspil "mod=W stik=1 kort=C3 uden=2"]
+
+[Stilling "T11"]
+[Viser "Tællingen passer ikke: Vest har et frit kort"]
+[Deal "N:AJ.K.2. ..8765. 4.2.3.A KQ.A.9."]
+[Trump "NT"]
+[V "2"]
+
+[Stilling "T12"]
+[Viser "Simpel skvis i en trumfkontrakt: den sidste trumf er skviskortet, og Vest har først et frit kort"]
+[Deal "N:.AJ.K.2 ...AQJT 98.4.3. .KQ.A.K"]
+[Trump "S"]
+[V "4"]
+[Skvis "mod=W stik=2 kort=S9 farver=HD uden=3"]
+
+[Stilling "T13"]
+[Viser "Tællingen rettes først: Syd afgiver en ruder til Østs es, og derefter er Vest i skvis på den sidste klør"]
+[Deal "N:AJ.K.2.5 ..A.QJT9 4.2.3.AK KQ.A.98."]
+[Trump "NT"]
+[V "4"]
+[Skvis "mod=W stik=3 kort=CA farver=SH uden=3"]
+
+[Stilling "T14"]
+[Viser "Indspil efter eliminering med seks kort: hjerter es indkasseres, og Vest sættes ind i klør"]
+[Deal "N:76.2.43.2 .T98.T98. 98.A.AQ.3 .QJ.KJ.AK"]
+[Trump "S"]
+[V "5"]
+[Indspil "mod=W stik=2 kort=C3 uden=4"]
+
+[Stilling "T15"]
+[Viser "Ligner T5, men kipningen sidder, og bordet har en indgang: indspillet er ikke nødvendigt"]
+[Deal "N:43.2.A. KJ..T9. AQ.3.2. .AK.QJ."]
+[Trump "NT"]
+[V "3"]
+
+[Stilling "T16"]
+[Viser "Ligner T3, men Øst har et frit kort at kaste, og tællingen kan ikke rettes"]
+[Deal "N:AJ..32. KQ.A.9. 4.K.4.A ..QJT8."]
+[Trump "NT"]
+[V "2"]
+
+[Stilling "T17"]
+[Viser "Ligner T1, men spartruslen på bordet har ingen indgang"]
+[Deal "N:J3.K.. ..987. A.2..A KQ.A.."]
+[Trump "NT"]
+[V "2"]

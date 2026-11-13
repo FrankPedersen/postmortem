@@ -21,6 +21,7 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
 - DDS' stiktal gælder den side, der er i tur: efter udspillet er det spilførersidens og skal ikke vendes (`docs/specs/NOTAT-afproevning.md`).
 - Svaret er beskrevet i `api/SVAR.md`. Ingen spillernavne i svaret, i loggen eller i cachen; kun holdlisten til valg af hold har holdnavne.
 - Hemmeligheder (forbindelsesstrenge og `IP_HASH_KEY`, nøglen til grænsens HMAC af IP'en) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`. Nøglen skrives aldrig ud.
+- Teknik og råd (SPEC-postmortem-1b-maerker.md): `postmortem/linje.py` (den bedste linje med DDS; reglerne for valg af kort står kun dér), `postmortem/slutloeser.py` (dobbeltdummy i ren Python for de sidste seks stik, med tilvalgene `pas_ved_afkast` og `giv_udspil`) og `postmortem/teknik.py` (mærkerne `skvis` og `indspil`, nøglebeslutningerne og udspillet). Uden tilvalg skal løseren give DDS' tal (`tests/test_slutloeser.py`). Testsættet er `tests/data/slutstillinger.pbn` og `helespil.pbn`: en ny stilling bekræftes først af DDS, og stemmer et tal ikke, rettes stillingen, og afvigelsen skrives i Afklaret. Mærkerne gælder den bedste linje efter udspillet, ikke det spillede forløb.
 - Grænsen pr. IP står i Table Storage (`postmortem/graense.py`, SPEC-postmortem-ip-graense.md). Hverken IP'en eller dens hash må logges; derfor logger `azure`- og `urllib3`-loggerne kun advarsler. `tests/test_graense.py` starter Azurite med `npx`.
 
 ## Appen (roden)

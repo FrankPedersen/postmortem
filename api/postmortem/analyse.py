@@ -6,10 +6,11 @@ holdkammeraternes bord; de står aldrig i svaret uden for holdlisten.
 """
 import hashlib
 import http.client
+import logging
 import urllib.error
 import urllib.parse
 
-from . import laes, regn
+from . import laes, regn, teknik
 from .hent import IkkeBridgeDk, er_bridge_dk, hent_side
 
 IKKE_BRIDGE_DK = 'Det er ikke et link fra resultater.bridge.dk'
@@ -169,6 +170,24 @@ def _dd_efter(spil, k, udspil, turnering, cache):
     return efter
 
 
+def _teknik(spil, k, udspil, turnering, cache):
+    """Mærkerne, rådene og linjen for kontrakten ved bordet (teknik.py); gemmes i cachen med samme nøgle som
+    DD-beregningerne. En analyse, der løb tør for tid eller fejlede, gemmes ikke. En fejl i teknikken må ikke vælte
+    analysen af aftenen: den logges uden kort og navne, og spillet får `beregnet: false` med grunden "fejl"."""
+    noegle = _noegle(turnering, spil, k.tekst() + k.spilfoerer, udspil or '-', 'teknik')
+    gemt = cache.get(noegle) if cache else None
+    if gemt is not None:
+        return gemt
+    try:
+        svar = teknik.analyser(spil.haender, k.farve, k.spilfoerer, udspil=udspil)
+    except Exception as fejl_:  # noqa: BLE001
+        logging.warning('postmortem: teknikken fejlede i spil %s (%s)', spil.nummer, type(fejl_).__name__)
+        return teknik.ikke_beregnet('fejl')
+    if cache and svar['teknik']['beregnet']:
+        cache.set(noegle, svar)
+    return svar
+
+
 def _grund(spil, dd, par, retning):
     s = 1 if retning == 'NS' else -1
     return {
@@ -183,8 +202,8 @@ def _ikke_spillet(spil, dd, par, retning):
     x = _grund(spil, dd, par, retning)
     x.update({'spillet': False, 'kontrakt': None, 'spilfoerer': None, 'udspil': None, 'stik': None, 'score': None,
               'point': None, 'top': None, 'procent': None, 'felt': [], 'holdkammerater': None, 'ddFoer': None,
-              'ddEfter': None, 'scorer': None, 'faktorer': None, 'modpartensFejl': None, 'udspilseffekt': None,
-              'maerker': []})
+              'ddEfter': None, 'scorer': None, 'faktorer': None, 'modpartensFejl': None, 'udspilseffekt': None})
+    x.update(teknik.ikke_beregnet('ikke spillet'))
     return x
 
 
@@ -228,8 +247,9 @@ def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, tu
         'faktorer': faktorer, 'modpartensFejl': modpartens_fejl,
         'udspilseffekt': None if k.pas else {'point': udspil, 'udspilAf': 'modparten' if parret_spilfoerer else 'parret',
                                              'ukendt': efter is None},
-        'maerker': [],
     })
+    # Vindue 1b: mærkerne, rådene og linjen for kontrakten ved bordet, uanset hvem der var spilfører
+    x.update(teknik.ikke_beregnet('pas') if k.pas else _teknik(spil, k, egen.udspil, turnering, cache))
     return x
 
 
@@ -243,8 +263,21 @@ def _aftenen(turnering, deltager, spil):
     else:
         resultat = {'procent': None, 'point': None, 'top': None, 'imp': point}
     kandidater = {f: faktorer[f] for f in ('meldinger', 'spilfoering', 'modspil') if faktorer[f] < 0}
+    # Teknikker i aftenens spil: antal spil med hvert mærke, og for de spil, hvor parret var spilfører: i hvor mange
+    # de tog DD-stikkene (med mærket: mindst stikkene med teknikken).
+    egne = [x for x in spillede if x['spilfoerer'] and (x['spilfoerer'] in 'NS') == (x['retning'] == 'NS')]
+    teknikker = {}
+    for m in ('skvis', 'indspil'):
+        med = [x for x in spillede if m in x['maerker']]
+        teknikker[m] = {'spil': len(med), 'somSpilfoerer': sum(1 for x in med if x in egne),
+                        'taget': sum(1 for x in med if x in egne and x['stik'] >= x['teknik'][m]['medTeknik'])}
+    teknikker['spilfoerer'] = {
+        'spil': len(egne),
+        'ddStik': sum(1 for x in egne if x['stik'] >= (x['ddEfter'] if x['ddEfter'] is not None else x['ddFoer'])),
+    }
     return {
         'turnering': turnering, 'deltager': deltager, 'resultat': resultat, 'faktorer': faktorer,
         'stoersteForbedring': min(kandidater, key=kandidater.get) if kandidater else None,
+        'teknikker': teknikker,
         'spil': spil,
     }
