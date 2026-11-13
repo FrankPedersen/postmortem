@@ -27,7 +27,7 @@ Grene: `ip-graense` i `postmortem` (tag `v-foer-ip-graense`) og `privatliv-postm
 
 ## Privatliv
 
-- **Appens note** får sætningen "Din IP-adresse bruges i krypteret form i højst 20 minutter til at begrænse antallet af analyser."
+- **Appens note** får sætningen "Din IP-adresse gemmes i højst 20 minutter som en kode, der ikke kan føres tilbage til adressen uden en hemmelig nøgle, for at begrænse antallet af analyser."
 - **Forsidens privatlivspolitik** får et afsnit om Post Mortem. Det fortæller:
   - hvad der hentes fra bridge.dk, og at navne ikke gemmes;
   - om IP-tælleren: formålet er at forhindre misbrug, grundlaget er legitim interesse, og opbevaringen er højst 20 minutter;
@@ -93,10 +93,10 @@ Bygget 13. november 2026. **Status: stoppet før merge, før udrulning og før a
 
 - **Appens note** har Franks sætning ordret.
 - **Forsiden:** afsnittet `<p class="om-privat om-privat-pm">` står under det eksisterende afsnit i samme `<details>`, på dansk med engelsk i `data-en`. Teksten er Claude Codes og skal læses af Frank:
-  - Dansk: "**Post Mortem.** Når du indsætter et link, henter en funktion i Microsoft Azure turneringens sider fra resultater.bridge.dk og regner spillene igennem. Navnene fra siderne gemmes ikke: kun beregningerne af spillene gemmes, uden navne, og svaret ligger kun i din browser, til du lukker fanen. Din IP-adresse bruges i krypteret form i højst 20 minutter til at begrænse antallet af analyser. Formålet er at forhindre misbrug, og grundlaget er legitim interesse. Azure logger tidspunktet for hvert kald og et omtrentligt land og en by i 30 dage, men ikke din IP-adresse eller linket."
-  - Engelsk: "**Post Mortem.** When you paste a link, a function in Microsoft Azure fetches the tournament's pages from resultater.bridge.dk and works through the boards. The names on the pages are not stored: only the calculations of the boards are stored, without names, and the result stays in your browser until you close the tab. Your IP address is used in encrypted form for up to 20 minutes to limit the number of analyses. The purpose is to prevent misuse, and the legal basis is legitimate interest. Azure logs the time of each request and an approximate country and city for 30 days, but not your IP address or the link."
+  - Dansk: "**Post Mortem.** Når du indsætter et link, henter en funktion i Microsoft Azure turneringens sider fra resultater.bridge.dk og regner spillene igennem. Navnene fra siderne gemmes ikke: kun beregningerne af spillene gemmes, uden navne, og svaret ligger kun i din browser, til du lukker fanen. Din IP-adresse gemmes i højst 20 minutter som en kode, der ikke kan føres tilbage til adressen uden en hemmelig nøgle, for at begrænse antallet af analyser. Formålet er at forhindre misbrug, og grundlaget er legitim interesse. Azure logger tidspunktet for hvert kald og et omtrentligt land og en by i 30 dage, men ikke din IP-adresse eller linket."
+  - Engelsk: "**Post Mortem.** When you paste a link, a function in Microsoft Azure fetches the tournament's pages from resultater.bridge.dk and works through the boards. The names on the pages are not stored: only the calculations of the boards are stored, without names, and the result stays in your browser until you close the tab. Your IP address is stored for up to 20 minutes as a code that cannot be traced back to the address without a secret key, to limit the number of analyses. The purpose is to prevent misuse, and the legal basis is legitimate interest. Azure logs the time of each request and an approximate country and city for 30 days, but not your IP address or the link."
 - **"Et omtrentligt land og en by"** er tilføjet ud over specen. Application Insights gemmer by og land for hvert kald til Post Mortem, som for kontakt-API'et, så teksten skal sige det for at være rigtig. Det er tjekket 13. november: IP'en er `0.0.0.0`, adressen er kun funktionens egen, og intet bridge.dk-link står i loggen.
-- **"Krypteret form"** er Franks ord. Teknisk er det en nøglet hash (HMAC-SHA256), som ikke kan regnes tilbage uden nøglen.
+- **Sætningen om IP-adressen** blev rettet af Frank før fletning 13. november 2026: "i krypteret form" blev til "som en kode, der ikke kan føres tilbage til adressen uden en hemmelig nøgle", som passer med HMAC-SHA256. Den står ens i appens note og i forsidens afsnit på dansk og engelsk, og testene er rettet.
 
 **Dokumentation:**
 
