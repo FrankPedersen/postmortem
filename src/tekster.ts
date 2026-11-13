@@ -30,7 +30,7 @@ export const T = {
     eksempelFed: 'filename=1111/MT3252…',
     eksempelEfter: '&pairno=11',
     lagring:
-      'Siden hentes én gang. Kun spil, kontrakter og tal gemmes, ingen navne. Appen gemmer ikke dine aftener; makker indsætter samme link.',
+      'Siden hentes én gang. Kun spil, kontrakter og tal gemmes, ingen navne. Appen gemmer ikke dine aftener; makker indsætter samme link. Din IP-adresse bruges i krypteret form i højst 20 minutter til at begrænse antallet af analyser.',
   },
 
   fejl: {

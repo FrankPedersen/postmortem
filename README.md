@@ -46,7 +46,7 @@ cd api
 - Python 3.12, Azure Functions v2-programmeringsmodellen og `endplay` 0.5.12 (DDS). Python 3.14 kan ikke bruges, fordi `endplay` ikke har hjul til den.
 - `postmortem/laes.py` læser siderne, `regn.py` regner DD, par, scorer (§ 77), imp (§ 78B) og matchpoint (§ 78A), `analyse.py` samler de fire faktorer, og `cache.py` gemmer DD-beregningerne (Blob i Azure, en mappe lokalt).
 - Ingen spillernavne i svaret, loggen eller cachen; kun holdlisten til valg af hold har holdnavne.
-- Højst 10 analyser pr. IP pr. 10 minutter (holdlisten tæller ikke), i hukommelsen pr. instans som i kontakt-API'et; derover 429 "For mange analyser lige nu. Prøv igen om lidt." med `Retry-After`. IP'en logges ikke (`function_app.py`, `tests/test_graense.py`).
+- Højst 10 analyser pr. IP pr. 10-minutters vindue (holdlisten tæller ikke); derover 429 "For mange analyser lige nu. Prøv igen om lidt." med `Retry-After` (SPEC-postmortem-ip-graense.md). Tælleren står i Table Storage (`postmortem/graense.py`, tabellen `ipgraense`), så den holder på tværs af instanser: én række pr. vindue og HMAC-SHA256 af IP'en med nøglen i app-indstillingen `IP_HASH_KEY`, med optimistisk samtidighed (ETag). Timer-funktionen `slet_ip_vinduer` sletter hvert 5. minut vinduer, der er mindst 15 minutter gamle, så en hash står højst 20 minutter. Fejler lageret, eller mangler nøglen, går analysen igennem, og det logges uden IP. Hverken IP'en eller hashen logges.
 
 ### Lokalt
 
@@ -65,12 +65,15 @@ Funktionen kan køres lokalt med Azure Functions Core Tools 4 (`npm install -g a
 cd api
 cp local.settings.example.json local.settings.json   # står i .gitignore
 source .venv/Scripts/activate                         # Git Bash; i PowerShell .venv\Scripts\Activate.ps1
+npx azurite --silent --location "$TEMP/azurite" &     # lokalt lager til cachen, grænsen og timeren
 func start
 curl -X POST http://localhost:7071/api/analyse -H "Content-Type: application/json" \
   -d '{"url": "https://resultater.bridge.dk/template/personligt_regnskab.php?filename=2151/MT452GT720.XML&tournament=452&section=1&pairno=1"}'
 ```
 
-Uden `AzureWebJobsStorage` gemmes DD-beregningerne i en mappe (`POSTMORTEM_CACHE_DIR` eller systemets midlertidige mappe).
+Uden `AzureWebJobsStorage` gemmes DD-beregningerne i en mappe (`POSTMORTEM_CACHE_DIR` eller systemets midlertidige mappe), men timer-funktionen kræver et lager, så `func start` bruger Azurite. Med en tom `IP_HASH_KEY` er grænsen slået fra lokalt; med en nøgle skal tabellen `ipgraense` findes i Azurite.
+
+Testene af grænsen (`tests/test_graense.py`) starter selv Azurites tabeltjeneste med `npx` (Node kræves) og stopper den bagefter.
 
 ### Tests på Linux
 
@@ -81,7 +84,7 @@ Uden `AzureWebJobsStorage` gemmes DD-beregningerne i en mappe (`POSTMORTEM_CACHE
 Ressourcegruppen `Kontraktbridge` i West Europe:
 
 - Function App `kontraktbridge-postmortem`: Flex Consumption, Linux, Python 3.12, 2048 MB pr. instans og højst 10 instanser. Anonym; CORS kun for `https://www.kontraktbridge.dk` og `https://kontraktbridge.dk`, sat i platformen (`az functionapp cors add`).
-- Lagerkonto `kontraktbridgepostmortem`: funktionens egen (`AzureWebJobsStorage`). DD-cachen ligger i blob-containeren `postmortem-dd`, som funktionen selv opretter ved første kald.
+- Lagerkonto `kontraktbridgepostmortem`: funktionens egen (`AzureWebJobsStorage`). DD-cachen ligger i blob-containeren `postmortem-dd`, som funktionen selv opretter ved første kald, og grænsen pr. IP i tabellen `ipgraense`, som oprettes med `az storage table create`.
 - Application Insights `kontraktbridge-postmortem` i Log Analytics-arbejdsområdet `kontraktbridge-kontakt-logs` (30 dage). Loggen har kun sidetype, status, antal spil og tid.
 
 ### Udrulning

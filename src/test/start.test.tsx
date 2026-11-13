@@ -88,4 +88,10 @@ describe('Start', () => {
     expect(within(guide).getByText(/Adresselinjen ser sådan ud/)).toBeTruthy();
     expect(screen.getByText(/ingen navne/)).toBeTruthy();
   });
+
+  it('noten fortæller om IP-tælleren (SPEC-postmortem-ip-graense.md)', () => {
+    vis('#/');
+    const note = tekst(screen.getByText(/ingen navne/));
+    expect(note).toContain('Din IP-adresse bruges i krypteret form i højst 20 minutter til at begrænse antallet af analyser.');
+  });
 });
