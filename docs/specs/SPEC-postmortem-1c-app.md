@@ -75,7 +75,34 @@ En månedlig budgetalarm på ressourcegruppen `Kontraktbridge`, 50 kr., med mail
 
 ## Afklaret
 
-Trin 1–6 er bygget 12. november 2026, og Franks rettelser før merge er lavet samme dag (afsnittet nedenfor). **Status: stoppet før merge, før udrulning af funktionen og før budgetalarmen.**
+Trin 1–6 er bygget 12. november 2026, og Franks rettelser før merge er lavet samme dag (afsnittet nedenfor). Trin 7 er udført 13. november 2026 efter Franks godkendelse (næste afsnit). **Status: udgivet; budgetalarmen venter på Franks ja til kommandoen, og grænsen pr. IP holder ikke på tværs af instanser (se Trin 7).**
+
+**Trin 7 (13. november 2026, godkendt af Frank):**
+
+- **Fletning:**
+  - `postmortem`: `app` er flettet ind på `main` (`a810225`) og pushet sammen med grenen og tagget `v-foer-app`.
+  - Forside: `postmortem-kort` er flettet ind på `main` (`8d953b2`) og pushet sammen med grenen og tagget `v-foer-postmortem-kort`.
+- **GitHub Pages for `postmortem`:** slået til med GitHub Actions som kilde og "Enforce HTTPS" (`gh api repos/FrankPedersen/postmortem/pages`). Adressen er https://www.kontraktbridge.dk/postmortem/, fordi `frankpedersen.github.io` har domænet.
+  - Workflowen "Udgiv på GitHub Pages" på `main` er grøn, og `api` er grøn på `main`, `app` og tagget.
+  - Forsidens Pages-byg af `8d953b2` er færdigt.
+- **Funktionen:** udrullet med zip og fjernbygning ("Deployment was successful."). Svaret har `modpartensFejl`, så den nye kode kører.
+- **Live: funktionen.** Direkte kald gav svar, der er identiske med de lokale svar i `src/test/data/`:
+  - 452 (par 1): 62,28 %; faktorerne +23, −2, −31 og +65, heraf modpartens fejl +43.
+  - 450 bord 2 NS: −15 imp; faktorerne +8, −6, −8 og −9.
+  - Holdlisten for 450 har de samme 16 id'er, retninger og borde og den samme turnering.
+- **Live: appen.** Chrome uden vindue på www.kontraktbridge.dk/postmortem/ ved 390 px:
+  - 452 giver "Par 1 · 32 spil · 62,28 % (279 af 448 point)" og faktorerne som lokalt. Hele svaret i `sessionStorage` er det samme som lokalt. Spil 7 viser "udspil ♥3 (står forkert på bridge.dk)".
+  - 450 giver holdlisten med 8 hold. Holdet ved bord 2 og Nord–Syd giver "… · bord 2, Nord–Syd · 16 spil · −15 imp mod jeres andet bord", og svaret er det samme som lokalt.
+  - Browserens konsol har ingen fejl, heller ikke om CORS.
+- **Live: forsiden.** Kortet Post Mortem vises ved 1280 px, og et klik åbner www.kontraktbridge.dk/postmortem/. Ved 390 px har mobilmenuen "Post Mortem · Analyse", og et tryk åbner appen. `tjek_kun_siden.mjs --live` er grøn (95 tjek); et første forsøg fik en forbigående 503 fra GitHub Pages på én adresse.
+- **Live: grænsen pr. IP holder ikke på Flex Consumption.** Den 11. analyse fra samme IP gav 200, ikke 429.
+  - Testen kørte 05:41–05:49 UTC: 11 rigtige analyser (to direkte, to gennem appen og 7 af 452) og derefter 100 billige kald med et ugyldigt link. De tæller også i grænsen, men henter intet fra bridge.dk. I alt 111 kald talte fra samme IP på 7 minutter, og ingen gav 429. Holdlisten gav 200.
+  - Application Insights viser, uden IP'er, at kaldene blev fordelt på 18 forskellige instanser. Der var 9 i første runde, og 9 nye i anden runde, fordi de første blev lukket efter 3 minutter uden kald. Ingen instans fik mere end 10 kald, der tæller. Grænsen virker altså som bygget og testet, pr. instans, men Flex spreder kaldene (Pythons standard er ét kald ad gangen pr. instans) og skifter instanserne ud. Derfor når en tæller i hukommelsen sjældent op på 11.
+  - Kontakt-API'et kører også på Flex Consumption med samme slags tæller. Den er ikke testet live, fordi et kald sender en rigtig mail.
+  - **Kræver Franks valg** (intet er ændret i Azure):
+    - (a) `az functionapp scale config set -g Kontraktbridge -n kontraktbridge-postmortem --maximum-instance-count 1` (hvis Flex tillader 1) sammen med flere samtidige kald pr. instans. Det er ingen kodeændring, men alle analyser deles om én instans, og tælleren nulstilles, når instansen lukkes efter en stille periode.
+    - (b) En fælles tæller i funktionens lagerkonto (Table Storage) med en saltet hash af IP'en, der slettes efter 10 minutter. Den holder på tværs af instanser, men så står en hash af IP'en i 10 minutter uden for hukommelsen, og privatlivsteksten og `SYSTEM.md` skal rettes.
+    - (c) Grænsen beholdes som en blød grænse pr. instans. Den reelle beskyttelse er så højst 10 instanser og budgetalarmen. `SVAR.md` og specen skal i så fald sige "pr. instans".
 
 **Franks rettelser før merge (12. november 2026):**
 
@@ -167,13 +194,13 @@ Appen har sin egen fagords- og bydeformtest i `npm test` (`src/sprog/` med Forde
   - `tjek_engelsk_om_mig.mjs`: "Post Mortem" er det samme på begge sprog og står nu på listen over navne.
 - Disse tjek er grønne: `tjek_ny_forside`, `tjek_kun_siden`, `tjek_fagord`, `tjek_bydeform`, `tjek_bredde`, `tjek_ordbog`, `tjek_skrifttyper` (begge), `tjek_scoring`, `tjek_om_mig`, `tjek_privatliv` (begge), `tjek_engelsk_om_mig` og `tjek_kontakt` (begge).
 
-**Udgivelse (trin 7, ikke gjort):**
+**Udgivelse (trin 7, gjort 13. november 2026; se Trin 7 øverst):**
 
 - `.github/workflows/pages.yml` er som Fordelingstrænerens: `npm ci`, `npm test` og `npx vite build --base=/postmortem/`. Bygget er prøvet lokalt, og stierne er `/postmortem/…`.
 - Produktionsbygget kalder Azure-adressen, og udviklingsserveren bruger proxyen. Funktionens CORS er ikke ændret.
 - Pages skal slås til med GitHub Actions som kilde.
 
-**Budgetalarmen (trin 7, ikke kørt):**
+**Budgetalarmen (trin 7, vist Frank 13. november 2026, ikke kørt før hans ja):**
 
 - `az consumption budget create-with-rg` findes (preview) og tager notifikationer.
 - Abonnementet har i forvejen budgettet "LoginProjekt" (300 pr. måned, på abonnementet). Valutaen kunne ikke læses med `az`. Beløbet er i abonnementets faktureringsvaluta, så det skal ses i portalen, at det er kr.
