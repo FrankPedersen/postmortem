@@ -354,6 +354,26 @@ Den tredje for spilfører i spil 2 er endnu et dyk (stik 5: ♠2 fra bordet, ♠
 
 **Tests.** `test_maerker.py` har fået to tests: frafaldet i spil 2, og at en topvinder i udspil kun tæller, når et andet kort også vinder stikket (T1, T7, T9, T5, T10, H1 og H2). Alle tests er grønne: pytest 256 bestod og 1 sprunget over; appens `npm test` 56 (appen er ikke rørt).
 
+#### 13. Udgivet og tjekket live (14. november 2026)
+
+- **Fletning:** `maerker` er squash-flettet til `main` som ét commit (`50244bd`), så `api/dump.txt` ikke står i historikken på `main`, og pushet sammen med tagget `v-foer-maerker`. Grenen `maerker` ligger stadig på GitHub med sin egen historik (og dermed `dump.txt`, en konstrueret stilling uden navne); den kan slettes.
+- **GitHub Actions på `main`:** testene i `api/` er grønne på Linux, og appen er bygget og udgivet igen uden ændringer.
+- **Udrulning:** funktionen er udrullet med zip og fjernbygning som i README; `analyse` og `slet_ip_vinduer` er på plads. Ingen nye Azure-ressourcer eller app-indstillinger.
+- **Live, 452 (par 1) og 450 (hold 2-NS):** alle 48 spil er beregnet (`beregnet: true`), og svarene har de tre mærker fra tabellen i afsnit 7:
+
+| Turnering | Spil | Kontrakt | Mærke | Mod | Stik | Kort | Med | Uden |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 452 | 3 | 2NT i Nord | skvis | V | 9 | ♦E (farver ♠♥) | 10 | 9 |
+| 452 | 18 | 3NT i Syd | indspil | Ø | 9 | ♥B | 10 | 9 |
+| 450 | 9 | 2♠ i Vest (udspillet antaget) | indspil | N | 11 | ♥7 | 10 | 9 |
+
+  Fordelingen af nøglebeslutninger live er den samme som lokalt (spilføring 21, 15, 4 og 8; modspil 37, 8, 2 og 1), så linjen er den samme på Linux og Windows.
+- **Uændret svar i øvrigt:** svarene blev gemt lige før udrulningen og sammenlignet med svarene efter. Alle felter fra før (turnering, deltager, resultat, faktorer og hvert spil uden de fire nye felter) er ens for begge aftener.
+- **Svartid:** 5,8 og 6,5 s før udrulningen; 6,0 og 7,9 s lige efter (teknikken regnet for første gang); 7,1 s for 452 med teknikken i cachen. Tiden går til at hente siderne fra bridge.dk og til instansens start, ikke til teknikken.
+- **Appen er uændret:** `index.html` og de to filer i `assets/` har samme indhold som før udrulningen. I Chrome uden vindue mod www.kontraktbridge.dk/postmortem/ viser aftenens oversigt og alle analysevinduer (32 + 16) præcis samme tekst med svaret før og efter udrulningen. Fra startskærmen fører linket til 452 til aftenens oversigt; svaret i `sessionStorage` har de nye felter, og browseren melder ingen fejl.
+
+Del B (appen) kommer i en ny besked.
+
 ## Besked til Claude Code (del A)
 
 > Model: Fable 5.2, høj effort. Læs `docs/specs/SPEC-postmortem-1b-maerker.md`, `PLAN-postmortem.md`, `NOTAT-afproevning.md` og `api/SVAR.md`. Byg kun del A på grenen `maerker` (tag `v-foer-maerker`). Lad først DDS bekræfte slutstillingerne i specen, og skriv afvigelser i Afklaret. Skriv accepttestene, før du skriver løseren. Mål ydeevnen, før du bygger videre på den. Stop før merge med tabellen over mærker på de 48 spil i Afklaret. Rør ikke appen, og udrul intet.
