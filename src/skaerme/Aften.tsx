@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { dato, kontrakt, medFortegn, tal } from '../format';
 import { T } from '../tekster';
-import type { Analyse, Spil, VaelgSvar } from '../typer';
+import type { Analyse, Maerke, Spil, VaelgSvar } from '../typer';
 import { FAKTORER } from '../typer';
-import { faktorSum, holdNavn, maerke, resultatArt, spilSum, udspilTekst } from '../udledt';
+import { faktorSum, holdNavn, maerke, resultatArt, spilSum, tagetVedBordet, teknikMaerker, teknikTekst, udspilTekst } from '../udledt';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
 
 /** Linjen for et spil i listen: "S 4♠ · udspil ♣B · 10 stik · +620". */
@@ -20,12 +20,17 @@ function spilLinje(s: Spil) {
 
 /** Skærm 3, aftenens oversigt (`#/aften`). */
 export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
-  const [filter, setFilter] = useState<'alle' | 'tabte'>('alle');
+  const [filter, setFilter] = useState<'alle' | 'tabte' | Maerke>('alle');
   const a = svar;
   const form = a.turnering.form;
   const antal = a.spil.length;
   const tabte = a.spil.filter((s) => (spilSum(s) ?? 0) < 0);
-  const vist = filter === 'alle' ? a.spil : tabte;
+  // Vindue 1b: spillene med hvert mærke. Et svar fra før vindue 1b har ikke teknikker; så vises hverken kort eller filtre.
+  const MAERKER: Maerke[] = ['skvis', 'indspil'];
+  const med = (m: Maerke) => a.spil.filter((s) => teknikMaerker(s).some((x) => x.navn === m));
+  const vist = filter === 'alle' ? a.spil : filter === 'tabte' ? tabte : med(filter);
+  const taget = tagetVedBordet(a);
+  const ingenTeknik = MAERKER.every((m) => med(m).length === 0);
   const iAlt = faktorSum(a.faktorer);
   const størst = Math.max(...FAKTORER.map((f) => Math.abs(a.faktorer[f])), 1);
   const enhed = T.aften.enhed[form];
@@ -101,6 +106,30 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
           <p className="note">{T.aften.note}</p>
         </section>
 
+        {a.teknikker && (
+          <section className="kort" aria-labelledby="h-teknikker">
+            <div className="kort-hoved">
+              <h2 id="h-teknikker">{T.teknik.kortTitel}</h2>
+              <span className="hint">{T.teknik.kortHint}</span>
+            </div>
+            <ul className="teknik-tal-liste">
+              {MAERKER.map((m) => (
+                <li key={m}>
+                  <span className="navn">{T.teknik.navn[m]}</span>{' '}
+                  <span className={med(m).length ? 'antal' : 'antal nul'}>{med(m).length}</span>
+                </li>
+              ))}
+              {taget.af > 0 && (
+                <li className="taget">
+                  <span className="navn">{T.teknik.taget}</span>{' '}
+                  <span className="tal">{T.teknik.tagetTal(taget.taget, taget.af)}</span>
+                </li>
+              )}
+            </ul>
+            <p className="note">{ingenTeknik ? T.teknik.ingen : T.teknik.note}</p>
+          </section>
+        )}
+
         <section className="spillene" aria-labelledby="h-spillene">
           <div className="kort-hoved">
             <h2 id="h-spillene">{T.aften.spillene}</h2>
@@ -110,6 +139,12 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
             <button type="button" className="filter" aria-pressed={filter === 'alle'} onClick={() => setFilter('alle')}>
               {T.aften.alle(antal)}
             </button>
+            {a.teknikker &&
+              MAERKER.map((m) => (
+                <button key={m} type="button" className="filter" aria-pressed={filter === m} disabled={med(m).length === 0} onClick={() => setFilter(m)}>
+                  {T.teknik.filter[m](med(m).length)}
+                </button>
+              ))}
             <button type="button" className="filter" aria-pressed={filter === 'tabte'} onClick={() => setFilter('tabte')}>
               {T.aften.tabte(tabte.length)}
             </button>
@@ -128,6 +163,11 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
                       </span>{' '}
                       {s.spillet && (
                         <span className="maerker">
+                          {teknikMaerker(s).map(({ navn }) => (
+                            <span className="teknik-maerke" key={navn}>
+                              {teknikTekst(s, navn)}
+                            </span>
+                          ))}
                           <span className={`maerke ${m.art}`}>
                             <Farver>{m.tekst}</Farver>
                           </span>
@@ -142,7 +182,7 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
               );
             })}
           </ol>
-          {vist.length === 0 && <p className="note">{T.aften.ingenTabte}</p>}
+          {vist.length === 0 && filter === 'tabte' && <p className="note">{T.aften.ingenTabte}</p>}
         </section>
       </Side>
       <Sidefod />

@@ -29,6 +29,16 @@ export const T = {
     eksempelFoer: 'resultater.bridge.dk/template/personligt_regnskab.php?',
     eksempelFed: 'filename=1111/MT3252…',
     eksempelEfter: '&pairno=11',
+    // Det, rådene gælder, og det, de ikke finder (SPEC-postmortem-1b-maerker.md, Kendte begrænsninger).
+    raadTitel: 'Sådan læses rådene',
+    raadMaerke: 'Råd',
+    raadPunkter: [
+      'Rådene gælder den bedste linje efter udspillet, ikke det, der blev spillet. Spilføringen kort for kort står ikke på bridge.dk.',
+      'Alt er regnet med åbne kort: en skvis eller et indspil er med, når det er den eneste vej til stikket. Ved bordet kan en kipning være lige så god.',
+      'Skvis og indspil findes i de sidste seks stik; det, der afgøres tidligere, findes ikke. Et indspil, der kun er nødvendigt, fordi spilfører mangler en indgang, findes ikke.',
+      'Linjen er én af flere rigtige. Nøglebeslutningerne er de kort, hvor kun én mulighed holder stikkene.',
+      'Står udspillet forkert på bridge.dk, bruger analysen det bedste udspil.',
+    ],
     lagring:
       'Siden hentes én gang. Kun spil, kontrakter og tal gemmes, ingen navne. Appen gemmer ikke dine aftener; makker indsætter samme link. Din IP-adresse gemmes i højst 20 minutter som en kode, der ikke kan føres tilbage til adressen uden en hemmelig nøgle, for at begrænse antallet af analyser.',
   },
@@ -97,6 +107,93 @@ export const T = {
     ikkeSpillet: 'Ikke spillet',
   },
 
+  // Vindue 1b, del B: teknikkerne i aftenens spil og mærkerne Skvis mulig og Indspil muligt.
+  teknik: {
+    kortTitel: 'Teknikker i aftenens spil',
+    kortHint: 'mulige med åbne kort',
+    navn: { skvis: 'Skvis', indspil: 'Indspil' },
+    taget: 'Taget ved jeres bord',
+    tagetTal: (taget: number, af: number) => `${taget} af ${af}`,
+    note: 'Mærkerne gælder den bedste linje efter udspillet. En skvis eller et indspil er med, når det er nødvendigt i de sidste seks stik.',
+    ingen: 'Ingen af aftenens spil krævede en skvis eller et indspil i de sidste seks stik.',
+    filter: { skvis: (n: number) => `Skvis · ${n}`, indspil: (n: number) => `Indspil · ${n}` },
+    maerke: { skvis: 'Skvis mulig', indspil: 'Indspil muligt' },
+    modJer: ' mod jer',
+    medStik: (maerke: string, stik: number) => `${maerke} · stik ${stik}`,
+  },
+
+  // Analysevinduets to afsnit med råd. Funktionen sender felter; sætningerne skrives her.
+  raad: {
+    spilfoering: 'Råd til spilføringen',
+    modspil: 'Råd til modspillet',
+    intro: 'Den bedste linje efter udspillet, kort for kort, hvor det afgør noget.',
+    introModspil: (stik: number) => `Det bedste modspil holder spilfører på ${stik} stik.`,
+    iModspil: 'I var i modspil',
+    andreIModspil: (retning: string) => `${retning} i modspil`,
+    noegle: 'Nøglebeslutninger',
+    stik: (n: number) => `Stik ${n}`,
+    udspil: 'Udspil',
+    fra: (kort: string, plads: string) => `${kort} fra ${plads}`,
+    bordet: ' (bordet)',
+    holder: (dd: number) => ` holder ${dd} stik.`,
+    holderModspil: (dd: number) => ` holder spilfører på ${dd} stik.`,
+    giver: (kort: string, dd: number) => `${kort} giver ${dd} stik`,
+    giverModspil: (kort: string, dd: number) => `${kort} giver spilfører ${dd} stik`,
+    tag: { skvis: 'skviskortet', indspil: 'indspilskortet', taelling: 'tællingen rettes' },
+    udspilKoster: (pris: number, efter: number, bedste: number) =>
+      ` koster ${pris} stik: spilfører har ${efter} stik efter udspillet og ${bedste} efter det bedste.`,
+    udspilGodt: (efter: number) => ` er blandt de bedste udspil: spilfører har ${efter} stik.`,
+    udspilForkert: (bedste: string) => `Udspillet står forkert på bridge.dk; analysen bruger det bedste udspil (${bedste}).`,
+    udspilMangler: (bedste: string) => `Udspillet står ikke på bridge.dk; analysen bruger det bedste udspil (${bedste}).`,
+    bedsteUdspil: (liste: string) => `Bedste udspil: ${liste}.`,
+    // Hvem teknikken er mod, i overskriften og i modspillets afsnit.
+    mod: {
+      plads: (navn: string) => navn,
+      jer: (navn: string) => `jer (${navn})`,
+      begge: 'begge modspillere',
+      jerBegge: 'jer begge',
+      enAfDem: 'en af modspillerne',
+      enAfJer: 'en af jer',
+    },
+    titel: {
+      skvis: (hvem: string) => `Skvis mod ${hvem}`,
+      dobbeltskvis: (hvem: string) => `Dobbeltskvis mod ${hvem}`,
+      indspil: (hvem: string) => `Indspil mod ${hvem}`,
+    },
+    uden: {
+      skvis: (uden: number, med: number) => `Uden skvisen ${uden} stik, med ${med}.`,
+      indspil: (uden: number, med: number) => `Uden indspillet ${uden} stik, med ${med}.`,
+    },
+    skviskort: (kort: string, stik: number, fra: string) => `Skviskortet er ${kort} i stik ${stik}, spillet fra ${fra}.`,
+    skvisFarver: (navn: string, farver: string) => ` ${navn} kan ikke bekende og har ${farver} tilbage.`,
+    skvisFarverFlere: (farver: string) => ` Modspillerne kan ikke bekende og har ${farver} tilbage.`,
+    indspilskort: (kort: string, stik: number, fra: string, vinder: string) =>
+      `Indspilskortet er ${kort} i stik ${stik}, spillet fra ${fra}. ${vinder} vinder stikket og skal spille ud.`,
+    kastInd: (navn: string) => `Kast-ind-skvis: ${navn} må først kaste et kort, han har brug for, og sættes derefter ind.`,
+    modHvem: {
+      skvis: (hvem: string) => `Skvisen er mod ${hvem}. Det bedste modspil kan ikke forhindre den.`,
+      indspil: (hvem: string) => `Indspillet er mod ${hvem}. Det bedste modspil kan ikke forhindre det.`,
+    },
+    stilling: (stik: number) => `Stillingen før stik ${stik}`,
+    spiller: (plads: string, kort: string) => `${plads} spiller ${kort}`,
+    spotTitel: 'Sådan spotter du den',
+    // Faste tekster pr. teknik med ordbogens ord: indspil og skvis er former for slutspil.
+    spot: {
+      skvis:
+        'En skvis er en form for slutspil: en modspiller må kaste et kort, han ikke kan undvære. Den viser sig, når én modspiller vogter to farver alene, og der mangler ét stik. Vinderne i de andre farver indkasseres, til han ikke har flere frie kort.',
+      dobbeltskvis:
+        'En dobbeltskvis er en form for slutspil: hver modspiller vogter sin egen farve, og begge vogter en tredje. Når vinderne i den fjerde farve indkasseres, må de efter tur slippe den fælles farve.',
+      indspil:
+        'Et indspil er en form for slutspil: en modspiller sættes ind og må spille ud til spilførers fordel, fx op i en gaffel eller til dobbeltrenonce. Det viser sig, når en modspiller kun har skadelige udspil tilbage. Hans udgange fjernes først, og så får han stikket.',
+      kastInd:
+        'En kast-ind-skvis er skvis og indspil efter hinanden. Modspilleren kan ikke både beholde sine udgange og sin garde: han må kaste noget af det og sættes så ind.',
+    },
+    ordbog: (navn: string) => `${navn} i ordbogen`,
+    ordbogNavn: { skvis: 'Skvis', indspil: 'Indspil', slutspil: 'Slutspil' },
+    ordbogLink: { skvis: '/ordbog/#skvis', indspil: '/ordbog/#indspil', slutspil: '/ordbog/#slutspil' },
+    ikkeRegnet: 'Rådene kunne ikke regnes for dette spil.',
+  },
+
   spil: {
     tilbage: 'Tilbage til oversigten',
     forrige: 'Forrige spil',
@@ -135,7 +232,7 @@ export const T = {
     ukendt: 'ukendt udspil',
     faktorTitel: 'Hvor gik pointene?',
     ikkeRelevant: '–',
-    note: 'Dobbeltdummy regnes med DDS (Apache 2.0). Spilføringen kort for kort kendes ikke fra bridge.dk; tallene gælder den bedste linje efter det faktiske udspil.',
+    note: 'Dobbeltdummy regnes med DDS (Apache 2.0). Spilføringen kort for kort kendes ikke fra bridge.dk. Rådene gælder den bedste linje efter det faktiske udspil, ikke det, der blev spillet. Skvis og indspil findes i de sidste seks stik.',
   },
 
   // Én linje pr. faktor i analysevinduet.
@@ -169,6 +266,7 @@ export const T = {
   zone: { None: 'Ingen i zonen', NS: 'N–S i zonen', EW: 'Ø–V i zonen', All: 'Alle i zonen' },
   farveNavn: { S: 'spar', H: 'hjerter', D: 'ruder', C: 'klør' },
   renonce: 'renonce',
+  og: 'og',
   doblet: 'D',
   redoblet: 'RD',
   pas: 'Pas',

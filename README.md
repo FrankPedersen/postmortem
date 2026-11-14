@@ -13,6 +13,7 @@ Vite, React og TypeScript som Fordelingstræneren; tests med vitest og Testing L
 - `src/App.tsx` styrer adresserne: `#/` start, `#/hold` valg af hold, `#/aften` aftenens oversigt og `#/spil/<nr>` analysevinduet.
 - `src/api.ts` har funktionens adresse ét sted og tjekker, at linket begynder med `https://resultater.bridge.dk/`. Under udvikling går kaldet gennem Vites proxy (`vite.config.ts`).
 - `src/tekster.ts` har alle tekster (kun dansk i første udgave), `src/format.ts` tal, kort og kontrakter på dansk, og `src/udledt.ts` det, appen udleder af svaret (mærker, middel, feltets grupper, hp).
+- `src/skaerme/Raad.tsx` viser Råd til spilføringen og Råd til modspillet i analysevinduet (mærkerne Skvis mulig og Indspil muligt, nøglebeslutningerne og udspillet), og `src/ui/Slutstilling.tsx` stillingen ved skvis- eller indspilsstikket (SPEC-postmortem-1b-maerker.md, del B). Sætningerne skrives i appen ud fra svarets felter.
 - `src/styles.css` har tokens, topbjælke og sidefod kopieret fra Fordelingstræneren; fontene og licenserne ligger i `public/fonts/`.
 - Svaret ligger kun i `sessionStorage` (`src/lager.ts`), så en genindlæsning ikke kræver et nyt kald. Ingen aftener gemmes.
 

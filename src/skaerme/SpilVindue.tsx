@@ -4,6 +4,7 @@ import type { Analyse, Benaevnelse, Plads, Spil } from '../typer';
 import { feltGrupper, forkertUdspil, viSpillede } from '../udledt';
 import { Bridgebord } from '../ui/Bridgebord';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
+import { Raad } from './Raad';
 
 const KOLONNER: [Benaevnelse, string][] = [['C', '♣'], ['D', '♦'], ['H', '♥'], ['S', '♠'], ['NT', 'NT']];
 const RÆKKER: Plads[] = ['N', 'S', 'E', 'W'];
@@ -230,6 +231,8 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
                 </ul>
               </section>
             )}
+
+            <Raad spil={s} />
 
             <p className="note fod-note">{T.spil.note}</p>
           </div>

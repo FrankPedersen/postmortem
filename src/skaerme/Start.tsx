@@ -90,6 +90,18 @@ export function Start({ url: forrige, onSvar }: { url: string; onSvar: (url: str
           </div>
         </section>
 
+        <section className="kort guide" aria-labelledby="h-raad">
+          <div className="kort-hoved">
+            <h2 id="h-raad">{T.start.raadTitel}</h2>
+            <span className="pille">{T.start.raadMaerke}</span>
+          </div>
+          <ul className="punkter">
+            {T.start.raadPunkter.map((t, i) => (
+              <li key={i}>{t}</li>
+            ))}
+          </ul>
+        </section>
+
         <div className="lagring">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="4" y="10" width="16" height="11" rx="2" />

@@ -28,10 +28,11 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
 
 - Vite, React og TypeScript som Fordelingstræneren (SPEC-postmortem-1c-app.md). `npm test` kører `tsc` og vitest: accepttestene i `src/test/` bruger svarene i `src/test/data/`, som er lavet af funktionen på de anonymiserede sider (README viser hvordan); `api/tests/test_ingen_navne.py` tjekker også dem.
 - `node tools/tjek_bredde.mjs` tjekker i Chrome eller Edge, at ingen skærm ruller vandret ved 320, 390 og 1280 px, at knapper og links har 44 px trykflade, og at bordet står i to spalter fra 1000 px; `--billeder=mappe` gemmer skærmbilleder.
+- Teknik og råd (SPEC-postmortem-1b-maerker.md, del B): `src/skaerme/Raad.tsx` viser Råd til spilføringen og Råd til modspillet ud fra felterne `teknik`, `raad` og `linje`, og `src/ui/Slutstilling.tsx` stillingen ved skvis- og indspilsstikket. Oversigten har kortet Teknikker i aftenens spil og filtrene for mærkerne. Funktionen sender ingen sætninger; de skrives i `src/tekster.ts`. Testsvarene i `src/test/data/` skal være funktionens svar (`api/tests/test_teknik_svar.py` tjekker det); ændres svaret, laves de igen som i README.
 - Alle tekster står i `src/tekster.ts`. Funktionens adresse står kun i `src/api.ts`. Ingen PWA og ingen gemte aftener; svaret ligger kun i `sessionStorage`.
 - `.github/workflows/pages.yml` udgiver appen ved push til `main`; funktionen udrulles kun med zip (README).
 
 ## Sprog
 
-- Dansk tekst følger husets ord og beskrivende form (`../CLAUDE.md`): bordet, slutspil, skvis, kipning, forbindelser, indkassere, toppe farven.
+- Dansk tekst følger husets ord og beskrivende form (`../CLAUDE.md`): bordet, slutspil, skvis, kipning, forbindelser, indkassere, toppe farven. Indspil bruges kun om den særlige form for slutspil, hvor en modspiller sættes ind (mærket Indspil muligt); overbegrebet er slutspil.
 - Fagordstesten og bydeformtesten er `src/test/sprog.test.tsx` (i `npm test`) med listerne i `src/sprog/fagord.ts` og `src/sprog/bydeform.ts`; de læser al tekst på alle skærme og hele `src/tekster.ts`. En ny knap i bydeform kommer på `UNDTAGELSER`.

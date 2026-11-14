@@ -16,8 +16,8 @@ export const IKKE_ORD: readonly { mønster: RegExp; husets: string }[] = [
   { mønster: /\bdobbeltton[a-zæøå]*/gi, husets: 'doubleton' },
   { mønster: /\bfittens?\b/gi, husets: 'fittet' },
   { mønster: /\ben\s+(?:\S+\s+)?(?:[0-9a-zæøå+]+-)*fit\b/gi, husets: 'et fit' },
-  // Indspil kun om den særlige form for slutspil; appen bruger slutspil.
-  { mønster: /\bindspil[a-zæøå]*/gi, husets: 'slutspil' },
+  // "Indspil" står ikke på listen: fra vindue 1b bruger appen ordet om den særlige form for slutspil, hvor en modspiller
+  // sættes ind (mærket Indspil muligt, Franks afgørelse 14. november 2026). Overbegrebet hedder stadig slutspil.
 ];
 
 /** Alle "Ikke"-ord i en dansk tekst som "ordet (husets ord)". */

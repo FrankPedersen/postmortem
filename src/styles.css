@@ -1507,3 +1507,335 @@ h1:focus {
     min-height: 132px;
   }
 }
+
+/* Vindue 1b, del B: teknikkerne, raadene og stillingen ved skvis- og indspilsstikket (SPEC-postmortem-1b-maerker.md). */
+
+.teknik-maerke {
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--fb-hit);
+  color: var(--fb-hit-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.kort-hoved .teknik-maerke {
+  padding: 4px 10px;
+}
+
+.teknik-tal-liste {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.teknik-tal-liste li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-12);
+  font-size: 0.92rem;
+}
+
+.teknik-tal-liste .antal {
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--fb-hit);
+  color: var(--fb-hit-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.teknik-tal-liste .antal.nul {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.teknik-tal-liste .taget {
+  grid-column: 1 / -1;
+  border: 0;
+  background: var(--surface-2);
+}
+
+.teknik-tal-liste .taget .navn {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.teknik-tal-liste .taget .tal {
+  font-weight: 600;
+}
+
+.filter:disabled {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.punkter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-size: 0.92rem;
+}
+
+.raad h3 {
+  margin: 0;
+  font-size: var(--type-h3);
+  font-weight: 600;
+}
+
+.raad p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.raad .raad-intro {
+  color: var(--muted);
+}
+
+.teknik {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-16);
+}
+
+.raad .teknik-tal {
+  font-weight: 600;
+}
+
+.spot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--radius-12);
+  background: var(--surface-2);
+}
+
+.raad-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.raad-liste li {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+}
+
+.stik-nr {
+  padding: 6px 0;
+  border-radius: var(--radius-12);
+  background: var(--ink);
+  color: var(--ink-text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.raad-linje {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.raad-tekst {
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+.raad-alt {
+  color: var(--fb-miss-text);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.raad-alt.neutral {
+  color: var(--muted);
+}
+
+/* Kuloerens roede farve viger for linjens egen farve i de smaa linjer. */
+.raad-alt .roed {
+  color: inherit;
+}
+
+.raad-tag {
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--fb-hit);
+  color: var(--fb-hit-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ordbog-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ordbog-links a {
+  flex: 1 1 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-12);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.ordbog-links a:hover {
+  box-shadow: inset 0 0 0 2px var(--accent-line);
+}
+
+.raad-mangler {
+  padding: 0 4px;
+}
+
+/* Stillingen ved stikket: et lille bord med de kort, der er tilbage. */
+.stilling {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 8px;
+  border-radius: var(--radius-12);
+  background: var(--surface-2);
+}
+
+.stilling figcaption {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.stilling figcaption .roed {
+  color: inherit;
+}
+
+.stilling-bord {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas:
+    'nord nord nord'
+    'vest midte oest'
+    'syd syd syd';
+  align-items: center;
+  gap: 6px;
+  /* Paa brede skaerme holdes haenderne taet paa kompasset. */
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.stilling-haand {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  justify-items: start;
+}
+
+.stilling-N {
+  grid-area: nord;
+  justify-self: center;
+}
+
+.stilling-S {
+  grid-area: syd;
+  justify-self: center;
+}
+
+.stilling-W {
+  grid-area: vest;
+}
+
+.stilling-E {
+  grid-area: oest;
+  justify-self: end;
+}
+
+.stilling .farve {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.stilling .plads-navn {
+  font-size: 0.7rem;
+}
+
+.stilling-kompas {
+  grid-area: midte;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-12);
+  background: var(--table);
+  color: var(--table-text);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.stilling-plads {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+/* Den, der spiller ud til stikket. */
+.stilling-plads.inde {
+  background: var(--accent);
+  color: #1a1a1a;
+}
+
+.stilling-plads-N {
+  top: 3px;
+  left: 21px;
+}
+
+.stilling-plads-S {
+  bottom: 3px;
+  left: 21px;
+}
+
+.stilling-plads-W {
+  left: 3px;
+  top: 21px;
+}
+
+.stilling-plads-E {
+  right: 3px;
+  top: 21px;
+}

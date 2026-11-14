@@ -255,7 +255,8 @@ describe('Et spil uden mærker viser ikke tomme afsnit', () => {
       if (!harMærke) {
         expect(document.querySelectorAll('.teknik-maerke, .spot, .ordbog-links'), `spil ${s.nummer}`).toHaveLength(0);
         expect(screen.queryByRole('figure', { name: /^Stillingen/ })).toBeNull();
-        expect(document.body.textContent).not.toMatch(/Skvis|Indspil|Sådan spotter/);
+        // Noten nederst nævner skvis og indspil; afsnittene gør ikke.
+        expect([...document.querySelectorAll('main section')].map(tekst).join(' ')).not.toMatch(/Skvis|Indspil|Sådan spotter/);
       }
       // Uden mærke og uden nøglebeslutninger for spilfører er der intet afsnit om spilføringen.
       const venterSpilføring = harMærke || s.raad!.spilfoering.length > 0;

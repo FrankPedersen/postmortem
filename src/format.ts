@@ -25,6 +25,21 @@ export const kortene = (farve: string) => [...farve].map((k) => RANG[k] ?? k).jo
 /** Ét kort som i udspillet: "CJ" → "♣B". */
 export const kort = (k: string) => `${SYMBOL[k[0]] ?? k[0]}${kortene(k.slice(1))}`;
 
+/** Kort i følge som én mulighed, højeste først: ["H3", "H4"] → "♥43", ["CT", "CJ"] → "♣B10". */
+export const kortGruppe = (g: string[]) => `${SYMBOL[g[0][0]] ?? g[0][0]}${kortene([...g].reverse().map((k) => k.slice(1)).join(''))}`;
+
+/** En opremsning på dansk: ["♠", "♥", "♦"] → "♠, ♥ og ♦". */
+export const opremsning = (dele: string[]) => (dele.length < 2 ? dele.join('') : `${dele.slice(0, -1).join(', ')} ${T.og} ${dele.at(-1)}`);
+
+/** Hånden til skærmlæseren: "spar B 8 4, hjerter E 8, …" med mellemrum mellem kortene (som Bridgebord). */
+export function oplaest(haand: string): string {
+  const farver = ['S', 'H', 'D', 'C'] as const;
+  return haand
+    .split('.')
+    .map((f, i) => `${T.farveNavn[farver[i]]} ${f ? [...f].map((k) => kortene(k)).join(' ') : T.renonce}`)
+    .join(', ');
+}
+
 /** "4S" → "4♠", "3NTX" → "3NT D", "5DXX" → "5♦ RD", "Pas" → "Pas". */
 export function kontrakt(k: string): string {
   const m = /^([1-7])(NT|[CDHS])(X{0,2})$/.exec(k);

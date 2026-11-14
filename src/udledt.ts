@@ -1,7 +1,7 @@
 /** Det, appen udleder af svaret: middel, summer, mærker, feltets grupper og hp. Ingen beregning af bridge her. */
 import { kontrakt, kort, medFortegn, parKontrakt } from './format';
 import { T } from './tekster';
-import type { Analyse, Faktorer, Plads, Spil } from './typer';
+import type { Analyse, Faktorer, Maerke, Plads, Spil, TeknikMaerke } from './typer';
 import { FAKTORER } from './typer';
 
 export const PLADSER: readonly Plads[] = ['N', 'E', 'S', 'W'];
@@ -103,4 +103,50 @@ export function feltGrupper(s: Spil): { score: number; antal: number; jer: boole
 export function hp(haand: string): number {
   const v: Record<string, number> = { A: 4, K: 3, Q: 2, J: 1 };
   return [...haand].reduce((sum, k) => sum + (v[k] ?? 0), 0);
+}
+
+// Vindue 1b, del B: mærkerne Skvis mulig og Indspil muligt og stillingen ved skvis- og indspilsstikket.
+
+/** Parret eller holdet var i modspil mod en kontrakt (ikke pas). */
+export const viVarIModspil = (s: Spil) => s.spilfoerer !== null && !viSpillede(s);
+
+/** Spillets mærker med detaljerne fra teknik, i svarets rækkefølge (skvis før indspil). */
+export function teknikMaerker(s: Spil): { navn: Maerke; m: TeknikMaerke }[] {
+  const t = s.teknik;
+  if (!s.spillet || !t?.beregnet) return [];
+  return (['skvis', 'indspil'] as const).flatMap((navn) => (t[navn] ? [{ navn, m: t[navn]! }] : []));
+}
+
+/** Mærket som tekst: "Skvis mulig", "Indspil muligt mod jer", med stikket, når det ønskes: "Skvis mulig · stik 9". */
+export function teknikTekst(s: Spil, navn: Maerke, medStik = false): string {
+  const tekst = T.teknik.maerke[navn] + (viVarIModspil(s) ? T.teknik.modJer : '');
+  const stik = s.teknik?.[navn]?.stik ?? null;
+  return medStik && stik !== null ? T.teknik.medStik(tekst, stik) : tekst;
+}
+
+/** "Taget ved jeres bord": spil med et mærke, hvor parret var spilfører, og hvor mange af dem de tog stikkene i. */
+export function tagetVedBordet(a: Analyse): { taget: number; af: number } {
+  const egne = a.spil.filter((s) => viSpillede(s) && teknikMaerker(s).length > 0);
+  const taget = egne.filter((s) => s.stik !== null && teknikMaerker(s).every(({ m }) => s.stik! >= m.medTeknik));
+  return { taget: taget.length, af: egne.length };
+}
+
+/** Hænderne før et stik på linjen (PBN: spar.hjerter.ruder.klør): de kort, der ikke er spillet i de tidligere stik. */
+export function stillingFoer(s: Spil, stik: number): Record<Plads, string> {
+  const spillet = new Set((s.linje ?? []).slice(0, stik - 1).flatMap((x) => x.kort));
+  const ud = {} as Record<Plads, string>;
+  for (const p of PLADSER) {
+    ud[p] = s.haender[p]
+      .split('.')
+      .map((farve, i) => [...farve].filter((k) => !spillet.has('SHDC'[i] + k)).join(''))
+      .join('.');
+  }
+  return ud;
+}
+
+/** Pladsen, der lagde kortet i stikket på linjen. */
+export function lagdeKortet(s: Spil, stik: number, kortet: string): Plads | null {
+  const x = s.linje?.[stik - 1];
+  const i = x ? x.kort.indexOf(kortet) : -1;
+  return x && i >= 0 ? PLADSER[(PLADSER.indexOf(x.udspiller) + i) % 4] : null;
 }
