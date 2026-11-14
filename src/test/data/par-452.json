@@ -28,6 +28,22 @@
   "held": 65
  },
  "stoersteForbedring": "modspil",
+ "teknikker": {
+  "skvis": {
+   "spil": 1,
+   "somSpilfoerer": 1,
+   "taget": 1
+  },
+  "indspil": {
+   "spil": 1,
+   "somSpilfoerer": 1,
+   "taget": 1
+  },
+  "spilfoerer": {
+   "spil": 13,
+   "ddStik": 12
+  }
+ },
  "spil": [
   {
    "nummer": 1,
@@ -147,7 +163,214 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 4,
+      "haand": "E",
+      "kort": "ST",
+      "dd": 9,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H2",
+         "H3"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "H8",
+         "H9"
+        ],
+        "dd": 6
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "D3",
+     "pris": 0,
+     "bedste": [
+      [
+       "S3"
+      ],
+      [
+       "S8"
+      ],
+      [
+       "SQ"
+      ],
+      [
+       "H5",
+       "H6"
+      ],
+      [
+       "HQ"
+      ],
+      [
+       "D2",
+       "D3"
+      ],
+      [
+       "D7"
+      ],
+      [
+       "DA"
+      ],
+      [
+       "C5"
+      ],
+      [
+       "CJ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "D3",
+      "D5",
+      "D4",
+      "D9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CQ",
+      "C5",
+      "C3",
+      "C6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CK",
+      "CJ",
+      "C4",
+      "CT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "ST",
+      "S3",
+      "S4",
+      "S2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SJ",
+      "S8",
+      "SK",
+      "S5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SA",
+      "S6",
+      "C2",
+      "SQ"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C8",
+      "H7",
+      "C7",
+      "D2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C9",
+      "D8",
+      "H2",
+      "D7"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CA",
+      "HJ",
+      "H3",
+      "H5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D6",
+      "DT",
+      "DJ",
+      "DQ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DA",
+      "H4",
+      "S7",
+      "DK"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H6",
+      "HT",
+      "HA",
+      "H8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S9",
+      "H9",
+      "HQ",
+      "HK"
+     ],
+     "vinder": "N"
+    }
+   ]
   },
   {
    "nummer": 2,
@@ -267,7 +490,201 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 8,
+      "haand": "E",
+      "kort": "H7",
+      "dd": 11,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "SK",
+         "SA"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "S4",
+         "S5"
+        ],
+        "dd": 10
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "D5",
+     "pris": 0,
+     "bedste": [
+      [
+       "D2"
+      ],
+      [
+       "D5"
+      ],
+      [
+       "D8"
+      ],
+      [
+       "C2"
+      ],
+      [
+       "C7",
+       "C8"
+      ],
+      [
+       "CJ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "D5",
+      "D9",
+      "D3",
+      "DJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C9",
+      "C2",
+      "C4",
+      "CT"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CA",
+      "C3",
+      "C7",
+      "C5"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C6",
+      "S3",
+      "C8",
+      "CK"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HA",
+      "H2",
+      "H4",
+      "H5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S9",
+      "S8",
+      "SQ",
+      "S2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DQ",
+      "D6",
+      "H3",
+      "D2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DK",
+      "D7",
+      "H7",
+      "D8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HJ",
+      "H6",
+      "S4",
+      "HT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SK",
+      "ST",
+      "D4",
+      "S6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SA",
+      "SJ",
+      "H8",
+      "CQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S5",
+      "CJ",
+      "H9",
+      "DT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S7",
+      "HQ",
+      "DA",
+      "HK"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 3,
@@ -387,7 +804,238 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [
+    "skvis"
+   ],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": {
+     "mod": "W",
+     "stik": 9,
+     "kort": "DA",
+     "farver": [
+      "S",
+      "H"
+     ],
+     "medTeknik": 10,
+     "udenTeknik": 9
+    },
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 1,
+      "haand": "S",
+      "kort": "C5",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "CJ",
+         "CQ"
+        ],
+        "dd": 9
+       }
+      ]
+     },
+     {
+      "stik": 7,
+      "haand": "N",
+      "kort": "H8",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S2"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "S9"
+        ],
+        "dd": 9
+       }
+      ]
+     },
+     {
+      "stik": 8,
+      "haand": "N",
+      "kort": "H9",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S2"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "S9"
+        ],
+        "dd": 9
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "C8",
+     "pris": 2,
+     "bedste": [
+      [
+       "S4"
+      ],
+      [
+       "S6"
+      ],
+      [
+       "S8"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "E",
+     "kort": [
+      "C8",
+      "C5",
+      "CK",
+      "C2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CA",
+      "CT",
+      "C3",
+      "C6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D3",
+      "D4",
+      "D2",
+      "D7"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DQ",
+      "D5",
+      "D8",
+      "D6"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DK",
+      "DT",
+      "DJ",
+      "D9"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "H2",
+      "H5",
+      "H3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CJ",
+      "S3",
+      "H8",
+      "C4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CQ",
+      "H4",
+      "H9",
+      "C7"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DA",
+      "ST",
+      "HT",
+      "S4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "SJ",
+      "SQ",
+      "SK",
+      "S6"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S9",
+      "S8",
+      "S5",
+      "SA"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H6",
+      "HK",
+      "H7",
+      "HJ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S2",
+      "C9",
+      "S7",
+      "HQ"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 4,
@@ -507,7 +1155,183 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 1,
+      "haand": "E",
+      "kort": "H3",
+      "dd": 9,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "HA"
+        ],
+        "dd": 8
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "H9",
+     "pris": 1,
+     "bedste": [
+      [
+       "D9"
+      ],
+      [
+       "DJ"
+      ],
+      [
+       "DA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "H9",
+      "H3",
+      "H4",
+      "HT"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CK",
+      "C4",
+      "C3",
+      "C2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HQ",
+      "H2",
+      "H5",
+      "H8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HK",
+      "S4",
+      "HA",
+      "HJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CA",
+      "C6",
+      "D4",
+      "C5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C9",
+      "C8",
+      "D6",
+      "CQ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D9",
+      "D2",
+      "D3",
+      "D8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C7",
+      "CT",
+      "D7",
+      "S3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D5",
+      "DT",
+      "H6",
+      "DJ"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "S8",
+      "S2",
+      "S6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SJ",
+      "SQ",
+      "S9",
+      "S7"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DA",
+      "ST",
+      "DQ",
+      "H7"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S5",
+      "SA",
+      "CJ",
+      "DK"
+     ],
+     "vinder": "N"
+    }
+   ]
   },
   {
    "nummer": 5,
@@ -627,7 +1451,195 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 10,
+      "haand": "S",
+      "kort": "C4",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "D8"
+        ],
+        "dd": 7
+       },
+       {
+        "kort": [
+         "SA"
+        ],
+        "dd": 9
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "H8",
+     "pris": 1,
+     "bedste": [
+      [
+       "S2"
+      ],
+      [
+       "S7"
+      ],
+      [
+       "C3"
+      ],
+      [
+       "C5"
+      ],
+      [
+       "C8"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "W",
+     "kort": [
+      "H8",
+      "H2",
+      "H3",
+      "HQ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CJ",
+      "C3",
+      "C9",
+      "CT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DA",
+      "D5",
+      "D6",
+      "D3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C6",
+      "C5",
+      "CQ",
+      "D4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S3",
+      "S6",
+      "S9",
+      "S2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DJ",
+      "D7",
+      "H4",
+      "DQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D9",
+      "D2",
+      "DK",
+      "S4"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C8",
+      "CK",
+      "S8",
+      "C2"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "H5",
+      "H6",
+      "HA",
+      "H9"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C4",
+      "HT",
+      "CA",
+      "SQ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "ST",
+      "SK",
+      "SA",
+      "S7"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C7",
+      "HJ",
+      "S5",
+      "H7"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "D8",
+      "HK",
+      "SJ",
+      "DT"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 6,
@@ -747,7 +1759,253 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 9,
+      "haand": "W",
+      "kort": "SK",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S2"
+        ],
+        "dd": 5
+       },
+       {
+        "kort": [
+         "SJ"
+        ],
+        "dd": 5
+       }
+      ]
+     },
+     {
+      "stik": 11,
+      "haand": "W",
+      "kort": "SJ",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S2"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "HT"
+        ],
+        "dd": 6
+       }
+      ]
+     }
+    ],
+    "modspil": [
+     {
+      "stik": 7,
+      "haand": "N",
+      "kort": "H9",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H5",
+         "H6"
+        ],
+        "dd": 8
+       },
+       {
+        "kort": [
+         "HJ"
+        ],
+        "dd": 8
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": "C9",
+     "pris": 0,
+     "bedste": [
+      [
+       "S4"
+      ],
+      [
+       "S6",
+       "S7",
+       "S8"
+      ],
+      [
+       "ST"
+      ],
+      [
+       "H3"
+      ],
+      [
+       "HQ"
+      ],
+      [
+       "DA"
+      ],
+      [
+       "C3"
+      ],
+      [
+       "C7"
+      ],
+      [
+       "C9"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "C9",
+      "CT",
+      "CK",
+      "C6"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CA",
+      "CQ",
+      "C3",
+      "C4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C2",
+      "H2",
+      "C7",
+      "CJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DK",
+      "D6",
+      "D3",
+      "D7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DJ",
+      "DQ",
+      "D4",
+      "DT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DA",
+      "D9",
+      "C5",
+      "D2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H3",
+      "H7",
+      "H9",
+      "HK"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H4",
+      "HQ",
+      "H8",
+      "H5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "S4",
+      "SK",
+      "S5",
+      "S3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SA",
+      "SQ",
+      "S9",
+      "S6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SJ",
+      "H6",
+      "HA",
+      "S7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D5",
+      "S8",
+      "S2",
+      "C8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D8",
+      "ST",
+      "HT",
+      "HJ"
+     ],
+     "vinder": "N"
+    }
+   ]
   },
   {
    "nummer": 7,
@@ -867,7 +2125,186 @@
     "udspilAf": "modparten",
     "ukendt": true
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": true,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": null,
+     "pris": null,
+     "bedste": [
+      [
+       "S3"
+      ],
+      [
+       "S5"
+      ],
+      [
+       "S9"
+      ],
+      [
+       "SA"
+      ],
+      [
+       "H5"
+      ],
+      [
+       "HQ",
+       "HK"
+      ],
+      [
+       "DK"
+      ],
+      [
+       "C3",
+       "C4",
+       "C5",
+       "C6"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "W",
+     "kort": [
+      "C3",
+      "C7",
+      "C2",
+      "CK"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "C4",
+      "C8",
+      "CT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "D7",
+      "DK",
+      "D3",
+      "D2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CQ",
+      "C9",
+      "H3",
+      "D8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C5",
+      "CJ",
+      "H4",
+      "H2"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SJ",
+      "S2",
+      "S6",
+      "S3"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S8",
+      "S7",
+      "SQ",
+      "S5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H9",
+      "H5",
+      "HA",
+      "H7"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D9",
+      "D6",
+      "DJ",
+      "HQ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DA",
+      "S9",
+      "D4",
+      "DT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HT",
+      "HK",
+      "H8",
+      "HJ"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C6",
+      "S4",
+      "DQ",
+      "H6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SA",
+      "D5",
+      "ST",
+      "SK"
+     ],
+     "vinder": "W"
+    }
+   ]
   },
   {
    "nummer": 8,
@@ -987,7 +2424,247 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 6,
+      "haand": "W",
+      "kort": "SA",
+      "dd": 12,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S4"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "SQ"
+        ],
+        "dd": 11
+       }
+      ]
+     },
+     {
+      "stik": 10,
+      "haand": "E",
+      "kort": "HK",
+      "dd": 12,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "C4"
+        ],
+        "dd": 10
+       },
+       {
+        "kort": [
+         "S8"
+        ],
+        "dd": 11
+       }
+      ]
+     },
+     {
+      "stik": 11,
+      "haand": "E",
+      "kort": "HA",
+      "dd": 12,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S8"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "C4"
+        ],
+        "dd": 11
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "C5",
+     "pris": 0,
+     "bedste": [
+      [
+       "H6"
+      ],
+      [
+       "H8",
+       "H9"
+      ],
+      [
+       "HQ"
+      ],
+      [
+       "D6"
+      ],
+      [
+       "D8"
+      ],
+      [
+       "DJ"
+      ],
+      [
+       "DK"
+      ],
+      [
+       "C5"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "C5",
+      "C9",
+      "C3",
+      "C2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DA",
+      "D2",
+      "H2",
+      "D6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D9",
+      "D4",
+      "S3",
+      "DJ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D8",
+      "D3",
+      "D5",
+      "C6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H4",
+      "H6",
+      "HT",
+      "H3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S7",
+      "S2",
+      "SA",
+      "S9"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H5",
+      "H8",
+      "HJ",
+      "H7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CQ",
+      "CJ",
+      "C7",
+      "ST"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CT",
+      "D7",
+      "C8",
+      "H9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HK",
+      "DT",
+      "S4",
+      "HQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HA",
+      "S5",
+      "SQ",
+      "SJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S8",
+      "S6",
+      "CK",
+      "SK"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CA",
+      "DK",
+      "C4",
+      "DQ"
+     ],
+     "vinder": "W"
+    }
+   ]
   },
   {
    "nummer": 9,
@@ -1107,7 +2784,233 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 3,
+      "haand": "E",
+      "kort": "H9",
+      "dd": 12,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S4"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "ST"
+        ],
+        "dd": 9
+       }
+      ]
+     },
+     {
+      "stik": 3,
+      "haand": "W",
+      "kort": "HQ",
+      "dd": 12,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H3",
+         "H4"
+        ],
+        "dd": 8
+       },
+       {
+        "kort": [
+         "H6"
+        ],
+        "dd": 8
+       }
+      ]
+     },
+     {
+      "stik": 4,
+      "haand": "W",
+      "kort": "HK",
+      "dd": 12,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H3",
+         "H4"
+        ],
+        "dd": 8
+       },
+       {
+        "kort": [
+         "H6"
+        ],
+        "dd": 8
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "S5",
+     "pris": 2,
+     "bedste": [
+      [
+       "C6"
+      ],
+      [
+       "CT"
+      ],
+      [
+       "CA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "S5",
+      "S9",
+      "S2",
+      "S7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DA",
+      "D4",
+      "D5",
+      "D3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H9",
+      "H7",
+      "HQ",
+      "H2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HK",
+      "H5",
+      "C2",
+      "H8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HA",
+      "HT",
+      "D2",
+      "HJ"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "S3",
+      "SA",
+      "S8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SQ",
+      "SJ",
+      "C3",
+      "S6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S4",
+      "C7",
+      "C4",
+      "C6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "ST",
+      "D8",
+      "C5",
+      "D7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CJ",
+      "CQ",
+      "H3",
+      "CT"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DT",
+      "D9",
+      "D6",
+      "DJ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CK",
+      "H4",
+      "CA",
+      "C8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H6",
+      "DK",
+      "C9",
+      "DQ"
+     ],
+     "vinder": "W"
+    }
+   ]
   },
   {
    "nummer": 10,
@@ -1227,7 +3130,187 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 7,
+      "haand": "N",
+      "kort": "H6",
+      "dd": 9,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "HK"
+        ],
+        "dd": 8
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "D5",
+     "pris": 1,
+     "bedste": [
+      [
+       "S3"
+      ],
+      [
+       "SJ"
+      ],
+      [
+       "H2"
+      ],
+      [
+       "HT",
+       "HJ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "W",
+     "kort": [
+      "D5",
+      "D2",
+      "D7",
+      "D8"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "C8",
+      "C3",
+      "C2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CT",
+      "C9",
+      "C4",
+      "CQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D9",
+      "DT",
+      "DJ",
+      "D3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D4",
+      "S4",
+      "S5",
+      "DK"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "H2",
+      "H4",
+      "H5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H9",
+      "HT",
+      "H6",
+      "H8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CK",
+      "C5",
+      "C7",
+      "S2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D6",
+      "C6",
+      "S6",
+      "DA"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H3",
+      "HJ",
+      "HK",
+      "HQ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CJ",
+      "S9",
+      "S8",
+      "S3"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S7",
+      "ST",
+      "SQ",
+      "SJ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "SA",
+      "DQ",
+      "H7",
+      "SK"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 11,
@@ -1347,7 +3430,193 @@
     "udspilAf": "modparten",
     "ukendt": true
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": true,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": null,
+     "pris": null,
+     "bedste": [
+      [
+       "S9"
+      ],
+      [
+       "SQ"
+      ],
+      [
+       "SA"
+      ],
+      [
+       "H2"
+      ],
+      [
+       "H5"
+      ],
+      [
+       "H8",
+       "H9"
+      ],
+      [
+       "D5"
+      ],
+      [
+       "D7"
+      ],
+      [
+       "DA"
+      ],
+      [
+       "C5",
+       "C6"
+      ],
+      [
+       "CJ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "W",
+     "kort": [
+      "C5",
+      "C7",
+      "C9",
+      "CQ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C8",
+      "C6",
+      "C3",
+      "CT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CK",
+      "C2",
+      "CJ",
+      "C4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HQ",
+      "HA",
+      "H2",
+      "H4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HJ",
+      "H5",
+      "H7",
+      "HK"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H3",
+      "D6",
+      "H8",
+      "HT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "ST",
+      "S9",
+      "S5",
+      "SK"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CA",
+      "DT",
+      "D5",
+      "D2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "S7",
+      "SQ",
+      "D3",
+      "S2"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D8",
+      "S3",
+      "DQ",
+      "D7"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "S8",
+      "SA",
+      "D4",
+      "S4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D9",
+      "H6",
+      "DK",
+      "DA"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H9",
+      "DJ",
+      "S6",
+      "SJ"
+     ],
+     "vinder": "N"
+    }
+   ]
   },
   {
    "nummer": 12,
@@ -1467,7 +3736,228 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 3,
+      "haand": "W",
+      "kort": "SQ",
+      "dd": 11,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H2"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "H5"
+        ],
+        "dd": 9
+       }
+      ]
+     },
+     {
+      "stik": 4,
+      "haand": "W",
+      "kort": "SK",
+      "dd": 11,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H2"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "H5"
+        ],
+        "dd": 9
+       }
+      ]
+     },
+     {
+      "stik": 7,
+      "haand": "E",
+      "kort": "DQ",
+      "dd": 11,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S9",
+         "SJ"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "H3"
+        ],
+        "dd": 9
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "C7",
+     "pris": 1,
+     "bedste": [
+      [
+       "H7",
+       "H8",
+       "H9"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "C7",
+      "C8",
+      "C3",
+      "C5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DT",
+      "D8",
+      "D5",
+      "D2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SQ",
+      "S2",
+      "S5",
+      "S3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "ST",
+      "S6",
+      "S4"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D3",
+      "DA",
+      "DJ",
+      "D4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C6",
+      "CT",
+      "D6",
+      "C2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DQ",
+      "D7",
+      "H2",
+      "H4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DK",
+      "D9",
+      "SA",
+      "C9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S9",
+      "S7",
+      "C4",
+      "H6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CQ",
+      "H7",
+      "H5",
+      "CA"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CJ",
+      "CK",
+      "H8",
+      "HT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SJ",
+      "S8",
+      "HQ",
+      "HJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H3",
+      "H9",
+      "HA",
+      "HK"
+     ],
+     "vinder": "W"
+    }
+   ]
   },
   {
    "nummer": 13,
@@ -1587,7 +4077,191 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "HA",
+     "pris": 0,
+     "bedste": [
+      [
+       "S3"
+      ],
+      [
+       "S6"
+      ],
+      [
+       "H6"
+      ],
+      [
+       "HK",
+       "HA"
+      ],
+      [
+       "D2"
+      ],
+      [
+       "D4",
+       "D5"
+      ],
+      [
+       "C5"
+      ],
+      [
+       "C7",
+       "C8"
+      ],
+      [
+       "CJ"
+      ],
+      [
+       "CK"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "H7",
+      "H4",
+      "H2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C5",
+      "C6",
+      "C2",
+      "H3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CA",
+      "C3",
+      "D8",
+      "C7"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C9",
+      "C4",
+      "S2",
+      "C8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DQ",
+      "D2",
+      "D3",
+      "D9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DK",
+      "D4",
+      "D6",
+      "DA"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CQ",
+      "S4",
+      "CJ",
+      "CT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HJ",
+      "H6",
+      "H9",
+      "HQ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DT",
+      "S7",
+      "D5",
+      "D7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H8",
+      "HK",
+      "S5",
+      "H5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SA",
+      "ST",
+      "S8",
+      "S3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SQ",
+      "DJ",
+      "SJ",
+      "S6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S9",
+      "HT",
+      "SK",
+      "CK"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 14,
@@ -1707,7 +4381,206 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 4,
+      "haand": "E",
+      "kort": "S5",
+      "dd": 8,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "C3"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "C9"
+        ],
+        "dd": 6
+       }
+      ]
+     },
+     {
+      "stik": 4,
+      "haand": "W",
+      "kort": "S9",
+      "dd": 8,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S4"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "SK",
+         "SA"
+        ],
+        "dd": 7
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "D4",
+     "pris": 2,
+     "bedste": [
+      [
+       "H9",
+       "HT"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "D4",
+      "D8",
+      "D5",
+      "D6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CA",
+      "C4",
+      "C2",
+      "C6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S3",
+      "SJ",
+      "SQ",
+      "S2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S5",
+      "S6",
+      "S9",
+      "C5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CT",
+      "C8",
+      "C3",
+      "D2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D3",
+      "D7",
+      "D9",
+      "DT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DA",
+      "H4",
+      "DJ",
+      "DK"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DQ",
+      "S4",
+      "H2",
+      "H5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H9",
+      "HA",
+      "H3",
+      "H6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "CJ",
+      "H8",
+      "S7"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SA",
+      "HQ",
+      "C9",
+      "S8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H7",
+      "HK",
+      "HJ",
+      "HT"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CK",
+      "CQ",
+      "ST",
+      "C7"
+     ],
+     "vinder": "N"
+    }
+   ]
   },
   {
    "nummer": 15,
@@ -1827,7 +4700,174 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "S7",
+     "pris": 0,
+     "bedste": [
+      [
+       "S5"
+      ],
+      [
+       "S7",
+       "S8",
+       "S9"
+      ],
+      [
+       "D3",
+       "D4",
+       "D5"
+      ],
+      [
+       "D8"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "S7",
+      "SA",
+      "S6",
+      "S3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C6",
+      "CJ",
+      "CK",
+      "C9"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DQ",
+      "D3",
+      "D9",
+      "D2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HK",
+      "H2",
+      "H5",
+      "H4"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HT",
+      "H3",
+      "H8",
+      "HA"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CQ",
+      "C2",
+      "S5",
+      "C3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "C5",
+      "D4",
+      "C4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C7",
+      "CT",
+      "S8",
+      "S2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DK",
+      "D5",
+      "DJ",
+      "D6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SJ",
+      "SK",
+      "S4",
+      "ST"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D8",
+      "DA",
+      "D7",
+      "H7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HQ",
+      "C8",
+      "HJ",
+      "H6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H9",
+      "DT",
+      "SQ",
+      "S9"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 16,
@@ -1947,7 +4987,207 @@
     "udspilAf": "parret",
     "ukendt": true
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": true,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [
+     {
+      "stik": 7,
+      "haand": "S",
+      "kort": "ST",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S3"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "SA"
+        ],
+        "dd": 11
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": null,
+     "pris": null,
+     "bedste": [
+      [
+       "S4",
+       "S5"
+      ],
+      [
+       "H9"
+      ],
+      [
+       "HJ"
+      ],
+      [
+       "D6",
+       "D7"
+      ],
+      [
+       "DT",
+       "DJ"
+      ],
+      [
+       "C6",
+       "C7"
+      ],
+      [
+       "CT",
+       "CJ",
+       "CQ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "C6",
+      "CK",
+      "C3",
+      "C2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C4",
+      "C9",
+      "CA",
+      "C7"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D2",
+      "D6",
+      "DQ",
+      "DK"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "D4",
+      "H4",
+      "D7",
+      "D3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HQ",
+      "H9",
+      "H2",
+      "H6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HK",
+      "HJ",
+      "H3",
+      "H7"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S7",
+      "S4",
+      "S6",
+      "ST"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "D8",
+      "H5",
+      "DT",
+      "D5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S8",
+      "S5",
+      "SQ",
+      "S3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H8",
+      "D9",
+      "S2",
+      "CT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HT",
+      "SJ",
+      "C5",
+      "CJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HA",
+      "DA",
+      "C8",
+      "CQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SK",
+      "SA",
+      "S9",
+      "DJ"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 17,
@@ -2067,7 +5307,191 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "D7",
+     "pris": 0,
+     "bedste": [
+      [
+       "S4",
+       "S5"
+      ],
+      [
+       "S7"
+      ],
+      [
+       "S9"
+      ],
+      [
+       "SQ"
+      ],
+      [
+       "D2"
+      ],
+      [
+       "D7"
+      ],
+      [
+       "DT"
+      ],
+      [
+       "C5",
+       "C6",
+       "C7"
+      ],
+      [
+       "CT"
+      ],
+      [
+       "CA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "D7",
+      "DK",
+      "D3",
+      "D6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CQ",
+      "C9",
+      "C8",
+      "CA"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C5",
+      "C2",
+      "CJ",
+      "H2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DJ",
+      "D2",
+      "D5",
+      "DA"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CK",
+      "H5",
+      "C6",
+      "C3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DQ",
+      "DT",
+      "C4",
+      "D4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D8",
+      "S4",
+      "H7",
+      "D9"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "ST",
+      "S3",
+      "SK",
+      "S5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S2",
+      "S7",
+      "S8",
+      "SA"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "H3",
+      "H8",
+      "C7",
+      "HQ"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HK",
+      "H4",
+      "HT",
+      "S9"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S6",
+      "H6",
+      "HJ",
+      "SQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HA",
+      "CT",
+      "SJ",
+      "H9"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 18,
@@ -2187,7 +5611,236 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [
+    "indspil"
+   ],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": {
+     "mod": "E",
+     "stik": 9,
+     "kort": "HJ",
+     "medTeknik": 10,
+     "udenTeknik": 9
+    },
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 4,
+      "haand": "S",
+      "kort": "C6",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S5"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "SK"
+        ],
+        "dd": 9
+       }
+      ]
+     },
+     {
+      "stik": 6,
+      "haand": "N",
+      "kort": "H7",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "SJ"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "HJ"
+        ],
+        "dd": 9
+       }
+      ]
+     },
+     {
+      "stik": 10,
+      "haand": "N",
+      "kort": "D5",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "SJ"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "DJ"
+        ],
+        "dd": 9
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "S6",
+     "pris": 1,
+     "bedste": [
+      [
+       "D2"
+      ],
+      [
+       "D4"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "W",
+     "kort": [
+      "S6",
+      "ST",
+      "S3",
+      "S4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CK",
+      "C7",
+      "C2",
+      "C3"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C8",
+      "CQ",
+      "CA",
+      "C4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C6",
+      "C5",
+      "S2",
+      "H3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "S5",
+      "S7",
+      "SA",
+      "S8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "H7",
+      "H6",
+      "H5",
+      "H2"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D9",
+      "D6",
+      "D3",
+      "DK"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H4",
+      "HA",
+      "H9",
+      "H8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "HJ",
+      "HK",
+      "HQ",
+      "D2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HT",
+      "D7",
+      "S9",
+      "D5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D8",
+      "C9",
+      "D4",
+      "DJ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DA",
+      "DT",
+      "CT",
+      "CJ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SJ",
+      "DQ",
+      "SK",
+      "SQ"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 19,
@@ -2307,7 +5960,174 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "HA",
+     "pris": 0,
+     "bedste": [
+      [
+       "H2"
+      ],
+      [
+       "H5",
+       "H6"
+      ],
+      [
+       "HT"
+      ],
+      [
+       "HA"
+      ],
+      [
+       "CA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "H4",
+      "H8",
+      "H3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "CQ",
+      "C2",
+      "C4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H2",
+      "H7",
+      "HJ",
+      "H9"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C5",
+      "C8",
+      "C3",
+      "D3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CK",
+      "C6",
+      "D5",
+      "C7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DJ",
+      "D2",
+      "DQ",
+      "D6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DK",
+      "D9",
+      "D8",
+      "D4"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DA",
+      "DT",
+      "S7",
+      "D7"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SJ",
+      "ST",
+      "S2",
+      "S6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SQ",
+      "H5",
+      "S3",
+      "S9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S8",
+      "H6",
+      "S4",
+      "CT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SK",
+      "C9",
+      "S5",
+      "CJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SA",
+      "HT",
+      "HQ",
+      "HK"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 20,
@@ -2428,7 +6248,206 @@
     "udspilAf": "modparten",
     "ukendt": true
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": true,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 8,
+      "haand": "S",
+      "kort": "HT",
+      "dd": 11,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "D3"
+        ],
+        "dd": 10
+       },
+       {
+        "kort": [
+         "D7",
+         "D8"
+        ],
+        "dd": 10
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": null,
+     "pris": null,
+     "bedste": [
+      [
+       "S2",
+       "S3"
+      ],
+      [
+       "S5"
+      ],
+      [
+       "S7"
+      ],
+      [
+       "S9"
+      ],
+      [
+       "H2"
+      ],
+      [
+       "H4"
+      ],
+      [
+       "HJ"
+      ],
+      [
+       "HK"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "E",
+     "kort": [
+      "H2",
+      "H3",
+      "HQ",
+      "H8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "SJ",
+      "S2",
+      "ST"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C6",
+      "C7",
+      "C2",
+      "CJ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DQ",
+      "D2",
+      "D4",
+      "D6"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H9",
+      "H5",
+      "C4",
+      "H4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SQ",
+      "S3",
+      "CQ",
+      "S4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "H6",
+      "C5",
+      "C3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HT",
+      "H7",
+      "C8",
+      "HJ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CT",
+      "C9",
+      "D3",
+      "S6"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CK",
+      "S5",
+      "D7",
+      "S8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DT",
+      "S7",
+      "D8",
+      "D9"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D5",
+      "HK",
+      "DK",
+      "HA"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DA",
+      "SA",
+      "DJ",
+      "S9"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 21,
@@ -2548,7 +6567,211 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 8,
+      "haand": "W",
+      "kort": "D2",
+      "dd": 9,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "SJ"
+        ],
+        "dd": 8
+       },
+       {
+        "kort": [
+         "SK",
+         "SA"
+        ],
+        "dd": 8
+       }
+      ]
+     }
+    ],
+    "modspil": [
+     {
+      "stik": 2,
+      "haand": "N",
+      "kort": "C5",
+      "dd": 9,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S7"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "ST"
+        ],
+        "dd": 11
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": "CK",
+     "pris": 0,
+     "bedste": [
+      [
+       "C5",
+       "C6",
+       "C7"
+      ],
+      [
+       "CK"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "CK",
+      "C3",
+      "C2",
+      "CT"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C5",
+      "C9",
+      "CQ",
+      "CJ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C4",
+      "S4",
+      "C6",
+      "D5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DT",
+      "D4",
+      "DQ",
+      "DK"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C8",
+      "S9",
+      "C7",
+      "H6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DJ",
+      "D9",
+      "DA",
+      "D3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HK",
+      "H4",
+      "HT",
+      "H2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HA",
+      "H5",
+      "D2",
+      "H3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H7",
+      "HQ",
+      "SJ",
+      "H9"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "S7",
+      "S5",
+      "S2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SA",
+      "ST",
+      "S6",
+      "S3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D6",
+      "HJ",
+      "S8",
+      "D8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H8",
+      "CA",
+      "D7",
+      "SQ"
+     ],
+     "vinder": "N"
+    }
+   ]
   },
   {
    "nummer": 22,
@@ -2668,7 +6891,215 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [
+     {
+      "stik": 3,
+      "haand": "E",
+      "kort": "CA",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "C7"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "CQ"
+        ],
+        "dd": 11
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": "S2",
+     "pris": 0,
+     "bedste": [
+      [
+       "S2"
+      ],
+      [
+       "S6"
+      ],
+      [
+       "S9",
+       "ST"
+      ],
+      [
+       "SK"
+      ],
+      [
+       "HT"
+      ],
+      [
+       "D2"
+      ],
+      [
+       "D8",
+       "D9"
+      ],
+      [
+       "C5"
+      ],
+      [
+       "C7"
+      ],
+      [
+       "CQ"
+      ],
+      [
+       "CA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "E",
+     "kort": [
+      "S2",
+      "S8",
+      "SA",
+      "S3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C4",
+      "C9",
+      "C5",
+      "C2"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C3",
+      "CA",
+      "C6",
+      "C8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C7",
+      "CK",
+      "CT",
+      "D4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DK",
+      "DA",
+      "D5",
+      "D2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CJ",
+      "H3",
+      "CQ",
+      "SJ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DT",
+      "D8",
+      "H2",
+      "D3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "H4",
+      "H7",
+      "HT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "SQ",
+      "S4",
+      "H8",
+      "S6"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DJ",
+      "D9",
+      "H5",
+      "DQ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HQ",
+      "HJ",
+      "HK",
+      "S9"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D6",
+      "ST",
+      "H6",
+      "S5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H9",
+      "S7",
+      "D7",
+      "SK"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 23,
@@ -2788,7 +7219,189 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "D7",
+     "pris": 0,
+     "bedste": [
+      [
+       "S8",
+       "S9"
+      ],
+      [
+       "H6",
+       "H7",
+       "H8",
+       "H9"
+      ],
+      [
+       "HQ"
+      ],
+      [
+       "D5"
+      ],
+      [
+       "D7"
+      ],
+      [
+       "DT"
+      ],
+      [
+       "C2"
+      ],
+      [
+       "C8"
+      ],
+      [
+       "CA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "D7",
+      "DJ",
+      "D6",
+      "D2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DQ",
+      "DA",
+      "D3",
+      "D5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C4",
+      "C7",
+      "C2",
+      "C3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "HT",
+      "H6",
+      "H3",
+      "HA"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C9",
+      "CJ",
+      "CA",
+      "C5"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C8",
+      "CT",
+      "CQ",
+      "CK"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H2",
+      "H7",
+      "HJ",
+      "H5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DK",
+      "D8",
+      "S2",
+      "DT"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SQ",
+      "S8",
+      "SK",
+      "S4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HK",
+      "S6",
+      "ST",
+      "H8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SA",
+      "S9",
+      "D4",
+      "S7"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S3",
+      "H9",
+      "H4",
+      "SJ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "D9",
+      "S5",
+      "HQ",
+      "C6"
+     ],
+     "vinder": "W"
+    }
+   ]
   },
   {
    "nummer": 24,
@@ -2908,7 +7521,236 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 6,
+      "haand": "S",
+      "kort": "C3",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S9"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "SQ"
+        ],
+        "dd": 9
+       }
+      ]
+     }
+    ],
+    "modspil": [
+     {
+      "stik": 1,
+      "haand": "E",
+      "kort": "SK",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S3",
+         "S4"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "ST"
+        ],
+        "dd": 11
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": "S6",
+     "pris": 0,
+     "bedste": [
+      [
+       "S2"
+      ],
+      [
+       "S6"
+      ],
+      [
+       "SJ"
+      ],
+      [
+       "H4"
+      ],
+      [
+       "H8",
+       "H9"
+      ],
+      [
+       "HQ",
+       "HK"
+      ],
+      [
+       "D6"
+      ],
+      [
+       "D8",
+       "D9"
+      ],
+      [
+       "DQ"
+      ],
+      [
+       "C5"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "W",
+     "kort": [
+      "S6",
+      "S7",
+      "SK",
+      "S8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C9",
+      "CQ",
+      "C5",
+      "C6"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "D7",
+      "D6",
+      "DJ",
+      "D2"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DK",
+      "DT",
+      "D3",
+      "D8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "HA",
+      "H3",
+      "HJ",
+      "H4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "HT",
+      "H7",
+      "C3",
+      "H8"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CK",
+      "H9",
+      "C8",
+      "C2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "D9",
+      "H2",
+      "CT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C4",
+      "HQ",
+      "D4",
+      "CJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S3",
+      "SQ",
+      "S2",
+      "S5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "S9",
+      "SJ",
+      "H5",
+      "S4"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DQ",
+      "DA",
+      "ST",
+      "D5"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "H6",
+      "SA",
+      "C7",
+      "HK"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 25,
@@ -3028,7 +7870,229 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 4,
+      "haand": "W",
+      "kort": "SK",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H4",
+         "H5"
+        ],
+        "dd": 8
+       },
+       {
+        "kort": [
+         "H7"
+        ],
+        "dd": 8
+       }
+      ]
+     },
+     {
+      "stik": 8,
+      "haand": "W",
+      "kort": "S6",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H5"
+        ],
+        "dd": 8
+       },
+       {
+        "kort": [
+         "H7"
+        ],
+        "dd": 8
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "C4",
+     "pris": 0,
+     "bedste": [
+      [
+       "H8"
+      ],
+      [
+       "HQ"
+      ],
+      [
+       "D7"
+      ],
+      [
+       "DQ"
+      ],
+      [
+       "C2"
+      ],
+      [
+       "C4"
+      ],
+      [
+       "C7"
+      ],
+      [
+       "C9"
+      ],
+      [
+       "CJ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "C4",
+      "C5",
+      "C6",
+      "CK"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CA",
+      "C2",
+      "C3",
+      "C8"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "DK",
+      "D7",
+      "D2",
+      "D3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "SA",
+      "S2",
+      "S8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C7",
+      "CQ",
+      "CT",
+      "H4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DA",
+      "D8",
+      "D6",
+      "DQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DT",
+      "D9",
+      "DJ",
+      "S3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S6",
+      "ST",
+      "SQ",
+      "S9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D4",
+      "H2",
+      "H5",
+      "C9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D5",
+      "H3",
+      "H7",
+      "H8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HJ",
+      "H6",
+      "HK",
+      "HQ"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H9",
+      "CJ",
+      "S4",
+      "HT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "S7",
+      "SJ",
+      "S5"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 26,
@@ -3148,7 +8212,186 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "S7",
+     "pris": 0,
+     "bedste": [
+      [
+       "S2"
+      ],
+      [
+       "S7"
+      ],
+      [
+       "ST"
+      ],
+      [
+       "D4"
+      ],
+      [
+       "D6"
+      ],
+      [
+       "D8",
+       "D9"
+      ],
+      [
+       "C3"
+      ],
+      [
+       "C6"
+      ],
+      [
+       "CQ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "W",
+     "kort": [
+      "S7",
+      "S8",
+      "SJ",
+      "S3"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C8",
+      "CA",
+      "C3",
+      "C2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C7",
+      "C6",
+      "CT",
+      "CJ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C9",
+      "C4",
+      "CQ",
+      "CK"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DK",
+      "D2",
+      "DJ",
+      "D4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DT",
+      "DA",
+      "DQ",
+      "D6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D5",
+      "H5",
+      "D8",
+      "D3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HK",
+      "H4",
+      "H2",
+      "H3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "H9",
+      "H7",
+      "H8"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "S5",
+      "S2",
+      "S4",
+      "SQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D7",
+      "H6",
+      "D9",
+      "S6"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C5",
+      "HQ",
+      "S9",
+      "SK"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "ST",
+      "HT",
+      "SA",
+      "HJ"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 27,
@@ -3268,7 +8511,190 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 4,
+      "haand": "S",
+      "kort": "CQ",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "C4"
+        ],
+        "dd": 4
+       },
+       {
+        "kort": [
+         "C7"
+        ],
+        "dd": 4
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "H8",
+     "pris": 1,
+     "bedste": [
+      [
+       "D5"
+      ],
+      [
+       "D8"
+      ],
+      [
+       "DK",
+       "DA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "E",
+     "kort": [
+      "H8",
+      "H9",
+      "HQ",
+      "HK"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "CK",
+      "C3",
+      "C2",
+      "C6"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SA",
+      "S2",
+      "ST",
+      "S6"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C8",
+      "D5",
+      "CQ",
+      "CT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "CJ",
+      "C5",
+      "D8"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C4",
+      "D2",
+      "C9",
+      "H5"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "HA",
+      "H6",
+      "H3",
+      "S7"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "HT",
+      "H7",
+      "H4",
+      "D3"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "H2",
+      "S3",
+      "HJ",
+      "S8"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C7",
+      "D6",
+      "S4",
+      "DK"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "DJ",
+      "DQ",
+      "D7",
+      "DA"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "S5",
+      "D4",
+      "SQ",
+      "S9"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SK",
+      "DT",
+      "SJ",
+      "D9"
+     ],
+     "vinder": "W"
+    }
+   ]
   },
   {
    "nummer": 28,
@@ -3388,7 +8814,194 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 9,
+      "haand": "N",
+      "kort": "S6",
+      "dd": 11,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "SA"
+        ],
+        "dd": 10
+       },
+       {
+        "kort": [
+         "D6"
+        ],
+        "dd": 10
+       }
+      ]
+     }
+    ],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "HA",
+     "pris": 0,
+     "bedste": [
+      [
+       "H2"
+      ],
+      [
+       "H8"
+      ],
+      [
+       "HT",
+       "HJ"
+      ],
+      [
+       "HK",
+       "HA"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "E",
+     "kort": [
+      "HA",
+      "H3",
+      "H6",
+      "H5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C2",
+      "CK",
+      "C7",
+      "CT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CA",
+      "C9",
+      "D4",
+      "C3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C6",
+      "CJ",
+      "S2",
+      "C4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DK",
+      "D9",
+      "D2",
+      "D7"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S9",
+      "S4",
+      "S3",
+      "S8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DA",
+      "H2",
+      "D3",
+      "D8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D5",
+      "H8",
+      "DJ",
+      "DT"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H9",
+      "H7",
+      "S6",
+      "HT"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D6",
+      "C5",
+      "DQ",
+      "SQ"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "CQ",
+      "S7",
+      "C8",
+      "H4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SA",
+      "HJ",
+      "S5",
+      "SK"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "ST",
+      "HK",
+      "SJ",
+      "HQ"
+     ],
+     "vinder": "S"
+    }
+   ]
   },
   {
    "nummer": 29,
@@ -3508,7 +9121,204 @@
     "udspilAf": "modparten",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [
+     {
+      "stik": 2,
+      "haand": "E",
+      "kort": "H5",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S3"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "SQ"
+        ],
+        "dd": 11
+       }
+      ]
+     },
+     {
+      "stik": 2,
+      "haand": "W",
+      "kort": "HA",
+      "dd": 10,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H4"
+        ],
+        "dd": 11
+       },
+       {
+        "kort": [
+         "H6"
+        ],
+        "dd": 11
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": "CA",
+     "pris": 1,
+     "bedste": [
+      [
+       "H5"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "E",
+     "kort": [
+      "CA",
+      "C2",
+      "C4",
+      "C8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "H5",
+      "H7",
+      "HA",
+      "H2"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "H4",
+      "HJ",
+      "S3",
+      "H9"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "C3",
+      "C6",
+      "C5",
+      "H3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C9",
+      "C7",
+      "S5",
+      "CJ"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "DK",
+      "D2",
+      "D9",
+      "D7"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D6",
+      "D3",
+      "DA",
+      "DQ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CT",
+      "CQ",
+      "S6",
+      "CK"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SK",
+      "SQ",
+      "S2",
+      "S9"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "D4",
+      "D5",
+      "SJ",
+      "H6"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HQ",
+      "H8",
+      "S7",
+      "D8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SA",
+      "DT",
+      "S4",
+      "ST"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "S8",
+      "DJ",
+      "HK",
+      "HT"
+     ],
+     "vinder": "N"
+    }
+   ]
   },
   {
    "nummer": 30,
@@ -3628,7 +9438,303 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [
+     {
+      "stik": 9,
+      "haand": "E",
+      "kort": "DJ",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "ST"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "SQ"
+        ],
+        "dd": 6
+       }
+      ]
+     },
+     {
+      "stik": 10,
+      "haand": "E",
+      "kort": "DQ",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "ST"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "SQ"
+        ],
+        "dd": 6
+       }
+      ]
+     },
+     {
+      "stik": 11,
+      "haand": "E",
+      "kort": "ST",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "SQ"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "SA"
+        ],
+        "dd": 6
+       }
+      ]
+     }
+    ],
+    "modspil": [
+     {
+      "stik": 2,
+      "haand": "S",
+      "kort": "CA",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "C3"
+        ],
+        "dd": 8
+       },
+       {
+        "kort": [
+         "C7"
+        ],
+        "dd": 8
+       }
+      ]
+     },
+     {
+      "stik": 5,
+      "haand": "S",
+      "kort": "H4",
+      "dd": 7,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "S5",
+         "S6"
+        ],
+        "dd": 9
+       },
+       {
+        "kort": [
+         "S8"
+        ],
+        "dd": 9
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": "DA",
+     "pris": 0,
+     "bedste": [
+      [
+       "S3"
+      ],
+      [
+       "S7"
+      ],
+      [
+       "SK"
+      ],
+      [
+       "H5"
+      ],
+      [
+       "H7"
+      ],
+      [
+       "HQ"
+      ],
+      [
+       "HA"
+      ],
+      [
+       "D4",
+       "D5"
+      ],
+      [
+       "DA"
+      ],
+      [
+       "C2"
+      ],
+      [
+       "C5"
+      ],
+      [
+       "CT"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "N",
+     "kort": [
+      "DA",
+      "D6",
+      "D2",
+      "D7"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C2",
+      "C4",
+      "CA",
+      "C6"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HJ",
+      "H2",
+      "H5",
+      "H8"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "HK",
+      "H3",
+      "H7",
+      "H9"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H4",
+      "H6",
+      "HQ",
+      "S4"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "HA",
+      "S9",
+      "D3",
+      "HT"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "C5",
+      "CJ",
+      "C3",
+      "C8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CQ",
+      "C7",
+      "C9",
+      "CT"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DJ",
+      "D8",
+      "D9",
+      "D4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DQ",
+      "DT",
+      "DK",
+      "D5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "SJ",
+      "S3",
+      "ST",
+      "S5"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "S2",
+      "S7",
+      "SQ",
+      "S6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SA",
+      "S8",
+      "CK",
+      "SK"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 31,
@@ -3748,7 +9854,203 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [
+     {
+      "stik": 8,
+      "haand": "S",
+      "kort": "S9",
+      "dd": 5,
+      "maerke": null,
+      "alternativer": [
+       {
+        "kort": [
+         "H4"
+        ],
+        "dd": 6
+       },
+       {
+        "kort": [
+         "H7"
+        ],
+        "dd": 6
+       }
+      ]
+     }
+    ],
+    "udspil": {
+     "faktisk": "CJ",
+     "pris": 0,
+     "bedste": [
+      [
+       "S9",
+       "ST"
+      ],
+      [
+       "H4"
+      ],
+      [
+       "H7"
+      ],
+      [
+       "H9"
+      ],
+      [
+       "C4"
+      ],
+      [
+       "C8"
+      ],
+      [
+       "CT",
+       "CJ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "CJ",
+      "CA",
+      "C7",
+      "C3"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "C5",
+      "C9",
+      "CQ",
+      "C4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DQ",
+      "D9",
+      "D2",
+      "D4"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DK",
+      "DA",
+      "DT",
+      "D5"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C8",
+      "C2",
+      "S2",
+      "CK"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "D7",
+      "DJ",
+      "H2",
+      "D6"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CT",
+      "C6",
+      "S7",
+      "D3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "S9",
+      "SK",
+      "SA",
+      "H3"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "HJ",
+      "HK",
+      "HA",
+      "S3"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "H4",
+      "S4",
+      "HQ",
+      "H5"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SJ",
+      "H6",
+      "ST",
+      "S5"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SQ",
+      "D8",
+      "H7",
+      "S6"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "H8",
+      "HT",
+      "H9",
+      "S8"
+     ],
+     "vinder": "E"
+    }
+   ]
   },
   {
    "nummer": 32,
@@ -3868,7 +10170,168 @@
     "udspilAf": "parret",
     "ukendt": false
    },
-   "maerker": []
+   "maerker": [],
+   "teknik": {
+    "beregnet": true,
+    "grund": null,
+    "udspilAntaget": false,
+    "stikFoerP": 7,
+    "skvis": null,
+    "indspil": null,
+    "kastIndSkvis": false
+   },
+   "raad": {
+    "spilfoering": [],
+    "modspil": [],
+    "udspil": {
+     "faktisk": "HA",
+     "pris": 0,
+     "bedste": [
+      [
+       "HK",
+       "HA"
+      ],
+      [
+       "D7"
+      ],
+      [
+       "DQ"
+      ]
+     ]
+    }
+   },
+   "linje": [
+    {
+     "udspiller": "S",
+     "kort": [
+      "HA",
+      "H3",
+      "H6",
+      "H2"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "D7",
+      "D8",
+      "D3",
+      "D6"
+     ],
+     "vinder": "W"
+    },
+    {
+     "udspiller": "W",
+     "kort": [
+      "D9",
+      "D4",
+      "DK",
+      "DQ"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "HQ",
+      "H4",
+      "H7",
+      "H8"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "CK",
+      "CA",
+      "C2",
+      "C4"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "CQ",
+      "C3",
+      "C6",
+      "CJ"
+     ],
+     "vinder": "S"
+    },
+    {
+     "udspiller": "S",
+     "kort": [
+      "C9",
+      "C8",
+      "C7",
+      "S6"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SK",
+      "S3",
+      "S9",
+      "S2"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "SA",
+      "S4",
+      "D2",
+      "S5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DJ",
+      "C5",
+      "DT",
+      "D5"
+     ],
+     "vinder": "E"
+    },
+    {
+     "udspiller": "E",
+     "kort": [
+      "DA",
+      "H5",
+      "H9",
+      "S8"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SJ",
+      "S7",
+      "CT",
+      "HT"
+     ],
+     "vinder": "N"
+    },
+    {
+     "udspiller": "N",
+     "kort": [
+      "SQ",
+      "ST",
+      "HK",
+      "HJ"
+     ],
+     "vinder": "N"
+    }
+   ]
   }
  ]
 }
