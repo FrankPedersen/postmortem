@@ -374,6 +374,60 @@ Den tredje for spilfører i spil 2 er endnu et dyk (stik 5: ♠2 fra bordet, ♠
 
 Del B (appen) kommer i en ny besked.
 
+### Del B (Claude Code, Fable 5.2, 14. november 2026)
+
+Bygget på grenen `raad` (før: `v-foer-raad`). Ikke flettet; funktionen er ikke ændret, og intet er udrullet. Grenen `maerker` er slettet lokalt og på GitHub.
+
+#### 14. Franks to afgørelser
+
+- **Navnet:** mærket hedder "Indspil muligt", filteret "Indspil · n", og kortet på oversigten skriver "Indspil". Forklaringen bruger ordbogens ord: "Et indspil er en form for slutspil: …" og "En skvis er en form for slutspil: …". Linkene går til ordbogens Skvis, Indspil og Slutspil (`/ordbog/#skvis`, `#indspil` og `#slutspil`): et mærke får sit eget opslag og Slutspil.
+- **Modspil:** var parret i modspil, hedder mærkerne "Skvis mulig mod jer" og "Indspil muligt mod jer" i spillisten og i analysevinduet, overskriften i mærket er "Indspil mod jer (Nord)", og "Råd til modspillet" står før "Råd til spilføringen".
+- **Skviskortet og indspilskortet** står altid i mærket fra `teknik`, også når de ikke er nøglebeslutninger: "Skviskortet er ♦E i stik 9, spillet fra Syd. Vest kan ikke bekende og har ♠ og ♥ tilbage." og "Indspilskortet er ♥B i stik 9, spillet fra Nord. Øst vinder stikket og skal spille ud."
+
+#### 15. Det, appen viser
+
+- **Aftenens oversigt:** kortet "Teknikker i aftenens spil" står mellem faktorerne og spillene med Skvis og Indspil og antal spil, og linjen "Taget ved jeres bord: x af y". `y` er de spil med et mærke, hvor parret var spilfører, og `x` dem, hvor de tog mindst stikkene med teknikken; et spil med begge mærker tæller én gang. Linjen står der ikke, når `y` er 0 (450: holdet var i modspil i spillet med mærket). Uden mærker siger kortet "Ingen af aftenens spil krævede en skvis eller et indspil i de sidste seks stik." Filtrene står i rækkefølgen Alle, Skvis, Indspil, Tabte point; et filter med 0 spil kan ikke vælges. Spillisten viser teknikmærket før mærket fra vindue 1c.
+- **Råd til spilføringen:** mærket med stik i overskriften ("Skvis mulig · stik 9"), og for hvert mærke: hvem det er mod, "Uden skvisen 9 stik, med 10.", kortet, stillingen før stikket som et lille bord (de kort, der er tilbage, og hvem der spiller ud), og boksen "Sådan spotter du den" med en fast tekst pr. teknik (skvis, dobbeltskvis, indspil, kast-ind-skvis). Derefter nøglebeslutningerne: stik, kort og hånd ("♣5 fra Syd (bordet) holder 10 stik."), og hvad de to dyreste alternativer giver ("♣DB giver 9 stik."). Et kort, der hører til et mærke, har en lille etiket (skviskortet, indspilskortet, tællingen rettes).
+- **Råd til modspillet:** udspillets pris ("♣8 fra Øst koster 2 stik: spilfører har 10 stik efter udspillet og 8 efter det bedste.") eller "er blandt de bedste udspil", de bedste udspil med kort i følge samlet ("♠EK, ♥2, …"), modspillets nøglebeslutninger ("… holder spilfører på 9 stik."), og ved et mærke: "Skvisen er mod Vest. Det bedste modspil kan ikke forhindre den."
+- **Udspil, der står forkert:** "Udspillet står forkert på bridge.dk; analysen bruger det bedste udspil (♣3)."
+- **Uden indhold vises intet:** et spil uden mærker og uden nøglebeslutninger for spilfører har ikke afsnittet om spilføringen (det gælder 13 af 32 spil i 452 og 8 af 16 i 450); et spil, der ikke er spillet eller er passet ud, har ingen råd; kunne teknikken ikke regnes (tid eller fejl), står der én linje: "Rådene kunne ikke regnes for dette spil."
+- **Guiden og noten:** startskærmen har kortet "Sådan læses rådene" med fem punkter (den bedste linje og ikke det spillede; åbne kort, og at en kipning kan være lige så god ved bordet; de sidste seks stik og den manglende indgang; én af flere rigtige linjer; forkert udspil). Noten under analysevinduet siger det samme i to sætninger.
+
+#### 16. Valg undervejs
+
+- **Teksterne skrives i appen** ud fra felterne og står alle i `src/tekster.ts` i beskrivende form. Mockuppens "Afgiv det stik, du alligevel taber, …" er bydeform og er skrevet om. Mockuppens forklaringer pr. stik ("Klørstikket skal afgives alligevel …") kan appen ikke skrive: funktionen sender kort og tal, ikke grunde.
+- **Fagordstesten:** "indspil" stod på listen over ord, appen ikke måtte bruge (fra vindue 1c, hvor mærket skulle hedde slutspil). Ordet er taget af listen, fordi appen nu bruger det om netop den særlige form for slutspil, og testens eksempel er rettet. Overbegrebet hedder stadig slutspil.
+- **Kortet på oversigten** har tal, ikke knapper: filtrene lige under gør det samme, og to sæt knapper til samme valg er sværere at bruge med tastatur og skærmlæser. Mockuppens fire andre teknikker (eliminering, sikkerhedsspil, dyk og hold-up, trumfkup) og feltet "I modspil: holdt DD" er ikke med; de er ikke i vindue 1b.
+- **Det lille bord** er sin egen komponent (`src/ui/Slutstilling.tsx`); det store bord er ikke rørt. På brede skærme holdes hænderne tæt på kompasset, og den, der spiller ud, er fremhævet.
+- **Et svar fra før vindue 1b** (det kan ligge i `sessionStorage` i en åben fane) vises som før: uden kort, filtre, mærker og råd.
+- **Ordbogens links** er absolutte stier som sidefodens (`/ordbog/#indspil`).
+
+#### 17. Tests
+
+- **Accepttestene blev skrevet og committet røde først** (`741d0dc`): `src/test/teknik.test.tsx` (oversigten: kortet, filtrene, mærkerne, et gammelt svar) og `src/test/raad.test.tsx` (de tre spil med mærker, kortene i mærket, stillingen, ordbogens links, nøglebeslutningerne, udspillet, kast-ind-skvis og dobbeltskvis, ingen tomme afsnit på nogen af de 48 spil, guiden og noten, tilgængelighed).
+- **Testsvarene** i `src/test/data/` er lavet igen med funktionen og har de nye felter. En ny test i `api/tests/test_teknik_svar.py` holder dem lig funktionens svar, og testen af de uændrede faktorer sammenligner nu uden `teknikker` på begge sider.
+- **Rettet i eksisterende tests:** kun eksemplet med "indspil" i `sprog.test.tsx` og hjælperen `ikkeSpillet` i `hjaelp.tsx` (de nye felter). Testene fra vindue 1c er ellers urørte og grønne; sprogtestene læser nu også de nye tekster på alle skærme.
+- **Bredde:** `tools/tjek_bredde.mjs` tjekker de nye dele på alle 48 spil ved 320, 390 og 1280 px (ingen vandret rulning, 44 px trykflader, intet oven i det lille kompas) og filteret Indspil på oversigten.
+- **I alt:** `npm test` 92 grønne (før 56); pytest 258 grønne og 1 sprunget over; breddetjekket uden fejl.
+
+#### 18. Skærmbilleder
+
+Ligger i `C:\Users\frank\Kontraktbridge\skaermbilleder\raad\` (ikke i git): `390-452-spil-3.png`, `1280-452-spil-3.png`, `390-452-spil-18.png`, `1280-452-spil-18.png`, `390-450-spil-9.png` og `1280-450-spil-9.png`, og desuden oversigten for begge aftener og startskærmen ved begge bredder.
+
+#### 19. Åbent
+
+- Teksterne i "Sådan spotter du den" og i kortet "Sådan læses rådene" er mine; Frank bør læse dem.
+- I 450 spil 9 er listen over de bedste udspil lang (ni muligheder), fordi udspillet er ukendt og næsten alle udspil er lige gode. Den kan kortes til fx de tre første, hvis det ønskes.
+- Var parret i modspil, viser "Råd til spilføringen" spilførers (modpartens) nøglebeslutninger. Det følger specen, men afsnittet kunne hedde noget andet dér.
+
+#### 20. Franks godkendelse med tre rettelser (14. november 2026)
+
+- **Bedste udspil:** højst fire vises, derefter "og n andre" (og "og 1 andet", når der er fem). 450 spil 9: "Bedste udspil: ♠EK, ♥2, ♥E, ♦3 og 5 andre."
+- **Afsnittets navn i modspil:** var parret i modspil, hedder afsnittet "Spilførerens spil (modparten)" i stedet for "Råd til spilføringen". Det løser det tredje punkt under Åbent i afsnit 19; det andet (den lange liste) er løst af den første rettelse.
+- **Forkert udspil i "Ved jeres bord":** flisen viser "♥10*", og "*Udspillet står forkert på bridge.dk" står på en linje under fliserne. Kompasset og DD-feltet er uændrede. Testen fra vindue 1c af flisen er rettet til den nye visning.
+
+Tests efter rettelserne: `npm test` 94 grønne, pytest 258 grønne og 1 sprunget over, breddetjekket uden fejl ved 320, 390 og 1280 px. Skærmbillederne i `skaermbilleder/raad/` er taget igen.
+
 ## Besked til Claude Code (del A)
 
 > Model: Fable 5.2, høj effort. Læs `docs/specs/SPEC-postmortem-1b-maerker.md`, `PLAN-postmortem.md`, `NOTAT-afproevning.md` og `api/SVAR.md`. Byg kun del A på grenen `maerker` (tag `v-foer-maerker`). Lad først DDS bekræfte slutstillingerne i specen, og skriv afvigelser i Afklaret. Skriv accepttestene, før du skriver løseren. Mål ydeevnen, før du bygger videre på den. Stop før merge med tabellen over mærker på de 48 spil i Afklaret. Rør ikke appen, og udrul intet.

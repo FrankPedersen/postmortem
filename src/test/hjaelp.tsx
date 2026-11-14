@@ -55,6 +55,8 @@ export function ikkeSpillet(s: Spil): Spil {
     ...s, spillet: false, kontrakt: null, spilfoerer: null, udspil: null, stik: null, score: null, point: null, top: null,
     procent: null, felt: [], holdkammerater: null, ddFoer: null, ddEfter: null, scorer: null, faktorer: null,
     udspilseffekt: null, maerker: [],
+    teknik: { beregnet: false, grund: 'ikke spillet', udspilAntaget: null, stikFoerP: null, skvis: null, indspil: null, kastIndSkvis: false },
+    raad: null, linje: null,
   };
 }
 

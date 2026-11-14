@@ -101,6 +101,14 @@ try {
       .filter(([, r]) => r.left < kompas.right - 0.5 && r.right > kompas.left + 0.5 && r.top < kompas.bottom - 0.5 && r.bottom > kompas.top + 0.5)
       .map(([e]) => e.textContent.trim());
     if (overlap.length) små.push('over kompasset: ' + overlap.join(', '));
+    // Det samme i de små borde med stillingen ved skvis- og indspilsstikket (vindue 1b, del B).
+    for (const bord of document.querySelectorAll('.stilling')) {
+      const k = bord.querySelector('.stilling-kompas').getBoundingClientRect();
+      const over = [...bord.querySelectorAll('.stilling-haand > *')].map((e) => [e, e.getBoundingClientRect()])
+        .filter(([, r]) => r.left < k.right - 0.5 && r.right > k.left + 0.5 && r.top < k.bottom - 0.5 && r.bottom > k.top + 0.5)
+        .map(([e]) => e.textContent.trim());
+      if (over.length) små.push('over det lille kompas: ' + over.join(', '));
+    }
     return { h1: document.querySelector('h1')?.textContent.trim(), scroll: d.scrollWidth, client: d.clientWidth, ud, små };
   })()`;
   const billede = async (navn) => {
@@ -142,6 +150,12 @@ try {
       await kør(`[...document.querySelectorAll('button')].find((b) => b.textContent.startsWith('Tabte point')).click(); true`);
       await vent(30);
       await mål(`aftenen, ${navn}, Tabte point`);
+      // Vindue 1b, del B: kortet med teknikker og filteret for indspil (begge testsvar har ét spil med indspil).
+      const teknik = await kør(`(() => { const b = [...document.querySelectorAll('button')].find((x) => x.textContent.startsWith('Indspil')); b.click(); return { kort: !!document.querySelector('#h-teknikker'), filter: b.textContent.trim() }; })()`);
+      await vent(30);
+      const vist = await kør(`document.querySelectorAll('.spil-liste li').length`);
+      tjek(teknik.kort && teknik.filter === 'Indspil · 1' && vist === 1, `${bredde} px, aftenen, ${navn}: kortet med teknikker står der, og filteret Indspil viser ét spil`, JSON.stringify({ teknik, vist }));
+      await mål(`aftenen, ${navn}, Indspil`);
       let værst = 0;
       for (const s of svar.spil) {
         await gåTil(`#/spil/${s.nummer}`);
@@ -186,6 +200,14 @@ try {
       await billede(`${bredde}-aften-hold.png`);
       await indlæs('#/spil/4');
       await billede(`${bredde}-hold-spil-4.png`);
+      // Vindue 1b, del B: de tre spil med mærker.
+      await indlæs('#/spil/9');
+      await billede(`${bredde}-450-spil-9.png`);
+      await gemSvar(PAR, PAR_URL);
+      await indlæs('#/spil/3');
+      await billede(`${bredde}-452-spil-3.png`);
+      await indlæs('#/spil/18');
+      await billede(`${bredde}-452-spil-18.png`);
     }
     console.log(`Skærmbillederne ligger i ${BILLEDER}`);
   }

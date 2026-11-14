@@ -70,7 +70,13 @@ def test_7_faktorerne_er_de_samme_som_i_testsvarene_fra_1c(aftener, navn):
         # Alt andet end de nye felter er også som før.
         assert {k: v for k, v in a.items() if k not in nye} == {k: v for k, v in b.items() if k not in nye}, a['nummer']
     assert {k: v for k, v in nu.items() if k not in ('spil', 'teknikker')} == \
-           {k: v for k, v in foer.items() if k != 'spil'}
+           {k: v for k, v in foer.items() if k not in ('spil', 'teknikker')}
+
+
+@pytest.mark.parametrize('navn', ['par-452', 'hold-450'])
+def test_7_appens_testsvar_er_funktionens_svar(aftener, navn):
+    # Del B: testsvarene i src/test/data/ er lavet igen med de nye felter og skal følge funktionen (README viser hvordan).
+    assert aftener[navn] == json.loads((TESTSVAR / f'{navn}.json').read_text(encoding='utf-8'))
 
 
 def test_9_maerkerne_og_teknikken_haenger_sammen(aftener):

@@ -4,6 +4,7 @@ import type { Analyse, Benaevnelse, Plads, Spil } from '../typer';
 import { feltGrupper, forkertUdspil, viSpillede } from '../udledt';
 import { Bridgebord } from '../ui/Bridgebord';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
+import { Raad } from './Raad';
 
 const KOLONNER: [Benaevnelse, string][] = [['C', '♣'], ['D', '♦'], ['H', '♥'], ['S', '♠'], ['NT', 'NT']];
 const RÆKKER: Plads[] = ['N', 'S', 'E', 'W'];
@@ -109,14 +110,8 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
                     <div className="flise">
                       <span className="flise-navn">{T.spil.udspilLabel}</span>{' '}
                       <span className="flise-vaerdi">
-                        <Farver>{s.udspil ? kort(s.udspil) : T.spil.ikkeRelevant}</Farver>
+                        <Farver>{s.udspil ? kort(s.udspil) + (forkertUdspil(s) ? T.spil.stjerne : '') : T.spil.ikkeRelevant}</Farver>
                       </span>
-                      {forkertUdspil(s) && (
-                        <>
-                          {' '}
-                          <span className="flise-note">{T.spil.forkert}</span>
-                        </>
-                      )}
                     </div>
                     <div className="flise">
                       <span className="flise-navn">{T.spil.stik}</span>{' '}
@@ -127,6 +122,7 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
                       <span className="flise-vaerdi">{medFortegn(s.score ?? 0)}</span>
                     </div>
                   </div>
+                  {forkertUdspil(s) && <p className="flise-fodnote">{T.spil.forkertFodnote}</p>}
                   {a.turnering.form === 'par' ? (
                     <div className="point-linje">
                       <span>{T.spil.point(tal(s.point ?? 0), tal(s.top ?? 0))}</span>{' '}
@@ -230,6 +226,8 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
                 </ul>
               </section>
             )}
+
+            <Raad spil={s} />
 
             <p className="note fod-note">{T.spil.note}</p>
           </div>

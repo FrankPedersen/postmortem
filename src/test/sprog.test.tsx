@@ -119,6 +119,7 @@ describe('Sprog', () => {
     expect(bydeform('Analysér')).toEqual([]);
     expect(bydeform('Hold 1 · bord 2')).toEqual([]);
     expect(fund('Spilfører kunne have taget en knibning mod blindemand.')).toHaveLength(2);
-    expect(fund('Et indspil i trumf.')).toHaveLength(1);
+    // Indspil er husets ord for den særlige form for slutspil (mærket Indspil muligt) og fanges ikke.
+    expect(fund('Et indspil i trumf.')).toEqual([]);
   });
 });
