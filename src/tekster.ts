@@ -125,6 +125,8 @@ export const T = {
   // Analysevinduets to afsnit med råd. Funktionen sender felter; sætningerne skrives her.
   raad: {
     spilfoering: 'Råd til spilføringen',
+    // Var parret i modspil, er det modpartens spilføring (Franks rettelse 14. november 2026).
+    spilfoeringModparten: 'Spilførerens spil (modparten)',
     modspil: 'Råd til modspillet',
     intro: 'Den bedste linje efter udspillet, kort for kort, hvor det afgør noget.',
     introModspil: (stik: number) => `Det bedste modspil holder spilfører på ${stik} stik.`,
@@ -146,6 +148,8 @@ export const T = {
     udspilForkert: (bedste: string) => `Udspillet står forkert på bridge.dk; analysen bruger det bedste udspil (${bedste}).`,
     udspilMangler: (bedste: string) => `Udspillet står ikke på bridge.dk; analysen bruger det bedste udspil (${bedste}).`,
     bedsteUdspil: (liste: string) => `Bedste udspil: ${liste}.`,
+    // Højst fire udspil vises; resten tælles.
+    ogAndre: (n: number) => (n === 1 ? ' og 1 andet' : ` og ${n} andre`),
     // Hvem teknikken er mod, i overskriften og i modspillets afsnit.
     mod: {
       plads: (navn: string) => navn,
@@ -210,6 +214,9 @@ export const T = {
     stik: 'Stik',
     score: 'Score',
     forkert: '(står forkert på bridge.dk)',
+    // I flisen Udspil under Ved jeres bord: "♥10*" og fodnoten på en linje under fliserne (Franks rettelse 14. november 2026).
+    stjerne: '*',
+    forkertFodnote: '*Udspillet står forkert på bridge.dk',
     forkertUdspil: (u: string) => `${u} (står forkert på bridge.dk)`,
     point: (point: string, top: string) => `${point} af ${top} point`,
     impMod: 'Imp mod jeres andet bord',

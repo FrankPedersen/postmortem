@@ -1839,3 +1839,10 @@ h1:focus {
   right: 3px;
   top: 21px;
 }
+
+/* Fodnoten under fliserne i Ved jeres bord: "*Udspillet staar forkert paa bridge.dk". */
+.flise-fodnote {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}

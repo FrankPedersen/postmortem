@@ -59,7 +59,10 @@ describe('Analysevinduet, spil 7 i 452', () => {
     const s = spil7();
     const bord = screen.getByRole('region', { name: 'Ved jeres bord' });
     expect(tekst(bord)).toContain('Kontrakt S 2NT');
-    expect(tekst(bord)).toContain('Udspil ♥3 (står forkert på bridge.dk)');
+    // Flisen viser "♥3*", og fodnoten står på en linje under fliserne (Franks rettelse 14. november 2026).
+    expect(tekst(bord.querySelector('.fliser'))).toContain('Udspil ♥3*');
+    expect(tekst(bord.querySelector('.fliser + .flise-fodnote'))).toBe('*Udspillet står forkert på bridge.dk');
+    expect(tekst(bord)).not.toContain('(står forkert');
     expect(tekst(bord)).toContain('Stik 8');
     expect(tekst(bord)).toContain('Score +120');
     expect(tekst(bord)).toContain('11 af 14 point 78,6 %');

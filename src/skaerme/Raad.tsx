@@ -94,7 +94,7 @@ function Spilfoering({ spil }: { spil: Spil }) {
   return (
     <section className="kort raad" aria-labelledby="h-raad-spilfoering">
       <div className="kort-hoved">
-        <h2 id="h-raad-spilfoering">{T.raad.spilfoering}</h2>
+        <h2 id="h-raad-spilfoering">{viSpillede(spil) ? T.raad.spilfoering : T.raad.spilfoeringModparten}</h2>
         {mærker.length > 0 && (
           <span className="maerker">
             {mærker.map(({ navn }) => (
@@ -138,7 +138,10 @@ function Modspil({ spil }: { spil: Spil }) {
   const brugt = s.linje![0].kort[0];
   const dd = s.ddEfter ?? s.ddFoer ?? 0;
   const modspilsside = s.spilfoerer === 'N' || s.spilfoerer === 'S' ? 'OV' : 'NS';
-  const bedste = T.raad.bedsteUdspil(u.bedste.map(kortGruppe).join(', '));
+  // Højst fire af de bedste udspil, derefter "og n andre".
+  const FLEST = 4;
+  const flere = u.bedste.length - FLEST;
+  const bedste = T.raad.bedsteUdspil(u.bedste.slice(0, FLEST).map(kortGruppe).join(', ') + (flere > 0 ? T.raad.ogAndre(flere) : ''));
   return (
     <section className="kort raad" aria-labelledby="h-raad-modspil">
       <div className="kort-hoved">

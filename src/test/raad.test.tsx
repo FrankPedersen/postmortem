@@ -15,6 +15,7 @@ const NAVN: Record<Plads, string> = { N: 'Nord', E: 'Øst', S: 'Syd', W: 'Vest' 
 const kort = (k: string) => `${SYMBOL[k[0]]}${RANG[k[1]] ?? k[1]}`;
 const spil = (a: Analyse, nummer: number) => a.spil.find((s) => s.nummer === nummer)!;
 const spilføring = () => screen.getByRole('region', { name: 'Råd til spilføringen' });
+const modpartensSpil = () => screen.getByRole('region', { name: 'Spilførerens spil (modparten)' });
 const modspil = () => screen.getByRole('region', { name: 'Råd til modspillet' });
 const overskrifter = () => screen.getAllByRole('heading', { level: 2 }).map(tekst);
 
@@ -152,7 +153,7 @@ describe('Råd til modspillet, 450 spil 9 (indspil mod holdet, der var i modspil
     expect([s.retning, s.spilfoerer]).toEqual(['NS', 'W']);
     const h = overskrifter();
     expect(h.indexOf('Råd til modspillet')).toBeGreaterThan(h.indexOf('Hvor gik pointene?'));
-    expect(h.indexOf('Råd til modspillet')).toBeLessThan(h.indexOf('Råd til spilføringen'));
+    expect(h.indexOf('Råd til modspillet')).toBeLessThan(h.indexOf('Spilførerens spil (modparten)'));
     expect(tekst(modspil().querySelector('.hint'))).toBe('I var i modspil');
   });
 
@@ -160,7 +161,7 @@ describe('Råd til modspillet, 450 spil 9 (indspil mod holdet, der var i modspil
     vis9();
     const t = spil(hold(), 9).teknik!.indspil!;
     expect([t.mod, t.stik, t.kort, t.medTeknik, t.udenTeknik]).toEqual(['N', 11, 'H7', 10, 9]);
-    const r = spilføring();
+    const r = modpartensSpil();
     expect([...r.querySelectorAll('.teknik-maerke')].map(tekst)).toEqual(['Indspil muligt mod jer · stik 11']);
     expect(within(r).getByRole('heading', { level: 3, name: 'Indspil mod jer (Nord)' })).toBeTruthy();
     expect(tekst(r)).toContain('Uden indspillet 9 stik, med 10.');
@@ -177,6 +178,32 @@ describe('Råd til modspillet, 450 spil 9 (indspil mod holdet, der var i modspil
     const række = within(modspil()).getByText('Udspil').closest('li')!;
     expect(tekst(række)).toContain(`Udspillet står forkert på bridge.dk; analysen bruger det bedste udspil (${kort(første)}).`);
     expect(tekst(række)).not.toContain('koster');
+  });
+
+  it('afsnittet om spilføringen hedder "Spilførerens spil (modparten)", når holdet var i modspil', () => {
+    vis9();
+    expect(overskrifter()).not.toContain('Råd til spilføringen');
+    expect(modpartensSpil().tagName).toBe('SECTION');
+    // Nøglebeslutningerne i afsnittet er spilførerens (Vest).
+    const liste = within(modpartensSpil()).getByRole('list', { name: 'Nøglebeslutninger' });
+    expect(within(liste).getAllByRole('listitem').every((li) => tekst(li).includes('fra Vest'))).toBe(true);
+  });
+
+  it('højst fire af de bedste udspil vises, derefter "og n andre"', () => {
+    vis9();
+    const u = spil(hold(), 9).raad!.udspil;
+    expect(u.bedste).toHaveLength(9);
+    const række = within(modspil()).getByText('Udspil').closest('li')!;
+    expect(tekst(række.querySelector('.raad-alt'))).toBe('Bedste udspil: ♠EK, ♥2, ♥E, ♦3 og 5 andre.');
+    cleanup();
+    // Med fire eller færre står de alle (452 spil 3 har tre), og med fem står der "og 1 andet".
+    vis('#/spil/3', par());
+    expect(tekst(within(modspil()).getByText('Udspil').closest('li')!.querySelector('.raad-alt'))).toBe('Bedste udspil: ♠4, ♠6, ♠8.');
+    cleanup();
+    const a = par();
+    spil(a, 3).raad!.udspil.bedste = [['S4'], ['S6'], ['S8'], ['H2'], ['D3']];
+    vis('#/spil/3', a);
+    expect(tekst(within(modspil()).getByText('Udspil').closest('li')!.querySelector('.raad-alt'))).toBe('Bedste udspil: ♠4, ♠6, ♠8, ♥2 og 1 andet.');
   });
 
   it('modspillets nøglebeslutninger står med "holder spilfører på"', () => {
@@ -260,7 +287,10 @@ describe('Et spil uden mærker viser ikke tomme afsnit', () => {
       }
       // Uden mærke og uden nøglebeslutninger for spilfører er der intet afsnit om spilføringen.
       const venterSpilføring = harMærke || s.raad!.spilfoering.length > 0;
-      expect(!!screen.queryByRole('region', { name: 'Råd til spilføringen' }), `spil ${s.nummer}`).toBe(venterSpilføring);
+      const vi = (s.retning === 'NS') === (s.spilfoerer === 'N' || s.spilfoerer === 'S');
+      // Var parret i modspil, hedder afsnittet "Spilførerens spil (modparten)" (Franks rettelse 14. november 2026).
+      expect(!!screen.queryByRole('region', { name: vi ? 'Råd til spilføringen' : 'Spilførerens spil (modparten)' }), `spil ${s.nummer}`).toBe(venterSpilføring);
+      expect(screen.queryByRole('region', { name: vi ? 'Spilførerens spil (modparten)' : 'Råd til spilføringen' }), `spil ${s.nummer}`).toBeNull();
       if (!venterSpilføring) udenRåd++;
       // Udspillet står altid i modspillets afsnit.
       expect(within(modspil()).getByText('Udspil')).toBeTruthy();
@@ -279,6 +309,7 @@ describe('Et spil uden mærker viser ikke tomme afsnit', () => {
     vis('#/spil/3', a);
     expect(screen.queryByRole('region', { name: 'Råd til spilføringen' })).toBeNull();
     expect(screen.queryByRole('region', { name: 'Råd til modspillet' })).toBeNull();
+    expect(screen.queryByRole('region', { name: 'Spilførerens spil (modparten)' })).toBeNull();
     expect(document.body.textContent).not.toContain('kunne ikke regnes');
   });
 

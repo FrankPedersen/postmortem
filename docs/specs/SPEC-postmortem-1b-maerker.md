@@ -420,6 +420,14 @@ Ligger i `C:\Users\frank\Kontraktbridge\skaermbilleder\raad\` (ikke i git): `390
 - I 450 spil 9 er listen over de bedste udspil lang (ni muligheder), fordi udspillet er ukendt og næsten alle udspil er lige gode. Den kan kortes til fx de tre første, hvis det ønskes.
 - Var parret i modspil, viser "Råd til spilføringen" spilførers (modpartens) nøglebeslutninger. Det følger specen, men afsnittet kunne hedde noget andet dér.
 
+#### 20. Franks godkendelse med tre rettelser (14. november 2026)
+
+- **Bedste udspil:** højst fire vises, derefter "og n andre" (og "og 1 andet", når der er fem). 450 spil 9: "Bedste udspil: ♠EK, ♥2, ♥E, ♦3 og 5 andre."
+- **Afsnittets navn i modspil:** var parret i modspil, hedder afsnittet "Spilførerens spil (modparten)" i stedet for "Råd til spilføringen". Det løser det tredje punkt under Åbent i afsnit 19; det andet (den lange liste) er løst af den første rettelse.
+- **Forkert udspil i "Ved jeres bord":** flisen viser "♥10*", og "*Udspillet står forkert på bridge.dk" står på en linje under fliserne. Kompasset og DD-feltet er uændrede. Testen fra vindue 1c af flisen er rettet til den nye visning.
+
+Tests efter rettelserne: `npm test` 94 grønne, pytest 258 grønne og 1 sprunget over, breddetjekket uden fejl ved 320, 390 og 1280 px. Skærmbillederne i `skaermbilleder/raad/` er taget igen.
+
 ## Besked til Claude Code (del A)
 
 > Model: Fable 5.2, høj effort. Læs `docs/specs/SPEC-postmortem-1b-maerker.md`, `PLAN-postmortem.md`, `NOTAT-afproevning.md` og `api/SVAR.md`. Byg kun del A på grenen `maerker` (tag `v-foer-maerker`). Lad først DDS bekræfte slutstillingerne i specen, og skriv afvigelser i Afklaret. Skriv accepttestene, før du skriver løseren. Mål ydeevnen, før du bygger videre på den. Stop før merge med tabellen over mærker på de 48 spil i Afklaret. Rør ikke appen, og udrul intet.
