@@ -428,6 +428,21 @@ Ligger i `C:\Users\frank\Kontraktbridge\skaermbilleder\raad\` (ikke i git): `390
 
 Tests efter rettelserne: `npm test` 94 grønne, pytest 258 grønne og 1 sprunget over, breddetjekket uden fejl ved 320, 390 og 1280 px. Skærmbillederne i `skaermbilleder/raad/` er taget igen.
 
+#### 21. Del B udgivet og tjekket live (14. november 2026)
+
+- **Fletning:** `raad` er flettet til `main` (`e27f285`) og pushet sammen med tagget `v-foer-raad`. Grenen er slettet bagefter. Funktionen er ikke ændret og ikke udrullet igen.
+- **GitHub Actions på `main`:** testene i `api/` er grønne på Linux, og appen er bygget (med `npm test`) og udgivet på GitHub Pages med nye filer i `assets/`.
+- **Live i Chrome uden vindue mod www.kontraktbridge.dk/postmortem/**, med svar hentet fra funktionen lige før:
+  - 452 spil 3: "Råd til spilføringen", "Skvis mulig · stik 9", "Skvis mod Vest", "Uden skvisen 9 stik, med 10.", skviskortet ♦E, stillingen før stik 9, "Sådan spotter du den", ordbogens Skvis og Slutspil, og "Bedste udspil: ♠4, ♠6, ♠8."
+  - 452 spil 18: "Indspil muligt · stik 9", "Indspil mod Øst", "Uden indspillet 9 stik, med 10.", indspilskortet ♥B, ordbogens Indspil og Slutspil.
+  - 450 spil 9: "Råd til modspillet" står først, afsnittet om spilføringen hedder "Spilførerens spil (modparten)", mærket er "Indspil muligt mod jer · stik 11", flisen viser "♥10*" med fodnoten under fliserne, og listen er "Bedste udspil: ♠EK, ♥2, ♥E, ♦3 og 5 andre."
+  - For alle tre spil er teksten på siden med live-svaret tegn for tegn den samme som med testsvaret bag de godkendte skærmbilleder.
+  - Oversigten for 452 har kortet med "Taget ved jeres bord 2 af 2", filtrene "Skvis · 1" og "Indspil · 1" og mærkerne i listen; for 450 står "Indspil muligt mod jer", "Skvis · 0" og ingen linje om jeres bord.
+  - Startskærmen har kortet "Sådan læses rådene". Et rigtigt kald fra startskærmen med linket til 452 fører til oversigten, og filteret Skvis fører til spil 3 med mærket. Browseren melder ingen fejl.
+- **Skærmbilleder fra den udgivne side** ligger ved siden af de godkendte i `skaermbilleder/raad/` som `live-390-…` og `live-1280-…` for de tre spil.
+
+Vindue 1b er dermed udgivet i sin helhed.
+
 ## Besked til Claude Code (del A)
 
 > Model: Fable 5.2, høj effort. Læs `docs/specs/SPEC-postmortem-1b-maerker.md`, `PLAN-postmortem.md`, `NOTAT-afproevning.md` og `api/SVAR.md`. Byg kun del A på grenen `maerker` (tag `v-foer-maerker`). Lad først DDS bekræfte slutstillingerne i specen, og skriv afvigelser i Afklaret. Skriv accepttestene, før du skriver løseren. Mål ydeevnen, før du bygger videre på den. Stop før merge med tabellen over mærker på de 48 spil i Afklaret. Rør ikke appen, og udrul intet.
