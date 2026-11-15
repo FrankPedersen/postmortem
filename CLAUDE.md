@@ -17,7 +17,15 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
 
 - Python 3.12, Azure Functions v2-programmeringsmodellen, `endplay` 0.5.12 (DDS). Python 3.14 kan ikke bruges, fordi endplay ikke har hjul til den.
 - Tests: `pytest` i `api/tests/` på gemte sider fra resultater.bridge.dk i `api/tests/data/`. Ingen test henter fra nettet. `.github/workflows/api.yml` kører dem på Linux ved hvert push.
-- **Rigtige navne må aldrig i git.** En ny rigtig testside fra bridge.dk hentes til en midlertidig mappe uden for repoet, anonymiseres med `api/tests/anonymiser.py` (spillere bliver "Spiller n", hold "Hold n"), og kun den anonymiserede side lægges i `api/tests/data/`; den rigtige side slettes bagefter, så ingen personnavne ligger lokalt. `tests/test_ingen_navne.py` sammenligner med de rigtige sider, når de findes i `_lab/postmortem-0/bridgedk/`; de er slettet (15. november 2026), så testen springer over, som den altid gør i GitHub Actions.
+- **Rigtige navne må aldrig i git.** En ny rigtig testside fra bridge.dk hentes til en midlertidig mappe uden for repoet, anonymiseres med `api/tests/anonymiser.py` (spillere bliver "Spiller n", hold "Hold n"), og kun den anonymiserede side lægges i `api/tests/data/`; den rigtige side slettes bagefter, så ingen personnavne ligger lokalt. Før sletningen sættes miljøvariablen `POSTMORTEM_RIGTIGE_SIDER` til den midlertidige mappe, og `tests/test_ingen_navne.py` køres: den læser navnene fra de rigtige sider og tjekker, at ingen fil i `api/tests/data/` eller `src/test/data/` indeholder dem, og at `api/tests/data/` er de anonymiserede sider. Derefter slettes mappen. I Git Bash fra `api/`, med `$TEMP/bridgedk` som eksempel på den midlertidige mappe:
+
+  ```bash
+  .venv/Scripts/python tests/anonymiser.py "$TEMP/bridgedk" tests/data
+  POSTMORTEM_RIGTIGE_SIDER="$TEMP/bridgedk" .venv/Scripts/python -m pytest tests/test_ingen_navne.py
+  rm -rf "$TEMP/bridgedk"
+  ```
+
+  Uden variablen springer testen over, også i GitHub Actions; peger den på en mappe, der ikke findes, fejler testen.
 - DDS' stiktal gælder den side, der er i tur: efter udspillet er det spilførersidens og skal ikke vendes (`docs/specs/NOTAT-afproevning.md`).
 - Svaret er beskrevet i `api/SVAR.md`. Ingen spillernavne i svaret, i loggen eller i cachen; kun holdlisten til valg af hold har holdnavne.
 - Hemmeligheder (forbindelsesstrenge og `IP_HASH_KEY`, nøglen til grænsens HMAC af IP'en) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`. Nøglen skrives aldrig ud.
