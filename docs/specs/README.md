@@ -3,6 +3,7 @@
 Planen, notatet fra afprøvningen og de udgivne specer til Post Mortem. En spec i arbejde ligger også her; når den er udgivet, får den en linje i listen.
 
 - [PLAN-postmortem.md](PLAN-postmortem.md) – planen for Post Mortem som egen app: funktionen i Azure, appen på www.kontraktbridge.dk/postmortem/, de fire faktorer, mærkerne og vinduerne 0, 1a, 1b og 1c (11. november 2026).
+- [SPEC-postmortem-0-afproevning.md](SPEC-postmortem-0-afproevning.md) – vindue 0, specen for afprøvningen af løseren: DDS i Python, fortegnet efter udspillet, første udkast til mærkerne, en lokal Azure Function, målingerne, licenserne og siderne fra bridge.dk; resultatet står i notatet nedenfor (12. november 2026).
 - [NOTAT-afproevning.md](NOTAT-afproevning.md) – vindue 0, afprøvningen af løseren: `endplay` på Python 3.12, måletabellen, fortegnsreglen for DDS efter udspillet, de tre testspil og siderne fra bridge.dk (12. november 2026).
 - [SPEC-postmortem-1a-funktion.md](SPEC-postmortem-1a-funktion.md) – vindue 1a, funktionen `POST /api/analyse`: læsning af Bordresultater og Personligt regnskab, DD-tabel, par og de fire faktorer, cachen og de anonymiserede testsider (udgivet 12. november 2026).
 - [SPEC-postmortem-1c-app.md](SPEC-postmortem-1c-app.md) – vindue 1c, appen: start og guide, valg af hold, aftenens oversigt og analysevinduet, Post Mortem-kortet på forsiden, modpartens fejl under Held og uheld, og budgetalarmen (udgivet 13. november 2026).
