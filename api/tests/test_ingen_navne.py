@@ -3,8 +3,9 @@
 De rigtige sider fra resultater.bridge.dk ligger aldrig i repoet. Når testsider laves, hentes de rigtige sider til en
 midlertidig mappe uden for repoet, og miljøvariablen POSTMORTEM_RIGTIGE_SIDER sættes til den mappe (CLAUDE.md). Testen
 læser navnene fra siderne dér og tjekker, at ingen fil i tests/data/ eller i appens src/test/data/ (svarene, appens
-tests bruger, SPEC-postmortem-1c-app.md) indeholder et af dem, og at tests/data/ er de anonymiserede sider. Uden
-variablen springes den over; peger den på en mappe, der ikke findes, fejler testen.
+tests bruger, SPEC-postmortem-1c-app.md) indeholder et af dem, og at tests/data/ er de anonymiserede sider. Siderne
+kommer i sæt (anonymiser.SAET); testen tjekker de sæt, der ligger i mappen. Uden variablen springes den over; peger den
+på en mappe, der ikke findes eller ikke har et helt sæt, fejler testen.
 """
 import os
 import pathlib
@@ -26,23 +27,36 @@ def mappen():
     return RIGTIGE_SIDER
 
 
+# Antal spillere og hold i hvert sæt af sider (anonymiser.SAET).
+ANTAL = {'v1': (37, 8), '1d': (32, 0)}
+
+
+def saettene():
+    """De sæt, hvis rigtige sider ligger i mappen; mindst ét skal være der."""
+    saet = anonymiser.saet_i(mappen())
+    assert saet, f'{VARIABEL} peger på en mappe uden et helt sæt af sider ({", ".join(anonymiser.SAET)})'
+    return saet
+
+
 @uden_rigtige_sider
 def test_ingen_rigtige_navne_i_testdata():
     rigtige = mappen()
-    sider = {navn: (rigtige / navn).read_bytes().decode('utf-8') for navn in anonymiser.SIDER}
-    spillere, hold = anonymiser.navne(sider)
-    assert len(spillere) == 37 and len(hold) == 8
     filer = [p for p in DATA.iterdir() if p.is_file()]
-    assert len(filer) >= 6
+    assert len(filer) >= 9
     app_filer = sorted(p.name for p in APP_DATA.glob('*.json'))
-    assert app_filer == ['hold-450-vaelg.json', 'hold-450.json', 'par-452.json']
-    for fil in filer + sorted(APP_DATA.glob('*.json')):
-        tekst = fil.read_bytes().decode('utf-8', errors='replace')
-        assert not anonymiser.rester(tekst, spillere | hold), fil.name
+    assert app_filer == ['hold-450-vaelg.json', 'hold-450.json', 'par-3287.json', 'par-452.json']
+    for saet in saettene():
+        sider = {navn: (rigtige / navn).read_bytes().decode('utf-8') for navn in anonymiser.SAET[saet]}
+        spillere, hold = anonymiser.navne(sider)
+        assert (len(spillere), len(hold)) == ANTAL[saet], saet
+        for fil in filer + sorted(APP_DATA.glob('*.json')):
+            tekst = fil.read_bytes().decode('utf-8', errors='replace')
+            assert not anonymiser.rester(tekst, spillere | hold), (saet, fil.name)
 
 
 @uden_rigtige_sider
 def test_testdata_er_de_anonymiserede_sider(tmp_path):
     anonymiser.main(mappen(), tmp_path)
-    for navn in anonymiser.SIDER:
-        assert (tmp_path / navn).read_bytes() == (DATA / navn).read_bytes(), navn
+    for saet in saettene():
+        for navn in anonymiser.SAET[saet]:
+            assert (tmp_path / navn).read_bytes() == (DATA / navn).read_bytes(), navn

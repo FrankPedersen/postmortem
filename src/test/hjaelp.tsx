@@ -10,16 +10,21 @@ import type { Analyse, Spil, VaelgSvar } from '../typer';
 import parData from './data/par-452.json';
 import holdData from './data/hold-450.json';
 import vaelgData from './data/hold-450-vaelg.json';
+import par3287Data from './data/par-3287.json';
 
 export const PAR_URL =
   'https://resultater.bridge.dk/template/personligt_regnskab.php?filename=2151/MT452GT720.XML&tournament=452&section=1&pairno=1';
 export const HOLD_URL =
   'https://resultater.bridge.dk/template/multihold_bordresultater.php?filename=2151/MT450GT714.XML&tournament=450&section=2&round=2&half=1';
+// Aftenen 16. november 2026, sektion Par Gul, par 1 (SPEC-postmortem-1d-point.md).
+export const PAR_3287_URL =
+  'https://resultater.bridge.dk/template/personligt_regnskab.php?filename=1111/MT3287GT11912.XML&tournament=3287&section=7&pairno=1';
 
 // En ny kopi hver gang, så en test kan ændre den.
 export const par = (): Analyse => structuredClone(parData) as Analyse;
 export const hold = (): Analyse => structuredClone(holdData) as Analyse;
 export const vaelg = (): VaelgSvar => structuredClone(vaelgData) as VaelgSvar;
+export const par3287 = (): Analyse => structuredClone(par3287Data) as Analyse;
 
 export function svar(status: number, krop: unknown): Response {
   return new Response(JSON.stringify(krop), { status, headers: { 'Content-Type': 'application/json' } });

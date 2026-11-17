@@ -3,7 +3,11 @@
 // 44 × 44 px. Samme teknik som Forsidens tools/tjek_bredde.mjs: Chrome eller Edge uden vindue, styret over DevTools.
 //
 //   node tools/tjek_bredde.mjs                   tjekker ved 320, 390 og 1280 px (og at intet ligger oven i kompasset)
-//   node tools/tjek_bredde.mjs --billeder=mappe  gemmer også skærmbilleder af skærmene ved 390 og 1280 px
+//   node tools/tjek_bredde.mjs --billeder=mappe  gemmer også skærmbilleder af skærmene ved 390 og 1280 px og af
+//                                                oversigten for 16. november med ⓘ lukket og åben ved 320, 390 og 1280 px
+//
+// SPEC-postmortem-1d-point.md: aftenen 16. november (par-3287.json) er med, og ⓘ ved "Hvor gik pointene?" åbner og
+// lukker med mus, tryk og tastatur uden vandret rulning.
 //
 // Appen køres med Vites udviklingsserver, og svarene fra src/test/data/ lægges i sessionStorage som efter en analyse,
 // så testen ikke kalder funktionen. Kræver Node 22+. Stien til browseren kan gives i CHROME.
@@ -33,6 +37,9 @@ const læs = (navn) => JSON.parse(readFileSync(join(ROD, 'src', 'test', 'data', 
 const PAR = læs('par-452.json');
 const HOLD = læs('hold-450.json');
 const VAELG = læs('hold-450-vaelg.json');
+const PAR_3287 = læs('par-3287.json');
+const PAR_3287_URL = 'https://resultater.bridge.dk/template/personligt_regnskab.php?filename=1111/MT3287GT11912.XML&tournament=3287&section=7&pairno=1';
+const INFO = 'Hjælp: Hvor gik pointene?';
 const PAR_URL = 'https://resultater.bridge.dk/template/personligt_regnskab.php?filename=2151/MT452GT720.XML&tournament=452&section=1&pairno=1';
 const HOLD_URL = 'https://resultater.bridge.dk/template/multihold_bordresultater.php?filename=2151/MT450GT714.XML&tournament=450&section=2&round=2&half=1';
 // Samme nøgle og form som src/lager.ts.
@@ -119,6 +126,74 @@ try {
     writeFileSync(join(BILLEDER, navn), Buffer.from(b.result.data, 'base64'));
   };
 
+  // ⓘ ved "Hvor gik pointene?" (accepttest 6): mus, tryk og tastatur i browseren, med ⓘ's midte som mål.
+  const FIND_INFO = `[...document.querySelectorAll('button')].find((b) => b.getAttribute('aria-label') === ${JSON.stringify(INFO)})`;
+  const infoTilstand = () => kør(`(() => {
+    const k = ${FIND_INFO};
+    if (!k) return null;
+    const r = k.getBoundingClientRect();
+    const p = document.getElementById(k.getAttribute('aria-controls'));
+    return { åben: k.getAttribute('aria-expanded') === 'true', synlig: !!p && p.checkVisibility(), tekst: p ? p.textContent.replace(/\\s+/g, ' ').trim() : '',
+      x: r.left + r.width / 2, y: r.top + r.height / 2, fokus: document.activeElement === k, b: Math.round(r.width), h: Math.round(r.height) };
+  })()`);
+  const tilInfo = () => kør(`(() => { ${FIND_INFO}.scrollIntoView({ block: 'center' }); return true; })()`);
+  const mus = async () => {
+    const t = await infoTilstand();
+    for (const type of ['mousePressed', 'mouseReleased']) await send('Input.dispatchMouseEvent', { type, x: t.x, y: t.y, button: 'left', clickCount: 1 });
+    await vent(50);
+  };
+  const tryk = async () => {
+    const t = await infoTilstand();
+    await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
+    await send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: t.x, y: t.y }] });
+    await send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await send('Emulation.setTouchEmulationEnabled', { enabled: false });
+    await vent(100);
+  };
+  const tast = async (key, code, kode) => {
+    const tekst = key === 'Enter' ? { text: '\r' } : key === ' ' ? { text: ' ' } : {};
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', key, code, windowsVirtualKeyCode: kode, nativeVirtualKeyCode: kode, ...tekst });
+    await send('Input.dispatchKeyEvent', { type: 'keyUp', key, code, windowsVirtualKeyCode: kode, nativeVirtualKeyCode: kode });
+    await vent(50);
+  };
+  const tjekInfo = async (bredde, navn) => {
+    const navnet = `${bredde} px, aftenen, ${navn}, ⓘ`;
+    let t = await infoTilstand();
+    if (!t) return tjek(false, `${navnet} står ved "Hvor gik pointene?"`);
+    await tilInfo();
+    t = await infoTilstand();
+    tjek(!t.åben && !t.synlig, `${navnet}: lukket fra start`, JSON.stringify(t));
+    await mus();
+    t = await infoTilstand();
+    tjek(t.åben && t.synlig && t.tekst.startsWith('Point er parpoint.') && t.tekst.endsWith('Summen er jeres point mod middel.'), `${navnet}: åbner med musen og viser teksten`, JSON.stringify(t).slice(0, 200));
+    const m = await kør(MÅL);
+    tjek(m.scroll <= m.client, `${navnet}: ingen vandret rulning med teksten åben`, `${m.scroll} px i ${m.client} px – stikker ud: ${m.ud.join(', ')}`);
+    tjek(m.små.length === 0, `${navnet}: knapper og links er mindst 44 × 44 px med teksten åben`, m.små.slice(0, 6).join(' | '));
+    await mus();
+    t = await infoTilstand();
+    tjek(!t.åben && !t.synlig, `${navnet}: lukker med musen`, JSON.stringify(t));
+    await tryk();
+    t = await infoTilstand();
+    tjek(t.åben && t.synlig, `${navnet}: åbner med et tryk`, JSON.stringify(t));
+    await tryk();
+    t = await infoTilstand();
+    tjek(!t.åben && !t.synlig, `${navnet}: lukker med et tryk`, JSON.stringify(t));
+    await kør(`${FIND_INFO}.focus(); true`);
+    await tast('Enter', 'Enter', 13);
+    t = await infoTilstand();
+    tjek(t.åben && t.synlig, `${navnet}: åbner med Enter`, JSON.stringify(t));
+    await tast('Escape', 'Escape', 27);
+    t = await infoTilstand();
+    tjek(!t.åben && !t.synlig && t.fokus, `${navnet}: lukker med Escape, og fokus bliver på ⓘ`, JSON.stringify(t));
+    await tast(' ', 'Space', 32);
+    t = await infoTilstand();
+    tjek(t.åben && t.synlig, `${navnet}: åbner med mellemrum`, JSON.stringify(t));
+    await tast(' ', 'Space', 32);
+    t = await infoTilstand();
+    tjek(!t.åben && !t.synlig, `${navnet}: lukker med mellemrum`, JSON.stringify(t));
+    await kør('window.scrollTo(0, 0); true');
+  };
+
   for (const bredde of [320, 390, 1280]) {
     await størrelse(bredde);
     await indlæs('#/');
@@ -142,20 +217,23 @@ try {
     await vent(50);
     await mål('valg af retning');
 
-    for (const [navn, svar, url, vaelg] of [['par 452', PAR, PAR_URL, undefined], ['hold 450', HOLD, HOLD_URL, VAELG]]) {
+    for (const [navn, svar, url, vaelg] of [['par 452', PAR, PAR_URL, undefined], ['hold 450', HOLD, HOLD_URL, VAELG], ['par 3287', PAR_3287, PAR_3287_URL, undefined]]) {
       await gemSvar(svar, url, vaelg);
       await indlæs('#/aften');
       const m = await mål(`aftenen, ${navn}`);
       tjek(m.h1 === svar.turnering.navn, `${bredde} px, aftenen, ${navn}: overskriften er turneringen`, m.h1);
+      if (svar.turnering.form === 'par') await tjekInfo(bredde, navn);
       await kør(`[...document.querySelectorAll('button')].find((b) => b.textContent.startsWith('Tabte point')).click(); true`);
       await vent(30);
       await mål(`aftenen, ${navn}, Tabte point`);
-      // Vindue 1b, del B: kortet med teknikker og filteret for indspil (begge testsvar har ét spil med indspil).
+      // Vindue 1b, del B: kortet med teknikker og filteret for indspil (de to første testsvar har ét spil med indspil).
+      if (navn !== 'par 3287') {
       const teknik = await kør(`(() => { const b = [...document.querySelectorAll('button')].find((x) => x.textContent.startsWith('Indspil')); b.click(); return { kort: !!document.querySelector('#h-teknikker'), filter: b.textContent.trim() }; })()`);
       await vent(30);
       const vist = await kør(`document.querySelectorAll('.spil-liste li').length`);
       tjek(teknik.kort && teknik.filter === 'Indspil · 1' && vist === 1, `${bredde} px, aftenen, ${navn}: kortet med teknikker står der, og filteret Indspil viser ét spil`, JSON.stringify({ teknik, vist }));
       await mål(`aftenen, ${navn}, Indspil`);
+      }
       let værst = 0;
       for (const s of svar.spil) {
         await gåTil(`#/spil/${s.nummer}`);
@@ -208,6 +286,17 @@ try {
       await billede(`${bredde}-452-spil-3.png`);
       await indlæs('#/spil/18');
       await billede(`${bredde}-452-spil-18.png`);
+    }
+    // SPEC-postmortem-1d-point.md: oversigten for 16. november med ⓘ lukket og åben.
+    for (const bredde of [320, 390, 1280]) {
+      await størrelse(bredde, 900);
+      await gemSvar(PAR_3287, PAR_3287_URL);
+      await indlæs('#/aften');
+      await billede(`${bredde}-aften-3287.png`);
+      await tilInfo();
+      await mus();
+      await kør('window.scrollTo(0, 0); true');
+      await billede(`${bredde}-aften-3287-info.png`);
     }
     console.log(`Skærmbillederne ligger i ${BILLEDER}`);
   }
