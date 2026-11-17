@@ -1083,6 +1083,82 @@ h1:focus {
   font-variant-numeric: tabular-nums;
 }
 
+/* Parturnering: procenten og under den spillets parpoint (SPEC-postmortem-1d-point.md). */
+.spil-procent,
+.spil-point {
+  display: block;
+}
+
+.spil-point {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* ⓘ ved "Hvor gik pointene?" som i de andre apps: en lille cirkel i en trykflade på 44 × 44 px. */
+.titel-med-info {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.info-knap {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  margin: -10px 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.info-cirkel {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+  background: var(--surface);
+  font: italic 600 0.95rem Georgia, 'Times New Roman', serif;
+}
+
+.info-knap[aria-expanded='true'] .info-cirkel {
+  border-color: var(--accent-line);
+  box-shadow: inset 0 0 0 1px var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.info-tekst {
+  padding: 10px 12px;
+  border-left: 3px solid var(--ink);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.info-tekst p {
+  margin: 0;
+}
+
+.info-tekst ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.info-tekst li + li {
+  margin-top: 4px;
+}
+
 /* Analysevinduet */
 
 .spil-hoved {

@@ -125,15 +125,23 @@ def _parturnering(url, q, hent, cache):
                  'skala': 'matchpoint', 'top': None, 'id': q.get('tournament'), 'sektion': q.get('section'),
                  'runde': None, 'halvleg': None}
 
+    # Point som bridge.dk (SPEC-postmortem-1d-point.md): alle spil skaleres til toppen for det mest spillede spil i
+    # sektionen, N resultater, med Neubergs formel. En justeret score ("M") er ikke et resultat og tæller hverken i
+    # feltet eller i N.
+    N = max((sum(1 for r in raekker if r.spillet) for _, raekker in resultater.values()), default=0)
     beregnet = _dd_og_par([s for s, _ in alle], turnering, cache)
     spil_ud = []
     for (spil, egen), (dd, par) in zip(alle, beregnet):
         retning = egen.retning or 'NS'
         s = 1 if retning == 'NS' else -1
         felt = [s * r.score_ns for r in spil.resultater if parnr not in (r.ns_nr, r.ov_nr) and r.spillet]
+        N_spil = max(N, len(felt) + 1)   # N, men aldrig under spillets eget antal resultater
         if egen.spillet and felt:
-            spil_ud.append(_spil(spil, dd, par, egen, retning, lambda S, felt=felt: regn.matchpoint(S, felt),
-                                 len(felt), 2 * len(felt), felt, None, turnering, cache))
+            spil_ud.append(_spil(spil, dd, par, egen, retning, lambda S, felt=felt, N=N_spil: regn.parpoint(S, felt, N),
+                                 N_spil - 1, 2 * (N_spil - 1), felt, None, turnering, cache))
+        elif egen.point is not None and N_spil > 1:
+            # En justeret score ved parrets bord får de point, bridge.dk giver den.
+            spil_ud.append(_justeret(spil, dd, par, retning, egen.point, 2 * (N_spil - 1)))
         else:
             spil_ud.append(_ikke_spillet(spil, dd, par, retning))
     turnering['top'] = max((x['top'] for x in spil_ud if x['top']), default=None)
@@ -207,6 +215,13 @@ def _ikke_spillet(spil, dd, par, retning):
     return x
 
 
+def _justeret(spil, dd, par, retning, point, top):
+    """Et spil med en justeret score ved parrets bord: ikke spillet, men med bridge.dk's point."""
+    x = _ikke_spillet(spil, dd, par, retning)
+    x.update({'point': point, 'top': top, 'procent': regn.rund1(100 * point / top)})
+    return x
+
+
 def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, turnering, cache):
     s = 1 if retning == 'NS' else -1
     k = egen.kontrakt
@@ -241,7 +256,7 @@ def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, tu
     x.update({
         'spillet': True, 'kontrakt': k.tekst(), 'spilfoerer': k.spilfoerer or None, 'udspil': egen.udspil,
         'stik': egen.stik, 'score': S_faktisk, 'point': pf, 'top': top,
-        'procent': round(100 * pf / top, 1) if top else None, 'felt': sorted(felt, reverse=True),
+        'procent': regn.rund1(100 * pf / top) if top else None, 'felt': sorted(felt, reverse=True),
         'holdkammerater': holdkammerater, 'ddFoer': foer, 'ddEfter': efter,
         'scorer': {'faktisk': S_faktisk, 'ddEfter': S_ddEfter, 'ddFoer': S_ddFoer, 'par': S_par},
         'faktorer': faktorer, 'modpartensFejl': modpartens_fejl,
@@ -258,8 +273,14 @@ def _aftenen(turnering, deltager, spil):
     faktorer = {f: sum(x['faktorer'][f] for x in spillede) for f in FAKTORER}
     point = sum(x['point'] for x in spillede)
     if turnering['form'] == 'par':
-        top = sum(x['top'] for x in spillede)
-        resultat = {'procent': round(100 * point / top, 2) if top else None, 'point': point, 'top': top, 'imp': None}
+        # Spil med en justeret score ved parrets bord tæller med bridge.dk's point; afvigelsen fra middel står under
+        # held og uheld, så faktorerne stadig lægger op til point i alt mod middel.
+        justerede = [x for x in spil if not x['spillet'] and x['point'] is not None]
+        if justerede:
+            point += sum(x['point'] for x in justerede)
+            faktorer['held'] += sum(x['point'] - x['top'] / 2 for x in justerede)
+        top = sum(x['top'] for x in spillede + justerede)
+        resultat = {'procent': regn.rund1(100 * point / top) if top else None, 'point': point, 'top': top, 'imp': None}
     else:
         resultat = {'procent': None, 'point': None, 'top': None, 'imp': point}
     kandidater = {f: faktorer[f] for f in ('meldinger', 'spilfoering', 'modspil') if faktorer[f] < 0}

@@ -15,9 +15,9 @@ export const faktorSum = (f: Faktorer) => FAKTORER.reduce((sum, k) => sum + f[k]
 /** Spillets sum af faktorerne = P(S_faktisk) − middel (SVAR.md). Null, når spillet ikke er spillet. */
 export const spilSum = (s: Spil) => (s.spillet && s.faktorer ? faktorSum(s.faktorer) : null);
 
-/** Middel for aftenen: halv top på hvert spillet spil i parturnering, 0 i holdturnering. */
+/** Middel for aftenen: halv top på hvert spil med point i parturnering (også et spil med justeret score), 0 i holdturnering. */
 export const middel = (a: Analyse) =>
-  a.turnering.form === 'par' ? a.spil.filter((s) => s.spillet).reduce((sum, s) => sum + (s.top ?? 0) / 2, 0) : 0;
+  a.turnering.form === 'par' ? a.spil.filter((s) => s.top !== null).reduce((sum, s) => sum + (s.top ?? 0) / 2, 0) : 0;
 
 /** Holdets navn fra holdlisten, hvis den er der. */
 export function holdNavn(a: Analyse, vaelg?: { vaelg: { hold: { id: string; hold: string }[] } }) {

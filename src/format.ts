@@ -3,18 +3,25 @@ import { T } from './tekster';
 
 export const MINUS = '−';
 
-const rund = (n: number) => Math.round(n * 100) / 100;
+/** Afrundet til `decimaler` decimaler; 0,05 rundes væk fra nul som på bridge.dk. */
+const rund = (n: number, decimaler = 2) => {
+  const f = 10 ** decimaler;
+  return (Math.sign(n) * Math.round(Math.abs(n) * f + 1e-9)) / f;
+};
 
-/** 62.28 → "62,28", −15 → "−15". */
-export function tal(n: number): string {
-  const r = rund(n);
+/** 62.28 → "62,28", −15 → "−15"; med én decimal (parpoint som bridge.dk) 225.857 → "225,9" og 14 → "14". */
+export function tal(n: number, decimaler = 2): string {
+  const r = rund(n, decimaler);
   return (r < 0 ? MINUS : '') + String(Math.abs(r)).replace('.', ',');
 }
 
 /** 23 → "+23", −2 → "−2", 0 → "0". */
-export function medFortegn(n: number): string {
-  return rund(n) > 0 ? `+${tal(n)}` : tal(n);
+export function medFortegn(n: number, decimaler = 2): string {
+  return rund(n, decimaler) > 0 ? `+${tal(n, decimaler)}` : tal(n, decimaler);
 }
+
+/** Decimalerne for point i en turnering: parpoint med én decimal som bridge.dk, imp med to (de er heltal). */
+export const decimaler = (form: 'par' | 'hold') => (form === 'par' ? 1 : 2);
 
 export const SYMBOL: Record<string, string> = { S: '♠', H: '♥', D: '♦', C: '♣', NT: 'NT' };
 const RANG: Record<string, string> = { A: 'E', K: 'K', Q: 'D', J: 'B', T: '10' };

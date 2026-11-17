@@ -69,6 +69,18 @@ export const T = {
     imp: (imp: string) => `${imp} imp`,
     modAndetBord: ' mod jeres andet bord',
     faktorTitel: 'Hvor gik pointene?',
+    // ⓘ ved "Hvor gik pointene?" i parturnering (SPEC-postmortem-1d-point.md): forslaget i specen, Franks tekst at rette.
+    info: {
+      label: 'Hjælp: Hvor gik pointene?',
+      tekst:
+        '**Point** er parpoint. På hvert spil får I 2 point for hvert par i feltet, I slår, og 1 for hvert, I deler med. Er et spil spillet færre gange, omregnes pointene som hos bridge.dk. **Middel** er halvdelen af det mulige, altså 50 %. Tallene viser, hvor mange point I lå over eller under middel, og hvad der flyttede dem:',
+      punkter: [
+        '**Meldinger (begge sider):** forskellen mellem den spillede kontrakt og det bedste, der kunne meldes med åbne kort.',
+        '**Spilføring** og **Modspil:** stik, I tabte i forhold til åbne kort. De er nul eller negative.',
+        '**Held og uheld:** resten, altså det, feltet gjorde anderledes, uden at I gjorde noget forkert. Modpartens fejl tæller med her.',
+      ],
+      slut: 'Summen er jeres point mod middel.',
+    },
     faktorEnhed: { par: 'point mod middel', hold: 'imp' },
     iAlt: { par: 'I alt mod middel', hold: 'I alt' },
     herafFejl: 'Heraf modpartens fejl',
@@ -93,6 +105,10 @@ export const T = {
       `${spilfoerer} ${kontrakt} · ${stik} stik · ${score}`,
     pasLinje: 'Pas hele vejen rundt',
     ikkeSpillet: 'Ikke spillet ved jeres bord',
+    // Et spil, hvor bridge.dk har justeret scoren ved jeres bord (fx "M"): ingen kontrakt, men bridge.dk's point.
+    justeret: 'Justeret score',
+    // Parpointene for spillet under procenten i rækken (SPEC-postmortem-1d-point.md).
+    spilPoint: (point: string) => `${point} point`,
     spilLink: (n: number) => `Spil ${n}`,
   },
 

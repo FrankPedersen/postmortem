@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { dato, kontrakt, medFortegn, tal } from '../format';
+import { dato, decimaler, kontrakt, medFortegn, tal } from '../format';
 import { T } from '../tekster';
 import type { Analyse, Maerke, Spil, VaelgSvar } from '../typer';
 import { FAKTORER } from '../typer';
 import { faktorSum, holdNavn, maerke, resultatArt, spilSum, tagetVedBordet, teknikMaerker, teknikTekst, udspilTekst } from '../udledt';
-import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
+import { InfoKnap, InfoTekst, useInfo } from '../ui/Info';
+import { Farver, Markeret, Side, Sidefod, TopBar } from '../ui/Ramme';
 
 /** Linjen for et spil i listen: "S 4♠ · udspil ♣B · 10 stik · +620". */
 function spilLinje(s: Spil) {
-  if (!s.spillet) return T.aften.ikkeSpillet;
+  if (!s.spillet) return s.point !== null ? T.aften.justeret : T.aften.ikkeSpillet;
   if (s.kontrakt === 'Pas' || !s.spilfoerer) return `${T.aften.pasLinje} · ${medFortegn(s.score ?? 0)}`;
   const k = kontrakt(s.kontrakt!);
   const plads = T.pladsKort[s.spilfoerer];
@@ -37,6 +38,9 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
   const retning = a.deltager.retning ? T.retning[a.deltager.retning] : '';
   const navn = holdNavn(a, vaelg);
   const modpartensFejl = a.spil.reduce((sum, s) => sum + (s.modpartensFejl ?? 0), 0);
+  // Parpoint med én decimal som bridge.dk (SPEC-postmortem-1d-point.md); imp er heltal.
+  const d = decimaler(form);
+  const info = useInfo();
 
   return (
     <>
@@ -52,7 +56,7 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
               <>
                 {T.aften.par(a.deltager.nummer ?? 0, antal)}
                 <strong>{tal(a.resultat.procent ?? 0)} %</strong>
-                {T.aften.parPoint(tal(a.resultat.point ?? 0), tal(a.resultat.top ?? 0))}
+                {T.aften.parPoint(tal(a.resultat.point ?? 0, d), tal(a.resultat.top ?? 0, d))}
               </>
             ) : (
               <>
@@ -66,9 +70,27 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
 
         <section className="kort" aria-labelledby="h-faktorer">
           <div className="kort-hoved">
-            <h2 id="h-faktorer">{T.aften.faktorTitel}</h2>
+            <div className="titel-med-info">
+              <h2 id="h-faktorer">{T.aften.faktorTitel}</h2>
+              {form === 'par' && <InfoKnap info={info} label={T.aften.info.label} />}
+            </div>
             <span className="hint">{T.aften.faktorEnhed[form]}</span>
           </div>
+          {form === 'par' && (
+            <InfoTekst info={info}>
+              <p>
+                <Markeret>{T.aften.info.tekst}</Markeret>
+              </p>
+              <ul>
+                {T.aften.info.punkter.map((punkt) => (
+                  <li key={punkt}>
+                    <Markeret>{punkt}</Markeret>
+                  </li>
+                ))}
+              </ul>
+              <p>{T.aften.info.slut}</p>
+            </InfoTekst>
+          )}
           <ul className="faktorer">
             {FAKTORER.map((f) => {
               const v = a.faktorer[f];
@@ -80,26 +102,26 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
                   <span className="bjaelke" aria-hidden="true">
                     <span className={`fyld ${art} ${v < 0 ? 'venstre' : 'hoejre'}`} style={{ width: bredde }} />
                   </span>{' '}
-                  <span className={`vaerdi ${art}`}>{medFortegn(v)}</span>
+                  <span className={`vaerdi ${art}`}>{medFortegn(v, d)}</span>
                 </li>
               );
             })}
             {modpartensFejl > 0 && (
               <li className="del">
                 <span className="navn">{T.aften.herafFejl}</span>{' '}
-                <span className="vaerdi held">{medFortegn(modpartensFejl)}</span>
+                <span className="vaerdi held">{medFortegn(modpartensFejl, d)}</span>
               </li>
             )}
             <li className="i-alt">
               <span className="navn">{T.aften.iAlt[form]}</span>{' '}
-              <span className="vaerdi">{medFortegn(iAlt)}</span>
+              <span className="vaerdi">{medFortegn(iAlt, d)}</span>
             </li>
           </ul>
           <div className="forbedring">
             <span className="eyebrow">{T.aften.stoersteTitel}</span>
             <p>
               {a.stoersteForbedring
-                ? T.aften.stoerste[a.stoersteForbedring](tal(-a.faktorer[a.stoersteForbedring]), enhed)
+                ? T.aften.stoerste[a.stoersteForbedring](tal(-a.faktorer[a.stoersteForbedring], d), enhed)
                 : T.aften.stoerste.ingen}
             </p>
           </div>
@@ -175,7 +197,17 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
                       )}
                     </span>{' '}
                     <span className={`spil-resultat ${art}`}>
-                      {!s.spillet ? '' : form === 'par' ? `${tal(s.procent ?? 0)} %` : medFortegn(s.point ?? 0)}
+                      {form === 'par' && s.point !== null ? (
+                        // Procenten og parpointene for spillet (SPEC-postmortem-1d-point.md); scoren står i linjen.
+                        <>
+                          <span className="spil-procent">{tal(s.procent ?? 0)} %</span>{' '}
+                          <span className="spil-point">{T.aften.spilPoint(tal(s.point, d))}</span>
+                        </>
+                      ) : !s.spillet ? (
+                        ''
+                      ) : (
+                        medFortegn(s.point ?? 0)
+                      )}
                     </span>
                   </a>
                 </li>

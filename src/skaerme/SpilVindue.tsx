@@ -1,4 +1,4 @@
-import { kontrakt, kort, medFortegn, parKontrakt, tal } from '../format';
+import { decimaler, kontrakt, kort, medFortegn, parKontrakt, tal } from '../format';
 import { T } from '../tekster';
 import type { Analyse, Benaevnelse, Plads, Spil } from '../typer';
 import { feltGrupper, forkertUdspil, viSpillede } from '../udledt';
@@ -42,7 +42,8 @@ function faktorLinjer(a: Analyse, s: Spil) {
   const udspilHjalp = vi && s.udspilseffekt?.udspilAf === 'modparten' ? s.udspilseffekt.point : 0;
   const feltet = (a.turnering.form === 'par' ? T.forklaring.heldPar : T.forklaring.heldHold)[tegn(f.held - udspilHjalp - fejl)];
   const kunne = efter ?? s.ddFoer!;
-  const fejlTekst = fejl > 0 ? (vi ? T.forklaring.fejlModspil(s.stik!, kunne, medFortegn(fejl)) : T.forklaring.fejlSpilfoerer(s.stik!, kunne, medFortegn(fejl))) : '';
+  const d = decimaler(a.turnering.form);
+  const fejlTekst = fejl > 0 ? (vi ? T.forklaring.fejlModspil(s.stik!, kunne, medFortegn(fejl, d)) : T.forklaring.fejlSpilfoerer(s.stik!, kunne, medFortegn(fejl, d))) : '';
   const held = feltet + (udspilHjalp > 0 ? T.forklaring.udspilHjalp : '') + fejlTekst;
   return [
     { navn: T.faktor.meldinger, linje: meldinger, v: f.meldinger, relevant: true },
@@ -125,7 +126,8 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
                   {forkertUdspil(s) && <p className="flise-fodnote">{T.spil.forkertFodnote}</p>}
                   {a.turnering.form === 'par' ? (
                     <div className="point-linje">
-                      <span>{T.spil.point(tal(s.point ?? 0), tal(s.top ?? 0))}</span>{' '}
+                      {/* Parpoint med én decimal som bridge.dk (SPEC-postmortem-1d-point.md). */}
+                      <span>{T.spil.point(tal(s.point ?? 0, 1), tal(s.top ?? 0, 1))}</span>{' '}
                       <span className={`stor-tal ${art((s.procent ?? 50) - 50)}`}>{tal(s.procent ?? 0)} %</span>
                     </div>
                   ) : (
@@ -220,7 +222,7 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
                       <span className="linje">
                         <Farver>{r.linje}</Farver>
                       </span>{' '}
-                      <span className={`vaerdi ${r.relevant ? art(r.v) : 'neutral'}`}>{r.relevant ? medFortegn(r.v) : T.spil.ikkeRelevant}</span>
+                      <span className={`vaerdi ${r.relevant ? art(r.v) : 'neutral'}`}>{r.relevant ? medFortegn(r.v, decimaler(a.turnering.form)) : T.spil.ikkeRelevant}</span>
                     </li>
                   ))}
                 </ul>

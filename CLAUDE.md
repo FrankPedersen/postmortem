@@ -25,7 +25,8 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
   rm -rf "$TEMP/bridgedk"
   ```
 
-  Uden variablen springer testen over, også i GitHub Actions; peger den på en mappe, der ikke findes, fejler testen.
+  Uden variablen springer testen over, også i GitHub Actions; peger den på en mappe, der ikke findes, fejler testen. Siderne kommer i sæt (`SAET` i `anonymiser.py`: v1 med 450 og 452, 1d med aftenen 16. november, 3287), der anonymiseres hver for sig, så et nyt sæt ikke ændrer de gemte sider; testen tjekker de sæt, der ligger i mappen.
+- Parpoint som bridge.dk (SPEC-postmortem-1d-point.md): alle spil skaleres med Neubergs formel til toppen for det mest spillede spil i sektionen (`regn.neuberg`, `regn.parpoint`), procenten har én decimal afrundet som bridge.dk (`regn.rund1`), og det personlige regnskabs point er facit (`tests/test_point_1d.py`).
 - DDS' stiktal gælder den side, der er i tur: efter udspillet er det spilførersidens og skal ikke vendes (`docs/specs/NOTAT-afproevning.md`).
 - Svaret er beskrevet i `api/SVAR.md`. Ingen spillernavne i svaret, i loggen eller i cachen; kun holdlisten til valg af hold har holdnavne.
 - Hemmeligheder (forbindelsesstrenge og `IP_HASH_KEY`, nøglen til grænsens HMAC af IP'en) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`. Nøglen skrives aldrig ud.

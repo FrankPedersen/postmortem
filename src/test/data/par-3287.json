@@ -16,16 +16,16 @@
   "nummer": 1
  },
  "resultat": {
-  "procent": 51.15,
-  "point": 223,
-  "top": 436,
+  "procent": 50.4,
+  "point": 225.85714285714286,
+  "top": 448,
   "imp": null
  },
  "faktorer": {
-  "meldinger": -8,
+  "meldinger": -8.285714285714285,
   "spilfoering": -11,
-  "modspil": -34,
-  "held": 58
+  "modspil": -34.0,
+  "held": 55.14285714285714
  },
  "stoersteForbedring": "modspil",
  "teknikker": {
@@ -2046,11 +2046,15 @@
    "stik": 6,
    "score": -200,
    "point": 0,
-   "top": 6,
+   "top": 14,
    "procent": 0.0,
    "felt": [
     140,
     110,
+    0,
+    0,
+    0,
+    0,
     -100
    ],
    "holdkammerater": null,
@@ -2066,7 +2070,7 @@
     "meldinger": 1,
     "spilfoering": -1,
     "modspil": 0,
-    "held": -3
+    "held": -7
    },
    "modpartensFejl": 0,
    "udspilseffekt": {
@@ -5086,14 +5090,15 @@
    "udspil": "HT",
    "stik": 9,
    "score": 140,
-   "point": 10,
-   "top": 12,
-   "procent": 83.3,
+   "point": 12,
+   "top": 14,
+   "procent": 85.7,
    "felt": [
     140,
     140,
     110,
     100,
+    0,
     -50,
     -50
    ],
@@ -5110,7 +5115,7 @@
     "meldinger": 0,
     "spilfoering": 0,
     "modspil": 0,
-    "held": 4
+    "held": 5
    },
    "modpartensFejl": 0,
    "udspilseffekt": {
@@ -10032,9 +10037,9 @@
    "udspil": "D2",
    "stik": 9,
    "score": -140,
-   "point": 5,
-   "top": 12,
-   "procent": 41.7,
+   "point": 5.857142857142857,
+   "top": 14,
+   "procent": 41.8,
    "felt": [
     100,
     100,
@@ -10053,14 +10058,14 @@
     "par": -100
    },
    "faktorer": {
-    "meldinger": -2,
+    "meldinger": -2.2857142857142856,
     "spilfoering": 0,
-    "modspil": 0,
-    "held": 1
+    "modspil": 0.0,
+    "held": 1.1428571428571423
    },
    "modpartensFejl": 0,
    "udspilseffekt": {
-    "point": 0,
+    "point": 0.0,
     "udspilAf": "parret",
     "ukendt": false
    },
