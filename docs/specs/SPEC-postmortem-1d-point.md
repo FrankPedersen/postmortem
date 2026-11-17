@@ -1,6 +1,6 @@
 # SPEC – Post Mortem 1d: point som bridge.dk, scoren pr. spil og forklaring af pointene
 
-17. november 2026 · repo `Postmortem` · gren `point-som-bridgedk`, tag før: `v-foer-point-som-bridgedk`. Det er en rettelse til v1 og kommer før v2a.
+17. november 2026 · repo `Postmortem` · gren `point-som-bridgedk`, tag før: `v-foer-point-som-bridgedk`. Godkendt af Frank og udgivet 17. november 2026 (`cce3ea2`); grenen er slettet. Det er en rettelse til v1 og kommer før v2a.
 
 ## Formål
 
@@ -64,7 +64,7 @@ Franks rettelse af teksten, ⓘ i analysevinduet og ⓘ ved holdturnering med en
 
 ## Afklaret
 
-**Status (17. november 2026): Franks svar er indarbejdet i tredje session; bygget og stoppet før fletning.** Accepttest 1–7, med accepttest 6 udvidet til ⓘ i analysevinduet og ved holdturnering, og alle andre tests er grønne på grenen `point-som-bridgedk`. **Venter på Franks godkendelse; ikke flettet.** Intet er pushet, og funktionen er ikke udrullet.
+**Status (17. november 2026): godkendt af Frank og udgivet.** Accepttest 1–7, med accepttest 6 udvidet til ⓘ i analysevinduet og ved holdturnering, og alle andre tests er grønne. Franks nye imp-tekst er bygget i fjerde session, og 1d er flettet ind på `main` (`cce3ea2`), pushet, udrullet og tjekket live (se Udgivelse under fjerde session nedenfor).
 
 ### Franks svar, 17. nov. 2026
 
@@ -215,6 +215,16 @@ Det betyder for specen:
   - `npm run build` bygger.
   - `node tools/tjek_bredde.mjs`: 289 tjek i orden og ingen fejl ved 320, 390 og 1280 px på 72 s.
 - **ⓘ i analysevinduet** er uændret: den er lukket, hver gang et nyt spil vises (Franks svar).
+- **Udgivelse (17. november 2026, fjerde og femte session):**
+  - Flettet: `cce3ea2` (17:10 UTC) fletter grenen (`2e48dbd`) ind på `main` (`285aef4`) og er pushet; `main` er lig med `origin/main`. Tagget `v-foer-point-som-bridgedk` (`285aef4`) er pushet.
+  - GitHub Actions for `cce3ea2`: "api" (44134039995) er grøn, og "Udgiv på GitHub Pages" (44134040212) er grøn. Tagget satte også en "api"-kørsel i gang på `285aef4` (44134042843), som er grøn.
+  - Funktionen er udrullet med zip som i README kl. 17:11:38 UTC (status 4, Success), og `analyse` og `slet_ip_vinduer` er på plads. Ingen app-indstillinger er ændret.
+  - Live-tjek på www.kontraktbridge.dk/postmortem/ ved 390 px kl. 17:15 UTC, én kørsel med to analyser:
+    - 16. november, par 1: 50,4 % (225,9 af 448 point) og 32 spil på oversigten; spil 32 viser "5,9 af 14 point 41,8 %". ⓘ på oversigten og i analysevinduet ved spil 32 har sætningen "Er et spil spillet færre gange, omregnes pointene, så alle spil tæller lige meget, som hos bridge.dk.";
+    - holdturnering 450, bord 2 Nord–Syd: 16 spil og −15 imp. ⓘ har imp-teksten ordret på oversigten og i analysevinduet ved spil 4.
+    - Ingen vandret rulning med ⓘ åben, ingen fejl i browserens konsol, og den udgivne app har den nye imp-tekst.
+  - Skærmbillede af imp-teksten fra live-sitet (kun ⓘ-teksten, 652 × 509 px, ingen hold- eller spillernavne; uden for git): `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\live-imp-tekst.png`.
+  - Grenen `point-som-bridgedk` er slettet lokalt og findes ikke på GitHub.
 
 ## Arbejdsgang
 
