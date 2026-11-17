@@ -13,7 +13,7 @@ Frank har fundet tre ting på aftenen 16. november 2026 (Efterårs Hold og Par, 
    | Post Mortem | 223 af 436 | 51,15 % |
    | bridge.dk | 225,9 | 50,4 % |
 
-   Forskellen kommer af regnemåden. Post Mortem regner parpoint med en top, der afhænger af, hvor mange gange spillet er spillet (436 = summen af 2 × antal andre resultater). bridge.dk skalerer alle spil til samme top (225,9 / 50,4 % svarer til 448 = 32 × 14) med Neubergs formel, når et spil er spillet færre gange end de andre. Post Mortem skal vise det samme tal som bridge.dk, ellers kan resultatet ikke bruges til at følge udviklingen.
+   Forskellen kom mest af, at pas hele vejen rundt ("P") ikke blev læst (10 point), og af det justerede spil 32, der blev regnet med Neubergs formel (2 point). Post Mortem skal vise det samme tal som bridge.dk, ellers kan resultatet ikke bruges til at følge udviklingen.
 2. **Oversigten skal vise scoren for hvert spil.**
 3. **"Hvor gik pointene?" skal have en ⓘ,** der forklarer, hvad pointene betyder.
 
@@ -23,7 +23,7 @@ Frank har fundet tre ting på aftenen 16. november 2026 (Efterårs Hold og Par, 
 | --- | --- |
 | `api/postmortem/analyse.py` og `regn.py`: parpoint, top og procent ved parturnering; skalering af faktorerne | dobbeltdummy, mærkerne, rådene, cachen og IP-grænsen |
 | `api/postmortem/laes.py`, hvis bridge.dk's point pr. spil skal læses fra det personlige regnskab | hentningen fra bridge.dk i øvrigt |
-| appens oversigt (`src/skaerme/`) og `src/tekster.ts`: scoren pr. spil og ⓘ-teksten | holdturnering (imp) |
+| appens oversigt og analysevindue (`src/skaerme/`), `src/ui/Info.tsx` og `src/tekster.ts`: scoren pr. spil og ⓘ ved "Hvor gik pointene?" på oversigten og i analysevinduet, ved parturnering og ved holdturnering (Franks svar 17. nov. 2026; ved holdturnering kun ⓘ og teksten) | holdturneringens imp-beregning |
 | tests og testdata (anonymiserede som i v1) | ingen rigtige navne i repoet |
 
 ## 1. Point og procent som bridge.dk
@@ -48,6 +48,8 @@ Der kommer en ⓘ som i de andre apps (et klik eller tryk åbner teksten, og den
 >
 > Summen er jeres point mod middel.
 
+Franks rettelse af teksten, ⓘ i analysevinduet og ⓘ ved holdturnering med en tekst om imp står under Afklaret (Franks svar, 17. nov. 2026).
+
 ## Accepttest (skrives først, røde)
 
 1. **Aftenen 16. nov. (par 1, sektion Gul):** samlede point 225,9 og 50,4 % som bridge.dk. Testdata gemmes anonymiseret med `api/tests/anonymiser.py`. Hvis siden ikke længere kan hentes, bruges den gemte kopi.
@@ -55,12 +57,45 @@ Der kommer en ⓘ som i de andre apps (et klik eller tryk åbner teksten, og den
 3. **Neubergs formel:** faste eksempler med et spil spillet 6, 7 og 8 gange i en sektion med N = 8.
 4. **Teleskopsummen** går op pr. spil og i alt efter skaleringen. "I alt mod middel" for 16. nov. er 225,9 − 224 = +1,9.
 5. **Oversigten** viser score, point og procent pr. spil. Der er ingen vandret scroll ved 320 og 390 px.
-6. **ⓘ'en** åbner og lukker med mus, tryk og tastatur og har den tekst, Frank godkender.
+6. **ⓘ'en** åbner og lukker med mus, tryk og tastatur og har den tekst, Frank godkender. Efter Franks svar 17. nov. 2026 står den fire steder ved "Hvor gik pointene?", og alle fire åbner og lukker med mus, tryk og tastatur uden vandret scroll ved 320 og 390 px:
+   - på oversigten og i analysevinduet ved parturnering med parpointteksten og den nye sætning om omregning;
+   - på oversigten og i analysevinduet ved holdturnering med imp-teksten, ordret som i Franks svar.
 7. **Uændret:** Holdturnering, dobbeltdummy, mærker og råd giver samme resultat som før. Alle eksisterende tests består.
 
 ## Afklaret
 
-**Status (17. november 2026): bygget og stoppet før fletning.** Accepttest 1–7 og alle andre tests er grønne på grenen `point-som-bridgedk`. **Venter på Franks godkendelse; ikke flettet.** Intet er pushet, og funktionen er ikke udrullet.
+**Status (17. november 2026): Franks svar indarbejdes i tredje session.** Accepttest 6 er udvidet med ⓘ i analysevinduet og ved holdturnering. **Venter på Franks godkendelse; ikke flettet.** Intet er pushet, og funktionen er ikke udrullet.
+
+### Franks svar, 17. nov. 2026
+
+Svaret på de fire spørgsmål til Frank nedenfor, med hans egne ord:
+
+> Post Mortem 1d:
+>
+> ⓘ-teksten med rettelsen: sætningen om omregning lyder "Er et spil spillet færre gange, omregnes pointene, så alle spil tæller lige meget, som hos bridge.dk." Resten står som i specen.
+>
+> ⓘ i analysevinduet med samme tekst.
+>
+> ⓘ ved holdturnering med denne tekst ordret:
+>
+> "Point er imp. På hvert spil sammenlignes jeres score med holdkammeraternes ved det andet bord, og forskellen omregnes til imp. Tallene viser, hvor mange imp I vandt eller tabte, og hvad der flyttede dem: meldinger, spilføring, modspil og held og uheld som ved parturnering. Summen er jeres imp på spillet."
+>
+> Passer teksten ikke med, hvordan Post Mortem regner imp, så skriv det i rapporten i stedet for at ændre den.
+>
+> Talformatet: "5,9 point" og hele tal uden ",0" er rigtigt.
+>
+> Formål i specen rettes til: "Forskellen kom mest af, at pas hele vejen rundt ("P") ikke blev læst (10 point), og af det justerede spil 32, der blev regnet med Neubergs formel (2 point)."
+>
+> Kør testene, tag skærmbilleder af ⓘ ved holdturnering og i analysevinduet (390 og 1280 px), og stop før merge. Jeg ser billederne, og først derefter flettes, pushes, udrulles og live-tjekkes der i en frisk session.
+
+Det betyder for specen:
+
+- Spørgsmål 1: ⓘ-teksten ved parturnering får den nye sætning om omregning; resten er forslaget i afsnit 3.
+- Spørgsmål 2: ⓘ står også ved "Hvor gik pointene?" i analysevinduet med samme tekst, og ved holdturnering (oversigten og analysevinduet) med imp-teksten ordret. Imp-beregningen er uændret.
+- Spørgsmål 3: rækkens "5,9 point" og hele tal uden ",0" ("14 point") bliver som bygget.
+- Spørgsmål 4: Formål er rettet med Franks sætning; de to sætninger om regnemåden (436 og 448) er taget ud, fordi de var den gamle forklaring, og tallene står i Afklaret nedenfor.
+
+### Første og anden session
 
 - **Linket (Franks svar 17. nov. 2026):** `https://resultater.bridge.dk/template/personligt_regnskab.php?filename=1111/MT3287GT11912.XML&tournament=3287&section=7&pairno=1`.
 - **Det, siden viser:** datoen 16-11-2026, turneringen "Efterårs Hold og Par, Par Gul" (parturnering, sektion 7) og par 1, der sad Nord–Syd hele aftenen: 32 spil i 8 runder med 4 spil og top 14. Rundernes point er 35,0, 17,0, 34,0, 26,0, 27,0, 34,0, 23,0 og 29,9, i alt 225,9. Point og procent i alt står ikke i regnskabet; de er læst i stillingen for samme sektion (`resultater.php?…&section=7`, "Resultater efter 7. sektion", middel 224): par 1 har 50,4 % og 225,9 point. Siden er altså aftenen, Frank nævnte. Stillingen er kun brugt til kontrollen og ikke gemt.
@@ -90,7 +125,7 @@ Der kommer en ⓘ som i de andre apps (et klik eller tryk åbner teksten, og den
   5. ⓘ står kun i parturnering, fordi teksten handler om parpoint, og holdturnering er uden for afgrænsningen. Den står kun på oversigten, ikke ved "Hvor gik pointene?" i analysevinduet. Teksten folder sig ud under kortets overskrift (som Fordelingstrænerens ⓘ under 1000 px); trykfladen er 44 × 44 px med en cirkel på 26 px, og Escape lukker teksten og lader fokus stå på ⓘ.
   6. Analysevinduet viser også pointene med én decimal ("5,9 af 14 point"), så tallene er de samme som på oversigten.
   7. Testsiderne er et eget sæt i `anonymiser.py` (`SAET`), og `test_ingen_navne.py` tjekker de sæt, der ligger i mappen. `anonymiser.py` kender ikke stillingen (`resultater.php`), som heller ikke er gemt.
-- **Spørgsmål til Frank:**
+- **Spørgsmål til Frank** (besvaret, se Franks svar ovenfor):
   1. ⓘ-teksten er forslaget fra specen, ordret. Skal den rettes? Den står i `src/tekster.ts` (`aften.info`) og i `src/test/point.test.tsx`.
   2. Skal ⓘ også stå ved "Hvor gik pointene?" i analysevinduet og i holdturnering (så med en tekst om imp)?
   3. Er "5,9 point" under procenten den rigtige form i rækken, og må hele tal stå uden ",0" ("14 point"), selv om bridge.dk skriver 14,0?
