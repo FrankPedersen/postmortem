@@ -225,6 +225,8 @@ Det betyder for specen:
     - Ingen vandret rulning med ⓘ åben, ingen fejl i browserens konsol, og den udgivne app har den nye imp-tekst.
   - Skærmbillede af imp-teksten fra live-sitet (kun ⓘ-teksten, 652 × 509 px, ingen hold- eller spillernavne; uden for git): `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\live-imp-tekst.png`.
   - Grenen `point-som-bridgedk` er slettet lokalt og findes ikke på GitHub.
+- **Tokenforbrug** (fjerde session, imp-teksten, testene, fletningen, push og zip-udrulningen, 55 svar fra 17:00 til 17:13 UTC, hele sessionen): nye input 118, skrevet til cachen 136.602, læst fra cachen 5.667.074 og output 32.638, i alt 5.836.432.
+- **Tokenforbrug** (femte session, Actions, live-tjekket, arkiveringen, sletningen af grenen og `SYSTEM.md`, 23 svar fra 17:14 til 17:17 UTC, målt før den sidste commit): nye input 46, skrevet til cachen 62.188, læst fra cachen 1.557.805 og output 13.448, i alt 1.633.487.
 
 ## Arbejdsgang
 
