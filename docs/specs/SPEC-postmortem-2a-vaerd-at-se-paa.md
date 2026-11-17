@@ -184,6 +184,8 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 11. **Husets ord:** appens spørgsmål bliver "Havde vi et fit?" (specen skriver "en fit"), fordi fagordstesten fejler ved "en fit".
 
 - **Spørgsmål til Frank:** punkt 1 og 2 skal besvares, før der bygges. Punkt 3 og 4 og forslagene under 5–11 kan besvares samtidig.
+- **`SYSTEM.md`:** beslutningsloggen har en række for 17. nov. 2026 om Post Mortem 2a med stoppet, de to punkter, grenen og tagget og "Venter på Franks svar; ikke flettet". Datoen øverst var allerede 17. november 2026.
+- **Tokenforbrug** (første session, 33 svar, målt før den sidste commit): nye input 66, skrevet til cachen 196.909, læst fra cachen 4.221.371 og output 63.877, i alt 4.482.223.
 
 ## Arbejdsgang
 
