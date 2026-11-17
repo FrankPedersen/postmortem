@@ -199,6 +199,23 @@ Det betyder for specen:
 - Spørgsmål 2: ⓘ i analysevinduet bliver, som den er bygget: den er lukket, hver gang et nyt spil vises.
 - 1d er godkendt, når testene er grønne efter rettelsen. Derefter flettes, pushes, udrulles og live-tjekkes der i fjerde session.
 
+### Fjerde session (17. november 2026): imp-teksten og udgivelsen
+
+- **Commits på grenen:**
+  - `8d60244` specen: Franks svar og godkendelse;
+  - `6122ef7` accepttesten for imp-teksten, rød før rettelsen;
+  - `59038a9` rettelsen: `T.pointInfo.hold` i `src/tekster.ts` er Franks tekst ordret. "Point" står stadig med fed som før; intet andet er ændret.
+- **Rød før rettelsen (`6122ef7`):** forventningen er Franks tekst ordret i `src/test/point.test.tsx` (`INFO_HOLD`, på oversigten og i analysevinduet) og begyndelsen, en sætning midt i og slutningen i `tools/tjek_bredde.mjs` (`INFO_TEKST.hold`).
+  - vitest: 3 fejlet og 114 bestået (117 test). De tre er imp-teksten ved holdturnering: på oversigten, i analysevinduet ved spil 4 og i analysevinduet for hvert spil med faktorer.
+  - `tjek_bredde.mjs`: 6 fejl og 283 tjek i orden. De seks er imp-teksten på oversigten og i analysevinduet ved 320, 390 og 1280 px.
+- **Grøn efter rettelsen (`59038a9`):**
+  - pytest i `api/` med `.venv`: 283 bestået og 3 sprunget over (de samme tre som før), 264 s. Funktionen er ikke ændret i denne session.
+  - `npm test` (tsc og vitest): 9 filer og 117 test bestået på 21 s. Et første forsøg, mens pytest kørte, fik to test over vitests grænse på 5 s ("Test timed out in 5000ms"); alene bestod alle.
+  - Fagords- og bydeformtesten (`src/test/sprog.test.tsx`) for sig: 6 test bestået.
+  - `npm run build` bygger.
+  - `node tools/tjek_bredde.mjs`: 289 tjek i orden og ingen fejl ved 320, 390 og 1280 px på 72 s.
+- **ⓘ i analysevinduet** er uændret: den er lukket, hver gang et nyt spil vises (Franks svar).
+
 ## Arbejdsgang
 
 1. Opret tagget og grenen i en frisk session.
