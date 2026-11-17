@@ -3,16 +3,25 @@
     python anonymiser.py <mappe med de rigtige sider> <mappe til de anonymiserede>
 
 Alle spiller- og holdnavne bliver til faste pladsholdere ("Spiller 7", "Hold 3"); alt andet (spil, kontrakter, scorer,
-Bridge Solver-links) er uændret. Samme navn får samme pladsholder på alle siderne, så holdkammeraterne stadig kan
-findes. Nummereringen følger navnenes alfabetiske orden, så scriptet giver de samme filer hver gang. Scriptet fejler,
-hvis et navn er tilbage bagefter. De rigtige sider må ikke komme i repoet; kun de anonymiserede ligger i tests/data/.
+Bridge Solver-links) er uændret. Samme navn får samme pladsholder på alle siderne i et sæt, så holdkammeraterne stadig
+kan findes. Nummereringen følger navnenes alfabetiske orden, så scriptet giver de samme filer hver gang. Scriptet
+fejler, hvis et navn er tilbage bagefter. De rigtige sider må ikke komme i repoet; kun de anonymiserede ligger i
+tests/data/.
+
+Siderne kommer i sæt, der anonymiseres hver for sig, så et nyt sæt ikke ændrer de sider, der allerede ligger i
+tests/data/: v1 (holdturneringen 450 og parturneringen 452) og 1d (aftenen 16. november 2026, turnering 3287,
+SPEC-postmortem-1d-point.md). Scriptet anonymiserer de sæt, hvis sider alle ligger i mappen.
 """
 import pathlib
 import re
 import sys
 
-SIDER = ('bordresultater-450.html', 'scoresheet-450.html', 'personligt-regnskab-452.html',
-         'kortfordeling-452.html', 'spilresultater-452.html')
+SAET = {
+    'v1': ('bordresultater-450.html', 'scoresheet-450.html', 'personligt-regnskab-452.html',
+           'kortfordeling-452.html', 'spilresultater-452.html'),
+    '1d': ('personligt-regnskab-3287.html', 'kortfordeling-3287.html', 'spilresultater-3287.html'),
+}
+SIDER = SAET['v1']
 BOGSTAV = r'[A-Za-zÆØÅæøåÉéÖöÜüÄä]'
 
 
@@ -71,20 +80,30 @@ def rester(tekst, alle_navne):
     return sorted(n for n in alle_navne if _ord(n).search(tekst))
 
 
+def saet_i(kilde):
+    """Navnene på de sæt, hvis sider alle ligger i mappen."""
+    kilde = pathlib.Path(kilde)
+    return [s for s, sider in SAET.items() if all((kilde / navn).is_file() for navn in sider)]
+
+
 def main(kilde, maal):
     kilde, maal = pathlib.Path(kilde), pathlib.Path(maal)
-    # Bytes ind og ud, så linjeskift og alt andet end navnene er uændret.
-    sider = {navn: (kilde / navn).read_bytes().decode('utf-8') for navn in SIDER}
-    spillere, hold = navne(sider)
-    til_spiller, til_hold = pladsholdere(spillere, hold)
+    saet = saet_i(kilde)
+    if not saet:
+        raise SystemExit(f'{kilde}: ingen af sættene {", ".join(SAET)} ligger i mappen')
     maal.mkdir(parents=True, exist_ok=True)
-    for navn, tekst in sider.items():
-        ny = anonymiser(tekst, til_spiller, til_hold)
-        tilbage = rester(ny, spillere | hold)
-        if tilbage:
-            raise SystemExit(f'{navn}: navne tilbage efter anonymiseringen: {len(tilbage)}')
-        (maal / navn).write_bytes(ny.encode('utf-8'))
-    print(f'{len(SIDER)} sider anonymiseret: {len(spillere)} spillere og {len(hold)} hold')
+    for s in saet:
+        # Bytes ind og ud, så linjeskift og alt andet end navnene er uændret.
+        sider = {navn: (kilde / navn).read_bytes().decode('utf-8') for navn in SAET[s]}
+        spillere, hold = navne(sider)
+        til_spiller, til_hold = pladsholdere(spillere, hold)
+        for navn, tekst in sider.items():
+            ny = anonymiser(tekst, til_spiller, til_hold)
+            tilbage = rester(ny, spillere | hold)
+            if tilbage:
+                raise SystemExit(f'{navn}: navne tilbage efter anonymiseringen: {len(tilbage)}')
+            (maal / navn).write_bytes(ny.encode('utf-8'))
+        print(f'{s}: {len(sider)} sider anonymiseret: {len(spillere)} spillere og {len(hold)} hold')
 
 
 if __name__ == '__main__':

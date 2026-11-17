@@ -45,6 +45,7 @@ class Resultat:
     stik: int | None = None
     score_ns: int | None = None
     retning: str | None = None  # parrets retning i personligt regnskab: 'NS' eller 'OV'
+    point: float | None = None  # parrets point i personligt regnskab, som bridge.dk viser dem (én decimal)
 
     @property
     def spillet(self):
@@ -93,7 +94,8 @@ def laes_kontrakt(t):
     t = t.strip()
     if not t:
         return None
-    if re.fullmatch(r'(?i)(alle\s+)?pas(s)?(\s+rundt)?', t):
+    # Spilresultaterne skriver pas hele vejen rundt som "P" (SPEC-postmortem-1d-point.md, Afklaret).
+    if re.fullmatch(r'(?i)p|(alle\s+)?pas(s)?(\s+rundt)?', t):
         return Kontrakt(pas=True)
     m = re.fullmatch(r'([NSØV])\s*([1-7])\s*(UT|NT|♠|♥|♦|♣)\s*(RD|R|XX|D|X)?', t)
     if not m:
@@ -220,8 +222,19 @@ def laes_bordresultater(side):
 
 # Parturnering: personligt_regnskab.php, kortfordeling.php og spilresultater.php
 
+def decimaltal(stykke):
+    """'5,9' -> 5.9; tom eller ikke et tal -> None."""
+    t = tekst(stykke).replace(',', '.')
+    try:
+        return float(t) if t else None
+    except ValueError:
+        return None
+
+
 def laes_personligt_regnskab(side):
-    """Parrets egne resultater: {spilnummer: Resultat med retning}. Retningen står kun i rundens første række."""
+    """Parrets egne resultater: {spilnummer: Resultat med retning og bridge.dk's point}. Retningen står kun i rundens
+    første række. Pointcellerne (klassen `imp`) er i rækkefølgen point NS, point (smal skærm), point ØV, procent NS,
+    procent ØV, runde og runde %; parrets point er cellen for dets retning."""
     hoved = laes_hoved(side)
     egne = {}
     retning = None
@@ -243,6 +256,9 @@ def laes_personligt_regnskab(side):
             r.udspil = laes_udspil(tekst(stik[0]))
             r.stik = heltal(stik[1])
             r.score_ns = score_ns(score)
+        point = celler(raekke, 'imp')
+        if len(point) >= 3:
+            r.point = decimaltal(point[0] if retning != 'OV' else point[2])
         egne[int(nummer.group(1))] = r
     return Side(hoved, egne)
 

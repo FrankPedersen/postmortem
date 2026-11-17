@@ -4,6 +4,7 @@ DDS' stiktal gælder den side, der er i tur. Efter udspillet er bordet i tur, s�
 vendes (afprøvningen, NOTAT-afproevning.md). DD før udspil er DD-tabellens tal for spilfører i kontraktens farve.
 """
 import threading
+from decimal import ROUND_HALF_UP, Decimal
 
 from endplay.dds import calc_all_tables, calc_dd_table, par, solve_board
 from endplay.types import Card, Deal, Denom, Player, Vul
@@ -110,3 +111,25 @@ def imp(forskel):
 def matchpoint(s, felt):
     """Parpoint efter § 78A: 2 for hver dårligere score i feltet, 1 for hver lige og 0 for hver bedre."""
     return sum(2 if s > f else 1 if s == f else 0 for f in felt)
+
+
+def neuberg(point, n, N):
+    """Parpoint skaleret til samme top som det mest spillede spil med Neubergs formel: P' = (P + 1) · N / n − 1.
+
+    P er pointene med spillets egen top 2 · (n − 1), n antal resultater på spillet (parrets medregnet) og N det største
+    antal i sektionen (SPEC-postmortem-1d-point.md). Middel bliver middel, og med n = N er pointene uændrede.
+    """
+    if n == N:
+        return point
+    return (point + 1) * N / n - 1
+
+
+def parpoint(s, felt, N):
+    """Parpoint for scoren s mod feltets andre resultater, skaleret til toppen 2 · (N − 1) som på bridge.dk."""
+    return neuberg(matchpoint(s, felt), len(felt) + 1, N)
+
+
+def rund1(x):
+    """Én decimal som bridge.dk: 0,05 rundes væk fra nul. Tallet rundes først til 9 decimaler, så en flydende
+    regnefejl (fx 41,849999…) ikke flytter afrundingen."""
+    return float(Decimal(f'{x:.9f}').quantize(Decimal('0.1'), rounding=ROUND_HALF_UP))

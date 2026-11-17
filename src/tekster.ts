@@ -93,6 +93,10 @@ export const T = {
       `${spilfoerer} ${kontrakt} · ${stik} stik · ${score}`,
     pasLinje: 'Pas hele vejen rundt',
     ikkeSpillet: 'Ikke spillet ved jeres bord',
+    // Et spil, hvor bridge.dk har justeret scoren ved jeres bord (fx "M"): ingen kontrakt, men bridge.dk's point.
+    justeret: 'Justeret score',
+    // Parpointene for spillet under procenten i rækken (SPEC-postmortem-1d-point.md).
+    spilPoint: (point: string) => `${point} point`,
     spilLink: (n: number) => `Spil ${n}`,
   },
 
@@ -241,6 +245,30 @@ export const T = {
     ikkeRelevant: '–',
     note: 'Dobbeltdummy regnes med DDS (Apache 2.0). Spilføringen kort for kort kendes ikke fra bridge.dk. Rådene gælder den bedste linje efter det faktiske udspil, ikke det, der blev spillet. Skvis og indspil findes i de sidste seks stik.',
   },
+
+  // ⓘ ved "Hvor gik pointene?" på oversigten og i analysevinduet, med samme tekst begge steder
+  // (SPEC-postmortem-1d-point.md, Franks svar 17. nov. 2026).
+  pointInfo: {
+    label: 'Hjælp: Hvor gik pointene?',
+    // Forslaget i specen med Franks sætning om omregning.
+    par: {
+      tekst:
+        '**Point** er parpoint. På hvert spil får I 2 point for hvert par i feltet, I slår, og 1 for hvert, I deler med. Er et spil spillet færre gange, omregnes pointene, så alle spil tæller lige meget, som hos bridge.dk. **Middel** er halvdelen af det mulige, altså 50 %. Tallene viser, hvor mange point I lå over eller under middel, og hvad der flyttede dem:',
+      punkter: [
+        '**Meldinger (begge sider):** forskellen mellem den spillede kontrakt og det bedste, der kunne meldes med åbne kort.',
+        '**Spilføring** og **Modspil:** stik, I tabte i forhold til åbne kort. De er nul eller negative.',
+        '**Held og uheld:** resten, altså det, feltet gjorde anderledes, uden at I gjorde noget forkert. Modpartens fejl tæller med her.',
+      ],
+      slut: 'Summen er jeres point mod middel.',
+    },
+    // Franks tekst ordret.
+    hold: {
+      tekst:
+        '**Point** er imp. På hvert spil lægges jeres score og holdkammeraternes score ved det andet bord sammen, og summen omregnes til imp. Tallene viser, hvor mange imp I vandt eller tabte, og hvad der flyttede dem: Meldinger, Spilføring og Modspil er regnet med åbne kort som ved parturnering. Held og uheld er resten, mest resultatet ved det andet bord, og holdkammeraternes fejl og gode spil tæller med her. Summen er jeres imp.',
+      punkter: [],
+      slut: '',
+    },
+  } satisfies { label: string } & Record<'par' | 'hold', { tekst: string; punkter: string[]; slut: string }>,
 
   // Én linje pr. faktor i analysevinduet.
   forklaring: {

@@ -25,7 +25,8 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
   rm -rf "$TEMP/bridgedk"
   ```
 
-  Uden variablen springer testen over, også i GitHub Actions; peger den på en mappe, der ikke findes, fejler testen.
+  Uden variablen springer testen over, også i GitHub Actions; peger den på en mappe, der ikke findes, fejler testen. Siderne kommer i sæt (`SAET` i `anonymiser.py`: v1 med 450 og 452, 1d med aftenen 16. november, 3287), der anonymiseres hver for sig, så et nyt sæt ikke ændrer de gemte sider; testen tjekker de sæt, der ligger i mappen.
+- Parpoint som bridge.dk (SPEC-postmortem-1d-point.md): alle spil skaleres med Neubergs formel til toppen for det mest spillede spil i sektionen (`regn.neuberg`, `regn.parpoint`), procenten har én decimal afrundet som bridge.dk (`regn.rund1`), og det personlige regnskabs point er facit (`tests/test_point_1d.py`).
 - DDS' stiktal gælder den side, der er i tur: efter udspillet er det spilførersidens og skal ikke vendes (`docs/specs/NOTAT-afproevning.md`).
 - Svaret er beskrevet i `api/SVAR.md`. Ingen spillernavne i svaret, i loggen eller i cachen; kun holdlisten til valg af hold har holdnavne.
 - Hemmeligheder (forbindelsesstrenge og `IP_HASH_KEY`, nøglen til grænsens HMAC af IP'en) står kun i Function App'ens indstillinger; `local.settings.json` er i `.gitignore`. Nøglen skrives aldrig ud.
@@ -35,7 +36,7 @@ Det, der gælder alle repoer – arbejdsgangen, husets ord, hemmeligheder og sys
 ## Appen (roden)
 
 - Vite, React og TypeScript som Fordelingstræneren (SPEC-postmortem-1c-app.md). `npm test` kører `tsc` og vitest: accepttestene i `src/test/` bruger svarene i `src/test/data/`, som er lavet af funktionen på de anonymiserede sider (README viser hvordan); `api/tests/test_ingen_navne.py` tjekker også dem.
-- `node tools/tjek_bredde.mjs` tjekker i Chrome eller Edge, at ingen skærm ruller vandret ved 320, 390 og 1280 px, at knapper og links har 44 px trykflade, og at bordet står i to spalter fra 1000 px; `--billeder=mappe` gemmer skærmbilleder.
+- `node tools/tjek_bredde.mjs` tjekker i Chrome eller Edge, at ingen skærm ruller vandret ved 320, 390 og 1280 px, at knapper og links har 44 px trykflade, at bordet står i to spalter fra 1000 px, og at ⓘ ved "Hvor gik pointene?" åbner og lukker med mus, tryk og tastatur på oversigten og i analysevinduet ved begge former (SPEC-postmortem-1d-point.md); `--billeder=mappe` gemmer skærmbilleder.
 - Teknik og råd (SPEC-postmortem-1b-maerker.md, del B): `src/skaerme/Raad.tsx` viser Råd til spilføringen og Råd til modspillet ud fra felterne `teknik`, `raad` og `linje`, og `src/ui/Slutstilling.tsx` stillingen ved skvis- og indspilsstikket. Oversigten har kortet Teknikker i aftenens spil og filtrene for mærkerne. Funktionen sender ingen sætninger; de skrives i `src/tekster.ts`. Testsvarene i `src/test/data/` skal være funktionens svar (`api/tests/test_teknik_svar.py` tjekker det); ændres svaret, laves de igen som i README.
 - Alle tekster står i `src/tekster.ts`. Funktionens adresse står kun i `src/api.ts`. Ingen PWA og ingen gemte aftener; svaret ligger kun i `sessionStorage`.
 - `.github/workflows/pages.yml` udgiver appen ved push til `main`; funktionen udrulles kun med zip (README).

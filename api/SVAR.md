@@ -70,7 +70,7 @@ Holdlisten er det eneste sted i svaret med navne: holdets navn (på siden holdka
 | `dato` | tekst | `ÅÅÅÅ-MM-DD` |
 | `form` | tekst | `par` eller `hold` |
 | `skala` | tekst | `matchpoint` (par) eller `imp` (hold) |
-| `top` | tal eller null | højeste point på et spil i parturnering (sidens skala, 2 pr. slået score); null i holdturnering |
+| `top` | tal eller null | højeste point på et spil i parturnering: 2 · (N − 1), hvor N er det største antal resultater på et spil i sektionen (som bridge.dk); null i holdturnering |
 | `id` | tekst | turneringens nummer på bridge.dk |
 | `sektion` | tekst | sektionen |
 | `runde` | tekst eller null | kampen i holdturnering |
@@ -92,14 +92,14 @@ Parturnering: `type` er `par`, og `nummer` er parnummeret. Holdturnering: `type`
 
 | Felt | Type | Indhold |
 | --- | --- | --- |
-| `procent` | tal eller null | parturnering: point i alt / top i alt × 100 |
-| `point` | tal eller null | parturnering: point i alt |
-| `top` | tal eller null | parturnering: top i alt over de spillede spil |
+| `procent` | tal eller null | parturnering: point i alt / top i alt × 100 med én decimal, afrundet som bridge.dk (0,05 væk fra nul) |
+| `point` | tal eller null | parturnering: point i alt, uafrundet (med Neubergs formel kan der være decimaler; bridge.dk viser én) |
+| `top` | tal eller null | parturnering: top i alt over spillene med point (de spillede og dem med en justeret score) |
 | `imp` | tal eller null | holdturnering: imp i alt mod holdkammeraternes bord |
 
 ### svar.faktorer
 
-Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`.
+Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`. Har et spil en justeret score ved parrets bord (parturnering), står dets point − middel under `held`, så summen stadig er `resultat.point` − middel i alt.
 
 | Felt | Type | Indhold |
 | --- | --- | --- |
@@ -110,7 +110,7 @@ Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`.
 
 ### svar.spil[]
 
-`P(S)` er pointene for scoren S: i parturnering matchpoint mod feltets faktiske scorer (§ 78A: 2 pr. dårligere score, 1 pr. lige); i holdturnering imp (§ 78B) for S plus holdkammeraternes score ved det andet bord. Middel er halvdelen af toppen i parturnering og 0 i holdturnering.
+`P(S)` er pointene for scoren S: i parturnering matchpoint mod feltets faktiske scorer (§ 78A: 2 pr. dårligere score, 1 pr. lige), skaleret som på bridge.dk med Neubergs formel P' = (P + 1) · N / n − 1, når spillet har færre resultater end det mest spillede spil i sektionen (n resultater på spillet med parrets, N det største antal; en justeret score, fx "M", tæller ikke som et resultat; SPEC-postmortem-1d-point.md); i holdturnering imp (§ 78B) for S plus holdkammeraternes score ved det andet bord. Middel er halvdelen af toppen i parturnering (N − 1) og 0 i holdturnering. Skaleringen ganger alle forskelle med N / n, så faktorerne skaleres med samme faktor, og teleskopsummen går op.
 
 | Felt | Type | Indhold |
 | --- | --- | --- |
@@ -123,15 +123,15 @@ Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`.
 | `ddAfvigelse` | sand/falsk | sand, når `ddTabel` og `ddSide` ikke er ens |
 | `par` | objekt | par-scoren og par-kontrakterne |
 | `retning` | tekst | parrets eller holdets retning ved bordet: `NS` eller `OV` |
-| `spillet` | sand/falsk | falsk, når der ikke er et resultat ved bordet (eller ved holdkammeraternes bord); så er resten af felterne null |
+| `spillet` | sand/falsk | falsk, når der ikke er et resultat ved bordet (eller ved holdkammeraternes bord); så er resten af felterne null, undtagen `point`, `top` og `procent` ved en justeret score i parturnering |
 | `kontrakt` | tekst eller null | kontrakten ved bordet |
 | `spilfoerer` | tekst eller null | spilføreren |
 | `udspil` | tekst eller null | udspillet, som siden viser det |
 | `stik` | tal eller null | spilførers stik |
 | `score` | tal eller null | scoren ved bordet (`S_faktisk`) |
-| `point` | tal eller null | `P(S_faktisk)` |
-| `top` | tal eller null | parturnering: top på spillet (2 × antal andre resultater) |
-| `procent` | tal eller null | parturnering: point / top × 100 |
+| `point` | tal eller null | `P(S_faktisk)`, uafrundet; ved en justeret score ved parrets bord de point, bridge.dk's personlige regnskab giver (spillet er så falsk) |
+| `top` | tal eller null | parturnering: top på spillet, 2 · (N − 1) for alle spil (som `turnering.top`) |
+| `procent` | tal eller null | parturnering: point / top × 100 med én decimal, afrundet som bridge.dk |
 | `felt` | liste | de andre bordes scorer på spillet, fra højeste til laveste |
 | `holdkammerater` | tal eller null | holdturnering: holdets score ved holdkammeraternes bord |
 | `ddFoer` | tal eller null | spilførersidens max stik i kontrakten før udspil |

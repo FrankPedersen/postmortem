@@ -39,7 +39,8 @@ describe.each([
     const eyebrow = tekst(document.querySelector('.eyebrow'));
     if (a.turnering.form === 'par') {
       expect(eyebrow).toBe('Parturnering · matchpoint · 4. november 2026');
-      expect(tekst(document.querySelector('.resultat'))).toBe(`Par 1 · 32 spil · 62,28 % (279 af 448 point)`);
+      // Procenten med én decimal som bridge.dk (SPEC-postmortem-1d-point.md).
+      expect(tekst(document.querySelector('.resultat'))).toBe(`Par 1 · 32 spil · 62,3 % (279 af 448 point)`);
     } else {
       expect(eyebrow).toBe('Holdturnering · imp · 11. november 2026');
       expect(tekst(document.querySelector('.resultat'))).toBe('Hold 1 · bord 2, Nord–Syd · 16 spil · −15 imp mod jeres andet bord');

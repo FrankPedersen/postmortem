@@ -31,7 +31,7 @@ node tools/tjek_bredde.mjs --billeder=../skaermbilleder/app   # gemmer ogs√• sk√
 
 ```bash
 cd api
-.venv/Scripts/python -c "import json,sys; sys.path.insert(0,'tests'); from conftest import GemteSider,PAR_URL,HOLD_URL; from postmortem.analyse import analyser; from postmortem import cache; k=cache.fra_miljoe(); [open(f'../src/test/data/{n}.json','w',encoding='utf-8').write(json.dumps(analyser(b,hent=GemteSider(),cache=k)[1],ensure_ascii=False,indent=1)+'\n') for n,b in [('par-452',{'url':PAR_URL}),('hold-450-vaelg',{'url':HOLD_URL}),('hold-450',{'url':HOLD_URL,'hold':'2-NS'})]]"
+.venv/Scripts/python -c "import json,sys; sys.path.insert(0,'tests'); from conftest import GemteSider,PAR_URL,PAR_3287_URL,HOLD_URL; from postmortem.analyse import analyser; from postmortem import cache; k=cache.fra_miljoe(); [open(f'../src/test/data/{n}.json','w',encoding='utf-8').write(json.dumps(analyser(b,hent=GemteSider(),cache=k)[1],ensure_ascii=False,indent=1)+'\n') for n,b in [('par-452',{'url':PAR_URL}),('par-3287',{'url':PAR_3287_URL}),('hold-450-vaelg',{'url':HOLD_URL}),('hold-450',{'url':HOLD_URL,'hold':'2-NS'})]]"
 ```
 
 ### Udgivelse

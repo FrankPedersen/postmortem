@@ -72,7 +72,8 @@ def kald(krop, monkeypatch, hent_funktion=None, raa=None):
 
 def test_funktionen_svarer_med_json(monkeypatch):
     status, svar = kald({'url': PAR_URL}, monkeypatch)
-    assert status == 200 and len(svar['spil']) == 32 and svar['resultat']['procent'] == pytest.approx(62.28, abs=0.01)
+    # 279 / 448 = 62,28 %, med én decimal som bridge.dk (SPEC-postmortem-1d-point.md).
+    assert status == 200 and len(svar['spil']) == 32 and svar['resultat']['procent'] == 62.3
     status, svar = kald({'url': HOLD_URL}, monkeypatch)
     assert status == 200 and len(svar['vaelg']['hold']) == 16
 

@@ -15,6 +15,10 @@ PAR_URL = ('https://resultater.bridge.dk/template/personligt_regnskab.php'
            '?filename=2151/MT452GT720.XML&tournament=452&section=1&pairno=1')
 SCORESHEET_URL = ('https://resultater.bridge.dk/template/scoresheet.php?filename=2151/MT450GT714.XML'
                   '&tournament=450&section=2&round=2&halfno=1&hometeam=5&awayteam=7')
+# Aftenen 16. november 2026, sektion Par Gul, par 1 (SPEC-postmortem-1d-point.md): 32 spil, spil 32 med en justeret
+# score ved et andet bord og to spil med pas hele vejen rundt ("P") ved andre borde.
+PAR_3287_URL = ('https://resultater.bridge.dk/template/personligt_regnskab.php'
+                '?filename=1111/MT3287GT11912.XML&tournament=3287&section=7&pairno=1')
 
 SIDER = {
     'multihold_bordresultater.php': 'bordresultater-450.html',
@@ -23,6 +27,11 @@ SIDER = {
     'spilresultater.php': 'spilresultater-452.html',
     'scoresheet.php': 'scoresheet-450.html',
 }
+SIDER_3287 = {
+    'personligt_regnskab.php': 'personligt-regnskab-3287.html',
+    'kortfordeling.php': 'kortfordeling-3287.html',
+    'spilresultater.php': 'spilresultater-3287.html',
+}
 
 
 def side(navn):
@@ -30,7 +39,7 @@ def side(navn):
 
 
 class GemteSider:
-    """Hentefunktion til testene: svarer med den gemte side for adressens sidetype og husker adresserne."""
+    """Hentefunktion til testene: svarer med den gemte side for adressens sidetype og turnering og husker adresserne."""
 
     def __init__(self, erstat=None):
         self.adresser = []
@@ -43,6 +52,8 @@ class GemteSider:
         navn = dele.path.rsplit('/', 1)[-1]
         if navn in self.erstat:
             return self.erstat[navn]
+        if urllib.parse.parse_qs(dele.query).get('tournament') == ['3287']:
+            return side(SIDER_3287[navn])
         return side(SIDER[navn])
 
 
