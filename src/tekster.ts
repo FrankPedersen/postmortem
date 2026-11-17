@@ -69,18 +69,6 @@ export const T = {
     imp: (imp: string) => `${imp} imp`,
     modAndetBord: ' mod jeres andet bord',
     faktorTitel: 'Hvor gik pointene?',
-    // ⓘ ved "Hvor gik pointene?" i parturnering (SPEC-postmortem-1d-point.md): forslaget i specen, Franks tekst at rette.
-    info: {
-      label: 'Hjælp: Hvor gik pointene?',
-      tekst:
-        '**Point** er parpoint. På hvert spil får I 2 point for hvert par i feltet, I slår, og 1 for hvert, I deler med. Er et spil spillet færre gange, omregnes pointene som hos bridge.dk. **Middel** er halvdelen af det mulige, altså 50 %. Tallene viser, hvor mange point I lå over eller under middel, og hvad der flyttede dem:',
-      punkter: [
-        '**Meldinger (begge sider):** forskellen mellem den spillede kontrakt og det bedste, der kunne meldes med åbne kort.',
-        '**Spilføring** og **Modspil:** stik, I tabte i forhold til åbne kort. De er nul eller negative.',
-        '**Held og uheld:** resten, altså det, feltet gjorde anderledes, uden at I gjorde noget forkert. Modpartens fejl tæller med her.',
-      ],
-      slut: 'Summen er jeres point mod middel.',
-    },
     faktorEnhed: { par: 'point mod middel', hold: 'imp' },
     iAlt: { par: 'I alt mod middel', hold: 'I alt' },
     herafFejl: 'Heraf modpartens fejl',
@@ -257,6 +245,30 @@ export const T = {
     ikkeRelevant: '–',
     note: 'Dobbeltdummy regnes med DDS (Apache 2.0). Spilføringen kort for kort kendes ikke fra bridge.dk. Rådene gælder den bedste linje efter det faktiske udspil, ikke det, der blev spillet. Skvis og indspil findes i de sidste seks stik.',
   },
+
+  // ⓘ ved "Hvor gik pointene?" på oversigten og i analysevinduet, med samme tekst begge steder
+  // (SPEC-postmortem-1d-point.md, Franks svar 17. nov. 2026).
+  pointInfo: {
+    label: 'Hjælp: Hvor gik pointene?',
+    // Forslaget i specen med Franks sætning om omregning.
+    par: {
+      tekst:
+        '**Point** er parpoint. På hvert spil får I 2 point for hvert par i feltet, I slår, og 1 for hvert, I deler med. Er et spil spillet færre gange, omregnes pointene, så alle spil tæller lige meget, som hos bridge.dk. **Middel** er halvdelen af det mulige, altså 50 %. Tallene viser, hvor mange point I lå over eller under middel, og hvad der flyttede dem:',
+      punkter: [
+        '**Meldinger (begge sider):** forskellen mellem den spillede kontrakt og det bedste, der kunne meldes med åbne kort.',
+        '**Spilføring** og **Modspil:** stik, I tabte i forhold til åbne kort. De er nul eller negative.',
+        '**Held og uheld:** resten, altså det, feltet gjorde anderledes, uden at I gjorde noget forkert. Modpartens fejl tæller med her.',
+      ],
+      slut: 'Summen er jeres point mod middel.',
+    },
+    // Franks tekst ordret.
+    hold: {
+      tekst:
+        '**Point** er imp. På hvert spil sammenlignes jeres score med holdkammeraternes ved det andet bord, og forskellen omregnes til imp. Tallene viser, hvor mange imp I vandt eller tabte, og hvad der flyttede dem: meldinger, spilføring, modspil og held og uheld som ved parturnering. Summen er jeres imp på spillet.',
+      punkter: [],
+      slut: '',
+    },
+  } satisfies { label: string } & Record<'par' | 'hold', { tekst: string; punkter: string[]; slut: string }>,
 
   // Én linje pr. faktor i analysevinduet.
   forklaring: {

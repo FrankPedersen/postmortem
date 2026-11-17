@@ -3,6 +3,7 @@ import { T } from '../tekster';
 import type { Analyse, Benaevnelse, Plads, Spil } from '../typer';
 import { feltGrupper, forkertUdspil, viSpillede } from '../udledt';
 import { Bridgebord } from '../ui/Bridgebord';
+import { InfoKnap, PointInfo, useInfo } from '../ui/Info';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
 import { Raad } from './Raad';
 
@@ -51,6 +52,34 @@ function faktorLinjer(a: Analyse, s: Spil) {
     { navn: T.faktor.modspil, linje: modspil, v: f.modspil, relevant: !pas && !vi },
     { navn: T.faktor.held, linje: held, v: f.held, relevant: true },
   ];
+}
+
+/**
+ * "Hvor gik pointene?" for spillet med ⓘ og samme tekst som på oversigten (SPEC-postmortem-1d-point.md, Franks svar
+ * 17. nov. 2026). Kortet har `key` efter spillet, så ⓘ er lukket, hver gang et nyt spil vises.
+ */
+function SpilFaktorer({ a, s }: { a: Analyse; s: Spil }) {
+  const info = useInfo();
+  return (
+    <section className="kort" aria-labelledby="h-spil-faktorer">
+      <div className="titel-med-info">
+        <h2 id="h-spil-faktorer">{T.spil.faktorTitel}</h2>
+        <InfoKnap info={info} label={T.pointInfo.label} />
+      </div>
+      <PointInfo info={info} form={a.turnering.form} />
+      <ul className="spil-faktorer">
+        {faktorLinjer(a, s).map((r) => (
+          <li key={r.navn}>
+            <span className="navn">{r.navn}</span>{' '}
+            <span className="linje">
+              <Farver>{r.linje}</Farver>
+            </span>{' '}
+            <span className={`vaerdi ${r.relevant ? art(r.v) : 'neutral'}`}>{r.relevant ? medFortegn(r.v, decimaler(a.turnering.form)) : T.spil.ikkeRelevant}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }
 
 /** Skærm 4, analysevinduet (`#/spil/<nr>`). */
@@ -212,22 +241,7 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
               </div>
             </section>
 
-            {s.spillet && s.faktorer && (
-              <section className="kort" aria-labelledby="h-spil-faktorer">
-                <h2 id="h-spil-faktorer">{T.spil.faktorTitel}</h2>
-                <ul className="spil-faktorer">
-                  {faktorLinjer(a, s).map((r) => (
-                    <li key={r.navn}>
-                      <span className="navn">{r.navn}</span>{' '}
-                      <span className="linje">
-                        <Farver>{r.linje}</Farver>
-                      </span>{' '}
-                      <span className={`vaerdi ${r.relevant ? art(r.v) : 'neutral'}`}>{r.relevant ? medFortegn(r.v, decimaler(a.turnering.form)) : T.spil.ikkeRelevant}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
+            {s.spillet && s.faktorer && <SpilFaktorer key={s.nummer} a={a} s={s} />}
 
             <Raad spil={s} />
 

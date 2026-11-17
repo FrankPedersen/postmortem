@@ -1,4 +1,7 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { T } from '../tekster';
+import type { Turnering } from '../typer';
+import { Markeret } from './Ramme';
 
 /**
  * En ⓘ som i de andre apps (SPEC-postmortem-1d-point.md): et klik eller tryk viser teksten, et nyt klik eller tryk
@@ -42,5 +45,30 @@ export function InfoTekst({ info, children }: { info: Info; children: ReactNode 
     <div id={info.id} className="info-tekst" role="note">
       {children}
     </div>
+  );
+}
+
+/**
+ * ⓘ-teksten ved "Hvor gik pointene?" for turneringsformen: parpoint ved parturnering og imp ved holdturnering, med samme
+ * tekst på oversigten og i analysevinduet (SPEC-postmortem-1d-point.md, Franks svar 17. nov. 2026).
+ */
+export function PointInfo({ info, form }: { info: Info; form: Turnering['form'] }) {
+  const t = T.pointInfo[form];
+  return (
+    <InfoTekst info={info}>
+      <p>
+        <Markeret>{t.tekst}</Markeret>
+      </p>
+      {t.punkter.length > 0 && (
+        <ul>
+          {t.punkter.map((punkt) => (
+            <li key={punkt}>
+              <Markeret>{punkt}</Markeret>
+            </li>
+          ))}
+        </ul>
+      )}
+      {t.slut && <p>{t.slut}</p>}
+    </InfoTekst>
   );
 }

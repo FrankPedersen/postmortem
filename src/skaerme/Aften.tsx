@@ -4,8 +4,8 @@ import { T } from '../tekster';
 import type { Analyse, Maerke, Spil, VaelgSvar } from '../typer';
 import { FAKTORER } from '../typer';
 import { faktorSum, holdNavn, maerke, resultatArt, spilSum, tagetVedBordet, teknikMaerker, teknikTekst, udspilTekst } from '../udledt';
-import { InfoKnap, InfoTekst, useInfo } from '../ui/Info';
-import { Farver, Markeret, Side, Sidefod, TopBar } from '../ui/Ramme';
+import { InfoKnap, PointInfo, useInfo } from '../ui/Info';
+import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
 
 /** Linjen for et spil i listen: "S 4♠ · udspil ♣B · 10 stik · +620". */
 function spilLinje(s: Spil) {
@@ -72,25 +72,11 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
           <div className="kort-hoved">
             <div className="titel-med-info">
               <h2 id="h-faktorer">{T.aften.faktorTitel}</h2>
-              {form === 'par' && <InfoKnap info={info} label={T.aften.info.label} />}
+              <InfoKnap info={info} label={T.pointInfo.label} />
             </div>
             <span className="hint">{T.aften.faktorEnhed[form]}</span>
           </div>
-          {form === 'par' && (
-            <InfoTekst info={info}>
-              <p>
-                <Markeret>{T.aften.info.tekst}</Markeret>
-              </p>
-              <ul>
-                {T.aften.info.punkter.map((punkt) => (
-                  <li key={punkt}>
-                    <Markeret>{punkt}</Markeret>
-                  </li>
-                ))}
-              </ul>
-              <p>{T.aften.info.slut}</p>
-            </InfoTekst>
-          )}
+          <PointInfo info={info} form={form} />
           <ul className="faktorer">
             {FAKTORER.map((f) => {
               const v = a.faktorer[f];
