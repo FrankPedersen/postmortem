@@ -181,6 +181,24 @@ Det betyder for specen:
   2. Skal ⓘ i analysevinduet blive åben, når der skiftes spil? Nu lukker den.
 - **Tokenforbrug** (tredje session, 64 svar, målt før den sidste commit): nye input 132, skrevet til cachen 184.877, læst fra cachen 9.416.268 og output 63.468, i alt 9.664.745.
 
+### Franks svar og godkendelse, 17. nov. 2026
+
+Svaret på de to spørgsmål fra tredje session og godkendelsen, med hans egne ord:
+
+> Post Mortem 1d: imp-teksten ved holdturnering (oversigten og analysevinduet) skal lyde ordret:
+>
+> 'Point er imp. På hvert spil lægges jeres score og holdkammeraternes score ved det andet bord sammen, og summen omregnes til imp. Tallene viser, hvor mange imp I vandt eller tabte, og hvad der flyttede dem: Meldinger, Spilføring og Modspil er regnet med åbne kort som ved parturnering. Held og uheld er resten, mest resultatet ved det andet bord, og holdkammeraternes fejl og gode spil tæller med her. Summen er jeres imp.'
+>
+> ⓘ i analysevinduet må lukke ved hvert nyt spil.
+>
+> Kør testene. Når alt er grønt, er 1d godkendt: flet, push, udrul med zip, live-tjek af 16. november (225,9 point og 50,4 %), arkivér specen, og slet grenen. Send mig ét skærmbillede af imp-teksten fra live-sitet bagefter.
+
+Det betyder for specen:
+
+- Spørgsmål 1: imp-teksten ved holdturnering (`T.pointInfo.hold` i `src/tekster.ts`) bliver Franks nye tekst ordret, på oversigten og i analysevinduet. Den følger nu beregningen: scorerne lægges sammen, og held og uheld er mest resultatet ved det andet bord. Imp-beregningen er uændret.
+- Spørgsmål 2: ⓘ i analysevinduet bliver, som den er bygget: den er lukket, hver gang et nyt spil vises.
+- 1d er godkendt, når testene er grønne efter rettelsen. Derefter flettes, pushes, udrulles og live-tjekkes der i fjerde session.
+
 ## Arbejdsgang
 
 1. Opret tagget og grenen i en frisk session.
