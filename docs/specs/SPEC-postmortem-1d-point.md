@@ -60,18 +60,48 @@ Der kommer en ⓘ som i de andre apps (et klik eller tryk åbner teksten, og den
 
 ## Afklaret
 
-**Status (17. november 2026): stoppet ved testdataene.** Aftenen 16. november 2026 kunne ikke findes på resultater.bridge.dk ud fra koden og bridge.dk uden at gætte. Der er ingen accepttest og intet bygget endnu.
+**Status (17. november 2026): bygget og stoppet før fletning.** Accepttest 1–7 og alle andre tests er grønne på grenen `point-som-bridgedk`. **Venter på Franks godkendelse; ikke flettet.** Intet er pushet, og funktionen er ikke udrullet.
 
-- **Tag og gren:** `main` (`285aef4`, lig med `origin/main`) er tagget `v-foer-point-som-bridgedk`, og grenen er `point-som-bridgedk`. Specen er committet som `719cf59`. Intet er pushet.
-- **Søgningen:** Post Mortem får hele linket fra brugeren og søger ikke selv. Testsiderne fra v1 kommer fra hovedklub 2151, klub 1 (onsdag), og den har ikke aftenen. Gennemgået med samme slags adresser, som siderne selv linker til:
-  - turneringsoversigten (`overview.php?mainclubno=…&club=1`) for 280 hovedklubber: de 224 klubnumre på DBf's regionale klublister og resten af numrene 2100–2199;
-  - klub 2–12, 20 og 99 under hovedklub 2151 (alle tomme);
-  - turneringssiden (`turnering.php`) for alle 145 turneringer, der omfatter 16. november 2026.
-- **Resultat:** ingen turnering hedder "Efterårs Hold og Par", og ingen har en sektion "Par Gul". Den nærmeste er en mandagsturnering med hold og sideløbende par, der har "B - Gul række", men den række er en holdrække. Klubber, der ikke er klub 1 under deres hovedklub, eller som ikke står på DBf's lister, er ikke gennemgået, fordi det kræver gæt på numre.
-- **Mangler fra Frank:** linket til det personlige regnskab for par 1 i sektion Par Gul 16. november 2026, som det står i adresselinjen (`https://resultater.bridge.dk/template/personligt_regnskab.php?filename=…&tournament=…&section=…&pairno=1`). Med det hentes siderne til en midlertidig mappe, og arbejdet fortsætter fra trin 2 på grenen.
-- **Regnskabet:** det personlige regnskab har kolonnerne Point og Pct for NS og ØV med én decimal pr. spil (set i den anonymiserede side for 452). bridge.dk's point pr. spil kan altså læses derfra, når siden er fundet.
-- **Rigtige sider:** den midlertidige mappe med de hentede oversigter og turneringssider er slettet. Ingen side fra bridge.dk er kommet i repoet, og `SYSTEM.md` er ikke ændret, fordi intet er bygget.
-- **Tokenforbrug** (denne session, 49 svar, målt før den sidste commit): nye input 100, skrevet til cachen 144.974, læst fra cachen 5.395.383 og output 28.310, i alt 5.568.767.
+- **Linket (Franks svar 17. nov. 2026):** `https://resultater.bridge.dk/template/personligt_regnskab.php?filename=1111/MT3287GT11912.XML&tournament=3287&section=7&pairno=1`.
+- **Det, siden viser:** datoen 16-11-2026, turneringen "Efterårs Hold og Par, Par Gul" (parturnering, sektion 7) og par 1, der sad Nord–Syd hele aftenen: 32 spil i 8 runder med 4 spil og top 14. Rundernes point er 35,0, 17,0, 34,0, 26,0, 27,0, 34,0, 23,0 og 29,9, i alt 225,9. Point og procent i alt står ikke i regnskabet; de er læst i stillingen for samme sektion (`resultater.php?…&section=7`, "Resultater efter 7. sektion", middel 224): par 1 har 50,4 % og 225,9 point. Siden er altså aftenen, Frank nævnte. Stillingen er kun brugt til kontrollen og ikke gemt.
+- **Commits:** `c9e9bbe` accepttestene og testdataene, røde før bygningen; `ba9d082` bygningen; Afklaret og tokenforbruget i de sidste commits på grenen.
+- **Testdata:** de tre sider, Post Mortem selv henter (det personlige regnskab, `kortfordeling.php` og `spilresultater.php` for sektion 7), er hentet til en midlertidig mappe uden for repoet og anonymiseret med `anonymiser.py` som et nyt sæt, `1d` (32 spillere, ingen hold), ved siden af `v1`, så siderne fra v1 er uændrede byte for byte. Et ekstra tjek med navnene fra stillingen fandt hverken de 32 navne eller deres ord på de anonymiserede sider. `test_ingen_navne.py` med `POSTMORTEM_RIGTIGE_SIDER` sat til mappen: 2 bestået (3,9 s). Mappen er slettet bagefter, og det er tjekket, at den er væk. `src/test/data/par-3287.json` er funktionens svar på de anonymiserede sider.
+- **Rød før bygningen (`c9e9bbe`):** pytest 24 fejlet, 259 bestået og 3 sprunget over (132 s): `regn.neuberg` og `regn.parpoint` fandtes ikke, regnskabets point blev ikke læst, "P" blev ikke læst som pas, toppen var 436 og ikke 448, og procenten havde to decimaler. Vitest 10 fejlet og 94 bestået: 51,15 % (223 af 436), "I alt mod middel +5", spil 32 med 5 af 12 point, ingen point i rækkerne, ingen ⓘ og "Ikke spillet" i stedet for "Justeret score". De eksisterende tests bestod, på nær forventningen til 62,28 %, der i samme commit blev 62,3 %.
+- **Grøn efter bygningen:**
+  - pytest i `api/` med `.venv`: 283 bestået og 3 sprunget over (de to navnetest uden variablen og slutløserens reference), 114 s. Accepttest 7 for 16. november (dobbeltdummy, kontrakterne, mærkerne, rådene og linjen som før) var grøn mod svaret fra før bygningen, inden testsvarene blev lavet igen som i README.
+  - `npm test` (tsc og vitest): 9 filer og 104 test bestået på 13 s, også fagords- og bydeformtesten i `src/test/sprog.test.tsx`. `npm run build` bygger.
+  - `node tools/tjek_bredde.mjs`: 157 tjek i orden ved 320, 390 og 1280 px på 40 s, nu også med aftenen 16. november og dens 32 spil: ingen vandret rulning, 44 px trykflader og ⓘ åbnet og lukket med mus, tryk (touch), Enter, mellemrum og Escape i en rigtig browser.
+- **Neubergs formel og afrundingen:**
+  - `regn.neuberg(P, n, N)` giver P' = (P + 1) · N / n − 1 og P uændret, når n = N. `regn.parpoint(S, felt, N)` er Neubergs formel på matchpointene mod feltet med n = feltets antal + 1.
+  - N er det største antal rigtige resultater på et spil i sektionen, læst fra `spilresultater.php`. En justeret score ("M", "Justeret til middel") er ikke et resultat og tæller hverken i n eller N. Top er 2 · (N − 1) og middel N − 1 på alle spil.
+  - Samme P' bruges for alle fire scorer (faktisk, efter udspil, før udspil og par), så alle forskelle og dermed faktorerne ganges med N / n, og teleskopsummen går op uden særskilt kode.
+  - Pointene står uafrundet i svaret. `regn.rund1` runder procenten pr. spil og i alt til én decimal med 0,05 væk fra nul (først til 9 decimaler, så en flydende regnefejl ikke flytter afrundingen). Appen viser parpoint og faktorer i parturnering med én decimal og samme afrunding (`tal(n, 1)`), hele tal uden ",0".
+- **De 32 spil og 225,9 / 50,4 %:** point og procent pr. spil stemmer med regnskabet på alle 32 spil, og rundernes summer stemmer med siden. 29 spil havde allerede bridge.dk's point og top. Forskellen fra 223 af 436 kom fra tre spil:
+  - spil 7: fire borde meldte pas hele vejen rundt, som spilresultaterne skriver "P". Læsningen kendte kun "Pas", så feltet havde 3 resultater og top 6. Nu er der 7: 0 af 14 som på bridge.dk.
+  - spil 16: ét bord med "P": før 10 af 12, nu 12 af 14 som på bridge.dk.
+  - spil 32: en justeret score ved et andet bord, så spillet er spillet 7 gange: 5 af 12 bliver (5 + 1) · 8 / 7 − 1 = 5,857, vist som 5,9 point og 41,8 % som på bridge.dk.
+
+  I alt 225,857 af 448 = 50,41 %, vist som 225,9 og 50,4 %. Af forskellen på 12 i toppen (448 − 436) kom 10 fra "P" og 2 fra spil 32, altså mest fra læsningen og ikke kun fra regnemåden, som Formål antog. "I alt mod middel" er +1,857, vist som +1,9: meldinger −8,3, spilføring −11, modspil −34 og held og uheld +55,1 (heraf modpartens fejl +24).
+- **Valg, specen ikke afgør:**
+  1. "P" læses som pas i `laes.py`. Uden det kan pointene pr. spil ikke stemme; testsiderne fra v1 har ingen "P", og deres svar er uændrede.
+  2. Procenten i `resultat` har nu én decimal i svaret (62,28 → 62,3 for 4. november), så appen viser bridge.dk's tal uden dobbelt afrunding. To eksisterende forventninger er rettet tilsvarende (`aften.test.tsx` og `test_cache_og_hent.py`). Ellers er `par-452.json` og begge holdsvar uændrede.
+  3. En justeret score ved jeres eget bord (et spil uden kontrakt, men med point i regnskabet) får regnskabets point fra cellen for parrets retning (NS eller ØV). `spillet` er falsk og faktorerne null, og spillets point − middel lægges til aftenens Held og uheld, så summen går op. Rækken viser "Justeret score" med procent og point. Det er kun prøvet med et konstrueret spil; ØV-cellen er ikke prøvet på en rigtig side, fordi par 1 sad Nord–Syd begge aftener.
+  4. Scoren stod allerede i rækkens linje ("… · −140"), så højre side af rækken viser nu procenten og under den pointene ("5,9 point").
+  5. ⓘ står kun i parturnering, fordi teksten handler om parpoint, og holdturnering er uden for afgrænsningen. Den står kun på oversigten, ikke ved "Hvor gik pointene?" i analysevinduet. Teksten folder sig ud under kortets overskrift (som Fordelingstrænerens ⓘ under 1000 px); trykfladen er 44 × 44 px med en cirkel på 26 px, og Escape lukker teksten og lader fokus stå på ⓘ.
+  6. Analysevinduet viser også pointene med én decimal ("5,9 af 14 point"), så tallene er de samme som på oversigten.
+  7. Testsiderne er et eget sæt i `anonymiser.py` (`SAET`), og `test_ingen_navne.py` tjekker de sæt, der ligger i mappen. `anonymiser.py` kender ikke stillingen (`resultater.php`), som heller ikke er gemt.
+- **Spørgsmål til Frank:**
+  1. ⓘ-teksten er forslaget fra specen, ordret. Skal den rettes? Den står i `src/tekster.ts` (`aften.info`) og i `src/test/point.test.tsx`.
+  2. Skal ⓘ også stå ved "Hvor gik pointene?" i analysevinduet og i holdturnering (så med en tekst om imp)?
+  3. Er "5,9 point" under procenten den rigtige form i rækken, og må hele tal stå uden ",0" ("14 point"), selv om bridge.dk skriver 14,0?
+  4. Formål siger, at forskellen kommer af regnemåden, men det meste kom af "P". Skal Formål rettes, før specen arkiveres?
+- **Skærmbilleder** (uden for git og kun med anonymiserede data): `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\` med oversigten for 16. november, `320-aften-3287.png`, `390-aften-3287.png` og `1280-aften-3287.png`, og de samme med ⓘ åben, `…-aften-3287-info.png`.
+- **`SYSTEM.md`:** beslutningsloggen har en række for 17. nov. 2026 om Post Mortem 1d, og rækken om testsiderne nævner sættene. Datoen øverst var allerede 17. november 2026.
+- **Første session (17. november 2026, stoppet ved testdataene):** aftenen kunne ikke findes på resultater.bridge.dk ud fra koden og bridge.dk uden at gætte, så linket manglede fra Frank.
+  - Tag og gren: `main` (`285aef4`, lig med `origin/main`) er tagget `v-foer-point-som-bridgedk`, og grenen er `point-som-bridgedk`. Specen er committet som `719cf59`.
+  - Søgningen: Post Mortem får hele linket fra brugeren og søger ikke selv. Testsiderne fra v1 kommer fra hovedklub 2151, klub 1 (onsdag), og den har ikke aftenen. Gennemgået med samme slags adresser, som siderne selv linker til: turneringsoversigten (`overview.php?mainclubno=…&club=1`) for 280 hovedklubber (de 224 klubnumre på DBf's regionale klublister og resten af numrene 2100–2199), klub 2–12, 20 og 99 under hovedklub 2151 (alle tomme) og turneringssiden (`turnering.php`) for alle 145 turneringer, der omfatter 16. november 2026. Ingen hed "Efterårs Hold og Par" eller havde en sektion "Par Gul".
+  - Den midlertidige mappe med de hentede oversigter og turneringssider blev slettet.
+  - Tokenforbrug (49 svar, målt før den sidste commit): nye input 100, skrevet til cachen 144.974, læst fra cachen 5.395.383 og output 28.310, i alt 5.568.767.
 
 ## Arbejdsgang
 
