@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>Post Mortem – spil værd at se på</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,'Segoe UI',Roboto,sans-serif;color:#1a1a1a}
+a{color:#1a1a1a}a:hover{color:#4a4a4a}
+</style>
+</helmet>
+<div style="width: 390px; height: 1500px; box-sizing: border-box; background: #f2f3f4; display: flex; flex-direction: column; font-size: 17px; line-height: 1.45">
+
+  <div style="background: #1a1a1a; color: #f2f3f4; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+    <span style="flex: none; width: 32px; height: 32px; border-radius: 8px; background: #ff9f4a; color: #1a1a1a; font-weight: 800; font-size: 11px; display: flex; align-items: center; justify-content: center">7NT</span>
+    <span style="font-weight: 600; font-size: 15px; flex: 1">Kontraktbridge · <span style="color: #ff9f4a">Post Mortem</span></span>
+  </div>
+
+  <div style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4a4a4a">Parturnering · matchpoint · 16. november 2026</span>
+      <h1 style="margin: 0; font-family: Manrope, Inter, sans-serif; font-weight: 800; font-size: 1.6rem; line-height: 1.2">Efterårs Hold og Par, Par Gul</h1>
+      <span style="font-size: 0.92rem; color: #4a4a4a">Par 1 · 32 spil · <strong style="color: #1a1a1a">50,4 %</strong> (225,9 af 448 point)</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+      <button type="button" style="height: 48px; border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); background: #ffffff; font: inherit; font-size: 0.85rem; font-weight: 600; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 6px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"></path><rect x="6" y="14" width="12" height="7"></rect><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path></svg>Udskriv</button>
+      <a href="Mail.dc.html" style="height: 48px; border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); background: #ffffff; font-size: 0.85rem; font-weight: 600; color: #1a1a1a; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Mail</a>
+      <button type="button" style="height: 48px; border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); background: #ffffff; font: inherit; font-size: 0.85rem; font-weight: 600; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 6px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>Kopiér</button>
+    </div>
+
+    <section aria-labelledby="vaerd" style="background: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+        <h2 id="vaerd" style="margin: 0; font-size: 1.1rem; font-weight: 600">Spil værd at se på</h2>
+        <span style="font-size: 0.8rem; color: #4a4a4a">8 af 32</span>
+      </div>
+      <p style="margin: 0; font-size: 0.88rem; color: #4a4a4a">Sorteret efter, hvor meget jeres egne beslutninger kostede. Bedøm beslutningen, ikke kun resultatet.</p>
+
+      <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px">
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">1</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">N 4♠ · 11 stik · +450</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Slem misset</span><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #eceff3; color: #4a4a4a">Anden kontrakt end feltet</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #7a3410; font-size: 0.95rem">28,6 %</span>
+        </a></li>
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">7</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">S 2<span style="color: #c62828">♦</span> · 6 stik · −200</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Bund</span><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Spilføring −1 stik</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #7a3410; font-size: 0.95rem">0 %</span>
+        </a></li>
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">24</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">Ø 2♠ · 10 stik · −170</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Bund</span><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Modspil −2 stik</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #7a3410; font-size: 0.95rem">14,3 %</span>
+        </a></li>
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">8</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">Ø 3<span style="color: #c62828">♥</span> · 10 stik · −170</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Modspil −2 stik</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #7a3410; font-size: 0.95rem">21,4 %</span>
+        </a></li>
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">17</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">N 5♣ doblet · 10 stik · −100</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Strafdobling</span><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #eceff3; color: #4a4a4a">Anden kontrakt end feltet</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #7a3410; font-size: 0.95rem">14,3 %</span>
+        </a></li>
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">14</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">V 4<span style="color: #c62828">♥</span> · 12 stik · −480</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #fde4d0; color: #7a3410">Udspillet kostede 1 stik</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #7a3410; font-size: 0.95rem">28,6 %</span>
+        </a></li>
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">19</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">Ø 3<span style="color: #c62828">♦</span> · 11 stik · −150</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #d6e4f5; color: #163e73">Heldigt: godt resultat, udspil −1 stik</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #0d6e63; font-size: 0.95rem">85,7 %</span>
+        </a></li>
+
+        <li><a href="Melde.dc.html" style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 12px; background: #f6f7f8; text-decoration: none; color: #1a1a1a">
+          <span style="font-weight: 600; font-size: 1.05rem">15</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 0.9rem">V 3♠ · 9 stik · −140</span><span style="display: flex; flex-wrap: wrap; gap: 4px"><span style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #e3e5e8; color: #4a4a4a">Uheldigt: bund, bedste modspil</span></span></span>
+          <span style="text-align: right; font-weight: 600; color: #7a3410; font-size: 0.95rem">0 %</span>
+        </a></li>
+      </ol>
+
+      <details style="background: #eceff3; border-radius: 12px; padding: 10px 12px">
+        <summary style="font-weight: 600; font-size: 0.9rem; cursor: pointer; min-height: 28px">Hvorfor er et spil med?</summary>
+        <ul style="margin: 6px 0 0; padding-left: 18px; font-size: 0.85rem; display: flex; flex-direction: column; gap: 4px">
+          <li>Bund eller top: under 25 % eller over 75 %.</li>
+          <li>Anden kontrakt end feltet, udgang eller slem misset eller meldt uden dækning.</li>
+          <li>Strafdobling, eller udspillet kostede et stik.</li>
+          <li>Heldigt eller uheldigt: resultatet og beslutningen peger hver sin vej.</li>
+        </ul>
+      </details>
+    </section>
+
+    <p style="margin: 0; padding: 0 4px; font-size: 0.8rem; color: #4a4a4a">Herunder følger aftenens side som i dag: Hvor gik pointene?, Teknikker og Spillene, nu med filteret "Værd at se på · 8".</p>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>Post Mortem – meldesamtalen, spil 1</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,'Segoe UI',Roboto,sans-serif;color:#1a1a1a}
+a{color:#1a1a1a}a:hover{color:#4a4a4a}
+</style>
+</helmet>
+<div style="width: 390px; height: 1500px; box-sizing: border-box; background: #f2f3f4; display: flex; flex-direction: column; font-size: 17px; line-height: 1.45">
+
+  <div style="background: #1a1a1a; color: #f2f3f4; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+    <a href="Main.dc.html" aria-label="Tilbage til oversigten" style="flex: none; width: 44px; height: 44px; margin: -8px 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f2f3f4; text-decoration: none"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+    <span style="font-weight: 600; font-size: 15px; flex: 1">Kontraktbridge · <span style="color: #ff9f4a">Post Mortem</span></span>
+    <span style="font-size: 0.88rem">Spil 1 af 32</span>
+  </div>
+
+  <div style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <div style="background: #ffffff; border-radius: 24px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h1 style="margin: 0; font-family: Manrope, Inter, sans-serif; font-weight: 800; font-size: 1.4rem">Spil 1</h1>
+        <span style="font-weight: 600; color: #7a3410">28,6 % · 4 point</span>
+      </div>
+      <span style="font-size: 0.92rem"><strong>Hvad skete der?</strong> N 4♠ · udspil ♣9 · 11 stik · +450. 2 af 7 borde meldte slem.</span>
+    </div>
+
+    <section aria-labelledby="ms" style="background: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <h2 id="ms" style="margin: 0; font-size: 1.1rem; font-weight: 600">Meldesamtalen</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <div style="border-radius: 12px; background: #d8efe9; padding: 10px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px"><span style="font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: #0d6e63">FIT</span><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0d6e63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg><span style="font-weight: 800; font-size: 0.95rem; color: #0d6e63">JA</span><span style="font-size: 0.75rem; color: #0d6e63">8 spar</span></div>
+        <div style="border-radius: 12px; background: #d8efe9; padding: 10px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px"><span style="font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: #0d6e63">UDGANG</span><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0d6e63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg><span style="font-weight: 800; font-size: 0.95rem; color: #0d6e63">JA</span><span style="font-size: 0.75rem; color: #0d6e63">alle borde</span></div>
+        <div style="border-radius: 12px; background: #fde4d0; padding: 10px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; box-shadow: inset 0 0 0 2px #7a3410"><span style="font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: #7a3410">SLEM</span><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7a3410" stroke-width="3" stroke-linecap="round"><path d="M4 12c2.5-4 5.5-4 8 0s5.5 4 8 0"></path></svg><span style="font-weight: 800; font-size: 0.95rem; color: #7a3410">MÅSKE</span><span style="font-size: 0.75rem; color: #7a3410">2 af 7 borde</span></div>
+      </div>
+      <p style="margin: 0; font-size: 0.78rem; color: #4a4a4a">✓ ja · ~ måske · ✗ nej (ved nej: grå flade med kryds). Symbol og ord står altid sammen, så farven ikke bærer betydningen alene.</p>
+      <div style="display: none">
+      </div>
+
+      <details open style="border-radius: 12px; background: #fff1e3; padding: 10px 12px">
+        <summary style="font-weight: 600; cursor: pointer; min-height: 28px">Slem: måske</summary>
+        <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px; font-size: 0.9rem">
+          <span><strong>Facit:</strong> 12 stik i sans og spar med åbne kort, 32 hp. Men 12 stik kræver, at ♥D sidder hos Øst, så slemmen er en kipning. Kun 2 af 7 borde meldte den.</span>
+          <span style="font-weight: 600; margin-top: 4px">Spørg hinanden</span>
+          <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px">
+            <li>Undersøgte vi slem, da fit og udgang var klare?</li>
+            <li>Havde vi styr på esser og nøglekort?</li>
+            <li>Kunne 6NT være bedre end 6♠ ved parturnering?</li>
+          </ul>
+        </div>
+      </details>
+      <details style="border-radius: 12px; background: #f6f7f8; padding: 10px 12px">
+        <summary style="font-weight: 600; cursor: pointer; min-height: 28px">Fit: ja</summary>
+        <p style="margin: 6px 0 0; font-size: 0.9rem">8 spar (5–3). Ingen anden farve med 8 kort. Spørgsmålene om fit vises kun ved "Nej" eller "Måske".</p>
+      </details>
+      <details style="border-radius: 12px; background: #f6f7f8; padding: 10px 12px">
+        <summary style="font-weight: 600; cursor: pointer; min-height: 28px">Udgang: ja</summary>
+        <p style="margin: 6px 0 0; font-size: 0.9rem">4♠ og 3NT vinder med åbne kort, og alle 7 borde meldte udgang.</p>
+      </details>
+
+      <div style="border-top: 1px solid rgba(26,26,26,0.1); padding-top: 10px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; font-size: 0.9rem">
+        <span>Var overstikket afgørende?</span><span style="font-weight: 600">Nej</span>
+        <span>Hvem ejede spillet?</span><span style="font-weight: 600">I (ingen konkurrence)</span>
+      </div>
+    </section>
+
+    <section style="background: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 1.05rem; font-weight: 600">Sådan regnes ja, nej og måske</h2>
+      <ul style="margin: 0; padding-left: 18px; font-size: 0.88rem; color: #1a1a1a; display: flex; flex-direction: column; gap: 4px">
+        <li><strong>Ja:</strong> kontrakten vinder med åbne kort, og enten kræver den ingen god sidning, eller mindst halvdelen af feltet var der.</li>
+        <li><strong>Måske:</strong> den vinder med åbne kort, men kun med en god sidning, og under halvdelen af feltet var der.</li>
+        <li><strong>Nej:</strong> den går ned med åbne kort.</li>
+      </ul>
+      <p style="margin: 0; font-size: 0.8rem; color: #4a4a4a">Fit er altid ja eller nej: 8 kort eller ej. "Måske" er, når I kunne have fundet en anden fit.</p>
+    </section>
+
+    <a href="Notat.dc.html" style="height: 52px; border-radius: 12px; background: #1a1a1a; color: #ffffff; font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center">Skriv spilnotat (v2b)</a>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

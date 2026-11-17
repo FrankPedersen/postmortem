@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>Post Mortem – spilnotat (v2b), spil 1</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,'Segoe UI',Roboto,sans-serif;color:#1a1a1a}
+a{color:#1a1a1a}a:hover{color:#4a4a4a}
+</style>
+</helmet>
+<div style="width: 390px; height: 2250px; box-sizing: border-box; background: #f2f3f4; display: flex; flex-direction: column; font-size: 17px; line-height: 1.45">
+
+  <div style="background: #1a1a1a; color: #f2f3f4; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+    <a href="Melde.dc.html" aria-label="Tilbage til spillet" style="flex: none; width: 44px; height: 44px; margin: -8px 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f2f3f4; text-decoration: none"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+    <span style="font-weight: 600; font-size: 15px; flex: 1">Kontraktbridge · <span style="color: #ff9f4a">Post Mortem</span></span>
+    <span style="font-size: 0.88rem">Notat · spil 1</span>
+  </div>
+
+  <form style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <fieldset style="margin: 0; border: 0; padding: 4px; background: #e3e5e8; border-radius: 9999px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px">
+      <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Gennemgang</legend>
+      <label style="border-radius: 9999px; background: #1a1a1a; color: #ffffff; font-weight: 600; font-size: 0.88rem; min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer"><input type="radio" name="tilstand" checked style="position: absolute; opacity: 0; width: 1px; height: 1px">Hurtig gennemgang</label>
+      <label style="border-radius: 9999px; color: #1a1a1a; font-weight: 600; font-size: 0.88rem; min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer"><input type="radio" name="tilstand" style="position: absolute; opacity: 0; width: 1px; height: 1px">Dybdeanalyse</label>
+    </fieldset>
+    <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #4a4a4a">
+      <span style="width: 22px; height: 6px; border-radius: 9999px; background: #1a1a1a"></span><span style="width: 22px; height: 6px; border-radius: 9999px; background: #1a1a1a"></span><span style="width: 22px; height: 6px; border-radius: 9999px; background: #ff9f4a"></span><span style="width: 22px; height: 6px; border-radius: 9999px; background: #c8ccd2"></span><span style="width: 22px; height: 6px; border-radius: 9999px; background: #c8ccd2"></span>
+      <span style="margin-left: 6px">Punkt 3 af 5 · ét punkt åbent ad gangen; udfyldte punkter foldes sammen til én linje</span>
+    </div>
+    <p style="margin: 0; font-size: 0.8rem; color: #4a4a4a"><strong>Hurtig:</strong> beslutning, aftalestatus, årsag og næste gang (ca. 1 minut pr. spil). <strong>Dybdeanalyse:</strong> også tjeklisterne for spilleplan og modspil. Aftalefelterne åbner i begge, når aftalen er uklar.</p>
+
+    <div style="background: #ffffff; border-radius: 24px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4a4a4a">1 · Hvad skete der?</span>
+      <span style="font-size: 0.92rem">N 4♠ · 11 stik · +450 · <strong style="color: #7a3410">28,6 %</strong>. 2 af 7 borde meldte slem.</span>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap">
+        <span style="font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 9999px; background: #d8efe9; color: #0d6e63">FIT JA</span>
+        <span style="font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 9999px; background: #d8efe9; color: #0d6e63">UDGANG JA</span>
+        <span style="font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 9999px; background: #fde4d0; color: #7a3410">SLEM MÅSKE</span>
+      </div>
+      <span style="font-size: 0.8rem; color: #4a4a4a">Udfyldt af appen.</span>
+    </div>
+
+    <fieldset style="margin: 0; border: 0; padding: 16px; background: #ffffff; border-radius: 24px; display: flex; flex-direction: column; gap: 8px">
+      <legend style="float: left; padding: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4a4a4a">2 · Beslutning eller resultat?</legend>
+      <div style="clear: both; display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+        <label style="border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); padding: 10px; display: flex; gap: 8px; align-items: flex-start; font-size: 0.85rem; min-height: 44px"><input type="radio" name="vurd" style="margin: 2px 0 0; width: 18px; height: 18px"><span><strong>Rigtig</strong> beslutning, <strong>godt</strong> resultat</span></label>
+        <label style="border-radius: 12px; border: 2px solid #1a1a1a; background: #fff1e3; padding: 10px; display: flex; gap: 8px; align-items: flex-start; font-size: 0.85rem; min-height: 44px"><input type="radio" name="vurd" checked style="margin: 2px 0 0; width: 18px; height: 18px"><span><strong>Rigtig</strong> beslutning, <strong>dårligt</strong> resultat</span></label>
+        <label style="border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); padding: 10px; display: flex; gap: 8px; align-items: flex-start; font-size: 0.85rem; min-height: 44px"><input type="radio" name="vurd" style="margin: 2px 0 0; width: 18px; height: 18px"><span><strong>Forkert</strong> beslutning, <strong>godt</strong> resultat</span></label>
+        <label style="border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); padding: 10px; display: flex; gap: 8px; align-items: flex-start; font-size: 0.85rem; min-height: 44px"><input type="radio" name="vurd" style="margin: 2px 0 0; width: 18px; height: 18px"><span><strong>Forkert</strong> beslutning, <strong>dårligt</strong> resultat</span></label>
+      </div>
+      <span style="font-size: 0.8rem; color: #4a4a4a">Appens forslag: rigtig beslutning, dårligt resultat. Slemmen var en kipning, og de fleste borde stoppede i udgang. I vælger.</span>
+    </fieldset>
+
+    <fieldset style="margin: 0; border: 0; padding: 16px; background: #ffffff; border-radius: 24px; display: flex; flex-direction: column; gap: 8px">
+      <legend style="float: left; padding: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4a4a4a">3 · Aftalestatus</legend>
+      <div style="clear: both; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 0.85rem">
+        <label style="border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; text-align: center"><input type="radio" name="aftale" style="margin: 0; width: 18px; height: 18px"><span style="display: flex; align-items: center; gap: 4px; font-weight: 600; color: #0d6e63"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d6e63"></circle></svg>Klar aftale</span></label>
+        <label style="border-radius: 12px; border: 2px solid #1a1a1a; background: #fff1e3; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; text-align: center"><input type="radio" name="aftale" checked style="margin: 0; width: 18px; height: 18px"><span style="display: flex; align-items: center; gap: 4px; font-weight: 600; color: #7a3410"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path d="M12 3l10 18H2z" fill="#c77800"></path></svg>Uklar aftale</span></label>
+        <label style="border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; text-align: center"><input type="radio" name="aftale" style="margin: 0; width: 18px; height: 18px"><span style="display: flex; align-items: center; gap: 4px; font-weight: 600; color: #a31d1d"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" fill="#a31d1d"></rect></svg>Ingen aftale</span></label>
+      </div>
+      <span style="font-size: 0.8rem; color: #4a4a4a">Gælder meldingerne i spillet. Ved uklar eller ingen aftale åbnes aftalefelterne nedenfor.</span>
+    </fieldset>
+
+    <fieldset style="margin: 0; border: 0; padding: 16px; background: #ffffff; border-radius: 24px; display: flex; flex-direction: column; gap: 8px">
+      <legend style="float: left; padding: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4a4a4a">4 · Primær årsag (vælg én)</legend>
+      <div style="clear: both; display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.85rem">
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Meldeteknik</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 2px solid #1a1a1a; background: #fff1e3; min-height: 32px"><input type="radio" name="aarsag" checked style="margin: 0">Manglende systemaftale</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Misforståelse</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px dashed #163e73; color: #163e73; min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Håndvurdering · forslag</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Konkurrerende meldinger</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Spilleplan</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Teknisk spilføring</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Udspil</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Modspil</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Signaler og aftaler</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Matchpoint-taktik</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Koncentration</label>
+        <label style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 9999px; border: 1px solid rgba(26,26,26,0.2); min-height: 32px"><input type="radio" name="aarsag" style="margin: 0">Ingen reel fejl</label>
+      </div>
+      <span style="font-size: 0.8rem; color: #4a4a4a">Faktorerne fra "Hvor gik pointene?" står uændret på spillet. Årsagen er jeres egen vurdering oveni.</span>
+    </fieldset>
+
+    <fieldset style="margin: 0; border: 0; padding: 16px; background: #ffffff; border-radius: 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: inset 0 0 0 2px #ff9f4a">
+      <legend style="float: left; padding: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #7a3410">Aftalen · uklar</legend>
+      <span style="clear: both; font-size: 0.8rem; color: #4a4a4a">Vises ved uklar eller ingen aftale.</span>
+      <label style="display: flex; flex-direction: column; gap: 4px; font-size: 0.88rem; font-weight: 600">Meldingen<input type="text" value="1♠ – 2♦ – 2♠ – 4♠" style="height: 44px; border-radius: 12px; border: 1px solid rgba(26,26,26,0.2); padding: 0 10px; font: inherit; font-weight: 400"></label>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="align-self: flex-start; max-width: 88%; background: #eceff3; border-radius: 16px 16px 16px 4px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><label for="mente" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4a4a4a">Melderen mente</label><textarea id="mente" rows="2" style="border: 0; background: transparent; padding: 0; font: inherit; font-size: 0.92rem; resize: vertical">4♠ viser en minimumshånd og afslutter.</textarea></div>
+        <div style="align-self: flex-end; max-width: 88%; background: #fde4d0; border-radius: 16px 16px 4px 16px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><label for="troede" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #7a3410">Makker troede</label><textarea id="troede" rows="2" style="border: 0; background: transparent; padding: 0; font: inherit; font-size: 0.92rem; resize: vertical">4♠ kan være stærk; jeg ventede på et slemforsøg.</textarea></div>
+        <span style="font-size: 0.75rem; color: #4a4a4a; text-align: center">Side om side fra ca. 600 px</span>
+      </div>
+      <label style="display: flex; flex-direction: column; gap: 4px; font-size: 0.88rem; font-weight: 600">Ny aftale<textarea rows="2" style="border-radius: 12px; border: 1px solid rgba(26,26,26,0.2); padding: 8px 10px; font: inherit; font-weight: 400; resize: vertical">Efter 2 over 1 og fit er 4♠ minimum; med ekstra værdier meldes 3♠ (krav) først.</textarea></label>
+    </fieldset>
+
+    <details style="background: #ffffff; border-radius: 24px; padding: 14px 16px">
+      <summary style="font-weight: 600; cursor: pointer; min-height: 28px">Tjekliste: spilleplan · dybdeanalyse</summary>
+      <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px; font-size: 0.9rem">
+        <label style="display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" style="margin: 0; width: 18px; height: 18px">Lavede jeg en plan ved stik 1?</label>
+        <label style="display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" style="margin: 0; width: 18px; height: 18px">Talte jeg sikre stik og tabere?</label>
+        <label style="display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" style="margin: 0; width: 18px; height: 18px">Fandt jeg kilden til de ekstra stik (kipning, rejsning, krydstrumf, langfarve, slutspil)?</label>
+        <label style="display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" style="margin: 0; width: 18px; height: 18px">Valgte jeg linjen med den bedste chance?</label>
+      </div>
+    </details>
+    <details style="background: #ffffff; border-radius: 24px; padding: 14px 16px">
+      <summary style="font-weight: 600; cursor: pointer; min-height: 28px">Tjekliste: modspil · dybdeanalyse</summary>
+      <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px; font-size: 0.9rem">
+        <label style="display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" style="margin: 0; width: 18px; height: 18px">Udspillet: rigtigt, eller var et andet bedre?</label>
+        <label style="display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" style="margin: 0; width: 18px; height: 18px">Markeringer forstået: kald eller afvisning, længde, Lavinthal, O/E, romersk kald</label>
+        <label style="display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" style="margin: 0; width: 18px; height: 18px">Talte vi hp og fordeling, og kunne vi placere honnørerne?</label>
+      </div>
+    </details>
+
+    <div style="background: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 0 0 2px #1a1a1a">
+      <label for="naeste" style="display: flex; align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 600; color: #1a1a1a"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5" fill="#1a1a1a"></circle></svg>5 · Næste gang gør vi …</label>
+      <textarea id="naeste" rows="3" style="border-radius: 12px; border: 1px solid rgba(26,26,26,0.2); padding: 8px 10px; font: inherit; resize: vertical">Med fit og 31+ hp undersøger vi altid slem, før vi melder udgang.</textarea>
+      <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; min-height: 32px"><input type="checkbox" checked style="margin: 0; width: 18px; height: 18px">Det er en ny aftale (kommer på listen over aftaler)</label>
+      <span style="font-size: 0.8rem; color: #4a4a4a">Skal udfyldes: hver analyse ender med en konkret regel eller aftale. Samles under "Aftenens læring".</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+      <button type="button" style="height: 52px; border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); background: #ffffff; font: inherit; font-weight: 600; color: #1a1a1a">Forrige spil</button>
+      <button type="button" style="height: 52px; border-radius: 12px; border: 0; background: #1a1a1a; color: #ffffff; font: inherit; font-weight: 600">Gem og næste</button>
+    </div>
+
+  </form>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2250}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
