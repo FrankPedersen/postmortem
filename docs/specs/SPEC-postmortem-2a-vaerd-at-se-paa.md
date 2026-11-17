@@ -268,7 +268,9 @@ Ikke med (10 spil): 2 (Top, Anden kontrakt end feltet), 3, **7** (Bund, Anden ko
 3. Skal der være et mærke "Meldinger −N point", så spil som 32 ikke står uden mærke?
 4. Er grænsen ved holdturnering −2 imp?
 
+- **Commits:** `77ee5af` (specen rettet efter Franks svar, listen og stoppet) og denne med tokenforbruget.
 - **`SYSTEM.md`:** rækken for Post Mortem 2a har fået Franks svar og stoppet i anden session, med "Venter på Franks svar; ikke flettet". Datoen øverst var allerede 17. november 2026.
+- **Tokenforbrug** (anden session, 39 svar, målt før den sidste commit): nye input 78, skrevet til cachen 171.089, læst fra cachen 5.055.478 og output 55.285, i alt 5.281.930.
 
 ## Arbejdsgang
 
