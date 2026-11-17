@@ -45,11 +45,13 @@ def test_ingen_rigtige_navne_i_testdata():
     assert len(filer) >= 9
     app_filer = sorted(p.name for p in APP_DATA.glob('*.json'))
     assert app_filer == ['hold-450-vaelg.json', 'hold-450.json', 'par-3287.json', 'par-452.json']
+    assert sorted(p.name for p in APP_DATA.glob('*.txt')) == ['mail-3287.txt']
     for saet in saettene():
         sider = {navn: (rigtige / navn).read_bytes().decode('utf-8') for navn in anonymiser.SAET[saet]}
         spillere, hold = anonymiser.navne(sider)
         assert (len(spillere), len(hold)) == ANTAL[saet], saet
-        for fil in filer + sorted(APP_DATA.glob('*.json')):
+        # SPEC-postmortem-2a: også den gemte mail-tekst (src/test/data/mail-3287.txt).
+        for fil in filer + sorted(APP_DATA.glob('*.json')) + sorted(APP_DATA.glob('*.txt')):
             tekst = fil.read_bytes().decode('utf-8', errors='replace')
             assert not anonymiser.rester(tekst, spillere | hold), (saet, fil.name)
 

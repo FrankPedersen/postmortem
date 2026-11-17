@@ -1,0 +1,61 @@
+Post Mortem · 16. november 2026
+Efterårs Hold og Par, Par Gul · 32 spil
+Resultat: 50,4 % (225,9 af 448 point)
+
+Hvor gik pointene? (mod middel)
+Meldinger −8,3 · Spilføring −11
+Modspil −34 · Held og uheld +55,1
+
+SPIL VÆRD AT SE PÅ (8)
+
+Spil 1 · N 4♠ · 11 stik · +450 · 28,6 %
+Slem misset · meldinger −14 point · anden kontrakt end feltet
+Fit: ja (9♥). Udgang: ja. Slem: måske, 12 stik i sans og hjerter; 0 af 7 borde.
+Kommentar:
+
+
+Spil 4 · N 3NT · 9 stik · +600 · 71,4 %
+Heldigt: godt resultat, meldinger −10 point, anden kontrakt end feltet
+Fit: ja (8♠). Udgang: ja. Slem: nej.
+Kommentar:
+
+
+Spil 8 · Ø 3♥ · 10 stik · −170 · 21,4 %
+Bund · modspil −2 stik
+Fit: ja (8♦). Udgang: nej.
+Kommentar:
+
+
+Spil 25 · Ø 3♠ · 9 stik · −140 · 7,1 %
+Bund · meldinger −1 point · modspil −1 stik · anden kontrakt end feltet
+Fit: ja (9♣). Udgang: nej.
+Kommentar:
+
+
+Spil 29 · N 2♠ · 7 stik · −100 · 42,9 %
+Meldinger −4 point · spilføring −1 stik · anden kontrakt end feltet
+Fit: ja (8♠). Udgang: nej.
+Kommentar:
+
+
+Spil 6 · N 3♠ · 10 stik · +170 · 42,9 %
+Udgang misset · meldinger −7 point
+Fit: ja (8♠). Udgang: måske, 10 stik i spar; 1 af 7 borde. Slem: nej.
+Kommentar:
+
+
+Spil 24 · Ø 2♠ · 10 stik · −170 · 14,3 %
+Bund · meldinger −2 point · modspil −2 stik · anden kontrakt end feltet
+Fit: ja (8♦). Udgang: nej.
+Kommentar:
+
+
+Spil 9 · Ø 3NT · 9 stik · −600 · 42,9 %
+Modspil −1 stik
+Fit: ja (8♣). Udgang: nej.
+Kommentar:
+
+
+Uheldige, ingen fejl: spil 15, 20, 26 og 27
+
+www.kontraktbridge.dk/postmortem/

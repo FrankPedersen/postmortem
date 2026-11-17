@@ -297,7 +297,8 @@ describe('Et spil uden mærker viser ikke tomme afsnit', () => {
       cleanup();
     }
     expect(udenRåd).toBeGreaterThan(0);
-  });
+    // Alle spil vises efter hinanden; med de nye testfiler i SPEC-postmortem-2a løb testen over standardgrænsen på 5 s.
+  }, 60_000);
 
   it('et spil, der ikke er spillet eller er passet ud, har ingen råd', () => {
     const a = par();

@@ -7,7 +7,7 @@ import { dato, kontrakt, kort, medFortegn, tal } from '../format';
 import { bydeform } from '../sprog/bydeform';
 import { fund } from '../sprog/fagord';
 import { T } from '../tekster';
-import { falskFetch, hold, HOLD_URL, par, svar, vaelg, vis } from './hjaelp';
+import { falskFetch, hold, HOLD_URL, par, PAR_3287_URL, par3287, svar, vaelg, vis } from './hjaelp';
 
 beforeEach(() => sessionStorage.clear());
 afterEach(() => {
@@ -24,7 +24,7 @@ function skærmtekster(): string[] {
     for (const a of ['aria-label', 'placeholder', 'title']) if (e.getAttribute(a)) ud.push(e.getAttribute(a)!);
   }
   // Turneringens navn kommer fra bridge.dk og er ikke appens tekst.
-  const navne = [par().turnering.navn, hold().turnering.navn, hold().turnering.titel];
+  const navne = [par().turnering.navn, hold().turnering.navn, hold().turnering.titel, par3287().turnering.navn];
   return ud.filter((t) => !navne.includes(t));
 }
 
@@ -51,6 +51,18 @@ async function alleSkærme(): Promise<string[]> {
       ud.push(...skærmtekster());
       cleanup();
     }
+  }
+  // SPEC-postmortem-2a-vaerd-at-se-paa.md: aftenen 16. november med "Spil værd at se på" og udskriften, vinduet til
+  // mailen for alle tre testsvar og meldesamtalen i spil 1 og 17.
+  for (const [data, url, liste] of [[par(), undefined, undefined], [hold(), HOLD_URL, vaelg()], [par3287(), PAR_3287_URL, undefined]] as const) {
+    vis('#/mail', data, url, liste);
+    ud.push(...skærmtekster());
+    cleanup();
+  }
+  for (const hash of ['#/aften', '#/spil/1', '#/spil/17']) {
+    vis(hash, par3287(), PAR_3287_URL);
+    ud.push(...skærmtekster());
+    cleanup();
   }
   return [...new Set(ud)];
 }
