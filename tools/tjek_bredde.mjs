@@ -3,11 +3,14 @@
 // 44 × 44 px. Samme teknik som Forsidens tools/tjek_bredde.mjs: Chrome eller Edge uden vindue, styret over DevTools.
 //
 //   node tools/tjek_bredde.mjs                   tjekker ved 320, 390 og 1280 px (og at intet ligger oven i kompasset)
-//   node tools/tjek_bredde.mjs --billeder=mappe  gemmer også skærmbilleder af skærmene ved 390 og 1280 px og af
+//   node tools/tjek_bredde.mjs --billeder=mappe  gemmer også skærmbilleder af skærmene ved 390 og 1280 px, af
 //                                                oversigten for 16. november med ⓘ lukket og åben ved 320, 390 og 1280 px
+//                                                og af ⓘ åben ved holdturnering og i analysevinduet ved 390 og 1280 px
 //
 // SPEC-postmortem-1d-point.md: aftenen 16. november (par-3287.json) er med, og ⓘ ved "Hvor gik pointene?" åbner og
-// lukker med mus, tryk og tastatur uden vandret rulning.
+// lukker med mus, tryk og tastatur uden vandret rulning. Efter Franks svar 17. nov. 2026 står ⓘ på oversigten og i
+// analysevinduet ved både parturnering og holdturnering; --billeder gemmer også ⓘ åben ved holdturnering og i
+// analysevinduet ved 390 og 1280 px.
 //
 // Appen køres med Vites udviklingsserver, og svarene fra src/test/data/ lægges i sessionStorage som efter en analyse,
 // så testen ikke kalder funktionen. Kræver Node 22+. Stien til browseren kan gives i CHROME.
@@ -40,6 +43,13 @@ const VAELG = læs('hold-450-vaelg.json');
 const PAR_3287 = læs('par-3287.json');
 const PAR_3287_URL = 'https://resultater.bridge.dk/template/personligt_regnskab.php?filename=1111/MT3287GT11912.XML&tournament=3287&section=7&pairno=1';
 const INFO = 'Hjælp: Hvor gik pointene?';
+// Begyndelsen, en sætning midt i og slutningen af ⓘ-teksten for hver form (Franks svar 17. nov. 2026).
+const INFO_TEKST = {
+  par: { start: 'Point er parpoint.', midt: 'omregnes pointene, så alle spil tæller lige meget, som hos bridge.dk.', slut: 'Summen er jeres point mod middel.' },
+  hold: { start: 'Point er imp.', midt: 'sammenlignes jeres score med holdkammeraternes ved det andet bord', slut: 'Summen er jeres imp på spillet.' },
+};
+// Spillet i analysevinduet, hvor ⓘ prøves for hvert testsvar.
+const INFO_SPIL = { 'par 452': 7, 'hold 450': 4, 'par 3287': 32 };
 const PAR_URL = 'https://resultater.bridge.dk/template/personligt_regnskab.php?filename=2151/MT452GT720.XML&tournament=452&section=1&pairno=1';
 const HOLD_URL = 'https://resultater.bridge.dk/template/multihold_bordresultater.php?filename=2151/MT450GT714.XML&tournament=450&section=2&round=2&half=1';
 // Samme nøgle og form som src/lager.ts.
@@ -156,8 +166,9 @@ try {
     await send('Input.dispatchKeyEvent', { type: 'keyUp', key, code, windowsVirtualKeyCode: kode, nativeVirtualKeyCode: kode });
     await vent(50);
   };
-  const tjekInfo = async (bredde, navn) => {
-    const navnet = `${bredde} px, aftenen, ${navn}, ⓘ`;
+  const tjekInfo = async (bredde, navn, form) => {
+    const navnet = `${bredde} px, ${navn}, ⓘ`;
+    const forventet = INFO_TEKST[form];
     let t = await infoTilstand();
     if (!t) return tjek(false, `${navnet} står ved "Hvor gik pointene?"`);
     await tilInfo();
@@ -165,7 +176,7 @@ try {
     tjek(!t.åben && !t.synlig, `${navnet}: lukket fra start`, JSON.stringify(t));
     await mus();
     t = await infoTilstand();
-    tjek(t.åben && t.synlig && t.tekst.startsWith('Point er parpoint.') && t.tekst.endsWith('Summen er jeres point mod middel.'), `${navnet}: åbner med musen og viser teksten`, JSON.stringify(t).slice(0, 200));
+    tjek(t.åben && t.synlig && t.tekst.startsWith(forventet.start) && t.tekst.includes(forventet.midt) && t.tekst.endsWith(forventet.slut), `${navnet}: åbner med musen og viser teksten`, JSON.stringify(t).slice(0, 300));
     const m = await kør(MÅL);
     tjek(m.scroll <= m.client, `${navnet}: ingen vandret rulning med teksten åben`, `${m.scroll} px i ${m.client} px – stikker ud: ${m.ud.join(', ')}`);
     tjek(m.små.length === 0, `${navnet}: knapper og links er mindst 44 × 44 px med teksten åben`, m.små.slice(0, 6).join(' | '));
@@ -222,7 +233,7 @@ try {
       await indlæs('#/aften');
       const m = await mål(`aftenen, ${navn}`);
       tjek(m.h1 === svar.turnering.navn, `${bredde} px, aftenen, ${navn}: overskriften er turneringen`, m.h1);
-      if (svar.turnering.form === 'par') await tjekInfo(bredde, navn);
+      await tjekInfo(bredde, `aftenen, ${navn}`, svar.turnering.form);
       await kør(`[...document.querySelectorAll('button')].find((b) => b.textContent.startsWith('Tabte point')).click(); true`);
       await vent(30);
       await mål(`aftenen, ${navn}, Tabte point`);
@@ -234,6 +245,9 @@ try {
       tjek(teknik.kort && teknik.filter === 'Indspil · 1' && vist === 1, `${bredde} px, aftenen, ${navn}: kortet med teknikker står der, og filteret Indspil viser ét spil`, JSON.stringify({ teknik, vist }));
       await mål(`aftenen, ${navn}, Indspil`);
       }
+      // ⓘ ved "Hvor gik pointene?" i analysevinduet (Franks svar 17. nov. 2026).
+      await gåTil(`#/spil/${INFO_SPIL[navn]}`);
+      await tjekInfo(bredde, `analysevinduet, ${navn}, spil ${INFO_SPIL[navn]}`, svar.turnering.form);
       let værst = 0;
       for (const s of svar.spil) {
         await gåTil(`#/spil/${s.nummer}`);
@@ -297,6 +311,22 @@ try {
       await mus();
       await kør('window.scrollTo(0, 0); true');
       await billede(`${bredde}-aften-3287-info.png`);
+    }
+    // Franks svar 17. nov. 2026: ⓘ åben ved holdturnering (oversigten) og i analysevinduet ved begge former.
+    for (const bredde of [390, 1280]) {
+      await størrelse(bredde, 900);
+      for (const [fil, svar, url, vaelg, hash] of [
+        ['aften-hold-450-info', HOLD, HOLD_URL, VAELG, '#/aften'],
+        ['analysevindue-par-3287-spil-32-info', PAR_3287, PAR_3287_URL, undefined, '#/spil/32'],
+        ['analysevindue-hold-450-spil-4-info', HOLD, HOLD_URL, VAELG, '#/spil/4'],
+      ]) {
+        await gemSvar(svar, url, vaelg);
+        await indlæs(hash);
+        await tilInfo();
+        await mus();
+        await kør('window.scrollTo(0, 0); true');
+        await billede(`${bredde}-${fil}.png`);
+      }
     }
     console.log(`Skærmbillederne ligger i ${BILLEDER}`);
   }
