@@ -179,6 +179,7 @@ Det betyder for specen:
 - **Spørgsmål til Frank:**
   1. Imp-teksten: skal "forskellen" og "held og uheld som ved parturnering" stå, som de gør (se ovenfor)? Et muligt forslag, hvis teksten skal følge beregningen: "På hvert spil lægges jeres score og holdkammeraternes score ved det andet bord sammen, og resultatet omregnes til imp." og "… og held og uheld, som her mest er det, der skete ved det andet bord."
   2. Skal ⓘ i analysevinduet blive åben, når der skiftes spil? Nu lukker den.
+- **Tokenforbrug** (tredje session, 64 svar, målt før den sidste commit): nye input 132, skrevet til cachen 184.877, læst fra cachen 9.416.268 og output 63.468, i alt 9.664.745.
 
 ## Arbejdsgang
 
