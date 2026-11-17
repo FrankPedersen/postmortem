@@ -215,8 +215,9 @@ def test_2_spil_1_slem_maaske_med_0_af_7_borde(aften):
 def test_2_spil_17_udgang_meldt_uden_daekning_og_konkurrence(aften):
     m = aften['spil'][16]['meldesamtale']
     assert m['fit'] == {'svar': 'ja', 'farve': 'C', 'kort': 9, 'fordeling': [7, 2]}
+    # Feltet: 4♣ D, 4♣, Ø 3♠, 5♣, 3♣, 3♥ og 5♣ D, så 2 af 7 borde meldte udgang.
     assert m['udgang'] == {'svar': 'nej', 'stik': [{'farve': 'H', 'stik': 8}, {'farve': 'C', 'stik': 8}],
-                           'borde': 1, 'af': 7, 'meldt': True}
+                           'borde': 2, 'af': 7, 'meldt': True}
     assert m['slem'] is None   # "–": slem vises kun ved udgang ja eller måske
     assert m['overstikAfgoerende'] is True
     assert m['ejer'] == {'side': 'modparten', 'konkurrence': True,

@@ -1922,3 +1922,721 @@ h1:focus {
   color: var(--muted);
   font-size: 0.8rem;
 }
+
+/*
+ * Post Mortem v2a (SPEC-postmortem-2a-vaerd-at-se-paa.md): knapperne til at dele aftenen, kortet "Spil værd at se på",
+ * Meldesamtalen i analysevinduet, vinduet til mailen og udskriften. Farverne er appens tokens som i mock-up'en
+ * (docs/specs/design/v2a/): orange flader for tab, grønne for gevinst, blå for heldigt og grå for ekstra mærker.
+ */
+
+.del-aftenen {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.del-knapper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.del-knap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-12);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.del-knap[aria-expanded="true"] {
+  border: 2px solid var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.del-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.udskriv-valg {
+  margin: 0;
+  border: 0;
+  gap: 4px;
+}
+
+.udskriv-valg legend {
+  float: left;
+  padding: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.udskriv-valg label {
+  clear: both;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+
+.udskriv-valg input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+
+/* Spil værd at se på */
+
+.vaerd-intro {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.vaerd-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vaerd-raekke {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+  min-height: 56px;
+  padding: 10px;
+  border-radius: var(--radius-12);
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.vaerd-raekke:hover {
+  box-shadow: inset 0 0 0 2px var(--accent-line);
+}
+
+.vaerd-nr {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.vaerd-midte {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.vaerd-linje {
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.vaerd-maerker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.vaerd-maerke {
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.vaerd-maerke.miss {
+  background: var(--fb-miss);
+  color: var(--fb-miss-text);
+}
+
+.vaerd-maerke.ok {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.vaerd-maerke.neutral,
+.vaerd-maerke.uheld {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.vaerd-maerke.held {
+  background: var(--fb-hit);
+  color: var(--fb-hit-text);
+}
+
+/* Heldigt og Uheldigt har grunden med og kan fylde flere linjer; så er hjørnerne runde, men ikke en pille. */
+.vaerd-maerke.held,
+.vaerd-maerke.uheld {
+  border-radius: 10px;
+}
+
+.vaerd-maerke .roed {
+  color: inherit;
+}
+
+.vaerd-procent {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.vaerd-procent.miss {
+  color: var(--fb-miss-text);
+}
+
+.vaerd-procent.ok {
+  color: var(--ok);
+}
+
+.vaerd-vis {
+  align-self: flex-start;
+  min-height: 44px;
+  font-weight: 600;
+}
+
+.vaerd-uheldige {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* Trykfladen er 44 × 44 px; den negative margen holder tallene tæt på kommaerne som i almindelig tekst. */
+.vaerd-uheldige a {
+  display: inline-block;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0 -12px;
+  line-height: 44px;
+  text-align: center;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.vaerd-forklaring,
+.melde-fold {
+  padding: 0 12px;
+  border-radius: var(--radius-12);
+  background: var(--surface-2);
+}
+
+.vaerd-forklaring summary,
+.melde-fold summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.vaerd-forklaring ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 10px;
+  padding-left: 18px;
+  font-size: 0.85rem;
+}
+
+/* Meldesamtalen (skærm 2): FIT, UDGANG og SLEM med symbol, ord og grund. */
+
+.meldesamtale h2 {
+  margin: 0;
+}
+
+.status-felter {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.status-felt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 6px;
+  border-radius: var(--radius-12);
+  text-align: center;
+}
+
+.status-felt.ja {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.status-felt.maaske {
+  background: var(--fb-miss);
+  color: var(--fb-miss-text);
+  box-shadow: inset 0 0 0 2px var(--fb-miss-text);
+}
+
+.status-felt.nej,
+.status-felt.ingen {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.status-navn {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-symbol {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.status-ord {
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.status-grund {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.melde-folder {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.melde-fold.med-spoerg {
+  background: var(--accent-soft);
+}
+
+.melde-fold p {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+.melde-fold .spoerg-titel {
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.spoerg {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 10px;
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+
+.melde-linjer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.melde-linjer > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+}
+
+.melde-linjer > div.bred {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.melde-linjer dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.melde-linjer .ejer-detalje {
+  display: block;
+  color: var(--muted);
+}
+
+/* Vinduet til mailen (skærm 3) */
+
+.mail-knapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mail-knapper .primaer,
+.mail-knapper .sekundaer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mail-knapper .primaer {
+  background: var(--ink);
+  color: var(--ink-text);
+}
+
+.mail-knapper .primaer:hover {
+  background: var(--ink);
+  opacity: 0.9;
+}
+
+.mail-knapper p {
+  margin: 0;
+}
+
+.mail-tekst {
+  margin: 0;
+  padding: 12px;
+  border-radius: var(--radius-12);
+  background: var(--bg);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/*
+ * Udskriften (afsnit 3, skærm 4): kun på papir. A4 med 12 mm margen, hver side er højst én A4-side (273 mm indhold), og
+ * hvert spil begynder på en ny side. Kun ♥ og ♦ er røde; al anden tekst er sort.
+ */
+
+.udskrift {
+  display: none;
+}
+
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  body {
+    min-height: 0;
+    background: #ffffff;
+  }
+
+  .topbar,
+  .site-footer,
+  main {
+    display: none !important;
+  }
+
+  .udskrift {
+    display: block;
+    color: #000000;
+    font-family: var(--font-sans);
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+
+  .udskrift * {
+    color: #000000;
+  }
+
+  .udskrift .roed {
+    color: #c62828;
+  }
+
+  .udskrift-side {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5mm;
+    height: 272mm;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+
+  .udskrift-side + .udskrift-side {
+    break-before: page;
+  }
+
+  .udskrift h2,
+  .udskrift h3,
+  .udskrift p {
+    margin: 0;
+  }
+
+  .udskrift-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6mm;
+    padding-bottom: 2mm;
+    border-bottom: 0.6mm solid #000000;
+    font-weight: 600;
+  }
+
+  .udskrift-top span + span {
+    flex: none;
+    font-size: 9pt;
+    font-weight: 400;
+  }
+
+  .udskrift-titel,
+  .udskrift-overskrift h2 {
+    font-family: var(--font-display);
+    font-size: 20pt;
+    font-weight: 800;
+  }
+
+  .udskrift h3 {
+    margin-top: 2mm;
+    font-size: 11pt;
+  }
+
+  .udskrift-liste {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 8.5pt;
+    line-height: 1.25;
+  }
+
+  .udskrift-liste li {
+    display: grid;
+    grid-template-columns: 7mm 40mm 15mm minmax(0, 1fr);
+    gap: 2mm;
+    padding: 0.4mm 0;
+    border-bottom: 0.2mm solid #c8ccd2;
+  }
+
+  .udskrift-liste .nr {
+    font-weight: 600;
+  }
+
+  .udskrift-overskrift {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12pt;
+  }
+
+  .udskrift-maerker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2mm;
+    margin-top: -2mm;
+  }
+
+  .udskrift-maerke {
+    padding: 0.3mm 2.5mm;
+    border: 0.3mm solid #000000;
+    border-radius: 9999px;
+    font-size: 9pt;
+    font-weight: 600;
+  }
+
+  .udskrift-midte {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 6mm;
+    align-items: start;
+  }
+
+  .udskrift-bord {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-areas: ". n ." "w c e" ". s .";
+    gap: 2mm 3.5mm;
+    justify-content: start;
+    align-items: center;
+    font-size: 10pt;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .udskrift-haand {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .udskrift-haand.haand-N {
+    grid-area: n;
+  }
+
+  .udskrift-haand.haand-W {
+    grid-area: w;
+  }
+
+  .udskrift-haand.haand-E {
+    grid-area: e;
+  }
+
+  .udskrift-haand.haand-S {
+    grid-area: s;
+  }
+
+  .udskrift-kort + .udskrift-kort {
+    margin-left: 0.3em;
+  }
+
+  .udskrift-plads {
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .udskrift-kompas {
+    grid-area: c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22mm;
+    height: 22mm;
+    border: 0.5mm solid #000000;
+    border-radius: 2mm;
+    font-size: 8pt;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .udskrift-fakta {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+    font-size: 10pt;
+  }
+
+  .udskrift-melde {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+    padding-top: 3mm;
+    border-top: 0.2mm solid #c8ccd2;
+  }
+
+  .udskrift-status {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3mm;
+  }
+
+  .udskrift-status .status-felt {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0 1.5mm;
+    padding: 1.5mm 3mm;
+    border: 0.4mm solid #000000;
+    border-radius: 2mm;
+    background: none;
+    box-shadow: none;
+    text-align: left;
+  }
+
+  .udskrift-status .status-felt.maaske,
+  .udskrift-status .status-felt.nej {
+    border-width: 0.7mm;
+  }
+
+  .udskrift-status .status-navn,
+  .udskrift-status .status-ord {
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .udskrift-status .status-symbol {
+    font-size: 10pt;
+  }
+
+  .udskrift-status .status-grund {
+    font-size: 9pt;
+  }
+
+  .udskrift-ramme,
+  .udskrift-aftale,
+  .udskrift-kommentarer {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+    padding: 2.5mm 4mm;
+    border: 0.4mm solid #000000;
+    border-radius: 2mm;
+    break-inside: avoid;
+  }
+
+  .udskrift-ramme {
+    font-size: 9.5pt;
+  }
+
+  .udskrift-valg {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1mm 5mm;
+  }
+
+  .udskrift-valg strong {
+    width: 100%;
+  }
+
+  .udskrift-aarsag::after {
+    content: "";
+    display: inline-block;
+    width: 45mm;
+    margin-left: 2mm;
+    border-bottom: 0.3mm solid #000000;
+  }
+
+  .udskrift-aftale {
+    border-width: 0.7mm;
+  }
+
+  .udskrift-linjer {
+    height: 27mm;
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 8.6mm, #c8ccd2 8.6mm, #c8ccd2 9mm);
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .udskrift-kommentarer {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .udskrift-kommentarer .udskrift-linjer {
+    flex: 1;
+    height: auto;
+  }
+
+  .udskrift-fod {
+    font-size: 8pt;
+  }
+
+  .udskrift-forside .udskrift-fod {
+    margin-top: auto;
+  }
+}

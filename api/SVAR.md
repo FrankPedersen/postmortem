@@ -59,6 +59,7 @@ Holdlisten er det eneste sted i svaret med navne: holdets navn (på siden holdka
 | `faktorer` | objekt | de fire faktorer summeret over de spillede spil |
 | `stoersteForbedring` | tekst eller null | den af `meldinger`, `spilfoering` og `modspil`, der er mest negativ; null, når ingen er negativ |
 | `teknikker` | objekt | teknikker i aftenens spil: antal spil med hvert mærke |
+| `vaerdAtSePaa` | objekt | spil værd at se på: listen, resten under "Vis alle" og de uheldige (v2a) |
 | `spil` | liste | ét objekt pr. spil |
 
 ### svar.turnering
@@ -144,6 +145,8 @@ Summen over de spillede spil af faktorerne i `svar.spil[].faktorer`. Har et spil
 | `teknik` | objekt | mærkerne i detaljer |
 | `raad` | objekt eller null | nøglebeslutningerne og udspillet; null, når teknikken ikke er beregnet |
 | `linje` | liste eller null | den bedste linje som 13 stik; null, når teknikken ikke er beregnet |
+| `meldesamtale` | objekt eller null | fit, udgang, slem, overstikket og hvem der ejede spillet (v2a); null, når spillet ikke er spillet |
+| `vaerd` | objekt eller null | spillets omkostning og mærker til listen "Spil værd at se på" (v2a); null, når spillet ikke er spillet |
 
 ### svar.spil[].par
 
@@ -295,3 +298,82 @@ Det faktiske udspil til spillet er ikke med; det står i `udspil`.
 | `udspiller` | tekst | den, der spiller ud til stikket |
 | `kort` | liste | de fire kort i den rækkefølge, de spilles |
 | `vinder` | tekst | den, der vinder stikket (og spiller ud til det næste) |
+
+## Spil værd at se på og meldesamtalen (v2a)
+
+`SPEC-postmortem-2a-vaerd-at-se-paa.md` og `postmortem/vaerd.py`. Alt regnes af det, svaret allerede har: hænderne, DD-tabellen, par, kontrakten ved bordet, faktorerne og feltets kontrakter. **Feltet** er de andre borde i parturnering (justerede scorer tæller ikke) og det andet bord (holdkammeraternes) i holdturnering. Funktionen sender felter og ingen sætninger; teksterne skrives i appen.
+
+### svar.vaerdAtSePaa
+
+Listen er rangeret efter **omkostningen**: den negative del af parrets egne faktorer, `min(0, meldinger) + min(0, spilfoering) + min(0, modspil)` (Franks svar 2, 17. nov. 2026). Ved lighed kommer laveste procent først (laveste imp i holdturnering), derefter laveste spilnummer.
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `liste` | liste | spilnumrene på de 8 spil med størst omkostning (færre, hvis færre spil har en omkostning under 0), det dyreste først; uden de uheldige |
+| `resten` | liste | spilnumrene under "Vis alle": de andre spil med en omkostning på −2 eller lavere (point eller imp) eller et fast mærke (`udgangMisset`, `slemMisset`, `udgangUdenDaekning`, `slemUdenDaekning`, `strafdobling`, `udspil`, `heldigt`), i samme rækkefølge |
+| `uheldige` | liste | spilnumrene med mærket `uheldigt` i spillenes rækkefølge; de står hverken i `liste` eller `resten` |
+
+### svar.spil[].vaerd
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `omkostning` | tal | den negative del af meldinger, spilføring og modspil (0 eller negativ) |
+| `maerker` | liste | mærkerne i visningens rækkefølge: `bund`, `top`, `udgangMisset`, `slemMisset`, `udgangUdenDaekning`, `slemUdenDaekning`, `strafdobling`, `udspil`, `meldinger`, `spilfoering`, `modspil`, `andenKontrakt`, `heldigt`, `uheldigt` |
+
+### svar.spil[].vaerd.maerker[]
+
+Reglerne står i specens afsnit 1. `bund` og `top` er procent under 25 og over 75 og findes kun i parturnering. `udgangMisset` og `slemMisset` kræver, at parret var spilfører, eller at alle passede. `andenKontrakt` sammenligner farve (sans regnes som en farve), den side, der var spilfører, og slags (delkontrakt, udgang eller slem; pas er sin egen slags) med den hyppigste i feltet; er parrets kontrakt blandt de hyppigste ved lighed, er der intet mærke. `heldigt`: mindst 50 % (0 imp eller mere) og en omkostning under 0. `uheldigt`: under 50 % (under 0 imp), ingen negativ egen faktor og `held` negativ.
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `maerke` | tekst | mærkets navn |
+| `tal` | tal eller null | `udspil`: de stik, udspillet kostede (`ddEfter` − `ddFoer`); `spilfoering` og `modspil`: stikkene efter udspillet; `meldinger`: point (imp) uden fortegn; ellers null |
+
+### svar.spil[].meldesamtale
+
+Alt gælder parrets side. Stikkene er DD-tabellens største tal for parrets to hænder.
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `fit` | objekt | parrets længste farve sammen |
+| `udgang` | objekt | udgang (3NT, 4♥, 4♠, 5♣, 5♦ eller højere) |
+| `slem` | objekt eller null | slem (12 stik); null ("–"), når udgang er `nej`, og parret ikke meldte slem |
+| `overstikAfgoerende` | sand/falsk eller null | sand, når ét stik mere eller mindre ved bordet havde flyttet parrets point mindst 25 procentpoint (3 imp i holdturnering); null ved pas |
+| `ejer` | objekt | hvem der ejede spillet |
+
+### svar.spil[].meldesamtale.fit
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `svar` | tekst | `ja` ved 8 kort eller flere, ellers `nej` |
+| `farve` | tekst | farven (`S`, `H`, `D` eller `C`); ved lighed i længde spar, hjerter, ruder, klør |
+| `kort` | tal | antal kort i farven sammen |
+| `fordeling` | liste | kortene på de to hænder, flest først, fx `[6, 3]` |
+
+### svar.spil[].meldesamtale.niveau
+
+Samme felter for `udgang` og `slem`.
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `svar` | tekst | `ja`: en kontrakt på niveauet vinder med åbne kort, og mindst halvdelen af feltet spillede på niveauet eller højere; `maaske`: den vinder, men under halvdelen var der; `nej`: ingen vinder |
+| `stik` | liste | `[{ "farve": "NT", "stik": 12 }, ...]`: de vindende benævnelser med flest stik (ved `nej` benævnelserne med flest stik), i rækkefølgen sans, spar, hjerter, ruder, klør |
+| `borde` | tal | borde i feltet, hvor parrets side spillede på niveauet eller højere |
+| `af` | tal | borde i feltet (1 i holdturnering) |
+| `meldt` | sand/falsk | parret var spilfører på niveauet eller højere (for udgang også ved slem) |
+
+### svar.spil[].meldesamtale.ejer
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `side` | tekst eller null | `jer`, når par-scoren er positiv for parret, `modparten`, når den er negativ; null, når par er pas |
+| `konkurrence` | sand/falsk | sand, når begge sider spillede en farvekontrakt ved mindst ét bord, parrets eller feltets (Franks svar 17. nov. 2026) |
+| `trumf` | objekt | `{ "jer": { "farve": "H", "kort": 9 }, "modparten": { "farve": "S", "kort": 8 } }`: hver sides længste farve sammen (loven om totale stik) |
+| `bedst` | objekt | par-kontrakterne for parret |
+
+### svar.spil[].meldesamtale.ejer.bedst
+
+| Felt | Type | Indhold |
+| --- | --- | --- |
+| `spilfoerer` | tekst eller null | `jer`, når par-kontrakten spilles af parret, `modparten` ellers; null, når par er pas |
+| `kontrakter` | liste | par-kontrakterne uden side og resultat, fx `["6NT"]` eller `["4SX"]` |

@@ -40,6 +40,7 @@ def test_analysen_har_felterne_fra_svar_md(gemte_sider, krop):
     for maerke in ('skvis', 'indspil'):
         tjek(svar['teknikker'][maerke], 'svar.teknikker.maerke', doc)
     tjek(svar['teknikker']['spilfoerer'], 'svar.teknikker.spilfoerer', doc)
+    tjek(svar['vaerdAtSePaa'], 'svar.vaerdAtSePaa', doc)
     for spil in svar['spil']:
         tjek(spil, 'svar.spil[]', doc)
         tjek(spil['par'], 'svar.spil[].par', doc)
@@ -50,6 +51,18 @@ def test_analysen_har_felterne_fra_svar_md(gemte_sider, krop):
         if spil['teknik']['indspil']:
             tjek(spil['teknik']['indspil'], 'svar.spil[].teknik.indspil', doc)
         if spil['spillet']:
+            # v2a (SPEC-postmortem-2a-vaerd-at-se-paa.md): meldesamtalen og mærkerne
+            m = spil['meldesamtale']
+            tjek(m, 'svar.spil[].meldesamtale', doc)
+            tjek(m['fit'], 'svar.spil[].meldesamtale.fit', doc)
+            for niveau in (m['udgang'], m['slem']):
+                if niveau is not None:
+                    tjek(niveau, 'svar.spil[].meldesamtale.niveau', doc)
+            tjek(m['ejer'], 'svar.spil[].meldesamtale.ejer', doc)
+            tjek(m['ejer']['bedst'], 'svar.spil[].meldesamtale.ejer.bedst', doc)
+            tjek(spil['vaerd'], 'svar.spil[].vaerd', doc)
+            for maerke in spil['vaerd']['maerker']:
+                tjek(maerke, 'svar.spil[].vaerd.maerker[]', doc)
             tjek(spil['scorer'], 'svar.spil[].scorer', doc)
             tjek(spil['faktorer'], 'svar.spil[].faktorer', doc)
             tjek(spil['udspilseffekt'], 'svar.spil[].udspilseffekt', doc)

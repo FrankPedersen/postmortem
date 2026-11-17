@@ -99,6 +99,50 @@ export interface Teknikker {
   spilfoerer: { spil: number; ddStik: number };
 }
 
+// v2a (SPEC-postmortem-2a-vaerd-at-se-paa.md, SVAR.md): meldesamtalen og listen "Spil værd at se på".
+
+export type MeldeSvar = 'ja' | 'maaske' | 'nej';
+
+export interface MeldeNiveau {
+  svar: MeldeSvar;
+  /** De vindende benævnelser med flest stik (ved nej benævnelserne med flest stik). */
+  stik: { farve: Benaevnelse; stik: number }[];
+  /** Borde i feltet, hvor jeres side spillede på niveauet eller højere, og antal borde i feltet (1 ved holdturnering). */
+  borde: number;
+  af: number;
+  meldt: boolean;
+}
+
+export interface Meldesamtale {
+  fit: { svar: 'ja' | 'nej'; farve: Kuloer; kort: number; fordeling: number[] };
+  udgang: MeldeNiveau;
+  /** Null ("–"), når udgang er nej, og I ikke meldte slem. */
+  slem: MeldeNiveau | null;
+  overstikAfgoerende: boolean | null;
+  ejer: {
+    side: 'jer' | 'modparten' | null;
+    konkurrence: boolean;
+    trumf: { jer: { farve: Kuloer; kort: number }; modparten: { farve: Kuloer; kort: number } };
+    bedst: { spilfoerer: 'jer' | 'modparten' | null; kontrakter: string[] };
+  };
+}
+
+export type VaerdMaerke =
+  | 'bund' | 'top' | 'udgangMisset' | 'slemMisset' | 'udgangUdenDaekning' | 'slemUdenDaekning' | 'strafdobling'
+  | 'udspil' | 'meldinger' | 'spilfoering' | 'modspil' | 'andenKontrakt' | 'heldigt' | 'uheldigt';
+
+export interface Vaerd {
+  /** Den negative del af meldinger, spilføring og modspil. */
+  omkostning: number;
+  maerker: { maerke: VaerdMaerke; tal: number | null }[];
+}
+
+export interface VaerdAtSePaa {
+  liste: number[];
+  resten: number[];
+  uheldige: number[];
+}
+
 export interface Spil {
   nummer: number;
   giver: Plads;
@@ -132,6 +176,9 @@ export interface Spil {
   teknik?: Teknik;
   raad?: Raad | null;
   linje?: LinjeStik[] | null;
+  /** De to næste mangler i et svar fra før v2a. */
+  meldesamtale?: Meldesamtale | null;
+  vaerd?: Vaerd | null;
 }
 
 export interface Analyse {
@@ -141,6 +188,7 @@ export interface Analyse {
   faktorer: Faktorer;
   stoersteForbedring: 'meldinger' | 'spilfoering' | 'modspil' | null;
   teknikker?: Teknikker;
+  vaerdAtSePaa?: VaerdAtSePaa;
   spil: Spil[];
 }
 

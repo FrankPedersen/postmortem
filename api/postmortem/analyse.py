@@ -10,7 +10,7 @@ import logging
 import urllib.error
 import urllib.parse
 
-from . import laes, regn, teknik
+from . import laes, regn, teknik, vaerd
 from .hent import IkkeBridgeDk, er_bridge_dk, hent_side
 
 IKKE_BRIDGE_DK = 'Det er ikke et link fra resultater.bridge.dk'
@@ -91,8 +91,9 @@ def _holdturnering(url, q, hold_id, hent, cache):
         felt = [s * r.score_ns for r in spil.resultater if r is not egen and r.spillet]
         if egen and egen.spillet and kammerater and kammerater.spillet:
             T = -s * kammerater.score_ns  # holdets score ved holdkammeraternes bord, set fra holdet
+            # Feltet i meldesamtalen er det andet bord (SPEC-postmortem-2a, afsnit 2).
             spil_ud.append(_spil(spil, dd, par, egen, valgt['retning'], lambda S, T=T: regn.imp(S + T), 0, None,
-                                 felt, T, turnering, cache))
+                                 felt, T, turnering, cache, [kammerater.kontrakt]))
         else:
             spil_ud.append(_ikke_spillet(spil, dd, par, valgt['retning']))
     deltager = {'type': 'hold', 'id': valgt['id'], 'retning': valgt['retning'], 'bord': valgt['bord']}
@@ -134,11 +135,12 @@ def _parturnering(url, q, hent, cache):
     for (spil, egen), (dd, par) in zip(alle, beregnet):
         retning = egen.retning or 'NS'
         s = 1 if retning == 'NS' else -1
-        felt = [s * r.score_ns for r in spil.resultater if parnr not in (r.ns_nr, r.ov_nr) and r.spillet]
+        andre = [r for r in spil.resultater if parnr not in (r.ns_nr, r.ov_nr) and r.spillet]
+        felt = [s * r.score_ns for r in andre]
         N_spil = max(N, len(felt) + 1)   # N, men aldrig under spillets eget antal resultater
         if egen.spillet and felt:
             spil_ud.append(_spil(spil, dd, par, egen, retning, lambda S, felt=felt, N=N_spil: regn.parpoint(S, felt, N),
-                                 N_spil - 1, 2 * (N_spil - 1), felt, None, turnering, cache))
+                                 N_spil - 1, 2 * (N_spil - 1), felt, None, turnering, cache, [r.kontrakt for r in andre]))
         elif egen.point is not None and N_spil > 1:
             # En justeret score ved parrets bord får de point, bridge.dk giver den.
             spil_ud.append(_justeret(spil, dd, par, retning, egen.point, 2 * (N_spil - 1)))
@@ -210,7 +212,8 @@ def _ikke_spillet(spil, dd, par, retning):
     x = _grund(spil, dd, par, retning)
     x.update({'spillet': False, 'kontrakt': None, 'spilfoerer': None, 'udspil': None, 'stik': None, 'score': None,
               'point': None, 'top': None, 'procent': None, 'felt': [], 'holdkammerater': None, 'ddFoer': None,
-              'ddEfter': None, 'scorer': None, 'faktorer': None, 'modpartensFejl': None, 'udspilseffekt': None})
+              'ddEfter': None, 'scorer': None, 'faktorer': None, 'modpartensFejl': None, 'udspilseffekt': None,
+              'meldesamtale': None, 'vaerd': None})
     x.update(teknik.ikke_beregnet('ikke spillet'))
     return x
 
@@ -222,7 +225,7 @@ def _justeret(spil, dd, par, retning, point, top):
     return x
 
 
-def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, turnering, cache):
+def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, turnering, cache, felt_kontrakter):
     s = 1 if retning == 'NS' else -1
     k = egen.kontrakt
     S_faktisk = s * egen.score_ns
@@ -265,6 +268,11 @@ def _spil(spil, dd, par, egen, retning, P, middel, top, felt, holdkammerater, tu
     })
     # Vindue 1b: mærkerne, rådene og linjen for kontrakten ved bordet, uanset hvem der var spilfører
     x.update(teknik.ikke_beregnet('pas') if k.pas else _teknik(spil, k, egen.udspil, turnering, cache))
+    # v2a (SPEC-postmortem-2a-vaerd-at-se-paa.md): meldesamtalen og spillets omkostning og mærker
+    ms = vaerd.meldesamtale(spil.haender, dd, x['par'], retning, k, felt_kontrakter)
+    ms['overstikAfgoerende'] = vaerd.overstik_afgoerende(k, egen.stik, spil.zone, retning, P, turnering['form'], top, pf)
+    x['meldesamtale'] = ms
+    x['vaerd'] = vaerd.maerker(x, k, felt_kontrakter, turnering['form'])
     return x
 
 
@@ -300,5 +308,6 @@ def _aftenen(turnering, deltager, spil):
         'turnering': turnering, 'deltager': deltager, 'resultat': resultat, 'faktorer': faktorer,
         'stoersteForbedring': min(kandidater, key=kandidater.get) if kandidater else None,
         'teknikker': teknikker,
+        'vaerdAtSePaa': vaerd.liste(spil, turnering['form']),
         'spil': spil,
     }

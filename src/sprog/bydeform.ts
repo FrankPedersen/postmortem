@@ -19,13 +19,30 @@ export const UNDTAGELSER: readonly (string | RegExp)[] = [
   'Analysér',
   // Funktionens svar ved 429 og appens besked ved en netfejl, som "Prøv igen senere" i de andre repoer.
   'Prøv igen om lidt.',
+  // SPEC-postmortem-2a-vaerd-at-se-paa.md: knapperne og linket til at dele aftenen og "Spørg hinanden", afsnittets navn
+  // i specen (som navnene på opgaver og øvelser, fx "Spil den selv").
+  'Udskriv',
+  'Udskriv nu',
+  'Kopiér',
+  'Kopiér gennemgangen',
+  'Åbn mail, og sæt ind',
+  /^Vis alle \(\d+\)$/,
+  'Vis færre',
+  'Spørg hinanden',
+  'Spørg hinanden:',
 ];
 
 /**
  * Tekster, der begynder med et af ordene, men ikke er bydeform: "Spil 7" er spillets navn, "Brug Bordresultater …" er
- * funktionens fejltekst (api/SVAR.md), og "Hold 1" er et holdnavn.
+ * funktionens fejltekst (api/SVAR.md), og "Hold 1" er et holdnavn. "Spil værd at se på" er listens navn, og "spil 15, 20
+ * …" og "spil" foran numrene i linjen med de uheldige er navneord (SPEC-postmortem-2a).
  */
-export const FALSKE_TRÆF: readonly RegExp[] = [/^Spil \d+\b/, /^Brug Bordresultater eller Personligt regnskab$/, /^Hold \d+\b/];
+export const FALSKE_TRÆF: readonly RegExp[] = [
+  /^spil(?: \d+\b|$)/i,
+  /^Spil værd at se på(?: \(\d+\))?$/i,
+  /^Brug Bordresultater eller Personligt regnskab$/,
+  /^Hold \d+\b/,
+];
 
 const PREFIX = /^[\s"'“„«(\[▶→←↓↑✓✗·•–—#*>-]*/;
 

@@ -3,16 +3,21 @@ import type { Resultat } from './api';
 import { gem, hent, type Tilstand } from './lager';
 import { Aften } from './skaerme/Aften';
 import { Holdvalg } from './skaerme/Holdvalg';
+import { Mail } from './skaerme/Mail';
 import { SpilVindue } from './skaerme/SpilVindue';
 import { Start } from './skaerme/Start';
 
-type Rute = { side: 'start' } | { side: 'hold' } | { side: 'aften' } | { side: 'spil'; nummer: number };
+type Rute = { side: 'start' } | { side: 'hold' } | { side: 'aften' } | { side: 'mail' } | { side: 'spil'; nummer: number };
 
-/** Adresserne: `#/` start, `#/hold` valg af hold, `#/aften` oversigten og `#/spil/<nr>` analysevinduet. */
+/**
+ * Adresserne: `#/` start, `#/hold` valg af hold, `#/aften` oversigten, `#/mail` vinduet til mailen
+ * (SPEC-postmortem-2a-vaerd-at-se-paa.md, skærm 3) og `#/spil/<nr>` analysevinduet.
+ */
 export function læsRute(hash: string): Rute {
   const h = hash.replace(/^#/, '');
   if (h === '/hold') return { side: 'hold' };
   if (h === '/aften') return { side: 'aften' };
+  if (h === '/mail') return { side: 'mail' };
   const m = /^\/spil\/(\d+)$/.exec(h);
   if (m) return { side: 'spil', nummer: Number(m[1]) };
   return { side: 'start' };
@@ -39,7 +44,7 @@ export function App() {
   const svar = tilstand?.svar;
   const mangler =
     (rute.side === 'hold' && !tilstand?.vaelg) ||
-    ((rute.side === 'aften' || rute.side === 'spil') && !svar) ||
+    ((rute.side === 'aften' || rute.side === 'mail' || rute.side === 'spil') && !svar) ||
     (rute.side === 'spil' && svar && !svar.spil.some((s) => s.nummer === rute.nummer));
   const vis: Rute = mangler ? (rute.side === 'spil' && svar ? { side: 'aften' } : { side: 'start' }) : rute;
 
@@ -76,6 +81,8 @@ export function App() {
       return <Holdvalg key={tilstand!.url} url={tilstand!.url} vaelg={tilstand!.vaelg!} onSvar={påSvar} />;
     case 'aften':
       return <Aften svar={svar!} vaelg={tilstand?.vaelg} />;
+    case 'mail':
+      return <Mail svar={svar!} />;
     case 'spil':
       return <SpilVindue svar={svar!} nummer={vis.nummer} />;
     default:

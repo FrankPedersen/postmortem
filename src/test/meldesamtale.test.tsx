@@ -80,10 +80,10 @@ describe('Meldesamtalen, 16. november', () => {
 
   it('spil 17: udgang meldt uden dækning, slem "–" og konkurrence med trumftallet', () => {
     vis('#/spil/17', par3287(), PAR_3287_URL);
-    expect(felter()).toEqual(['Fit ✓ Ja 9 klør', 'Udgang ✗ Nej 1 af 7 borde', 'Slem – kun ved udgang']);
+    expect(felter()).toEqual(['Fit ✓ Ja 9 klør', 'Udgang ✗ Nej 2 af 7 borde', 'Slem – kun ved udgang']);
     const udgang = fold('Udgang: nej');
     expect(udgang.open).toBe(true);
-    expect(tekst(udgang)).toContain('Facit: 8 stik i hjerter og klør med åbne kort; 1 af 7 borde meldte udgang.');
+    expect(tekst(udgang)).toContain('Facit: 8 stik i hjerter og klør med åbne kort; 2 af 7 borde meldte udgang.');
     expect(spørgsmål(udgang)).toEqual(SPØRG.udgangUden);
     expect(within(kortet()).queryByText(/^Slem:/, { selector: 'summary' })).toBeNull();
     expect(linje('Hvem ejede spillet?')).toBe(

@@ -70,7 +70,8 @@ describe('Teknikker i aftenens spil', () => {
   it('kortet står mellem faktorerne og spillene', () => {
     vis('#/aften', par());
     const overskrifter = screen.getAllByRole('heading', { level: 2 }).map(tekst);
-    expect(overskrifter.slice(0, 3)).toEqual(['Hvor gik pointene?', 'Teknikker i aftenens spil', 'Spillene']);
+    // Fra SPEC-postmortem-2a står kortet "Spil værd at se på" først (skærm 1); resten er som før.
+    expect(overskrifter.slice(0, 4)).toEqual(['Spil værd at se på', 'Hvor gik pointene?', 'Teknikker i aftenens spil', 'Spillene']);
   });
 });
 
@@ -143,11 +144,15 @@ describe('Et svar uden de nye felter', () => {
     // Et svar fra før vindue 1b kan ligge i sessionStorage i en åben fane.
     const a = par();
     delete a.teknikker;
+    // Et svar fra før vindue 1b har heller ikke felterne fra v2a (SPEC-postmortem-2a).
+    delete a.vaerdAtSePaa;
     for (const s of a.spil) {
       s.maerker = [];
       delete s.teknik;
       delete s.raad;
       delete s.linje;
+      delete s.meldesamtale;
+      delete s.vaerd;
     }
     vis('#/aften', a);
     expect(screen.queryByRole('region', { name: 'Teknikker i aftenens spil' })).toBeNull();
