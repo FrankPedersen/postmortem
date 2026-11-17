@@ -64,7 +64,7 @@ Franks rettelse af teksten, ⓘ i analysevinduet og ⓘ ved holdturnering med en
 
 ## Afklaret
 
-**Status (17. november 2026): Franks svar indarbejdes i tredje session.** Accepttest 6 er udvidet med ⓘ i analysevinduet og ved holdturnering. **Venter på Franks godkendelse; ikke flettet.** Intet er pushet, og funktionen er ikke udrullet.
+**Status (17. november 2026): Franks svar er indarbejdet i tredje session; bygget og stoppet før fletning.** Accepttest 1–7, med accepttest 6 udvidet til ⓘ i analysevinduet og ved holdturnering, og alle andre tests er grønne på grenen `point-som-bridgedk`. **Venter på Franks godkendelse; ikke flettet.** Intet er pushet, og funktionen er ikke udrullet.
 
 ### Franks svar, 17. nov. 2026
 
@@ -122,7 +122,7 @@ Det betyder for specen:
   2. Procenten i `resultat` har nu én decimal i svaret (62,28 → 62,3 for 4. november), så appen viser bridge.dk's tal uden dobbelt afrunding. To eksisterende forventninger er rettet tilsvarende (`aften.test.tsx` og `test_cache_og_hent.py`). Ellers er `par-452.json` og begge holdsvar uændrede.
   3. En justeret score ved jeres eget bord (et spil uden kontrakt, men med point i regnskabet) får regnskabets point fra cellen for parrets retning (NS eller ØV). `spillet` er falsk og faktorerne null, og spillets point − middel lægges til aftenens Held og uheld, så summen går op. Rækken viser "Justeret score" med procent og point. Det er kun prøvet med et konstrueret spil; ØV-cellen er ikke prøvet på en rigtig side, fordi par 1 sad Nord–Syd begge aftener.
   4. Scoren stod allerede i rækkens linje ("… · −140"), så højre side af rækken viser nu procenten og under den pointene ("5,9 point").
-  5. ⓘ står kun i parturnering, fordi teksten handler om parpoint, og holdturnering er uden for afgrænsningen. Den står kun på oversigten, ikke ved "Hvor gik pointene?" i analysevinduet. Teksten folder sig ud under kortets overskrift (som Fordelingstrænerens ⓘ under 1000 px); trykfladen er 44 × 44 px med en cirkel på 26 px, og Escape lukker teksten og lader fokus stå på ⓘ.
+  5. ⓘ står kun i parturnering, fordi teksten handler om parpoint, og holdturnering er uden for afgrænsningen. Den står kun på oversigten, ikke ved "Hvor gik pointene?" i analysevinduet. Teksten folder sig ud under kortets overskrift (som Fordelingstrænerens ⓘ under 1000 px); trykfladen er 44 × 44 px med en cirkel på 26 px, og Escape lukker teksten og lader fokus stå på ⓘ. (Afløst af Franks svar 17. nov. 2026: ⓘ står nu også i analysevinduet og ved holdturnering, se tredje session.)
   6. Analysevinduet viser også pointene med én decimal ("5,9 af 14 point"), så tallene er de samme som på oversigten.
   7. Testsiderne er et eget sæt i `anonymiser.py` (`SAET`), og `test_ingen_navne.py` tjekker de sæt, der ligger i mappen. `anonymiser.py` kender ikke stillingen (`resultater.php`), som heller ikke er gemt.
 - **Spørgsmål til Frank** (besvaret, se Franks svar ovenfor):
@@ -138,6 +138,47 @@ Det betyder for specen:
   - Den midlertidige mappe med de hentede oversigter og turneringssider blev slettet.
   - Tokenforbrug (49 svar, målt før den sidste commit): nye input 100, skrevet til cachen 144.974, læst fra cachen 5.395.383 og output 28.310, i alt 5.568.767.
 - **Tokenforbrug** (anden session, 106 svar, målt før den sidste commit): nye input 214, skrevet til cachen 271.178, læst fra cachen 20.047.858 og output 124.355, i alt 20.443.605.
+
+### Tredje session (17. november 2026): Franks svar
+
+- **Status:** Franks svar er indarbejdet, og accepttest 1–7 og alle andre tests er grønne. Stoppet før fletning: **venter på Franks godkendelse; ikke flettet.** Intet er pushet, og funktionen er ikke udrullet (den er uændret i denne session).
+- **Commits:**
+  - `7f072d6` specen: Franks svar, Formål, Afgrænsning og accepttest 6;
+  - `981e6b0` accepttest 6 for de fire steder, røde før rettelsen;
+  - `d6635f9` rettelsen;
+  - Afklaret og tokenforbruget i de sidste commits på grenen.
+- **Rød før rettelsen (`981e6b0`):**
+  - vitest: 13 fejlet og 104 bestået (117 test): ⓘ fandtes ikke i analysevinduet og ved holdturnering, og teksten ved parturnering havde den gamle sætning om omregning. De 100 gamle test bestod; de fire nye, der bestod, er ⓘ på oversigten ved parturnering, der åbner og lukker som før.
+  - `tjek_bredde.mjs`: 18 fejl og 151 tjek i orden (54 s), af samme grunde.
+- **Grøn efter rettelsen:**
+  - pytest i `api/` med `.venv`: 283 bestået og 3 sprunget over (de samme tre som før), 258 s, fordi den kørte samtidig med browsertjekket; funktionen er ikke ændret i denne session.
+  - `npm test` (tsc og vitest): 9 filer og 117 test bestået på 15 s. Fagords- og bydeformtesten (`src/test/sprog.test.tsx`, der læser al tekst på alle skærme og hele `src/tekster.ts`) består for sig: 6 test. `npm run build` bygger.
+  - `node tools/tjek_bredde.mjs`: 289 tjek i orden og ingen fejl ved 320, 390 og 1280 px på 70 s (før 157). ⓘ prøves nu på oversigten og i analysevinduet for alle tre testsvar (par 452 spil 7, hold 450 spil 4 og par 3287 spil 32) ved 320, 390 og 1280 px: åbner og lukker med mus, tryk, Enter, mellemrum og Escape, fokus bliver på ⓘ, og der er ingen vandret rulning og ingen trykflade under 44 px med teksten åben.
+- **Skærmbilleder** med ⓘ åben (uden for git og kun med anonymiserede data: holdet hedder "Hold 1", og ingen spillernavne står på billederne):
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\390-aften-hold-450-info.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\1280-aften-hold-450-info.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\390-analysevindue-par-3287-spil-32-info.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\1280-analysevindue-par-3287-spil-32-info.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\390-analysevindue-hold-450-spil-4-info.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\1280-analysevindue-hold-450-spil-4-info.png`
+  - oversigten ved parturnering igen med den nye sætning: `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\390-aften-3287-info.png` og `C:\Users\frank\Kontraktbridge\skaermbilleder\point-som-bridgedk\1280-aften-3287-info.png`. Billederne fra anden session (`320-`, `390-` og `1280-aften-3287.png` og `320-aften-3287-info.png`) er taget igen, så ingen viser den gamle sætning.
+- **Passer imp-teksten med beregningen?** Ikke helt. Post Mortem regner hvert spil ved holdturnering som imp(S + T) (`analyse._holdturnering`, `regn.imp` efter § 78B), hvor S er jeres score og T holdkammeraternes score ved det andet bord, begge set fra jeres hold. Faktorerne findes ved holdturnering (de samme fire, med middel 0), og de lægger op til jeres imp på spillet. Derfor passer "Point er imp", "omregnes til imp", "hvad der flyttede dem: meldinger, spilføring, modspil og held og uheld" og "Summen er jeres imp på spillet". To ting passer ikke helt, og teksten er brugt uændret:
+  1. **"forskellen":** Post Mortem lægger jeres og holdkammeraternes score sammen; det er ikke forskellen mellem dem. Det er kun en forskel, hvis holdkammeraternes resultat læses som scoren i jeres retning ved det andet bord (modstandernes score dér). Analysevinduet viser holdkammeraternes score set fra holdet ("Jeres andet bord: −200"), så en læser, der trækker fra, får et andet tal: i spil 4 (hold 450) er jeres score −680 og andet bord −200; imp er −13 (−880), ikke −10 (−480).
+  2. **"held og uheld som ved parturnering":** ved holdturnering er held og uheld først og fremmest resultatet ved det andet bord mod par, imp(par + T), altså det, holdkammeraterne og deres modstandere gjorde, plus modpartens fejl og udspil ved jeres bord. Det er ikke feltet som ved parturnering, og holdkammeraternes egne fejl og gode spil tæller her. Analysevinduet skriver da også "Jeres andet bord gjorde det bedre/dårligere end par."
+
+  En lille ting mere: på oversigten er summen af faktorerne aftenens imp ("I alt"), ikke spillets; teksten siger "på spillet". Ved parturnering siger teksten "jeres point mod middel", som passer begge steder.
+- **Engelsk:** appen har ingen engelsk udgave (`src/tekster.ts` er kun dansk i første udgave, SPEC-postmortem-1c-app.md), så der er ingen engelsk tekst at skrive.
+- **Valg, specen ikke afgør:**
+  1. Teksterne står samlet i `T.pointInfo` (label, `par` og `hold`) i stedet for `T.aften.info`, fordi de bruges både på oversigten og i analysevinduet; `PointInfo` i `src/ui/Info.tsx` viser teksten for formen begge steder med samme ⓘ-komponent som før.
+  2. "Point" står med fed i imp-teksten, som "Point" og "Middel" gør i parturneringens tekst; ordene er Franks, ordret. Teksten er ét afsnit, fordi den ikke har punkter.
+  3. I analysevinduet står ⓘ ved overskriften som på oversigten, og teksten folder sig ud under den. Kortet har `key` efter spillet, så ⓘ er lukket, hver gang et nyt spil vises (med "Næste spil" eller "Forrige spil").
+  4. Formål: Franks sætning har erstattet de to sætninger om regnemåden (436 og 448). Hans enkelte anførselstegn om 'P' er skrevet som "P" som i resten af specen.
+  5. Skærmbillederne er taget med `tjek_bredde.mjs --billeder` til en midlertidig mappe, og kun de tolv billeder ovenfor er kopieret til mappen, så den ikke fyldes med de andre skærme.
+  6. `CLAUDE.md` nævner, at `tjek_bredde.mjs` også prøver ⓘ.
+- **`SYSTEM.md`:** rækken for 17. nov. 2026 om Post Mortem 1d har Franks svar, ⓘ de fire steder, at imp-teksten ikke passer helt, og hvor skærmbillederne ligger. Den siger stadig "Venter på Franks godkendelse; ikke flettet". Datoen øverst var allerede 17. november 2026.
+- **Spørgsmål til Frank:**
+  1. Imp-teksten: skal "forskellen" og "held og uheld som ved parturnering" stå, som de gør (se ovenfor)? Et muligt forslag, hvis teksten skal følge beregningen: "På hvert spil lægges jeres score og holdkammeraternes score ved det andet bord sammen, og resultatet omregnes til imp." og "… og held og uheld, som her mest er det, der skete ved det andet bord."
+  2. Skal ⓘ i analysevinduet blive åben, når der skiftes spil? Nu lukker den.
 
 ## Arbejdsgang
 
