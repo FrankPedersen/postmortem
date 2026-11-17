@@ -60,7 +60,18 @@ Der kommer en ⓘ som i de andre apps (et klik eller tryk åbner teksten, og den
 
 ## Afklaret
 
-(udfyldes af Claude Code. Tokenforbruget skrives i fire tal: nye input, skrevet til cachen, læst fra cachen og output.)
+**Status (17. november 2026): stoppet ved testdataene.** Aftenen 16. november 2026 kunne ikke findes på resultater.bridge.dk ud fra koden og bridge.dk uden at gætte. Der er ingen accepttest og intet bygget endnu.
+
+- **Tag og gren:** `main` (`285aef4`, lig med `origin/main`) er tagget `v-foer-point-som-bridgedk`, og grenen er `point-som-bridgedk`. Specen er committet som `719cf59`. Intet er pushet.
+- **Søgningen:** Post Mortem får hele linket fra brugeren og søger ikke selv. Testsiderne fra v1 kommer fra hovedklub 2151, klub 1 (onsdag), og den har ikke aftenen. Gennemgået med samme slags adresser, som siderne selv linker til:
+  - turneringsoversigten (`overview.php?mainclubno=…&club=1`) for 280 hovedklubber: de 224 klubnumre på DBf's regionale klublister og resten af numrene 2100–2199;
+  - klub 2–12, 20 og 99 under hovedklub 2151 (alle tomme);
+  - turneringssiden (`turnering.php`) for alle 145 turneringer, der omfatter 16. november 2026.
+- **Resultat:** ingen turnering hedder "Efterårs Hold og Par", og ingen har en sektion "Par Gul". Den nærmeste er en mandagsturnering med hold og sideløbende par, der har "B - Gul række", men den række er en holdrække. Klubber, der ikke er klub 1 under deres hovedklub, eller som ikke står på DBf's lister, er ikke gennemgået, fordi det kræver gæt på numre.
+- **Mangler fra Frank:** linket til det personlige regnskab for par 1 i sektion Par Gul 16. november 2026, som det står i adresselinjen (`https://resultater.bridge.dk/template/personligt_regnskab.php?filename=…&tournament=…&section=…&pairno=1`). Med det hentes siderne til en midlertidig mappe, og arbejdet fortsætter fra trin 2 på grenen.
+- **Regnskabet:** det personlige regnskab har kolonnerne Point og Pct for NS og ØV med én decimal pr. spil (set i den anonymiserede side for 452). bridge.dk's point pr. spil kan altså læses derfra, når siden er fundet.
+- **Rigtige sider:** den midlertidige mappe med de hentede oversigter og turneringssider er slettet. Ingen side fra bridge.dk er kommet i repoet, og `SYSTEM.md` er ikke ændret, fordi intet er bygget.
+- **Tokenforbrug** (denne session, 49 svar, målt før den sidste commit): nye input 100, skrevet til cachen 144.974, læst fra cachen 5.395.383 og output 28.310, i alt 5.568.767.
 
 ## Arbejdsgang
 
