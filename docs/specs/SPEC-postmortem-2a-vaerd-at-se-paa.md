@@ -42,34 +42,35 @@ Den er allerede gemt anonymiseret som testdata i 1d. Brug den gemte kopi.
 
 ## 1. Spil værd at se på
 
-**Jeres egne faktorer** er meldinger, spilføring og modspil fra v1. Kun den negative del af hver faktor tæller (Franks svar 17. nov., punkt 1 (a)): en positiv faktor for meldinger kommer af modpartens meldinger, ligesom v1 lægger modpartens fejl i spilføring og modspil under held og uheld. "Den negative del af egne faktorer" er summen af de negative faktorer, fx −1 for meldinger +11, spilføring 0 og modspil −1.
+**Jeres egne faktorer** er meldinger, spilføring og modspil fra v1. Kun den negative del af hver faktor tæller (Franks svar 17. nov., punkt 1 (a)): en positiv faktor for meldinger kommer af modpartens meldinger, ligesom v1 lægger modpartens fejl i spilføring og modspil under held og uheld. "Den negative del af egne faktorer" er summen af de negative faktorer, fx −1 for meldinger +11, spilføring 0 og modspil −1. Den kaldes også spillets **omkostning**.
 
-**Listen** (Franks svar 17. nov.): et spil er med, når mindst ét af disse gælder:
-- den negative del af jeres egne faktorer er −2 point eller lavere;
-- udgang eller slem er misset eller meldt uden dækning;
-- strafdobling;
-- udspillet kostede mindst 1 stik;
-- heldigt eller uheldigt.
+**Listen er rangeret, ikke en grænse** (Franks svar 2, 17. nov.):
+- **"Spil værd at se på"** viser de 8 spil med størst omkostning, med deres mærker. Er der færre end 8 spil med en omkostning (en negativ del under 0), vises færre.
+- **"Vis alle (N)"** viser derudover resten af de spil, der har en omkostning på −2 point eller lavere (ved holdturnering −2 imp), eller som har et af de faste mærker. N er alle spil på den lange liste, de 8 og resten. Knappen står kun, når der er en rest.
+- **De uheldige spil** (Uheldigt: ingen egne fejl) står på én linje under listen, fx "Uheldige, ingen fejl: spil 15, 20, 26 og 27". De står hverken blandt de 8 eller i resten.
+- **De faste mærker** er dem, der alene bringer et spil med under "Vis alle": udgang eller slem misset eller meldt uden dækning, strafdobling, udspillet kostede N stik og heldigt.
+- **Ekstra mærker** er bund, top og anden kontrakt end feltet: de vises på spillet, men bringer det ikke med. Meldinger, spilføring og modspil viser, hvor omkostningen kom fra, og bringer kun et spil med gennem omkostningen.
 
-**Mærkerne** gives på alle spil. Bund, top og anden kontrakt end feltet er ekstra mærker: de vises på spillet, men bringer ikke alene et spil på listen. Spilføring og modspil viser, hvor faktoren kom fra, og bringer et spil på listen gennem grænsen på −2 point.
+**Mærkerne** gives på alle spil.
 
-| Mærke | Regel | Bringer spillet på listen |
+| Mærke | Regel | Slags |
 | --- | --- | --- |
-| **Udgang misset** / **Slem misset** | meldesamtalen siger "Ja" eller "Måske" til udgang eller slem, og I meldte lavere. Mærket gives kun, når I var spilfører, eller alle passede (forslag 6) | ja |
-| **Udgang meldt uden dækning** / **Slem meldt uden dækning** | I meldte udgang eller slem, og meldesamtalen siger "Nej" | ja |
-| **Strafdobling** | kontrakten er doblet eller redoblet | ja |
-| **Udspillet kostede N stik** | udspillets pris fra v1 er mindst 1 stik, og jeres side spillede ud | ja |
-| **Heldigt** | mindst 50 %, men den negative del af jeres egne faktorer er under 0 | ja |
-| **Uheldigt** | under 50 %, ingen af jeres egne faktorer er negative, og Held og uheld er negativ | ja |
-| **Spilføring −N stik** / **Modspil −N stik** | faktoren fra v1 er negativ. N er stikkene efter udspillet: er modspillet kun negativt på grund af udspillet, står kun "Udspillet kostede N stik" (forslag 8) | gennem grænsen på −2 point |
-| **Bund** / **Top** | procent under 25 eller over 75 | nej, ekstra mærke |
-| **Anden kontrakt end feltet** | jeres kontrakt har en anden farve (sans regnes som en farve) eller er en anden slags kontrakt (delkontrakt, udgang eller slem; pas er sin egen slags) end den hyppigste i feltet. Et andet niveau af samme slags i samme farve tæller ikke, fx 2♠ mod feltets 3♠. Er jeres kontrakt blandt de hyppigste ved lighed, er der intet mærke (forslag 7) | nej, ekstra mærke |
+| **Udgang misset** / **Slem misset** | meldesamtalen siger "Ja" eller "Måske" til udgang eller slem, og I meldte lavere. Mærket gives kun, når I var spilfører, eller alle passede (forslag 6) | fast |
+| **Udgang meldt uden dækning** / **Slem meldt uden dækning** | I meldte udgang eller slem, og meldesamtalen siger "Nej" | fast |
+| **Strafdobling** | kontrakten er doblet eller redoblet | fast |
+| **Udspillet kostede N stik** | udspillets pris fra v1 er mindst 1 stik, og jeres side spillede ud | fast |
+| **Heldigt** | mindst 50 %, men den negative del af jeres egne faktorer er under 0 | fast |
+| **Uheldigt** | under 50 %, ingen af jeres egne faktorer er negative, og Held og uheld er negativ | linjen under listen |
+| **Meldinger −N point** | meldingsfaktoren fra v1 er negativ; N er pointene med én decimal som bridge.dk (ved holdturnering "Meldinger −N imp") (Franks svar 2) | omkostning |
+| **Spilføring −N stik** / **Modspil −N stik** | faktoren fra v1 er negativ. N er stikkene efter udspillet: er modspillet kun negativt på grund af udspillet, står kun "Udspillet kostede N stik" (forslag 8) | omkostning |
+| **Bund** / **Top** | procent under 25 eller over 75 | ekstra |
+| **Anden kontrakt end feltet** | jeres kontrakt har en anden farve (sans regnes som en farve) eller er en anden slags kontrakt (delkontrakt, udgang eller slem; pas er sin egen slags) end den hyppigste i feltet, eller den anden side var spilfører (Franks svar 2). Et andet niveau af samme slags i samme farve og ved samme side tæller ikke, fx 2♠ mod feltets 3♠. Er jeres kontrakt blandt de hyppigste ved lighed, er der intet mærke (forslag 7) | ekstra |
 
-- **Heldigt og Uheldigt** vises som ét mærke med grunden, fx "Heldigt: godt resultat, udspil −1 stik" og "Uheldigt: bund, bedste modspil"; spillets andre mærker står i grunden (forslag 10).
-- **Sortering:** efter den negative del af jeres egne faktorer, det dyreste først. Ved lighed kommer laveste procent først. Heldige og uheldige spil står sidst.
-- **Visning:** de første 8 vises, og derunder står knappen "Vis alle (N)". Filteret "Værd at se på · N" kommer med i filtrene over Spillene.
+- **Heldigt og Uheldigt** vises som ét mærke med grunden, fx "Heldigt: godt resultat, udspillet kostede 1 stik" og "Uheldigt: bund, ingen fejl"; spillets andre mærker står i grunden (forslag 10).
+- **Sortering:** efter omkostningen, det dyreste først, både blandt de 8 og i resten. Heldige spil står efter omkostningen som de andre. Ved lighed kommer laveste procent først (ved holdturnering laveste imp) og derefter laveste spilnummer.
+- **Visning:** de 8 vises med "8 af 32", og derunder står knappen "Vis alle (N)" og linjen med de uheldige. Filteret "Værd at se på · 8" over Spillene viser de 8 i spillenes rækkefølge, og udskriften og mailen har de 8 under "Spil værd at se på".
 - **Forklaring:** "Hvorfor er et spil med?" kan foldes ud og har listens regel i ord, som på skærm 1, og siger, at bund, top og anden kontrakt end feltet kun er ekstra mærker.
-- **Ved holdturnering** (forslag 5): bund og top udelades. Heldigt er 0 imp eller mere, og uheldigt er under 0 imp.
+- **Ved holdturnering** (forslag 5 og Franks svar 2): bund og top udelades, grænsen er −2 imp, og meldingsmærket er "Meldinger −N imp". Heldigt er 0 imp eller mere, og uheldigt er under 0 imp.
 
 ## 2. Meldesamtalen (analysevinduet, øverst)
 
@@ -129,14 +130,18 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 
 ## Accepttest (skrives først, røde)
 
-1. **Mærkerne og listen for 16. nov.** (rettet efter Franks svar 17. nov.):
-   - Spil 1 har "Slem misset" og "Anden kontrakt end feltet" og er med.
-   - Spil 7 har "Bund", "Anden kontrakt end feltet" og "Spilføring −1 stik", men er ikke med: den negative del af egne faktorer er −1 point, og de andre mærker er ekstra mærker.
-   - Spil 17 har "Strafdobling" og er med.
-   - Spil 19 er "Heldigt" og er med (meldinger +11 tæller ikke; modspil −1).
-   - Spil 15 er "Uheldigt" og er med.
-   - Spil 12 har ikke "Anden kontrakt end feltet" (2♠ mod feltets 3♠: samme farve og slags).
-   - Listen og rækkefølgen er listen under Afklaret, og målet er 8–12 spil. Testen skriver hele listen, så Frank kan se den.
+1. **Mærkerne og listen for 16. nov.** (rettet efter Franks svar 2, 17. nov.):
+   - "Spil værd at se på" er spil 1, 4, 8, 25, 29, 6, 24 og 9 i den rækkefølge, og "Vis alle (18)" viser derudover 5, 21, 14, 11, 13, 32, 17, 18, 22 og 19. Mærkerne er dem under Afklaret ("Franks svar 2").
+   - Linjen under listen er "Uheldige, ingen fejl: spil 15, 20, 26 og 27".
+   - Spil 1 har "Slem misset", "Meldinger −14 point" og "Anden kontrakt end feltet" og er nummer 1.
+   - Spil 7 har "Bund", "Spilføring −1 stik" og "Anden kontrakt end feltet", men er hverken blandt de 8 eller under "Vis alle": omkostningen er −1 point, og ingen af mærkerne er faste. Udskriften af spil 7 laves fra "Alle spil".
+   - Spil 17 har "Strafdobling" og står under "Vis alle".
+   - Spil 19 er "Heldigt" (meldinger +11 tæller ikke; modspil −1) og står under "Vis alle".
+   - Spil 15 er "Uheldigt" og står på linjen under listen.
+   - Spil 12 har ikke "Anden kontrakt end feltet" (2♠ mod feltets 3♠: samme farve, slags og side).
+   - Spil 32 har "Meldinger −2,3 point".
+   - Ved holdturnering er grænsen −2 imp, og bund og top findes ikke.
+   - Testen skriver hele listen, så Frank kan se den.
 2. **Meldesamtalen:**
    - Fit, udgang og slem for spil 1 og spil 17 og mindst fire konstruerede spil, der dækker ja, måske og nej, fit "Nej" og konkurrence med trumftallet.
    - Facit for udgang og slem holdes op mod DD-tabellen og feltet i testdata.
@@ -271,6 +276,59 @@ Ikke med (10 spil): 2 (Top, Anden kontrakt end feltet), 3, **7** (Bund, Anden ko
 - **Commits:** `77ee5af` (specen rettet efter Franks svar, listen og stoppet) og denne med tokenforbruget.
 - **`SYSTEM.md`:** rækken for Post Mortem 2a har fået Franks svar og stoppet i anden session, med "Venter på Franks svar; ikke flettet". Datoen øverst var allerede 17. november 2026.
 - **Tokenforbrug** (anden session, 39 svar, målt før den sidste commit): nye input 78, skrevet til cachen 171.089, læst fra cachen 5.055.478 og output 55.285, i alt 5.281.930.
+
+### Franks svar 2, 17. nov. 2026
+
+> "Post Mortem 2a, svar fra Frank:
+> Listen er rangeret, ikke en grænse: 'Spil værd at se på' viser de 8 spil med størst omkostning af egne beslutninger (kun den negative del), med deres mærker. Færre, hvis færre har en omkostning. 'Vis alle (N)' viser resten af de spil, der har mindst −2 point (ved holdturnering −2 imp) eller et af de faste mærker. De uheldige spil (bund uden fejl) står på én linje under listen: 'Uheldige, ingen fejl: spil …'. Skriv de 8 og linjen for 16. nov. under Afklaret, og ret accepttest 1.
+> Spil 7 må falde ud af listen. PDF'en af spil 1 og 7 laves fra 'Alle spil'.
+> Mærket 'Meldinger −N point' tilføjes.
+> −2 imp ved holdturnering er godkendt.
+> At 'anden kontrakt end feltet' tæller med, hvem der var spilfører, er godkendt.
+> Byg nu i en frisk session på grenen: accepttestene først (røde), byg, og stop før merge med billeder og PDF. Kør alt i forgrunden. Stop ikke for listens længde igen; jeg vurderer den ved gennemgangen."
+
+Afsnit 1 og accepttest 1 er rettet efter svaret. Listen er regnet som i første og anden session (feltets kontrakter fra `spilresultater-3287.html`, resten fra `src/test/data/par-3287.json`, feltet er de 7 andre borde og 6 i spil 32) og bygges ind i funktionen i tredje session.
+
+**Spil værd at se på, 16. november (8 af 32):**
+
+| Nr. | Spil | Kontrakt | Procent | Omkostning | Mærker |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 1 | N 4♠ | 28,6 | −14 | Slem misset, Meldinger −14 point, Anden kontrakt end feltet |
+| 2 | 4 | N 3NT | 71,4 | −10 | Heldigt: godt resultat, meldinger −10 point, anden kontrakt end feltet |
+| 3 | 8 | Ø 3♥ | 21,4 | −9 | Bund, Modspil −2 stik |
+| 4 | 25 | Ø 3♠ | 7,1 | −8 | Bund, Meldinger −1 point, Modspil −1 stik, Anden kontrakt end feltet |
+| 5 | 29 | N 2♠ | 42,9 | −8 | Meldinger −4 point, Spilføring −1 stik, Anden kontrakt end feltet |
+| 6 | 6 | N 3♠ | 42,9 | −7 | Udgang misset, Meldinger −7 point |
+| 7 | 24 | Ø 2♠ | 14,3 | −6 | Bund, Meldinger −2 point, Modspil −2 stik, Anden kontrakt end feltet |
+| 8 | 9 | Ø 3NT | 42,9 | −6 | Modspil −1 stik |
+
+**"Vis alle (18)"** viser derudover de 10 andre (alle har en omkostning på −2 point eller lavere eller et fast mærke):
+
+| Nr. | Spil | Kontrakt | Procent | Omkostning | Mærker |
+| --- | --- | --- | --- | --- | --- |
+| 9 | 5 | N 3NT | 57,1 | −6 | Heldigt: godt resultat, meldinger −2 point, spilføring −1 stik |
+| 10 | 21 | N 2♥ | 57,1 | −6 | Heldigt: godt resultat, udgang misset, meldinger −6 point |
+| 11 | 14 | V 4♠ | 28,6 | −5 | Udspillet kostede 1 stik, Anden kontrakt end feltet |
+| 12 | 11 | N 4♠ | 85,7 | −5 | Heldigt: top, udgang meldt uden dækning, meldinger −5 point |
+| 13 | 13 | N 1♥ | 71,4 | −4 | Heldigt: godt resultat, udgang misset, meldinger −2 point, spilføring −1 stik |
+| 14 | 32 | Ø 3♥ | 41,8 | −2,3 | Meldinger −2,3 point |
+| 15 | 17 | N 5♣ doblet | 14,3 | −2 | Bund, Udgang meldt uden dækning, Strafdobling, Meldinger −2 point, Anden kontrakt end feltet |
+| 16 | 18 | S 1NT | 78,6 | −2 | Heldigt: top, udgang misset, meldinger −2 point, anden kontrakt end feltet |
+| 17 | 22 | Ø 4♥ | 78,6 | −2 | Heldigt: top, udspillet kostede 1 stik |
+| 18 | 19 | Ø 3♦ | 85,7 | −1 | Heldigt: top, udspillet kostede 1 stik, anden kontrakt end feltet |
+
+**Linjen under listen:** "Uheldige, ingen fejl: spil 15, 20, 26 og 27" (15 og 20 er bund, 26 og 27 er 42,9 %).
+
+**Ikke med (10 spil):** 2 (Top, Anden kontrakt end feltet), 3, **7** (Bund, Spilføring −1 stik, Anden kontrakt end feltet; omkostning −1 point), 10, 12, 16 (Top), 23 (Top, Anden kontrakt end feltet), 28 og 30 (Anden kontrakt end feltet) og 31.
+
+**Valg, svaret ikke afgør** (tredje session):
+- **Lighed i omkostning:** laveste procent først (ved holdturnering laveste imp), derefter laveste spilnummer. Det afgør, hvilke to af de fire spil med −6 point der kommer blandt de 8: 24 (14,3 %) og 9 (42,9 %) før 5 og 21 (57,1 %). Med spilnummer alene ville det være 5 og 9.
+- **Heldige spil rangeres efter omkostningen** som de andre, fordi listen er rangeret efter omkostningen; specens tidligere "heldige og uheldige spil står sidst" er taget ud. Spil 4 (heldigt, −10 point) er derfor nummer 2.
+- **De faste mærker** er de mærker, der i specen før svaret bragte et spil på listen, uden uheldigt, der har sin egen linje: udgang eller slem misset eller meldt uden dækning, strafdobling, udspillet og heldigt. 16. november ændrer heldigt intet, fordi alle heldige spil også har −2 point eller et andet fast mærke.
+- **N i "Vis alle (N)"** er hele den lange liste (18), ikke kun resten (10).
+- **Uheldigt** følger specens regel (under 50 %, ingen negativ egen faktor, Held og uheld negativ), så linjen har 26 og 27 med (42,9 %). Mente Frank kun bund ("bund uden fejl"), er linjen 15 og 20.
+- **"Spil værd at se på" i filteret, udskriften og mailen** er de 8, som mock-up'en ("Side 2 af 9", "Værd at se på · 8"). Resten kommer med "Alle spil".
+- **Meldinger −N point** har én decimal som bridge.dk's point (−2,3) og hele tal uden ",0" (−14).
 
 ## Arbejdsgang
 
