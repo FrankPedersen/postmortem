@@ -102,6 +102,7 @@ Der kommer en ⓘ som i de andre apps (et klik eller tryk åbner teksten, og den
   - Søgningen: Post Mortem får hele linket fra brugeren og søger ikke selv. Testsiderne fra v1 kommer fra hovedklub 2151, klub 1 (onsdag), og den har ikke aftenen. Gennemgået med samme slags adresser, som siderne selv linker til: turneringsoversigten (`overview.php?mainclubno=…&club=1`) for 280 hovedklubber (de 224 klubnumre på DBf's regionale klublister og resten af numrene 2100–2199), klub 2–12, 20 og 99 under hovedklub 2151 (alle tomme) og turneringssiden (`turnering.php`) for alle 145 turneringer, der omfatter 16. november 2026. Ingen hed "Efterårs Hold og Par" eller havde en sektion "Par Gul".
   - Den midlertidige mappe med de hentede oversigter og turneringssider blev slettet.
   - Tokenforbrug (49 svar, målt før den sidste commit): nye input 100, skrevet til cachen 144.974, læst fra cachen 5.395.383 og output 28.310, i alt 5.568.767.
+- **Tokenforbrug** (anden session, 106 svar, målt før den sidste commit): nye input 214, skrevet til cachen 271.178, læst fra cachen 20.047.858 og output 124.355, i alt 20.443.605.
 
 ## Arbejdsgang
 
