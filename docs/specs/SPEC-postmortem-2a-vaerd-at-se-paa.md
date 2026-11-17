@@ -146,6 +146,45 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 - reglen for ja, måske og nej (halvdelen af feltet);
 - grænsen på 25 procentpoint for "overstikket var afgørende".
 
+### Første session (17. november 2026, stoppet før accepttestene)
+
+- **Status:** stoppet før accepttestene med spørgsmål til Frank, fordi specen ikke kan bygges, som den står, på to punkter (1 og 2 nedenfor). Intet er bygget, og kun specen og mock-up'en er committet. Intet er pushet eller udrullet. **Venter på Franks svar; ikke flettet.**
+- **Tag og gren:** `main` (`d973315`, lig med `origin/main`) er tagget `v-foer-vaerd-at-se-paa`, og grenen er `vaerd-at-se-paa`. Specen og de seks mock-up-filer er committet som `f91d9e1`. `PLAN-postmortem-v2.md` er ikke rørt.
+- **Sådan er reglerne prøvet:** reglerne i afsnit 1 og 2 er regnet med et script uden for repoet på de gemte sider for 16. november (kontrakterne i feltet fra `spilresultater-3287.html`) og funktionens svar i `src/test/data/par-3287.json` (procent, faktorer, DD-tabel og udspil). Feltet er de 7 andre borde, som i mock-up'en ("2 af 7 borde").
+
+**Det, der stopper bygningen:**
+
+1. **Reglen for Heldigt og accepttest 1 modsiger hinanden i spil 19.** Accepttesten kræver, at spil 19 er "Heldigt", og reglen er "mindst 50 %, men jeres egne faktorer (meldinger, spilføring, modspil) er tilsammen negative". Spil 19 (Ø 3♦, 11 stik, −150, 85,7 %) har meldinger +11, spilføring 0 og modspil −1, altså tilsammen +10. Meldinger er +11, fordi modparten stoppede i 3♦, mens par er 6NT for Øst–Vest. Modspil −1 er udspillet, der kostede et stik (12 stik før udspillet og 13 efter). Efter reglen er spil 19 altså ikke heldigt. Tre muligheder:
+   - (a) Kun den negative del af hver af jeres egne faktorer tæller. En positiv faktor for meldinger kommer af modpartens meldinger, ligesom v1 lægger modpartens fejl i spilføring og modspil under held og uheld. Heldige: 4, 5, 11, 13, 18, 19, 21 og 22. Uheldige: 15, 20, 26 og 27. **Anbefalet.**
+   - (b) Meldinger tæller kun som jeres egen faktor, når I var spilfører, eller alle passede. Heldige: de samme otte. Uheldige: 15, 26 og 27.
+   - (c) Reglen står, og accepttesten rettes. Heldige: 4, 5, 11, 13, 18, 21 og 22. Uheldige: 15 og 26. Spil 19 er så med som Top, Anden kontrakt end feltet og Udspillet kostede 1 stik.
+
+   Sorteringen ("summen af jeres egne faktorer") følger samme valg.
+2. **Konkurrence kan ikke læses af data.** "Med konkurrence (begge sider har meldt en farve)" kræver meldeforløbet. bridge.dk's sider (personligt regnskab, kortfordeling, spilresultater og bordresultater) har kun slutkontrakten, udspillet, stikkene og scoren, så det kan ikke ses, om den anden side meldte. Tre muligheder:
+   - (a) Konkurrence, når begge sider spillede en farvekontrakt ved mindst ét bord (jeres eller feltets, ved holdturnering de to borde). 16. november giver det 14 af 32 spil: 4, 6, 8, 13, 15, 17, 19, 20, 22, 24, 25, 26, 29 og 32. **Anbefalet.**
+   - (b) Konkurrence, når begge sider har et fit på mindst 8 kort. Det er 29 af 32 spil, så det skiller næsten ikke.
+   - (c) Linjen skelner ikke: den viser altid parrets side efter dobbeltdummy, trumftallet for hver side og summen.
+
+**Til Frank, før der bygges (ingen modstrid, men det ændrer billedet):**
+
+3. **Listen bliver lang.** Med reglerne, som de står, har 29 af 32 spil mindst ét mærke, mens mock-up'en viser 8 af 32. Kun spil 3, 10 og 31 er uden.
+   - Bund og top giver alene 14 spil: med 7 andre borde går procenten i trin på 7,1, og 4 af de 15 mulige værdier ligger under 25 % og 4 over 75 %.
+   - "Anden kontrakt end feltet" rammer 20 spil, også delkontrakter, hvor kun niveauet afviger (fx 2♠ mod feltets 3♠).
+   - "Vis alle (N)" viser de 8 dyreste først, så listen kan bruges, men "29 af 32" siger ikke meget. Med (a) under punkt 1 bliver rækkefølgen 1, 8, 25, 29, 6, 24, 9, 14, 32, 17, 7, 12, 28, 30, 2, 16 og 23, så de heldige 4, 5, 21, 11, 13, 18, 22 og 19 og til sidst de uheldige 15, 20, 26 og 27. Spil 7 (0 %) er nummer 11, fordi spilføringen kun kostede 1 point.
+4. **Mock-up'en og specen siger noget forskelligt om ja, måske og nej.** Boksen "Sådan regnes ja, nej og måske" på skærm 2 siger "kræver ingen god sidning" og "kun med en god sidning". Det har specens regel ikke, og dobbeltdummy kan ikke afgøre det. Det samme gælder facit-teksten om ♥D hos Øst ("slemmen er en kipning"). Mail-teksten på skærm 3 siger "Slem: ja … 2 af 7 borde", hvor skærm 2 og reglen siger måske. Forslag: boksen og teksterne følger specens regel (stik med åbne kort og feltet).
+
+**Valg, specen ikke afgør** (forslaget i parentes, så næste session ikke behøver at stoppe igen):
+
+5. **Holdturnering:** der er ingen procent pr. spil, så bund og top, grænsen på 50 % for heldigt og uheldigt og de 25 procentpoint for overstikket siger ikke noget i imp. (Bund og top udelades. Heldigt ved 0 imp eller mere og uheldigt under 0. Overstikket er afgørende ved mindst 3 imp.)
+6. **Udgang eller slem misset, når modparten fik kontrakten:** om I "meldte lavere", kan ikke ses, fx ved en offermelding over jeres 4♠. (Mærket gives kun, når I var spilfører, eller alle passede. Det ændrer intet 16. november.)
+7. **Anden kontrakt end feltet ved lighed:** i spil 17 spillede to borde 4♣ og to 5♣. (Intet mærke, når jeres kontrakt er blandt de hyppigste. Mock-up'en viser mærket på spil 17.)
+8. **Modspil −N stik, når faktoren kun er negativ på grund af udspillet** (spil 14, 19 og 22). (Kun "Udspillet kostede N stik", som mock-up'en viser spil 14. "Modspil −N stik" tæller stikkene efter udspillet.)
+9. **Nej uden spørgsmål:** "Udgang: nej" og "Slem: nej", når I ikke meldte det, har ingen spørgsmål på listen. (Foldet sammen som ja, så "Slem: nej" ikke står åbent på næsten hvert spil.)
+10. **Heldigt og Uheldigt** vises som ét mærke med grunden, som i mock-up'en ("Heldigt: godt resultat, udspil −1 stik", "Uheldigt: bund, bedste modspil"), og spillets andre mærker står i grunden.
+11. **Husets ord:** appens spørgsmål bliver "Havde vi et fit?" (specen skriver "en fit"), fordi fagordstesten fejler ved "en fit".
+
+- **Spørgsmål til Frank:** punkt 1 og 2 skal besvares, før der bygges. Punkt 3 og 4 og forslagene under 5–11 kan besvares samtidig.
+
 ## Arbejdsgang
 
 1. Arbejd i en frisk session, og kør alt i forgrunden.
