@@ -28,9 +28,9 @@ const INFO_PAR = [
   'Summen er jeres point mod middel.',
 ];
 const FEDE_PAR = ['Point', 'Middel', 'Meldinger (begge sider):', 'Spilføring', 'Modspil:', 'Held og uheld:'];
-// ⓘ-teksten ved holdturnering, ordret som i Franks svar 17. nov. 2026.
+// ⓘ-teksten ved holdturnering, ordret som i Franks svar og godkendelse 17. nov. 2026.
 const INFO_HOLD = [
-  'Point er imp. På hvert spil sammenlignes jeres score med holdkammeraternes ved det andet bord, og forskellen omregnes til imp. Tallene viser, hvor mange imp I vandt eller tabte, og hvad der flyttede dem: meldinger, spilføring, modspil og held og uheld som ved parturnering. Summen er jeres imp på spillet.',
+  'Point er imp. På hvert spil lægges jeres score og holdkammeraternes score ved det andet bord sammen, og summen omregnes til imp. Tallene viser, hvor mange imp I vandt eller tabte, og hvad der flyttede dem: Meldinger, Spilføring og Modspil er regnet med åbne kort som ved parturnering. Held og uheld er resten, mest resultatet ved det andet bord, og holdkammeraternes fejl og gode spil tæller med her. Summen er jeres imp.',
 ];
 const FEDE_HOLD = ['Point'];
 

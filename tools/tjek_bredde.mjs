@@ -43,10 +43,11 @@ const VAELG = læs('hold-450-vaelg.json');
 const PAR_3287 = læs('par-3287.json');
 const PAR_3287_URL = 'https://resultater.bridge.dk/template/personligt_regnskab.php?filename=1111/MT3287GT11912.XML&tournament=3287&section=7&pairno=1';
 const INFO = 'Hjælp: Hvor gik pointene?';
-// Begyndelsen, en sætning midt i og slutningen af ⓘ-teksten for hver form (Franks svar 17. nov. 2026).
+// Begyndelsen, en sætning midt i og slutningen af ⓘ-teksten for hver form (Franks svar 17. nov. 2026 og, for imp-teksten,
+// Franks svar og godkendelse samme dag).
 const INFO_TEKST = {
   par: { start: 'Point er parpoint.', midt: 'omregnes pointene, så alle spil tæller lige meget, som hos bridge.dk.', slut: 'Summen er jeres point mod middel.' },
-  hold: { start: 'Point er imp.', midt: 'sammenlignes jeres score med holdkammeraternes ved det andet bord', slut: 'Summen er jeres imp på spillet.' },
+  hold: { start: 'Point er imp.', midt: 'lægges jeres score og holdkammeraternes score ved det andet bord sammen, og summen omregnes til imp.', slut: 'Summen er jeres imp.' },
 };
 // Spillet i analysevinduet, hvor ⓘ prøves for hvert testsvar.
 const INFO_SPIL = { 'par 452': 7, 'hold 450': 4, 'par 3287': 32 };
