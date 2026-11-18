@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 // Accepttest 2 og 3 i SPEC-postmortem-2a-vaerd-at-se-paa.md, skrevet før bygningen: kortet Meldesamtalen øverst i
-// analysevinduet med FIT, UDGANG og SLEM (symbol, ord og en kort grund), "Spørg hinanden" kun ved måske, fit "Nej" og
-// meldt uden dækning, og de to linjer om overstikket og hvem der ejede spillet. Spørgsmålene står kun i src/tekster.ts.
+// analysevinduet med FIT, UDGANG og SLEM (symbol, ord og en kort grund), "Spørg hinanden" kun ved måske, fit "Nej",
+// meldt uden dækning og fit "Ja" med en kontrakt uden for fittets farve og sans (Franks svar 3, 18. nov. 2026), og de to
+// linjer om overstikket og hvem der ejede spillet. Spørgsmålene står kun i src/tekster.ts.
 import { cleanup, screen, within } from '@testing-library/react';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -19,7 +20,17 @@ const SPØRG = {
   udgangUden: ['Meldte vi udgang uden nok information?'],
   slemMåske: ['Undersøgte vi slem?', 'Havde vi styr på esser og nøglekort?', 'Var 6NT eller slem i farve rigtigst ved parturnering?'],
   slemUden: ['Pressede vi for hårdt?', 'Havde vi kontrol i sidefarverne?'],
+  // Franks svar 3, 18. nov. 2026: fit "Ja", og I spillede en farvekontrakt uden for fittets farve.
+  trumf: ['Var trumffarven den rigtige?'],
 };
+
+/** Fit "Ja", I var spilfører, og kontrakten er hverken i fittets farve eller i sans (Franks svar 3). */
+function andenTrumf(s: { kontrakt: string | null; spilfoerer: string | null; retning: string }, m: Meldesamtale): boolean {
+  if (m.fit.svar !== 'ja' || !s.kontrakt || s.kontrakt === 'Pas' || !s.spilfoerer) return false;
+  const farve = /^\d(NT|[CDHS])/.exec(s.kontrakt)![1];
+  const vi = (s.spilfoerer === 'N' || s.spilfoerer === 'S' ? 'NS' : 'OV') === s.retning;
+  return vi && farve !== 'NT' && farve !== m.fit.farve;
+}
 
 const kortet = () => screen.getByRole('region', { name: 'Meldesamtalen' });
 const felter = () => within(kortet()).getAllByRole('listitem').filter((li) => li.classList.contains('status-felt')).map(tekst);
@@ -58,7 +69,7 @@ describe('Meldesamtalen, 16. november', () => {
     expect(tekst(within(k).getByRole('heading', { level: 2 }))).toBe('Meldesamtalen');
   });
 
-  it('spil 1: fit ja, udgang ja, slem måske med 0 af 7 borde og spørgsmålene til slem', () => {
+  it('spil 1: fit ja, udgang ja, slem måske med 0 af 7 borde og spørgsmålene til slem og trumffarven', () => {
     vis('#/spil/1', par3287(), PAR_3287_URL);
     expect(felter()).toEqual(['Fit ✓ Ja 9 hjerter', 'Udgang ✓ Ja 7 af 7 borde', 'Slem ~ Måske 0 af 7 borde']);
     const slem = fold('Slem: måske');
@@ -66,14 +77,15 @@ describe('Meldesamtalen, 16. november', () => {
     expect(tekst(slem)).toContain('Facit: 12 stik i sans og hjerter med åbne kort; 0 af 7 borde meldte slem.');
     expect(tekst(slem.querySelector('.spoerg-titel'))).toBe('Spørg hinanden');
     expect(spørgsmål(slem)).toEqual(SPØRG.slemMåske);
-    for (const navn of ['Fit: ja', 'Udgang: ja']) {
-      expect(fold(navn).open, navn).toBe(false);
-      expect(spørgsmål(fold(navn)), navn).toEqual([]);
-    }
+    // N 4♠ med 9 hjerter: kontrakten er hverken i fittets farve eller i sans (Franks svar 3).
+    expect(fold('Fit: ja').open).toBe(true);
+    expect(spørgsmål(fold('Fit: ja'))).toEqual(SPØRG.trumf);
+    expect(fold('Udgang: ja').open).toBe(false);
+    expect(spørgsmål(fold('Udgang: ja'))).toEqual([]);
     expect(tekst(fold('Fit: ja'))).toContain('9 hjerter (6–3).');
     expect(tekst(fold('Udgang: ja'))).toContain('Facit: 12 stik i sans og hjerter med åbne kort; 7 af 7 borde meldte udgang.');
-    // De folder med spørgsmål står først (som på skærm 2).
-    expect([...kortet().querySelectorAll('summary')].map(tekst)).toEqual(['Slem: måske', 'Fit: ja', 'Udgang: ja']);
+    // De folder med spørgsmål står først (som på skærm 2), i rækkefølgen fit, udgang, slem.
+    expect([...kortet().querySelectorAll('summary')].map(tekst)).toEqual(['Fit: ja', 'Slem: måske', 'Udgang: ja']);
     expect(linje('Var overstikket afgørende?')).toBe('Ja');
     expect(linje('Hvem ejede spillet?')).toBe('I (ingen konkurrence)');
   });
@@ -89,6 +101,37 @@ describe('Meldesamtalen, 16. november', () => {
     expect(linje('Hvem ejede spillet?')).toBe(
       'Modparten (konkurrence) Trumf: jer 9 klør, modparten 8 spar, i alt 17 (loven om totale stik). Bedst for jer: at forsvare mod 3♠.',
     );
+  });
+
+  it('spil 7: fit ja med 8 hjerter, men S 2♦, viser "Spørg hinanden: Var trumffarven den rigtige?" (Franks svar 3)', () => {
+    const data = par3287();
+    const s7 = data.spil.find((s) => s.nummer === 7)!;
+    expect([s7.kontrakt, s7.spilfoerer, s7.retning]).toEqual(['2D', 'S', 'NS']);
+    vis('#/spil/7', data, PAR_3287_URL);
+    expect(felter()[0]).toBe('Fit ✓ Ja 8 hjerter');
+    const fit = fold('Fit: ja');
+    expect(fit.open).toBe(true);
+    expect(tekst(fit.querySelector('.spoerg-titel'))).toBe('Spørg hinanden');
+    expect(spørgsmål(fit)).toEqual(['Var trumffarven den rigtige?']);
+    expect(`${tekst(fit.querySelector('.spoerg-titel'))}: ${spørgsmål(fit).join(' ')}`).toBe('Spørg hinanden: Var trumffarven den rigtige?');
+    expect(tekst(kortet().querySelector('summary'))).toBe('Fit: ja');
+  });
+
+  it('konstrueret: trumfspørgsmålet kommer ikke ved sans, i fittets farve, når modparten spillede, eller ved fit nej', () => {
+    const tilfælde: [string, string, Partial<Meldesamtale>][] = [
+      ['3NT', 'S', {}],
+      ['2H', 'S', {}],
+      ['2D', 'E', {}],
+      ['2D', 'S', { fit: { svar: 'nej', farve: 'H', kort: 7, fordeling: [4, 3] } }],
+    ];
+    for (const [k, spilfoerer, m] of tilfælde) {
+      const data = med(m, par3287(), 7);
+      Object.assign(data.spil.find((s) => s.nummer === 7)!, { kontrakt: k, spilfoerer });
+      vis('#/spil/7', data, PAR_3287_URL);
+      const vist = [...kortet().querySelectorAll('details')].flatMap(spørgsmål);
+      expect(vist, `${spilfoerer} ${k}`).not.toContain('Var trumffarven den rigtige?');
+      cleanup();
+    }
   });
 
   it('konstrueret: udgang måske uden at have meldt den har spørgsmålene til udgang', () => {
@@ -172,13 +215,15 @@ describe('Spørg hinanden', () => {
     }
   });
 
-  it('vises kun ved måske, fit "Nej" og meldt uden dækning på alle 32 spil den 16. november', () => {
+  it('vises kun ved måske, fit "Nej", meldt uden dækning og trumffarven på alle 32 spil den 16. november', () => {
     const data = par3287();
+    const trumf: number[] = [];
     for (const s of data.spil) {
       vis(`#/spil/${s.nummer}`, data, PAR_3287_URL);
       const m = (s as unknown as { meldesamtale: Meldesamtale }).meldesamtale;
+      if (andenTrumf(s, m)) trumf.push(s.nummer);
       const ventet = [
-        m.fit.svar === 'nej' ? SPØRG.fit : [],
+        m.fit.svar === 'nej' ? SPØRG.fit : andenTrumf(s, m) ? SPØRG.trumf : [],
         m.udgang.svar === 'maaske' ? SPØRG.udgangMåske : m.udgang.svar === 'nej' && m.udgang.meldt && !m.slem?.meldt ? SPØRG.udgangUden : [],
         m.slem?.svar === 'maaske' ? SPØRG.slemMåske : m.slem?.svar === 'nej' && m.slem.meldt ? SPØRG.slemUden : [],
       ].flat();
@@ -188,5 +233,7 @@ describe('Spørg hinanden', () => {
       expect([...kortet().querySelectorAll('details:not([open])')].flatMap(spørgsmål), `spil ${s.nummer}`).toEqual([]);
       cleanup();
     }
+    // N 4♠ med 9 hjerter, S 2♦ med 8 hjerter og S 2♦ med 8 hjerter.
+    expect(trumf).toEqual([1, 7, 30]);
   });
 });

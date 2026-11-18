@@ -2,8 +2,9 @@
 meldesamtalen i funktionens svar (`postmortem/vaerd.py`).
 
 1. Listen for 16. november (Franks svar 2, 17. nov. 2026): de 8 spil med størst omkostning (den negative del af egne
-   faktorer), "Vis alle (18)" med resten på −2 point eller et fast mærke og linjen med de uheldige. Mærkerne pr. spil er
-   tabellerne under Afklaret. Testen skriver hele listen (`pytest -s` eller `-rP`), så Frank kan se den.
+   faktorer), "Vis alle (18)" med resten på −2 point eller et fast mærke og linjen med de uheldige, der kun er bund
+   (Franks svar 3), og "Alle med mærker (26)" til udskrift og mail. Mærkerne pr. spil er tabellerne under Afklaret.
+   Testen skriver hele listen (`pytest -s` eller `-rP`), så Frank kan se den.
 2. Meldesamtalen: fit, udgang og slem for spil 1 og 17, facit holdt op mod DD-tabellen og feltet på alle 32 spil, og
    konstruerede spil, der dækker ja, måske og nej, fit "Nej", konkurrence med trumftallet og holdturnering.
 7. Uændret: alt andet i svaret er som i testsvarene i src/test/data/.
@@ -55,7 +56,10 @@ def par452():
 
 LISTE_3287 = [1, 4, 8, 25, 29, 6, 24, 9]
 RESTEN_3287 = [5, 21, 14, 11, 13, 32, 17, 18, 22, 19]
-UHELDIGE_3287 = [15, 20, 26, 27]
+UHELDIGE_3287 = [15, 20]   # kun bund, under 25 % (Franks svar 3)
+# "Alle med mærker (26)" til udskrift og mail (Franks svar 3): den lange liste og derefter de andre spil med mindst ét
+# mærke efter omkostningen. Uden mærker er 3, 10, 12, 26, 27 og 31.
+MED_MAERKER_3287 = LISTE_3287 + RESTEN_3287 + [7, 15, 20, 28, 30, 2, 16, 23]
 
 # Mærkerne pr. spil i visningens rækkefølge: (mærke, tal). Tallet er stik for udspil, spilføring og modspil og point for
 # meldinger (uden fortegn); de andre mærker har intet tal.
@@ -86,8 +90,8 @@ MAERKER_3287 = {
     23: [M('top'), M('andenKontrakt')],
     24: [M('bund'), M('meldinger', 2), M('modspil', 2), M('andenKontrakt')],
     25: [M('bund'), M('meldinger', 1), M('modspil', 1), M('andenKontrakt')],
-    26: [M('uheldigt')],
-    27: [M('uheldigt')],
+    26: [],   # 42,9 %: ikke bund, så ikke uheldigt (Franks svar 3)
+    27: [],
     28: [M('andenKontrakt')],
     29: [M('meldinger', 4), M('spilfoering', 1), M('andenKontrakt')],
     30: [M('andenKontrakt')],
@@ -115,13 +119,29 @@ def skriv_listen(svar):
             m = ', '.join(f"{navn}{'' if tal is None else f' {tal:.1f}'}" for navn, tal in maerker(s))
             linjer.append(f"  {n:2} {s['spilfoerer']} {s['kontrakt']:4} {s['procent']:5} {s['vaerd']['omkostning']:7.2f}  {m}")
     linjer.append(f"Uheldige, ingen fejl: {v['uheldige']}")
+    linjer.append(f"Alle med mærker ({len(v['medMaerker'])}): {v['medMaerker']}")
     return '\n'.join(linjer)
 
 
 def test_1_listen_for_16_november_er_de_8_dyreste_resten_og_de_uheldige(aften):
     v = aften['vaerdAtSePaa']
     print('\n' + skriv_listen(aften))
-    assert v == {'liste': LISTE_3287, 'resten': RESTEN_3287, 'uheldige': UHELDIGE_3287}
+    assert v == {'liste': LISTE_3287, 'resten': RESTEN_3287, 'uheldige': UHELDIGE_3287, 'medMaerker': MED_MAERKER_3287}
+    assert len(v['medMaerker']) == 26
+
+
+def test_1_uheldige_er_kun_bund_ved_parturnering(aften, par452):
+    """Franks svar 3: "Uheldige, ingen fejl" gælder kun bund (under 25 %). Den 16. november er det spil 15 og 20; spil 26
+    og 27 (42,9 %, ingen egne fejl, held negativ) har intet mærke."""
+    for svar in (aften, par452):
+        for s in svar['spil']:
+            if not s['spillet']:
+                continue
+            ingen_fejl = s['vaerd']['omkostning'] > -1e-9 and s['faktorer']['held'] < -1e-9
+            assert (('uheldigt', None) in maerker(s)) is (s['procent'] < 25 and ingen_fejl), s['nummer']
+    spil = {s['nummer']: s for s in aften['spil']}
+    assert [spil[n]['procent'] for n in (15, 20)] == [0, 14.3]
+    assert maerker(spil[26]) == [] and maerker(spil[27]) == []
 
 
 def test_1_maerkerne_for_16_november(aften):
@@ -167,7 +187,10 @@ def test_1_listen_foelger_reglen_paa_alle_tre_testaftener(request, navn):
     liste = [s['nummer'] for s in med[:8]]
     resten = [s['nummer'] for s in sorted(spillede, key=noegle) if s['nummer'] not in liste + uheldige and
               (s['vaerd']['omkostning'] <= -2 + 1e-9 or FASTE & {m for m, _ in maerker(s)})]
-    assert svar['vaerdAtSePaa'] == {'liste': liste, 'resten': resten, 'uheldige': uheldige}
+    andre = [s['nummer'] for s in sorted(spillede, key=noegle) if s['nummer'] not in liste + resten and maerker(s)]
+    assert svar['vaerdAtSePaa'] == {'liste': liste, 'resten': resten, 'uheldige': uheldige,
+                                    'medMaerker': liste + resten + andre}
+    assert all(maerker(s) for s in spillede if s['nummer'] in liste + resten + andre)
     for s in spillede:
         f = s['faktorer']
         assert s['vaerd']['omkostning'] == pytest.approx(sum(min(0, f[k]) for k in ('meldinger', 'spilfoering', 'modspil')))
@@ -194,7 +217,8 @@ def test_1_raekkefoelgen_ved_lighed_og_faerre_end_8(aften):
                 'vaerd': {'omkostning': omk, 'maerker': [{'maerke': m, 'tal': None} for m in maerker_]}}
     alle = [spil(1, -6, 57.1), spil(2, -6, 42.9), spil(3, -6, 57.1), spil(4, 0, 30, ['strafdobling']),
             spil(5, -1, 80), spil(6, 0, 10, ['bund', 'uheldigt']), spil(7, 0, 90, ['top'])]
-    assert vaerd().liste(alle, 'par') == {'liste': [2, 1, 3, 5], 'resten': [4], 'uheldige': [6]}
+    assert vaerd().liste(alle, 'par') == {'liste': [2, 1, 3, 5], 'resten': [4], 'uheldige': [6],
+                                          'medMaerker': [2, 1, 3, 5, 4, 6, 7]}
 
 
 # 2. Meldesamtalen

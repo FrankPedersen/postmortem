@@ -20,6 +20,12 @@ afterEach(() => {
 const REFERENCE = readFileSync(join(process.cwd(), 'src', 'test', 'data', 'mail-3287.txt'), 'utf8').replace(/\r\n/g, '\n').replace(/\n$/, '');
 const forhåndsvisning = () => screen.getByRole('region', { name: 'Sådan ser teksten ud' }).querySelector('pre')!.textContent!;
 
+// Udskrift og mail har tre valg (Franks svar 3, 18. nov. 2026). "Alle med mærker" er den lange liste (de 8 og "Vis alle")
+// og derefter de andre spil med mindst ét mærke efter omkostningen; uden mærker er 3, 10, 12, 26, 27 og 31.
+const VALG = ['De 8', 'Alle med mærker (26)', 'Alle spil'];
+const MED_MÆRKER = [1, 4, 8, 25, 29, 6, 24, 9, 5, 21, 14, 11, 13, 32, 17, 18, 22, 19, 7, 15, 20, 28, 30, 2, 16, 23];
+const radioer = (e: HTMLElement) => within(e).getAllByRole('radio').map((r) => tekst(r.closest('label')));
+
 function udklipsholder() {
   const writeText = vi.fn(async (_t: string) => {});
   Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
@@ -30,16 +36,31 @@ describe('Send aftenen til makker (#/mail)', () => {
   it('mail-teksten for spil værd at se på den 16. november svarer til den gemte reference', () => {
     vis('#/mail', par3287(), PAR_3287_URL);
     expect(tekst(screen.getByRole('heading', { level: 1 }))).toBe('Aftenen til makker');
-    const værd = screen.getByRole('radio', { name: 'Spil værd at se på (8)' }) as HTMLInputElement;
+    expect(radioer(screen.getByRole('group', { name: 'Hvilke spil?' }))).toEqual(VALG);
+    const værd = screen.getByRole('radio', { name: 'De 8' }) as HTMLInputElement;
     expect(værd.checked).toBe(true);
     expect(forhåndsvisning()).toBe(REFERENCE);
     expect(forhåndsvisning().match(/^Kommentar:$/gm)).toHaveLength(8);
+    expect(forhåndsvisning()).toContain('\nUheldige, ingen fejl: spil 15 og 20\n');
     expect(forhåndsvisning()).not.toMatch(/Spiller|Hold \d/);
   });
 
-  it('"Alle 32 spil" giver alle spil med "Kommentar:" efter hvert', () => {
+  it('"Alle med mærker (26)" giver de 26 spil med mærker i listens rækkefølge med "Kommentar:" efter hvert', () => {
     vis('#/mail', par3287(), PAR_3287_URL);
-    fireEvent.click(screen.getByRole('radio', { name: 'Alle 32 spil' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Alle med mærker (26)' }));
+    const t = forhåndsvisning();
+    expect(t).toContain('ALLE MED MÆRKER (26)');
+    expect([...t.matchAll(/^Spil (\d+) · /gm)].map((x) => Number(x[1]))).toEqual(MED_MÆRKER);
+    expect(t.match(/^Kommentar:$/gm)).toHaveLength(26);
+    expect(t).toContain('Spil 7 · S 2♦ · 6 stik · −200 · 0 %\nBund · spilføring −1 stik · anden kontrakt end feltet\n');
+    // De uheldige står blandt spillene, så linjen under listen står kun ved "De 8".
+    expect(t).not.toContain('Uheldige, ingen fejl: spil');
+    expect(t.endsWith('www.kontraktbridge.dk/postmortem/')).toBe(true);
+  });
+
+  it('"Alle spil" giver alle spil med "Kommentar:" efter hvert', () => {
+    vis('#/mail', par3287(), PAR_3287_URL);
+    fireEvent.click(screen.getByRole('radio', { name: 'Alle spil' }));
     const t = forhåndsvisning();
     expect(t).toContain('ALLE SPIL (32)');
     expect(t.match(/^Spil \d+ · /gm)).toHaveLength(32);
@@ -117,8 +138,9 @@ describe('Knapperne på aftenens oversigt', () => {
     fireEvent.click(udskriv);
     expect(udskriv.getAttribute('aria-expanded')).toBe('true');
     const valg = screen.getByRole('group', { name: 'Hvilke spil?' });
-    expect((within(valg).getByRole('radio', { name: 'Spil værd at se på (8)' }) as HTMLInputElement).checked).toBe(true);
-    fireEvent.click(within(valg).getByRole('radio', { name: 'Alle 32 spil' }));
+    expect(radioer(valg)).toEqual(VALG);
+    expect((within(valg).getByRole('radio', { name: 'De 8' }) as HTMLInputElement).checked).toBe(true);
+    fireEvent.click(within(valg).getByRole('radio', { name: 'Alle spil' }));
     fireEvent.click(screen.getByRole('button', { name: 'Udskriv nu' }));
     expect(print).toHaveBeenCalledTimes(1);
   });
@@ -136,7 +158,7 @@ describe('Udskriften', () => {
     expect(forside).toContain('50,4 % (225,9 af 448 point)');
     expect(forside).toContain('Hvor gik pointene?');
     expect(forside).toContain('Spil værd at se på (8)');
-    expect(forside).toContain('Uheldige, ingen fejl: spil 15, 20, 26 og 27');
+    expect(forside).toContain('Uheldige, ingen fejl: spil 15 og 20');
     expect([...s[0].querySelectorAll('.udskrift-liste li')].map((li) => tekst(li).split(' ')[0])).toEqual(['1', '4', '8', '25', '29', '6', '24', '9']);
     for (const [i, side] of s.slice(1).entries()) {
       const t = tekst(side);
@@ -151,13 +173,29 @@ describe('Udskriften', () => {
     expect(tekst(s[1])).toContain('Spørg hinanden: Undersøgte vi slem? Havde vi styr på esser og nøglekort? Var 6NT eller slem i farve rigtigst ved parturnering?');
   });
 
+  it('"Alle med mærker (26)" giver side 1 og 26 sider i listens rækkefølge, også spil 7 med spørgsmålet om trumffarven', () => {
+    vis('#/aften', par3287(), PAR_3287_URL);
+    fireEvent.click(screen.getByRole('button', { name: 'Udskriv' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Alle med mærker (26)' }));
+    const s = sider();
+    expect(s).toHaveLength(1 + 26);
+    expect(tekst(s[0])).toContain('Alle med mærker (26)');
+    expect(tekst(s[0])).not.toContain('Uheldige, ingen fejl');
+    expect([...s[0].querySelectorAll('.udskrift-liste li')].map((li) => Number(tekst(li).split(' ')[0]))).toEqual(MED_MÆRKER);
+    const syv = s[1 + MED_MÆRKER.indexOf(7)];
+    expect(tekst(syv)).toContain(`Side ${2 + MED_MÆRKER.indexOf(7)} af 27 Spil 7`);
+    expect(tekst(syv)).toContain('Spørg hinanden: Var trumffarven den rigtige?');
+  });
+
   it('"Alle spil" giver side 1 og 32 sider, også spil 7', () => {
     vis('#/aften', par3287(), PAR_3287_URL);
     fireEvent.click(screen.getByRole('button', { name: 'Udskriv' }));
-    fireEvent.click(screen.getByRole('radio', { name: 'Alle 32 spil' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Alle spil' }));
     const s = sider();
     expect(s).toHaveLength(1 + 32);
+    expect(tekst(s[0])).toContain('Alle spil (32)');
     expect(tekst(s[7])).toContain('Spil 7');
     expect(tekst(s[7])).toContain('Side 8 af 33');
+    expect(tekst(s[7])).toContain('Spørg hinanden: Var trumffarven den rigtige?');
   });
 });

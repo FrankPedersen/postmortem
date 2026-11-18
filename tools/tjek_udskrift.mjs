@@ -1,7 +1,8 @@
 // Accepttest 4 i SPEC-postmortem-2a-vaerd-at-se-paa.md: udskriften i Chrome uden vindue (A4). Aftenen 16. november
-// (src/test/data/par-3287.json) udskrives med "Spil værd at se på" og med "Alle spil", og testen tjekker:
-//   - knappen Udskriv lader brugeren vælge og åbner browserens print (window.print);
-//   - PDF'en har side 1 og én side pr. spil (9 og 33 sider), i A4;
+// (src/test/data/par-3287.json) udskrives med de tre valg "De 8", "Alle med mærker (26)" og "Alle spil" (Franks svar 3,
+// 18. nov. 2026), og testen tjekker:
+//   - knappen Udskriv har de tre valg, lader brugeren vælge og åbner browserens print (window.print);
+//   - PDF'en har side 1 og én side pr. spil (9, 27 og 33 sider), i A4;
 //   - hver side begynder på en ny side og er højst én A4-side høj, og rammen med beslutning, årsag og ny aftale har
 //     break-inside: avoid, så den aldrig deles over to sider (en side, der løb over, ville give en side mere);
 //   - menu, sidefod, knapper og skærmens indhold er skjult;
@@ -86,7 +87,9 @@ try {
   await indlæs('#/');
   await kør(`sessionStorage.setItem(${JSON.stringify(NØGLE)}, ${JSON.stringify(JSON.stringify({ url: URL_3287, svar: SVAR }))}); true`);
 
-  for (const [valg, radio, sider] of [['spil værd at se på', 'Spil værd at se på (8)', 9], ['alle spil', 'Alle 32 spil', 33]]) {
+  // Tre valg (Franks svar 3, 18. nov. 2026): "De 8", "Alle med mærker (26)" og "Alle spil".
+  const VALG = [['de 8', 'De 8', 9], ['alle med mærker', 'Alle med mærker (26)', 27], ['alle spil', 'Alle spil', 33]];
+  for (const [valg, radio, sider] of VALG) {
     await send('Emulation.setEmulatedMedia', { media: 'screen' });
     await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false });
     await indlæs('#/aften');
@@ -97,13 +100,15 @@ try {
       if (!knap) return { fejl: 'ingen knap Udskriv' };
       knap.click();
       await new Promise((r) => requestAnimationFrame(() => r()));
+      const radioer = [...document.querySelectorAll('fieldset.udskriv-valg input[type=radio]')].map((x) => x.labels[0]?.textContent.trim());
       const r = [...document.querySelectorAll('input[type=radio]')].find((x) => x.labels[0]?.textContent.trim() === ${JSON.stringify(radio)});
-      if (!r) return { fejl: 'intet valg ' + ${JSON.stringify(radio)} };
+      if (!r) return { fejl: 'intet valg ' + ${JSON.stringify(radio)}, radioer };
       r.click();
       await new Promise((r) => requestAnimationFrame(() => r()));
       [...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Udskriv nu').click();
-      return { print: window.__print, sider: document.querySelectorAll('.udskrift .udskrift-side').length };
+      return { print: window.__print, sider: document.querySelectorAll('.udskrift .udskrift-side').length, radioer };
     })()`);
+    tjek(!valgt.fejl && JSON.stringify(valgt.radioer) === JSON.stringify(VALG.map((v) => v[1])), `${valg}: Udskriv har de tre valg ${VALG.map((v) => `"${v[1]}"`).join(', ')}`, JSON.stringify(valgt));
     tjek(!valgt.fejl && valgt.print === 1 && valgt.sider === sider, `${valg}: Udskriv lader brugeren vælge og åbner browserens print`, JSON.stringify(valgt));
 
     // Printmediet med A4's bredde: det, der skjules, sideskiftene, højden og farverne.

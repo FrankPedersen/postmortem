@@ -32,7 +32,8 @@ const RESTEN: [number, string[]][] = [
   [22, ['Heldigt: top, udspillet kostede 1 stik']],
   [19, ['Heldigt: top, udspillet kostede 1 stik, anden kontrakt end feltet']],
 ];
-const UHELDIGE = 'Uheldige, ingen fejl: spil 15, 20, 26 og 27';
+// Kun bund, under 25 % (Franks svar 3, 18. nov. 2026): spil 26 og 27 (42,9 %) er ikke med.
+const UHELDIGE = 'Uheldige, ingen fejl: spil 15 og 20';
 
 const kortet = () => screen.getByRole('region', { name: 'Spil værd at se på' });
 const listen = () => within(kortet()).getByRole('list', { name: 'Spil værd at se på' });
@@ -82,8 +83,11 @@ describe('Spil værd at se på, 16. november', () => {
     vísAften();
     const linje = within(kortet()).getByText(/^Uheldige, ingen fejl/).closest('p')!;
     expect(tekst(linje)).toBe(UHELDIGE);
-    expect(within(linje).getAllByRole('link').map((a) => a.getAttribute('href'))).toEqual(['#/spil/15', '#/spil/20', '#/spil/26', '#/spil/27']);
+    expect(within(linje).getAllByRole('link').map((a) => a.getAttribute('href'))).toEqual(['#/spil/15', '#/spil/20']);
     expect(rækker().map(nummer)).not.toContain(15);
+    // Spil 26 og 27 (42,9 %) er ikke bund og står hverken på linjen eller i listen.
+    fireEvent.click(within(kortet()).getByRole('button', { name: 'Vis alle (18)' }));
+    expect(rækker().map(nummer).filter((n) => n === 26 || n === 27)).toEqual([]);
   });
 
   it('"Hvorfor er et spil med?" har listens regel og siger, at bund, top og anden kontrakt end feltet kun er ekstra mærker', () => {
@@ -94,7 +98,7 @@ describe('Spil værd at se på, 16. november', () => {
     expect(t).toContain('de 8 spil');
     expect(t).toContain('2 point');
     expect(t).toContain('Bund, top og anden kontrakt end feltet er kun ekstra mærker');
-    expect(t).toContain('Uheldige');
+    expect(t).toContain('Uheldige spil, bund (under 25 %) uden egne fejl, står på én linje under listen.');
   });
 
   it('filteret "Værd at se på · 8" viser de 8 i spillenes rækkefølge', () => {

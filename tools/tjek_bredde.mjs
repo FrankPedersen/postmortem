@@ -281,6 +281,9 @@ try {
       await kør(`[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Udskriv')?.click(); true`);
       await vent(30);
       tjek(await kør(`!!document.querySelector('fieldset.udskriv-valg')`), `${bredde} px, aftenen, ${navn}: Udskriv viser valget af spil`);
+      // Tre valg (Franks svar 3, 18. nov. 2026): "De 8", "Alle med mærker (N)" og "Alle spil".
+      const valgene = await kør(`[...document.querySelectorAll('fieldset.udskriv-valg input[type=radio]')].map((r) => r.labels[0]?.textContent.trim())`);
+      tjek(valgene.length === 3 && /^De \d+$/.test(valgene[0]) && /^Alle med mærker \(\d+\)$/.test(valgene[1]) && valgene[2] === 'Alle spil', `${bredde} px, aftenen, ${navn}: Udskriv har de tre valg`, JSON.stringify(valgene));
       await mål(`aftenen, ${navn}, valget under Udskriv`);
       await gåTil('#/mail');
       const mail = await mål(`mailen, ${navn}`);
