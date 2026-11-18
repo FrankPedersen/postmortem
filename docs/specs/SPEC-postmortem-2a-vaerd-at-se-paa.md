@@ -418,6 +418,26 @@ Afsnit 1–4 og accepttest 1, 3, 4 og 5 er rettet efter svaret. **Sådan er svar
 - **"Alle med mærker (N)"** er alle spil med mindst ét mærke, også de ekstra mærker og Uheldigt: den lange liste (de 8 og resten) i dens rækkefølge og derefter de andre efter omkostningen. Funktionen sender den som `vaerdAtSePaa.medMaerker`. Den 16. november er det 26 spil: de 18 og 7, 15, 20, 28, 30, 2, 16 og 23. Uden mærker er 3, 10, 12, 26, 27 og 31.
 - **"De 8"** står med listens antal ("De N"), så det passer, hvis en aften har færre end 8 spil med en omkostning. "Alle spil" står uden antal, som i svaret. Overskriften over listen på udskriftens side 1 er "Spil værd at se på (8)", "Alle med mærker (26)" og "Alle spil (32)", og i mailen står den samme med store bogstaver. Linjen med de uheldige står kun ved "De 8", fordi de uheldige ellers er med blandt spillene.
 
+### Fjerde session (18. november 2026): rettelserne og udgivelsen
+
+- **Status:** Franks svar 3 er bygget på grenen `vaerd-at-se-paa`, og alle tests er grønne, så 2a er godkendt efter svaret.
+- **Commits på grenen:** `7ef1266` (Franks svar 3 ordret og specen rettet), `14733c0` (accepttestene, røde før rettelsen), `6a00fee` (rettelsen) og denne med status.
+- **Rød → grøn:**
+
+  | Test | Før rettelsen (`14733c0`) | Efter (`6a00fee`) |
+  | --- | --- | --- |
+  | pytest i `api/` med `.venv` | 7 fejlede (listen og `medMaerker`, de uheldige kun ved bund, mærkerne for 16. nov., reglen på alle tre testaftener og lighed); 299 bestod, 3 sprunget over; 147 s | 306 bestået, 3 sprunget over (de samme tre); 132 s |
+  | `npm test` (tsc og vitest) | 16 fejlede (trumffarven i spil 1 og 7 og på alle 32 spil, spørgsmålet i `src/tekster.ts`, de uheldige og "Hvorfor er et spil med?", de tre valg i mailen og udskriften); 136 bestod; 25 s | 152 bestået i 12 filer; 19 s |
+  | `node tools/tjek_bredde.mjs` | 9 FEJL (de tre valg under Udskriv ved 320, 390 og 1280 px for alle tre testsvar); 394 ok; 51 s | 403 ok; 51 s |
+  | `node tools/tjek_udskrift.mjs` | 12 FEJL (valgene "De 8", "Alle med mærker (26)" og "Alle spil" fandtes ikke); 13 s | alle 30 tjek i orden (9, 27 og 33 A4-sider, intet løber over, kun ♥ og ♦ røde); 12 s |
+  | `npm run build` | – | i orden |
+
+  Fagord og bydeform (`src/test/sprog.test.tsx`) er med i `npm test`. Hver kørsel var alene.
+- **Testen rettet under rettelsen:** udskriften af spil 1 i `src/test/mail.test.tsx` har nu "Spørg hinanden: Var trumffarven den rigtige?" før spørgsmålene til slem, fordi spil 1 (N 4♠ med 9 hjerter) også er omfattet af Franks regel.
+- **Funktionen** er ændret på to punkter: mærket Uheldigt kræver bund ved parturnering, og `vaerdAtSePaa.medMaerker` er nyt (`api/SVAR.md`). Testsvarene i `src/test/data/` er lavet igen som i README; kun de to ting er ændret (`test_7_alt_andet_i_svaret_er_som_foer` består).
+- **Listen for 16. november:** de 8 er 1, 4, 8, 25, 29, 6, 24 og 9, "Vis alle (18)" viser derudover 5, 21, 14, 11, 13, 32, 17, 18, 22 og 19, og linjen er "Uheldige, ingen fejl: spil 15 og 20". "Alle med mærker (26)" er de 18 og 7, 15, 20, 28, 30, 2, 16 og 23.
+- **`CLAUDE.md` og README** har hver en linje om `tools/tjek_udskrift.mjs`.
+
 ## Arbejdsgang
 
 1. Arbejd i en frisk session, og kør alt i forgrunden.
