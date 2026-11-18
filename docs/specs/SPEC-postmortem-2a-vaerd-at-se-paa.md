@@ -330,6 +330,71 @@ Afsnit 1 og accepttest 1 er rettet efter svaret. Listen er regnet som i første 
 - **"Spil værd at se på" i filteret, udskriften og mailen** er de 8, som mock-up'en ("Side 2 af 9", "Værd at se på · 8"). Resten kommer med "Alle spil".
 - **Meldinger −N point** har én decimal som bridge.dk's point (−2,3) og hele tal uden ",0" (−14).
 
+### Tredje session (17.–18. november 2026, bygget og stoppet før merge)
+
+- **Status:** Franks svar 2 er bygget på grenen `vaerd-at-se-paa`. Funktionen regner meldesamtalen, mærkerne og listen (`api/postmortem/vaerd.py`, felterne `vaerdAtSePaa`, `spil[].meldesamtale` og `spil[].vaerd` i `api/SVAR.md`). Appen har knapperne Udskriv, Mail og Kopiér, kortet "Spil værd at se på" med "Vis alle (18)", linjen med de uheldige og "Hvorfor er et spil med?", filteret "Værd at se på · 8", kortet Meldesamtalen øverst i analysevinduet, vinduet "Aftenen til makker" (`#/mail`) og udskriften. Alle tests er grønne. Intet er flettet, pushet eller udrullet, og `PLAN-postmortem-v2.md` er ikke rørt. **Venter på Franks godkendelse; ikke flettet.**
+- **Afbrudt og genoptaget:** sessionen blev stoppet af 5-timersgrænsen efter bygningen (`a45c8f4`), mens Afklaret blev skrevet, og genoptaget i samme agent, da grænsen var nulstillet. Intet blev kørt om; Afklaret, `SYSTEM.md` og tokenforbruget er skrevet efter genoptagelsen.
+- **Commits:** `570ca5f` (Franks svar 2 ordret, afsnit 1 og accepttest 1 rettet og listen for 16. nov.), `bc5ff8a` (accepttestene, røde), `a45c8f4` (bygningen), Afklaret og `SYSTEM.md` og til sidst tokenforbruget.
+- **Rød → grøn:**
+
+  | Test | Før bygningen (`bc5ff8a`) | Efter (`a45c8f4`) |
+  | --- | --- | --- |
+  | pytest i `api/` | 19 nye fejlede (KeyError på `vaerd`, `vaerdAtSePaa` og `meldesamtale`, ImportError på `postmortem.vaerd`); 286 bestod, 3 sprunget over; 268 s | 305 bestået, 3 sprunget over; 235 s |
+  | `npm test` (tsc og vitest) | 31 nye fejlede (`vaerd` 8, `meldesamtale` 12, `mail` 11: kortene og knapperne fandtes ikke); 117 bestod; 21 s | 148 bestået i 12 filer; 24 s |
+  | `node tools/tjek_bredde.mjs` | 36 nye FEJL (kortet, valget under Udskriv, mailen og Meldesamtalen fandtes ikke); 325 ok; 64 s | 394 ok; 96 s |
+  | `node tools/tjek_udskrift.mjs` (ny, accepttest 4) | FEJL: ingen knap Udskriv; 21 s | alle 18 tjek i orden (9 og 33 A4-sider, intet løber over, kun ♥ og ♦ røde); 22 s |
+  | `npm run build` | – | i orden |
+
+  Fagord og bydeform er `src/test/sprog.test.tsx` i `npm test`; den læser nu også mailen for alle tre testsvar, aftenen 16. november med udskriften og spil 1 og 17.
+- **Listen for 16. november** er som under "Franks svar 2": de 8 er 1, 4, 8, 25, 29, 6, 24 og 9, "Vis alle (18)" viser derudover 5, 21, 14, 11, 13, 32, 17, 18, 22 og 19, og linjen er "Uheldige, ingen fejl: spil 15, 20, 26 og 27". Mærkerne er tabellernes, og testene skriver hele listen (`src/test/vaerd.test.tsx` og `api/tests/test_vaerd.py` med `-rP`).
+- **Meldesamtalen i spil 1 og 17:** spil 1 har fit 9 hjerter (6–3), udgang ja (12 stik i sans og hjerter; 7 af 7 borde), slem måske (0 af 7 borde), overstikket afgørende og "I (ingen konkurrence)". Spil 17 har fit 9 klør (7–2), udgang nej (8 stik i hjerter og klør; 2 af 7 borde, meldt uden dækning), slem "–", overstikket afgørende og "Modparten (konkurrence)" med trumf 9 klør mod 8 spar, i alt 17, og "Bedst for jer: at forsvare mod 3♠". Mock-up'ens "8 spar (5–3)" og "2 af 7 borde" i spil 1 var eksempeldata.
+- **Testene rettet under bygningen:**
+  - Spil 17: 2 af 7 borde meldte udgang (5♣ og 5♣ D), ikke 1, som accepttesten sagde efter en tællefejl. Funktionen og testens egen gennemregning af feltet gav begge 2.
+  - `src/test/teknik.test.tsx`: overskrifternes rækkefølge har nu "Spil værd at se på" først (skærm 1), og "et svar uden de nye felter" er også uden felterne fra v2a. Filteret "Værd at se på · 8" står efter "Tabte point", så de eksisterende filtres rækkefølge er som før.
+  - `src/test/raad.test.tsx` "hvert spil" har 60 s: den løb over standardgrænsen på 5 s (5096 ms), da de nye testfiler kørte samtidig.
+  - Uændret (accepttest 7): de tre testsvar i `src/test/data/` er lavet igen, og kun de nye felter er kommet til (`test_vaerd.py::test_7_alt_andet_i_svaret_er_som_foer`).
+
+**Valg, specen eller svaret ikke afgør** (ud over valgene under "Franks svar 2"):
+1. **Beskrivende form, hvor mock-up'en eller specen har bydeform:** skærm 3 hedder "Aftenen til makker" (mock-up'en: "Send aftenen til makker"); "Beslutningen bedømmes, ikke kun resultatet" (mock-up'en: "Bedøm beslutningen …"); "Teksten sættes ind i mailen" (mock-up'en: "Sæt teksten ind …"); "Bedst for jer: selv at spille 4♠" og "at forsvare mod 3♠" (specen: "spil selv / forsvar mod X"). Knapperne (Udskriv, Udskriv nu, Kopiér, "1. Kopiér gennemgangen", "2. Åbn mail, og sæt ind", "Vis alle (N)", "Vis færre") og "Spørg hinanden", afsnittets navn i specen, står på bydeformtestens `UNDTAGELSER`; "Spil værd at se på" og "spil 15" er navneord (`FALSKE_TRÆF`).
+2. **Husets ord:** "Stoppede vi i 3NT før et muligt majorfit?" (specen: "en mulig majorfit").
+3. **Grunden i felterne:** feltet viser den korte grund ("9 hjerter", "7 af 7 borde", ved holdturnering "det andet bord" eller "ikke det andet bord"), og folden har facit: "Facit: 12 stik i sans og hjerter med åbne kort; 0 af 7 borde meldte slem." Stikkene er de vindende benævnelser med flest stik (ved nej benævnelserne med flest stik). Mock-up'ens "alle borde" er skrevet som "7 af 7 borde".
+4. **Folderne:** dem med spørgsmål står først og er åbne (som på skærm 2), de andre er lukkede i rækkefølgen fit, udgang, slem. Mock-up'ens forklaring under felterne ("✓ ja · ~ måske · ✗ nej …") er ikke med, fordi ordet står ved symbolet.
+5. **Mærkernes detaljer:** misset gives for udgang og slem hver for sig, så et spil stoppet under udgang, hvor slem vinder, får begge (ingen 16. november); meldte I slem, gives kun "Slem meldt uden dækning", ikke også udgang; strafdobling gælder kontrakten ved jeres bord, uanset hvem der var spilfører. Slem vises også, når I meldte slem, selv om udgang er nej.
+6. **Hvem ejede spillet:** siden er fortegnet på par-scoren, "Bedst for jer" er par-kontrakten (også en offermelding), og trumftallet er hver sides længste farve sammen (ved lighed spar, hjerter, ruder, klør). Uden konkurrence står kun "I" eller "Modparten" med "(ingen konkurrence)"; par pas giver "Ingen (par er pas)".
+7. **Mailen:** grunden står ved måske og ved meldt uden dækning ("Udgang: måske, 10 stik i spar; 1 af 7 borde."); ja og nej står alene, og slem "–" er udeladt. Linjen med de uheldige står efter spillene ved "Spil værd at se på". Ved holdturnering står bordet og retningen ("Bord 2, Nord–Syd"), ikke holdets navn, og emnet har imp ("Post Mortem: 11. november, −15 imp"). På en telefon (`pointer: coarse`) med `navigator.share` deler knap 2 hele teksten.
+8. **Kopiér på oversigten** kopierer "Spil værd at se på" (de 8); valget af spil står i vinduet Mail.
+9. **Udskriften:** side 1 har titlen "Gennemgang af aftenen", resultatet, faktorerne og listen over de valgte spil med mærkerne (og linjen med de uheldige ved "Spil værd at se på"); med alle 32 spil står listen tættere (8,5 pt) for at holde sig på én side. Feltet på spillets side er scorerne, som i analysevinduet: svaret har ikke feltets kontrakter, som mock-up'en viser. Udskriften er skjult for skærmlæsere, fordi skærmen har det samme. Mock-up'ens linje "Er notatet skrevet i appen (v2b) …" er ikke med.
+10. **Analysevinduet:** kun kortet Meldesamtalen er nyt (afgrænsningen); mock-up'ens kort "Hvad skete der?" er ikke bygget, fordi "Ved jeres bord" viser det samme, og "Skriv spilnotat (v2b)" kommer i v2b.
+
+**Spørgsmål til Frank:**
+1. Linjen med de uheldige følger specens regel (under 50 %, ingen egne fejl), så 26 og 27 (42,9 %) er med. Mente du kun bund ("bund uden fejl"), er linjen 15 og 20.
+2. "Spil værd at se på" i udskriften, mailen og filteret er de 8. Skal det være de 18, når "Vis alle" er åben?
+3. Heldige spil rangeres efter omkostningen som de andre, så spil 4 (heldigt, −10 point) er nummer 2. Skal heldige stå sidst, som specen sagde før svar 2?
+4. `tools/tjek_udskrift.mjs` er nyt. Skal `Postmortem/CLAUDE.md` og README have en linje om det ved fletningen?
+5. Stadig til bekræftelse: grænserne for bund og top (25 % og 75 %), "halvdelen af feltet" og de 25 procentpoint for overstikket.
+
+- **Skærmbilleder og PDF** (uden for git, ingen spillernavne), ved 390 og 1280 px for 16. november:
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-1-spil-vaerd-at-se-paa-8-spil-og-uheldige.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-1-spil-vaerd-at-se-paa-8-spil-og-uheldige.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-1-vis-alle-18-aaben.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-1-vis-alle-18-aaben.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-1-linjen-med-de-uheldige.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-1-linjen-med-de-uheldige.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-1-hvorfor-er-et-spil-med.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-1-hvorfor-er-et-spil-med.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-1-knapperne-og-valget-under-udskriv.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-1-knapperne-og-valget-under-udskriv.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-1-aften-hele-siden.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-1-aften-hele-siden.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-2-meldesamtalen-spil-1.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-2-meldesamtalen-spil-1.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-2-meldesamtalen-spil-17.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-2-meldesamtalen-spil-17.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\390-3-mail-spil-vaerd-at-se-paa.png`
+  - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-3-mail-spil-vaerd-at-se-paa.png`
+  - PDF af udskriften "Alle spil" med side 1, spil 1 og spil 7 (Chromes `Page.printToPDF`, `node tools/tjek_udskrift.mjs --pdf=…`): `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\udskrift-alle-spil-side-1-spil-1-og-7.pdf`
+- **`SYSTEM.md`:** rækken for Post Mortem 2a har fået Franks svar 2, bygningen og afbrydelsen med "Venter på Franks godkendelse; ikke flettet", og datoen øverst er 18. november 2026. Filen har stadig LF-linjeskift og hverken navne eller hemmeligheder.
+
 ## Arbejdsgang
 
 1. Arbejd i en frisk session, og kør alt i forgrunden.
