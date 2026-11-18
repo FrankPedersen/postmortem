@@ -47,7 +47,7 @@ Den er allerede gemt anonymiseret som testdata i 1d. Brug den gemte kopi.
 **Listen er rangeret, ikke en grænse** (Franks svar 2, 17. nov.):
 - **"Spil værd at se på"** viser de 8 spil med størst omkostning, med deres mærker. Er der færre end 8 spil med en omkostning (en negativ del under 0), vises færre.
 - **"Vis alle (N)"** viser derudover resten af de spil, der har en omkostning på −2 point eller lavere (ved holdturnering −2 imp), eller som har et af de faste mærker. N er alle spil på den lange liste, de 8 og resten. Knappen står kun, når der er en rest.
-- **De uheldige spil** (Uheldigt: ingen egne fejl) står på én linje under listen, fx "Uheldige, ingen fejl: spil 15, 20, 26 og 27". De står hverken blandt de 8 eller i resten.
+- **De uheldige spil** (Uheldigt: bund uden egne fejl) står på én linje under listen, fx "Uheldige, ingen fejl: spil 15 og 20". Linjen gælder kun bund, under 25 % (Franks svar 3). De står hverken blandt de 8 eller i resten.
 - **De faste mærker** er dem, der alene bringer et spil med under "Vis alle": udgang eller slem misset eller meldt uden dækning, strafdobling, udspillet kostede N stik og heldigt.
 - **Ekstra mærker** er bund, top og anden kontrakt end feltet: de vises på spillet, men bringer det ikke med. Meldinger, spilføring og modspil viser, hvor omkostningen kom fra, og bringer kun et spil med gennem omkostningen.
 
@@ -60,17 +60,18 @@ Den er allerede gemt anonymiseret som testdata i 1d. Brug den gemte kopi.
 | **Strafdobling** | kontrakten er doblet eller redoblet | fast |
 | **Udspillet kostede N stik** | udspillets pris fra v1 er mindst 1 stik, og jeres side spillede ud | fast |
 | **Heldigt** | mindst 50 %, men den negative del af jeres egne faktorer er under 0 | fast |
-| **Uheldigt** | under 50 %, ingen af jeres egne faktorer er negative, og Held og uheld er negativ | linjen under listen |
+| **Uheldigt** | bund (under 25 %), ingen af jeres egne faktorer er negative, og Held og uheld er negativ (Franks svar 3) | linjen under listen |
 | **Meldinger −N point** | meldingsfaktoren fra v1 er negativ; N er pointene med én decimal som bridge.dk (ved holdturnering "Meldinger −N imp") (Franks svar 2) | omkostning |
 | **Spilføring −N stik** / **Modspil −N stik** | faktoren fra v1 er negativ. N er stikkene efter udspillet: er modspillet kun negativt på grund af udspillet, står kun "Udspillet kostede N stik" (forslag 8) | omkostning |
 | **Bund** / **Top** | procent under 25 eller over 75 | ekstra |
 | **Anden kontrakt end feltet** | jeres kontrakt har en anden farve (sans regnes som en farve) eller er en anden slags kontrakt (delkontrakt, udgang eller slem; pas er sin egen slags) end den hyppigste i feltet, eller den anden side var spilfører (Franks svar 2). Et andet niveau af samme slags i samme farve og ved samme side tæller ikke, fx 2♠ mod feltets 3♠. Er jeres kontrakt blandt de hyppigste ved lighed, er der intet mærke (forslag 7) | ekstra |
 
 - **Heldigt og Uheldigt** vises som ét mærke med grunden, fx "Heldigt: godt resultat, udspillet kostede 1 stik" og "Uheldigt: bund, ingen fejl"; spillets andre mærker står i grunden (forslag 10).
-- **Sortering:** efter omkostningen, det dyreste først, både blandt de 8 og i resten. Heldige spil står efter omkostningen som de andre. Ved lighed kommer laveste procent først (ved holdturnering laveste imp) og derefter laveste spilnummer.
-- **Visning:** de 8 vises med "8 af 32", og derunder står knappen "Vis alle (N)" og linjen med de uheldige. Filteret "Værd at se på · 8" over Spillene viser de 8 i spillenes rækkefølge, og udskriften og mailen har de 8 under "Spil værd at se på".
+- **Sortering:** efter omkostningen, det dyreste først, både blandt de 8 og i resten. Heldige spil står efter omkostningen som de andre; de bliver i rangeringen (Franks svar 3). Ved lighed kommer laveste procent først (ved holdturnering laveste imp) og derefter laveste spilnummer.
+- **Visning:** de 8 vises med "8 af 32", og derunder står knappen "Vis alle (N)" og linjen med de uheldige. Filteret "Værd at se på · 8" over Spillene viser de 8 i spillenes rækkefølge.
+- **Udskrift og mail** har tre valg (Franks svar 3): **"De 8"**, **"Alle med mærker (N)"** og **"Alle spil"**. "Alle med mærker" er de spil, der har mindst ét mærke: først den lange liste (de 8 og resten under "Vis alle") i dens rækkefølge, derefter de andre spil med mærker efter omkostningen med samme lighedsregel. N er antallet. De 8 står under "Spil værd at se på".
 - **Forklaring:** "Hvorfor er et spil med?" kan foldes ud og har listens regel i ord, som på skærm 1, og siger, at bund, top og anden kontrakt end feltet kun er ekstra mærker.
-- **Ved holdturnering** (forslag 5 og Franks svar 2): bund og top udelades, grænsen er −2 imp, og meldingsmærket er "Meldinger −N imp". Heldigt er 0 imp eller mere, og uheldigt er under 0 imp.
+- **Ved holdturnering** (forslag 5 og Franks svar 2): bund og top udelades, grænsen er −2 imp, og meldingsmærket er "Meldinger −N imp". Heldigt er 0 imp eller mere, og uheldigt er under 0 imp, fordi bund ikke findes ved holdturnering.
 
 ## 2. Meldesamtalen (analysevinduet, øverst)
 
@@ -86,11 +87,12 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 - **Grunden** nævner stik med åbne kort og feltet, fx "12 stik i sans og spar; 2 af 7 borde".
 - **Måske og nej** foldes ud med **"Spørg hinanden"**. Spørgsmålene står i en fast liste i `src/tekster.ts` pr. felt og svar og er hentet fra tjeklistens punkt 2–3:
   - **Fit, nej eller måske:** Undersøgte vi majorfarverne? Viste vi vores længder? Stoppede vi i 3NT før en mulig majorfit?
+  - **Fit, ja, men kontrakten er hverken i fittets farve eller i sans** (I var spilfører; Franks svar 3, fx spil 7): Var trumffarven den rigtige?
   - **Udgang, måske:** Inviterede vi, da vi skulle? Passede en af os for tidligt?
   - **Udgang, meldt uden dækning:** Meldte vi udgang uden nok information?
   - **Slem, måske:** Undersøgte vi slem? Havde vi styr på esser og nøglekort? Var 6NT eller slem i farve rigtigst ved parturnering?
   - **Slem, meldt uden dækning:** Pressede vi for hårdt? Havde vi kontrol i sidefarverne?
-- **Ja-felterne er foldet sammen**, og det samme er "Udgang: nej" og "Slem: nej", når I ikke meldte det, fordi de ikke har spørgsmål (forslag 9).
+- **Ja-felterne er foldet sammen** (undtagen fit "Ja" med spørgsmålet om trumffarven), og det samme er "Udgang: nej" og "Slem: nej", når I ikke meldte det, fordi de ikke har spørgsmål (forslag 9).
 - **Under felterne** står to linjer:
   - **Var overstikket afgørende?** "Ja", når ét stik mere eller mindre havde flyttet jeres point med mindst 25 procentpoint. Ellers "Nej".
   - **Hvem ejede spillet?** Uden konkurrence står "I" eller "Modparten". Med konkurrence står parrets side efter dobbeltdummy, trumftallet for hver side og summen (loven om totale stik), og "Bedst for jer: spil selv / forsvar mod X". **Konkurrence** er, når begge sider spillede en farvekontrakt ved mindst ét bord, jeres eller feltets; ved holdturnering de to borde (Franks svar 17. nov., punkt 2 (a)). bridge.dk's sider har ikke meldeforløbet, så det kan ikke ses, om den anden side meldte.
@@ -98,7 +100,7 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 
 ## 3. Udskrift
 
-- Knappen **Udskriv** åbner browserens print. Brugeren vælger "Spil værd at se på" eller "Alle spil".
+- Knappen **Udskriv** åbner browserens print. Brugeren vælger "De 8", "Alle med mærker (N)" eller "Alle spil" (Franks svar 3).
 - **Side 1:** aftenens resultat, "Hvor gik pointene?" og listen over de valgte spil.
 - **Derefter én side pr. spil** (skærm 4):
   - de fire hænder, kontrakt, udspil og resultat;
@@ -116,7 +118,7 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 
 ## 4. Mail og kopiér som tekst
 
-- Knappen **Mail** fører til et lille vindue (skærm 3), hvor brugeren vælger "Spil værd at se på" eller "Alle spil".
+- Knappen **Mail** fører til et lille vindue (skærm 3), hvor brugeren vælger "De 8", "Alle med mærker (N)" eller "Alle spil" (Franks svar 3).
   1. **"Kopiér gennemgangen"** lægger den fulde tekst i udklipsholderen.
   2. **"Åbn mail, og sæt ind"** åbner `mailto:` med emnet "Post Mortem: <dato>, <procent>" og en kort tekst om at sætte ind.
 - **På mobil** bruges `navigator.share` med hele teksten, hvor den findes.
@@ -132,9 +134,9 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 
 1. **Mærkerne og listen for 16. nov.** (rettet efter Franks svar 2, 17. nov.):
    - "Spil værd at se på" er spil 1, 4, 8, 25, 29, 6, 24 og 9 i den rækkefølge, og "Vis alle (18)" viser derudover 5, 21, 14, 11, 13, 32, 17, 18, 22 og 19. Mærkerne er dem under Afklaret ("Franks svar 2").
-   - Linjen under listen er "Uheldige, ingen fejl: spil 15, 20, 26 og 27".
+   - Linjen under listen er "Uheldige, ingen fejl: spil 15 og 20": kun bund (Franks svar 3). Spil 26 og 27 (42,9 %) har intet mærke.
    - Spil 1 har "Slem misset", "Meldinger −14 point" og "Anden kontrakt end feltet" og er nummer 1.
-   - Spil 7 har "Bund", "Spilføring −1 stik" og "Anden kontrakt end feltet", men er hverken blandt de 8 eller under "Vis alle": omkostningen er −1 point, og ingen af mærkerne er faste. Udskriften af spil 7 laves fra "Alle spil".
+   - Spil 7 har "Bund", "Spilføring −1 stik" og "Anden kontrakt end feltet", men er hverken blandt de 8 eller under "Vis alle": omkostningen er −1 point, og ingen af mærkerne er faste. Udskriften af spil 7 laves fra "Alle med mærker" eller "Alle spil".
    - Spil 17 har "Strafdobling" og står under "Vis alle".
    - Spil 19 er "Heldigt" (meldinger +11 tæller ikke; modspil −1) og står under "Vis alle".
    - Spil 15 er "Uheldigt" og står på linjen under listen.
@@ -145,13 +147,14 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 2. **Meldesamtalen:**
    - Fit, udgang og slem for spil 1 og spil 17 og mindst fire konstruerede spil, der dækker ja, måske og nej, fit "Nej" og konkurrence med trumftallet.
    - Facit for udgang og slem holdes op mod DD-tabellen og feltet i testdata.
-3. **"Spørg hinanden"** vises kun ved måske, fit "Nej" og meldt uden dækning, og teksterne findes kun i `src/tekster.ts`. "Udgang: nej" og "Slem: nej" uden spørgsmål er foldet sammen (forslag 9).
+3. **"Spørg hinanden"** vises kun ved måske, fit "Nej", meldt uden dækning og fit "Ja", når I spillede en farvekontrakt uden for fittets farve, og teksterne findes kun i `src/tekster.ts`. Spil 7 (S 2♦ med 8 hjerter) viser "Spørg hinanden: Var trumffarven den rigtige?" (Franks svar 3). "Udgang: nej" og "Slem: nej" uden spørgsmål er foldet sammen (forslag 9).
 4. **Udskrift** (Chrome headless, A4):
+   - tre valg: "De 8", "Alle med mærker (N)" og "Alle spil" (Franks svar 3);
    - én side pr. spil plus side 1;
    - ingen ramme med beslutning, årsag og ny aftale er delt over to sider;
    - menu og knapper er skjult;
    - kun ♥ og ♦ som symboler er røde.
-5. **Mail-teksten** for de spil, der er værd at se på, på 16. nov. svarer til en gemt reference. Den indeholder "Kommentar:" pr. spil og ingen navne, og navnetesten består.
+5. **Mail-teksten** for de spil, der er værd at se på, på 16. nov. svarer til en gemt reference. Den indeholder "Kommentar:" pr. spil og ingen navne, og navnetesten består. Mailen har de samme tre valg som udskriften (Franks svar 3).
 6. **Bredde:** ingen vandret scroll ved 320, 390 og 1280 px. Knapperne er mindst 44 px, og alt virker med tastatur og skærmlæser.
 7. **Uændret:** point, procent, faktorer, DD og mærker er som før, og alle eksisterende tests består.
 
@@ -159,7 +162,9 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 
 (udfyldes af Claude Code. Tokenforbruget skrives i fire tal: nye input, skrevet til cachen, læst fra cachen og output.)
 
-**Til Franks bekræftelse ved gennemgangen:**
+**Status (18. november 2026):** Franks svar 3 og godkendelse er kommet. Rettelserne bygges i fjerde session; når alt er grønt, flettes, pushes, udrulles og live-tjekkes der.
+
+**Bekræftet af Frank 18. nov. (svar 3):**
 - grænserne for bund og top (25 % og 75 %);
 - reglen for ja, måske og nej (halvdelen af feltet);
 - grænsen på 25 procentpoint for "overstikket var afgørende".
@@ -395,6 +400,23 @@ Afsnit 1 og accepttest 1 er rettet efter svaret. Listen er regnet som i første 
   - PDF af udskriften "Alle spil" med side 1, spil 1 og spil 7 (Chromes `Page.printToPDF`, `node tools/tjek_udskrift.mjs --pdf=…`): `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\udskrift-alle-spil-side-1-spil-1-og-7.pdf`
 - **`SYSTEM.md`:** rækken for Post Mortem 2a har fået Franks svar 2, bygningen og afbrydelsen med "Venter på Franks godkendelse; ikke flettet", og datoen øverst er 18. november 2026. Filen har stadig LF-linjeskift og hverken navne eller hemmeligheder.
 - **Tokenforbrug** (tredje session, hele agentens logfil med afbrydelsen og genoptagelsen, 135 svar fra 17. nov. kl. 22.15 til 18. nov. kl. 06.15 UTC, målt før den sidste commit): nye input 272, skrevet til cachen 1.232.843, læst fra cachen 48.437.921 og output 269.442, i alt 49.940.478.
+
+### Franks svar 3 og godkendelse, 18. nov. 2026
+
+> "Post Mortem 2a, svar fra Frank:
+> Når fit er 'Ja', og kontrakten hverken er i den farve eller i sans, vises 'Spørg hinanden: Var trumffarven den rigtige?' (spil 7). Tilføj en test.
+> 'Uheldige, ingen fejl' gælder kun bund (under 25 %). For 16. nov. er det spil 15 og 20.
+> Udskrift og mail får tre valg: 'De 8', 'Alle med mærker (N)' og 'Alle spil'.
+> De heldige spil bliver i rangeringen.
+> CLAUDE.md og README får en linje om tools/tjek_udskrift.mjs.
+> Grænserne er bekræftet: 25 % og 75 %, halvdelen af feltet og 25 procentpoint.
+> Lav rettelserne i en frisk session, og kør alle tests i forgrunden. Når alt er grønt, er 2a godkendt: flet, push, udrul, live-tjek af 16. nov., arkivér specen, og slet grenen. Send mig skærmbilledet af spil 7's meldesamtale fra live-sitet."
+
+Afsnit 1–4 og accepttest 1, 3, 4 og 5 er rettet efter svaret. **Sådan er svaret læst** (fjerde session):
+- **Trumffarven:** spørgsmålet står i folden "Fit: ja", når I var spilfører i en farvekontrakt, der ikke er i fittets farve (sidens længste farve, som feltet FIT viser). Spillede modparten kontrakten, eller blev spillet meldt pas, er der intet spørgsmål, fordi trumffarven så ikke var jeres. Den 16. november gælder det spil 1 (N 4♠ med 9 hjerter), 7 (S 2♦ med 8 hjerter) og 30 (S 2♦ med 8 hjerter). Folden er åben og står først, som de andre folder med spørgsmål. Appen afgør det ud fra kontrakten og fittet i svaret; funktionen er uændret på dette punkt.
+- **Uheldige:** mærket Uheldigt kræver bund (under 25 %) ved parturnering, så spil 26 og 27 (42,9 %) mister mærket og har intet mærke. Ved holdturnering findes bund ikke, og reglen er uændret (under 0 imp).
+- **"Alle med mærker (N)"** er alle spil med mindst ét mærke, også de ekstra mærker og Uheldigt: den lange liste (de 8 og resten) i dens rækkefølge og derefter de andre efter omkostningen. Funktionen sender den som `vaerdAtSePaa.medMaerker`. Den 16. november er det 26 spil: de 18 og 7, 15, 20, 28, 30, 2, 16 og 23. Uden mærker er 3, 10, 12, 26, 27 og 31.
+- **"De 8"** står med listens antal ("De N"), så det passer, hvis en aften har færre end 8 spil med en omkostning. "Alle spil" står uden antal, som i svaret. Overskriften over listen på udskriftens side 1 er "Spil værd at se på (8)", "Alle med mærker (26)" og "Alle spil (32)", og i mailen står den samme med store bogstaver. Linjen med de uheldige står kun ved "De 8", fordi de uheldige ellers er med blandt spillene.
 
 ## Arbejdsgang
 
