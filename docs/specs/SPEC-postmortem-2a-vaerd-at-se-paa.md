@@ -394,6 +394,7 @@ Afsnit 1 og accepttest 1 er rettet efter svaret. Listen er regnet som i første 
   - `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\1280-3-mail-spil-vaerd-at-se-paa.png`
   - PDF af udskriften "Alle spil" med side 1, spil 1 og spil 7 (Chromes `Page.printToPDF`, `node tools/tjek_udskrift.mjs --pdf=…`): `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\udskrift-alle-spil-side-1-spil-1-og-7.pdf`
 - **`SYSTEM.md`:** rækken for Post Mortem 2a har fået Franks svar 2, bygningen og afbrydelsen med "Venter på Franks godkendelse; ikke flettet", og datoen øverst er 18. november 2026. Filen har stadig LF-linjeskift og hverken navne eller hemmeligheder.
+- **Tokenforbrug** (tredje session, hele agentens logfil med afbrydelsen og genoptagelsen, 135 svar fra 17. nov. kl. 22.15 til 18. nov. kl. 06.15 UTC, målt før den sidste commit): nye input 272, skrevet til cachen 1.232.843, læst fra cachen 48.437.921 og output 269.442, i alt 49.940.478.
 
 ## Arbejdsgang
 
