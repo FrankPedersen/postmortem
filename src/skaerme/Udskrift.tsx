@@ -82,7 +82,7 @@ function Forside({ a, valg, spil, top, sider }: { a: Analyse; valg: Valg; spil: 
       <p>
         <Faktorer a={a} />
       </p>{' '}
-      <h3>{valg === 'vaerd' ? T.del.vaerd(spil.length) : T.del.alle(spil.length)}</h3>{' '}
+      <h3>{T.udskrift.liste[valg](spil.length)}</h3>{' '}
       <ol className="udskrift-liste">
         {spil.map((s) => (
           <li key={s.nummer}>
@@ -135,7 +135,7 @@ function SpilSide({ a, s, top, side, sider }: { a: Analyse; s: Spil; top: string
   const form = a.turnering.form;
   const d = decimaler(form);
   const m = s.spillet ? s.meldesamtale : null;
-  const spørg = m ? spoergsmaal(m, form) : [];
+  const spørg = m ? spoergsmaal(m, form, s) : [];
   const vedBordet = !s.spillet
     ? kortLinje(s)
     : s.kontrakt === 'Pas' || !s.spilfoerer

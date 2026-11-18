@@ -277,8 +277,12 @@ export const T = {
     mail: 'Mail',
     kopier: 'Kopiér',
     hvilke: 'Hvilke spil?',
-    vaerd: (n: number) => `Spil værd at se på (${n})`,
-    alle: (n: number) => `Alle ${n} spil`,
+    // Tre valg (Franks svar 3, 18. nov. 2026). "De 8" står med listens antal, hvis en aften har færre.
+    valg: {
+      vaerd: (n: number) => `De ${n}`,
+      maerker: (n: number) => `Alle med mærker (${n})`,
+      alle: (_n: number) => 'Alle spil',
+    },
     udskrivNu: 'Udskriv nu',
     kopieret: 'Gennemgangen er kopieret.',
     ikkeKopieret: 'Teksten kunne ikke kopieres. Den står i vinduet Mail og kan markeres dér.',
@@ -298,7 +302,7 @@ export const T = {
       par: [
         'Listen viser de 8 spil, hvor jeres egne beslutninger kostede mest: den negative del af meldinger, spilføring og modspil.',
         'Under "Vis alle" står også de andre spil, hvor de kostede 2 point eller mere, og spil med udgang eller slem misset eller meldt uden dækning, strafdobling, et udspil, der kostede et stik, eller et heldigt resultat.',
-        'Heldigt er mindst 50 %, selv om jeres egne beslutninger kostede point. Uheldige spil, under 50 % uden egne fejl, står på én linje under listen.',
+        'Heldigt er mindst 50 %, selv om jeres egne beslutninger kostede point. Uheldige spil, bund (under 25 %) uden egne fejl, står på én linje under listen.',
         'Bund, top og anden kontrakt end feltet er kun ekstra mærker: de vises, men bringer ikke et spil med.',
       ],
       hold: [
@@ -363,6 +367,8 @@ export const T = {
       udgangUden: ['Meldte vi udgang uden nok information?'],
       slemMaaske: ['Undersøgte vi slem?', 'Havde vi styr på esser og nøglekort?', 'Var 6NT eller slem i farve rigtigst ved parturnering?'],
       slemUden: ['Pressede vi for hårdt?', 'Havde vi kontrol i sidefarverne?'],
+      // Fit "Ja", men I spillede en farvekontrakt uden for fittets farve (Franks svar 3, 18. nov. 2026).
+      trumf: ['Var trumffarven den rigtige?'],
     },
     overstik: 'Var overstikket afgørende?',
     ejer: 'Hvem ejede spillet?',
@@ -391,6 +397,12 @@ export const T = {
     aabneKort: 'Med åbne kort:',
     par: (par: string, score: string) => `par ${par}, ${score}.`,
     faktorer: 'Hvor gik pointene?',
+    // Overskriften over listen på side 1 for de tre valg.
+    liste: {
+      vaerd: (n: number) => `Spil værd at se på (${n})`,
+      maerker: (n: number) => `Alle med mærker (${n})`,
+      alle: (n: number) => `Alle spil (${n})`,
+    },
     spoerg: 'Spørg hinanden:',
     beslutning: 'Beslutning eller resultat?',
     beslutninger: ['Rigtig, godt', 'Rigtig, dårligt', 'Forkert, godt', 'Forkert, dårligt'],
@@ -427,8 +439,11 @@ export const T = {
     resultatHold: (imp: string) => `Resultat: ${imp} imp mod jeres andet bord`,
     faktorer: { par: 'Hvor gik pointene? (mod middel)', hold: 'Hvor gik pointene? (imp)' },
     faktorNavn: { meldinger: 'Meldinger', spilfoering: 'Spilføring', modspil: 'Modspil', held: 'Held og uheld' } satisfies Record<Faktor, string>,
-    vaerd: (n: number) => `SPIL VÆRD AT SE PÅ (${n})`,
-    alle: (n: number) => `ALLE SPIL (${n})`,
+    overskrift: {
+      vaerd: (n: number) => `SPIL VÆRD AT SE PÅ (${n})`,
+      maerker: (n: number) => `ALLE MED MÆRKER (${n})`,
+      alle: (n: number) => `ALLE SPIL (${n})`,
+    },
     spil: (n: number, linje: string, resultat: string) => `Spil ${n} · ${linje} · ${resultat}`,
     kommentar: 'Kommentar:',
     uheldige: (numre: string) => `Uheldige, ingen fejl: spil ${numre}`,

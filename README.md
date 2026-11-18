@@ -25,6 +25,7 @@ npm run dev                  # http://localhost:5173/ – kaldene går gennem pr
 npm test                     # tsc og vitest: accepttestene i src/test/ med svarene i src/test/data/
 node tools/tjek_bredde.mjs   # i Chrome eller Edge: ingen vandret rulning ved 320, 390 og 1280 px, 44 px trykflader
 node tools/tjek_bredde.mjs --billeder=../skaermbilleder/app   # gemmer også skærmbilleder af skærmene
+node tools/tjek_udskrift.mjs # i Chrome eller Edge: udskriften i A4 med "De 8", "Alle med mærker" og "Alle spil", én side pr. spil, intet deles, kun ♥ og ♦ røde
 ```
 
 `src/test/data/` er svar fra funktionen på de anonymiserede testsider i `api/tests/data/` (ingen rigtige navne). De laves igen fra `api/` med `.venv` sådan:

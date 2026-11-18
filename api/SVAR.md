@@ -59,7 +59,7 @@ Holdlisten er det eneste sted i svaret med navne: holdets navn (på siden holdka
 | `faktorer` | objekt | de fire faktorer summeret over de spillede spil |
 | `stoersteForbedring` | tekst eller null | den af `meldinger`, `spilfoering` og `modspil`, der er mest negativ; null, når ingen er negativ |
 | `teknikker` | objekt | teknikker i aftenens spil: antal spil med hvert mærke |
-| `vaerdAtSePaa` | objekt | spil værd at se på: listen, resten under "Vis alle" og de uheldige (v2a) |
+| `vaerdAtSePaa` | objekt | spil værd at se på: listen, resten under "Vis alle", de uheldige og alle spil med mærker (v2a) |
 | `spil` | liste | ét objekt pr. spil |
 
 ### svar.turnering
@@ -312,6 +312,7 @@ Listen er rangeret efter **omkostningen**: den negative del af parrets egne fakt
 | `liste` | liste | spilnumrene på de 8 spil med størst omkostning (færre, hvis færre spil har en omkostning under 0), det dyreste først; uden de uheldige |
 | `resten` | liste | spilnumrene under "Vis alle": de andre spil med en omkostning på −2 eller lavere (point eller imp) eller et fast mærke (`udgangMisset`, `slemMisset`, `udgangUdenDaekning`, `slemUdenDaekning`, `strafdobling`, `udspil`, `heldigt`), i samme rækkefølge |
 | `uheldige` | liste | spilnumrene med mærket `uheldigt` i spillenes rækkefølge; de står hverken i `liste` eller `resten` |
+| `medMaerker` | liste | valget "Alle med mærker" til udskrift og mail (Franks svar 3, 18. nov. 2026): `liste` og `resten` og derefter de andre spil med mindst ét mærke (også de ekstra mærker og `uheldigt`) i samme rækkefølge |
 
 ### svar.spil[].vaerd
 
@@ -322,7 +323,7 @@ Listen er rangeret efter **omkostningen**: den negative del af parrets egne fakt
 
 ### svar.spil[].vaerd.maerker[]
 
-Reglerne står i specens afsnit 1. `bund` og `top` er procent under 25 og over 75 og findes kun i parturnering. `udgangMisset` og `slemMisset` kræver, at parret var spilfører, eller at alle passede. `andenKontrakt` sammenligner farve (sans regnes som en farve), den side, der var spilfører, og slags (delkontrakt, udgang eller slem; pas er sin egen slags) med den hyppigste i feltet; er parrets kontrakt blandt de hyppigste ved lighed, er der intet mærke. `heldigt`: mindst 50 % (0 imp eller mere) og en omkostning under 0. `uheldigt`: under 50 % (under 0 imp), ingen negativ egen faktor og `held` negativ.
+Reglerne står i specens afsnit 1. `bund` og `top` er procent under 25 og over 75 og findes kun i parturnering. `udgangMisset` og `slemMisset` kræver, at parret var spilfører, eller at alle passede. `andenKontrakt` sammenligner farve (sans regnes som en farve), den side, der var spilfører, og slags (delkontrakt, udgang eller slem; pas er sin egen slags) med den hyppigste i feltet; er parrets kontrakt blandt de hyppigste ved lighed, er der intet mærke. `heldigt`: mindst 50 % (0 imp eller mere) og en omkostning under 0. `uheldigt`: bund, under 25 % (Franks svar 3, 18. nov. 2026; ved holdturnering under 0 imp), ingen negativ egen faktor og `held` negativ.
 
 | Felt | Type | Indhold |
 | --- | --- | --- |

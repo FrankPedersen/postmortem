@@ -7,9 +7,12 @@ import { dato, decimaler, kontrakt, medFortegn, opremsning, SYMBOL, tal } from '
 import { T } from './tekster';
 import type { Analyse, Benaevnelse, MeldeNiveau, MeldeSvar, Meldesamtale, Spil, VaerdMaerke } from './typer';
 import { FAKTORER } from './typer';
+import { viSpillede } from './udledt';
 
 type Form = Analyse['turnering']['form'];
-export type Valg = 'vaerd' | 'alle';
+/** Valgene til udskrift og mail (Franks svar 3, 18. nov. 2026): "De 8", "Alle med mærker (N)" og "Alle spil". */
+export type Valg = 'vaerd' | 'maerker' | 'alle';
+export const VALG: readonly Valg[] = ['vaerd', 'maerker', 'alle'];
 export type ChipArt = 'miss' | 'ok' | 'neutral' | 'held' | 'uheld';
 
 /** Første bogstav som lille bogstav: "Anden kontrakt end feltet" → "anden kontrakt end feltet". */
@@ -73,10 +76,15 @@ export function resultatTekst(a: Analyse, s: Spil): string {
   return a.turnering.form === 'par' ? `${tal(s.procent ?? 0)} %` : T.vaerd.imp(medFortegn(s.point));
 }
 
-/** Spillene i et valg: de 8 på listen "Spil værd at se på" eller alle aftenens spil. */
+/**
+ * Spillene i et valg: de 8 på listen "Spil værd at se på", alle spil med mærker (den lange liste og derefter de andre
+ * spil med mærker, `vaerdAtSePaa.medMaerker`) eller alle aftenens spil.
+ */
 export function valgteSpil(a: Analyse, valg: Valg): Spil[] {
   if (valg === 'alle') return a.spil;
-  return (a.vaerdAtSePaa?.liste ?? []).map((n) => a.spil.find((s) => s.nummer === n)).filter((s): s is Spil => !!s);
+  const v = a.vaerdAtSePaa;
+  const numre = valg === 'vaerd' ? v?.liste : (v?.medMaerker ?? (v ? [...v.liste, ...v.resten] : undefined));
+  return (numre ?? []).map((n) => a.spil.find((s) => s.nummer === n)).filter((s): s is Spil => !!s);
 }
 
 /** Den lange liste: de 8 og resten under "Vis alle", i listens rækkefølge. */
@@ -128,12 +136,28 @@ export interface Fold {
   felt: Felt;
   titel: string;
   tekst: string;
-  /** "Spørg hinanden": kun ved måske, fit "Nej" og meldt uden dækning; ellers tom, og folden er lukket (forslag 9). */
+  /**
+   * "Spørg hinanden": kun ved måske, fit "Nej", meldt uden dækning og fit "Ja" med en kontrakt uden for fittets farve
+   * og sans; ellers tom, og folden er lukket (forslag 9).
+   */
   spoerg: string[];
 }
 
+type Kontrakten = Pick<Spil, 'kontrakt' | 'spilfoerer' | 'retning'>;
+
+/**
+ * Fit "Ja", og I var spilfører i en farvekontrakt, der hverken er i fittets farve eller i sans (Franks svar 3, 18. nov.
+ * 2026), fx spil 7 den 16. november: S 2♦ med 8 hjerter. Spillede modparten, eller blev spillet meldt pas, var
+ * trumffarven ikke jeres.
+ */
+export function andenTrumf(m: Meldesamtale, s: Kontrakten): boolean {
+  if (m.fit.svar !== 'ja' || !s.kontrakt || s.kontrakt === 'Pas' || !viSpillede(s)) return false;
+  const farve = /^\d(NT|[CDHS])/.exec(s.kontrakt)?.[1];
+  return !!farve && farve !== 'NT' && farve !== m.fit.farve;
+}
+
 /** Folderne under statusfelterne: dem med spørgsmål først (som på skærm 2), ellers fit, udgang, slem. */
-export function folder(m: Meldesamtale, form: Form): Fold[] {
+export function folder(m: Meldesamtale, form: Form, s: Kontrakten): Fold[] {
   const M = T.meldesamtale;
   const facit = (n: MeldeNiveau, niveau: 'udgang' | 'slem') =>
     form === 'par' ? M.facit(stikTekst(n), M.borde(n.borde, n.af), M.niveau[niveau]) : M.facitHold(stikTekst(n), n.borde > 0, M.niveau[niveau]);
@@ -143,7 +167,7 @@ export function folder(m: Meldesamtale, form: Form): Fold[] {
       felt: 'fit',
       titel: M.fold(M.navn.fit, ord(m.fit.svar).toLocaleLowerCase('da')),
       tekst: (m.fit.svar === 'ja' ? M.fitJa : M.fitNej)(m.fit.kort, B(m.fit.farve), fordeling),
-      spoerg: m.fit.svar === 'nej' ? M.spoerg.fit : [],
+      spoerg: m.fit.svar === 'nej' ? M.spoerg.fit : andenTrumf(m, s) ? M.spoerg.trumf : [],
     },
     {
       felt: 'udgang',
@@ -195,9 +219,9 @@ export function meldeKort(m: Meldesamtale, form: Form): string {
 }
 
 /** Spørgsmålene til spillet ("Spørg hinanden") i felternes rækkefølge, til udskriften. */
-export function spoergsmaal(m: Meldesamtale, form: Form): string[] {
+export function spoergsmaal(m: Meldesamtale, form: Form, s: Kontrakten): string[] {
   const rækkefølge: Felt[] = ['fit', 'udgang', 'slem'];
-  return folder(m, form)
+  return folder(m, form, s)
     .sort((x, y) => rækkefølge.indexOf(x.felt) - rækkefølge.indexOf(y.felt))
     .flatMap((f) => f.spoerg);
 }
@@ -233,7 +257,7 @@ export function gennemgang(a: Analyse, valg: Valg): string {
   const faktor = (f: (typeof FAKTORER)[number]) => `${G.faktorNavn[f]} ${medFortegn(a.faktorer[f], d)}`;
   linjer.push('', G.faktorer[form], `${faktor('meldinger')} · ${faktor('spilfoering')}`, `${faktor('modspil')} · ${faktor('held')}`, '');
   const spil = valgteSpil(a, valg);
-  linjer.push(valg === 'vaerd' ? G.vaerd(spil.length) : G.alle(spil.length), '');
+  linjer.push(G.overskrift[valg](spil.length), '');
   for (const s of spil) {
     linjer.push([`${T.spil.titel(s.nummer)}`, kortLinje(s), resultatTekst(a, s)].filter(Boolean).join(' · '));
     const m = vaerdMaerker(a, s).map((x, i) => (i === 0 ? x.tekst : småt(x.tekst)));

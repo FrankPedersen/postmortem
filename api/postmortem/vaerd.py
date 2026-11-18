@@ -7,7 +7,8 @@ faktorerne. Intet gemmes.
 - `overstik_afgoerende`: om ét stik mere eller mindre havde flyttet pointene mindst 25 procentpoint (3 imp ved
   holdturnering).
 - `maerker`: spillets omkostning (den negative del af meldinger, spilføring og modspil) og mærker.
-- `liste`: de 8 spil med størst omkostning, resten under "Vis alle" og de uheldige (Franks svar 2, 17. nov. 2026).
+- `liste`: de 8 spil med størst omkostning, resten under "Vis alle" og de uheldige (Franks svar 2, 17. nov. 2026), og
+  alle spil med mærker til udskrift og mail (Franks svar 3, 18. nov. 2026).
 
 Feltet er de andre borde i parturnering og det andet bord (holdkammeraternes) i holdturnering.
 """
@@ -182,14 +183,19 @@ def maerker(x, egen, felt, form):
     godt = x['procent'] >= 50 if par else x['point'] >= 0
     if godt and omkostning < -EPS:
         m('heldigt')
-    if not godt and omkostning > -EPS and f['held'] < -EPS:
+    # Uheldigt kun ved bund, under 25 % (Franks svar 3, 18. nov. 2026); bund findes ikke ved holdturnering, så dér er
+    # det under 0 imp som før.
+    daarligt = x['procent'] < BUND if par else x['point'] < 0
+    if daarligt and omkostning > -EPS and f['held'] < -EPS:
         m('uheldigt')
     return {'omkostning': omkostning, 'maerker': ud}
 
 
 def liste(spil, form):
     """Listen for aftenen (Franks svar 2): de 8 spil med størst omkostning (færre, hvis færre har en), resten med en
-    omkostning på −2 eller lavere eller et fast mærke, og de uheldige. Ved lighed laveste procent (imp), så spilnummer."""
+    omkostning på −2 eller lavere eller et fast mærke, og de uheldige. Ved lighed laveste procent (imp), så spilnummer.
+    `medMaerker` er valget "Alle med mærker" til udskrift og mail (Franks svar 3): den lange liste og derefter de andre
+    spil med mindst ét mærke i samme rækkefølge."""
     med_maerker = [s for s in spil if s.get('spillet') and s.get('vaerd')]
 
     def navne(s):
@@ -205,4 +211,6 @@ def liste(spil, form):
     resten = [s['nummer'] for s in sorted(med_maerker, key=noegle)
               if s['nummer'] not in de_8 and s['nummer'] not in uheldige
               and (s['vaerd']['omkostning'] <= GRAENSE + EPS or navne(s) & set(FASTE))]
-    return {'liste': de_8, 'resten': resten, 'uheldige': uheldige}
+    lang = de_8 + resten
+    andre = [s['nummer'] for s in sorted(med_maerker, key=noegle) if s['nummer'] not in lang and s['vaerd']['maerker']]
+    return {'liste': de_8, 'resten': resten, 'uheldige': uheldige, 'medMaerker': lang + andre}

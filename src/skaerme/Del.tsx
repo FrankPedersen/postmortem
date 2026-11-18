@@ -1,7 +1,7 @@
 import { useId, useState } from 'react';
 import { T } from '../tekster';
 import type { Analyse } from '../typer';
-import { gennemgang, valgteSpil, type Valg } from '../vaerd';
+import { gennemgang, VALG, valgteSpil, type Valg } from '../vaerd';
 
 /** Lægger teksten i udklipsholderen og giver beskeden til skærmlæseren (role="status"). */
 export async function kopier(tekst: string): Promise<string> {
@@ -13,19 +13,20 @@ export async function kopier(tekst: string): Promise<string> {
   }
 }
 
-/** Valget "Spil værd at se på (8)" eller "Alle 32 spil" under Udskriv og i vinduet til mailen. */
-export function ValgAfSpil({ a, valg, setValg, antal, navn }: { a: Analyse; valg: Valg; setValg: (v: Valg) => void; antal: number; navn: string }) {
+/**
+ * Valget under Udskriv og i vinduet til mailen (Franks svar 3, 18. nov. 2026): "De 8", "Alle med mærker (N)" og
+ * "Alle spil".
+ */
+export function ValgAfSpil({ a, valg, setValg, navn }: { a: Analyse; valg: Valg; setValg: (v: Valg) => void; navn: string }) {
   return (
     <fieldset className="kort udskriv-valg">
       <legend>{T.del.hvilke}</legend>
-      <label>
-        <input type="radio" name={navn} checked={valg === 'vaerd'} onChange={() => setValg('vaerd')} />
-        <span>{T.del.vaerd(antal)}</span>
-      </label>
-      <label>
-        <input type="radio" name={navn} checked={valg === 'alle'} onChange={() => setValg('alle')} />
-        <span>{T.del.alle(a.spil.length)}</span>
-      </label>
+      {VALG.map((v) => (
+        <label key={v}>
+          <input type="radio" name={navn} checked={valg === v} onChange={() => setValg(v)} />
+          <span>{T.del.valg[v](valgteSpil(a, v).length)}</span>
+        </label>
+      ))}
     </fieldset>
   );
 }
@@ -57,7 +58,7 @@ export function DelAftenen({ a, valg, setValg }: { a: Analyse; valg: Valg; setVa
       </div>
       {åben && (
         <div id={panel} className="del-panel">
-          <ValgAfSpil a={a} valg={valg} setValg={setValg} antal={valgteSpil(a, 'vaerd').length} navn="udskriv-valg" />
+          <ValgAfSpil a={a} valg={valg} setValg={setValg} navn="udskriv-valg" />
           <button type="button" className="primaer" onClick={() => window.print()}>
             {T.del.udskrivNu}
           </button>

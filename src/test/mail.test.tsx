@@ -170,7 +170,8 @@ describe('Udskriften', () => {
       expect(side.querySelectorAll('.udskrift-haand')).toHaveLength(4);
     }
     expect(tekst(s[1])).toMatch(/^Post Mortem · 16\. november 2026 · Efterårs Hold og Par, Par Gul Side 2 af 9 Spil 1 28,6 % · 4 af 14 point/);
-    expect(tekst(s[1])).toContain('Spørg hinanden: Undersøgte vi slem? Havde vi styr på esser og nøglekort? Var 6NT eller slem i farve rigtigst ved parturnering?');
+    // Spil 1 er N 4♠ med 9 hjerter, så trumffarven kommer først (Franks svar 3), derefter slem.
+    expect(tekst(s[1])).toContain('Spørg hinanden: Var trumffarven den rigtige? Undersøgte vi slem? Havde vi styr på esser og nøglekort? Var 6NT eller slem i farve rigtigst ved parturnering?');
   });
 
   it('"Alle med mærker (26)" giver side 1 og 26 sider i listens rækkefølge, også spil 7 med spørgsmålet om trumffarven', () => {

@@ -7,7 +7,7 @@ import { FAKTORER } from './typer';
 export const PLADSER: readonly Plads[] = ['N', 'E', 'S', 'W'];
 
 /** Parret eller holdet var spilfører. */
-export const viSpillede = (s: Spil) =>
+export const viSpillede = (s: Pick<Spil, 'spilfoerer' | 'retning'>) =>
   s.spilfoerer !== null && (s.retning === 'NS') === (s.spilfoerer === 'N' || s.spilfoerer === 'S');
 
 export const faktorSum = (f: Faktorer) => FAKTORER.reduce((sum, k) => sum + f[k], 0);

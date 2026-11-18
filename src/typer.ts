@@ -141,6 +141,8 @@ export interface VaerdAtSePaa {
   liste: number[];
   resten: number[];
   uheldige: number[];
+  /** "Alle med mærker" til udskrift og mail (Franks svar 3); mangler i et svar fra før. */
+  medMaerker?: number[];
 }
 
 export interface Spil {

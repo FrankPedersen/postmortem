@@ -69,9 +69,35 @@
   ],
   "uheldige": [
    15,
+   20
+  ],
+  "medMaerker": [
+   1,
+   4,
+   8,
+   25,
+   29,
+   6,
+   24,
+   9,
+   5,
+   21,
+   14,
+   11,
+   13,
+   32,
+   17,
+   18,
+   22,
+   19,
+   7,
+   15,
    20,
-   26,
-   27
+   28,
+   30,
+   2,
+   16,
+   23
   ]
  },
  "spil": [
@@ -10148,12 +10174,7 @@
    },
    "vaerd": {
     "omkostning": 0,
-    "maerker": [
-     {
-      "maerke": "uheldigt",
-      "tal": null
-     }
-    ]
+    "maerker": []
    }
   },
   {
@@ -10530,12 +10551,7 @@
    },
    "vaerd": {
     "omkostning": 0,
-    "maerker": [
-     {
-      "maerke": "uheldigt",
-      "tal": null
-     }
-    ]
+    "maerker": []
    }
   },
   {
