@@ -449,6 +449,8 @@ Afsnit 1–4 og accepttest 1, 3, 4 og 5 er rettet efter svaret. **Sådan er svar
     - ingen vandret rulning i spil 7 og ingen fejl i browserens konsol.
   - Skærmbillede af spil 7's meldesamtale fra live-sitet (kun kortet Meldesamtalen, 358 × 460 px, ingen spillernavne; uden for git): `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\live-spil-7-meldesamtale.png`.
   - Grenen `vaerd-at-se-paa` er slettet lokalt og findes ikke på GitHub (den blev aldrig pushet).
+- **`SYSTEM.md`:** rækken for Post Mortem 2a har Franks svar 3, fjerde session og "Godkendt af Frank og udgivet 18. nov. 2026" med flettecommit, tag, Actions, udrulningen og live-tjekket i stedet for "Venter på Franks godkendelse; ikke flettet", og oversigtstabellens linje om Post Mortem nævner "Spil værd at se på", Meldesamtalen, udskriften og mailen. Datoen øverst er 18. november 2026, og filen har stadig LF-linjeskift og hverken navne eller hemmeligheder.
+- **Tokenforbrug** (fjerde session, rettelserne, testene, fletningen, push, zip-udrulningen, live-tjekket, arkiveringen og `SYSTEM.md`, 95 svar fra 06:18 til 06:47 UTC, målt før den sidste commit): nye input 190, skrevet til cachen 270.726, læst fra cachen 19.910.498 og output 98.610, i alt 20.280.024.
 
 ## Arbejdsgang
 
