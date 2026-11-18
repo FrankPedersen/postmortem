@@ -6,6 +6,10 @@ import { FAKTORER } from '../typer';
 import { faktorSum, holdNavn, maerke, resultatArt, spilSum, tagetVedBordet, teknikMaerker, teknikTekst, udspilTekst } from '../udledt';
 import { InfoKnap, PointInfo, useInfo } from '../ui/Info';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
+import type { Valg } from '../vaerd';
+import { DelAftenen } from './Del';
+import { Udskrift } from './Udskrift';
+import { VaerdKort } from './Vaerd';
 
 /** Linjen for et spil i listen: "S 4♠ · udspil ♣B · 10 stik · +620". */
 function spilLinje(s: Spil) {
@@ -21,7 +25,9 @@ function spilLinje(s: Spil) {
 
 /** Skærm 3, aftenens oversigt (`#/aften`). */
 export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
-  const [filter, setFilter] = useState<'alle' | 'tabte' | Maerke>('alle');
+  const [filter, setFilter] = useState<'alle' | 'tabte' | 'vaerd' | Maerke>('alle');
+  // SPEC-postmortem-2a: valget under Udskriv ("Spil værd at se på" eller "Alle spil") styrer udskriften.
+  const [udskrivValg, setUdskrivValg] = useState<Valg>('vaerd');
   const a = svar;
   const form = a.turnering.form;
   const antal = a.spil.length;
@@ -29,7 +35,9 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
   // Vindue 1b: spillene med hvert mærke. Et svar fra før vindue 1b har ikke teknikker; så vises hverken kort eller filtre.
   const MAERKER: Maerke[] = ['skvis', 'indspil'];
   const med = (m: Maerke) => a.spil.filter((s) => teknikMaerker(s).some((x) => x.navn === m));
-  const vist = filter === 'alle' ? a.spil : filter === 'tabte' ? tabte : med(filter);
+  // Filteret "Værd at se på" viser de 8 på listen i spillenes rækkefølge.
+  const værd = a.spil.filter((s) => a.vaerdAtSePaa?.liste.includes(s.nummer));
+  const vist = filter === 'alle' ? a.spil : filter === 'tabte' ? tabte : filter === 'vaerd' ? værd : med(filter);
   const taget = tagetVedBordet(a);
   const ingenTeknik = MAERKER.every((m) => med(m).length === 0);
   const iAlt = faktorSum(a.faktorer);
@@ -67,6 +75,13 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
             )}
           </p>
         </div>
+
+        {a.vaerdAtSePaa && (
+          <>
+            <DelAftenen a={a} valg={udskrivValg} setValg={setUdskrivValg} />
+            <VaerdKort a={a} />
+          </>
+        )}
 
         <section className="kort" aria-labelledby="h-faktorer">
           <div className="kort-hoved">
@@ -156,6 +171,12 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
             <button type="button" className="filter" aria-pressed={filter === 'tabte'} onClick={() => setFilter('tabte')}>
               {T.aften.tabte(tabte.length)}
             </button>
+            {/* SPEC-postmortem-2a: "Værd at se på · 8" efter de filtre, der var der før. */}
+            {a.vaerdAtSePaa && (
+              <button type="button" className="filter" aria-pressed={filter === 'vaerd'} disabled={værd.length === 0} onClick={() => setFilter('vaerd')}>
+                {T.vaerd.filter(værd.length)}
+              </button>
+            )}
           </div>
           <ol className="spil-liste" aria-labelledby="h-spillene">
             {vist.map((s) => {
@@ -204,6 +225,7 @@ export function Aften({ svar, vaelg }: { svar: Analyse; vaelg?: VaelgSvar }) {
         </section>
       </Side>
       <Sidefod />
+      {a.vaerdAtSePaa && <Udskrift a={a} valg={udskrivValg} />}
     </>
   );
 }

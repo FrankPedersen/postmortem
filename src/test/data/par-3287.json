@@ -44,6 +44,62 @@
    "ddStik": 12
   }
  },
+ "vaerdAtSePaa": {
+  "liste": [
+   1,
+   4,
+   8,
+   25,
+   29,
+   6,
+   24,
+   9
+  ],
+  "resten": [
+   5,
+   21,
+   14,
+   11,
+   13,
+   32,
+   17,
+   18,
+   22,
+   19
+  ],
+  "uheldige": [
+   15,
+   20
+  ],
+  "medMaerker": [
+   1,
+   4,
+   8,
+   25,
+   29,
+   6,
+   24,
+   9,
+   5,
+   21,
+   14,
+   11,
+   13,
+   32,
+   17,
+   18,
+   22,
+   19,
+   7,
+   15,
+   20,
+   28,
+   30,
+   2,
+   16,
+   23
+  ]
+ },
  "spil": [
   {
    "nummer": 1,
@@ -367,7 +423,88 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 9,
+     "fordeling": [
+      6,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "ja",
+     "stik": [
+      {
+       "farve": "NT",
+       "stik": 12
+      },
+      {
+       "farve": "H",
+       "stik": 12
+      }
+     ],
+     "borde": 7,
+     "af": 7,
+     "meldt": true
+    },
+    "slem": {
+     "svar": "maaske",
+     "stik": [
+      {
+       "farve": "NT",
+       "stik": 12
+      },
+      {
+       "farve": "H",
+       "stik": 12
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "6NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -14,
+    "maerker": [
+     {
+      "maerke": "slemMisset",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 14
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 2,
@@ -666,7 +803,73 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "nej",
+     "farve": "S",
+     "kort": 7,
+     "fordeling": [
+      4,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 6
+      },
+      {
+       "farve": "H",
+       "stik": 6
+      },
+      {
+       "farve": "D",
+       "stik": 6
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 7
+      },
+      "modparten": {
+       "farve": "C",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "1NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": [
+     {
+      "maerke": "top",
+      "tal": null
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 3,
@@ -989,7 +1192,56 @@
      ],
      "vinder": "N"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "C",
+     "kort": 9,
+     "fordeling": [
+      6,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "C",
+       "stik": 6
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "C",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "3NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": []
+   }
   },
   {
    "nummer": 4,
@@ -1316,7 +1568,80 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 8,
+     "fordeling": [
+      4,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "ja",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 10
+      }
+     ],
+     "borde": 5,
+     "af": 7,
+     "meldt": true
+    },
+    "slem": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 10
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "4S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -10,
+    "maerker": [
+     {
+      "maerke": "meldinger",
+      "tal": 10
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 5,
@@ -1674,7 +1999,89 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "nej",
+     "farve": "H",
+     "kort": 7,
+     "fordeling": [
+      5,
+      2
+     ]
+    },
+    "udgang": {
+     "svar": "ja",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 10
+      },
+      {
+       "farve": "H",
+       "stik": 10
+      }
+     ],
+     "borde": 5,
+     "af": 7,
+     "meldt": true
+    },
+    "slem": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 10
+      },
+      {
+       "farve": "H",
+       "stik": 10
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 7
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 7
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "4H",
+       "4S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -6,
+    "maerker": [
+     {
+      "maerke": "meldinger",
+      "tal": 2
+     },
+     {
+      "maerke": "spilfoering",
+      "tal": 1
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 6,
@@ -1958,7 +2365,76 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 8,
+     "fordeling": [
+      5,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "maaske",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 10
+      }
+     ],
+     "borde": 1,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 10
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "4S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -7,
+    "maerker": [
+     {
+      "maerke": "udgangMisset",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 7
+     }
+    ]
+   }
   },
   {
    "nummer": 7,
@@ -2329,7 +2805,69 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 8,
+     "fordeling": [
+      5,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 8
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "C",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "3C"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -1,
+    "maerker": [
+     {
+      "maerke": "bund",
+      "tal": null
+     },
+     {
+      "maerke": "spilfoering",
+      "tal": 1
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 8,
@@ -2678,7 +3216,66 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "D",
+     "kort": 8,
+     "fordeling": [
+      5,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "D",
+       "stik": 8
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "D",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "H",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "2SX",
+       "3DX"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -9,
+    "maerker": [
+     {
+      "maerke": "bund",
+      "tal": null
+     },
+     {
+      "maerke": "modspil",
+      "tal": 2
+     }
+    ]
+   }
   },
   {
    "nummer": 9,
@@ -3008,7 +3605,61 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "C",
+     "kort": 8,
+     "fordeling": [
+      5,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "C",
+       "stik": 6
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "C",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "1D"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -6,
+    "maerker": [
+     {
+      "maerke": "modspil",
+      "tal": 1
+     }
+    ]
+   }
   },
   {
    "nummer": 10,
@@ -3353,7 +4004,56 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 7
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "1S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": []
+   }
   },
   {
    "nummer": 11,
@@ -3668,7 +4368,77 @@
      ],
      "vinder": "N"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 9
+      },
+      {
+       "farve": "D",
+       "stik": 9
+      }
+     ],
+     "borde": 4,
+     "af": 7,
+     "meldt": true
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "C",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "3S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -5,
+    "maerker": [
+     {
+      "maerke": "top",
+      "tal": null
+     },
+     {
+      "maerke": "udgangUdenDaekning",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 5
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 12,
@@ -4021,7 +4791,56 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 9
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "2S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": []
+   }
   },
   {
    "nummer": 13,
@@ -4351,7 +5170,84 @@
      ],
      "vinder": "N"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 8,
+     "fordeling": [
+      5,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "maaske",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 10
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 10
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "C",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "4H"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -4,
+    "maerker": [
+     {
+      "maerke": "udgangMisset",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 2
+     },
+     {
+      "maerke": "spilfoering",
+      "tal": 1
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 14,
@@ -4654,7 +5550,65 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "C",
+     "kort": 9,
+     "fordeling": [
+      6,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "C",
+       "stik": 6
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "C",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "3NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -5,
+    "maerker": [
+     {
+      "maerke": "udspil",
+      "tal": 1
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 15,
@@ -5003,7 +5957,73 @@
      ],
      "vinder": "N"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "C",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "NT",
+       "stik": 8
+      },
+      {
+       "farve": "C",
+       "stik": 8
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "C",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "3S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": [
+     {
+      "maerke": "bund",
+      "tal": null
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     },
+     {
+      "maerke": "uheldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 16,
@@ -5281,7 +6301,61 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 8
+      }
+     ],
+     "borde": 2,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "2H"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": [
+     {
+      "maerke": "top",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 17,
@@ -5586,7 +6660,81 @@
      ],
      "vinder": "N"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "C",
+     "kort": 9,
+     "fordeling": [
+      7,
+      2
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 8
+      },
+      {
+       "farve": "C",
+       "stik": 8
+      }
+     ],
+     "borde": 2,
+     "af": 7,
+     "meldt": true
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "C",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "3S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -2,
+    "maerker": [
+     {
+      "maerke": "bund",
+      "tal": null
+     },
+     {
+      "maerke": "udgangUdenDaekning",
+      "tal": null
+     },
+     {
+      "maerke": "strafdobling",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 2
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 18,
@@ -5910,7 +7058,96 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 8,
+     "fordeling": [
+      4,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "ja",
+     "stik": [
+      {
+       "farve": "NT",
+       "stik": 9
+      }
+     ],
+     "borde": 5,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "NT",
+       "stik": 9
+      },
+      {
+       "farve": "S",
+       "stik": 9
+      },
+      {
+       "farve": "C",
+       "stik": 9
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "3NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -2,
+    "maerker": [
+     {
+      "maerke": "top",
+      "tal": null
+     },
+     {
+      "maerke": "udgangMisset",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 2
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 19,
@@ -6207,7 +7444,77 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 8,
+     "fordeling": [
+      6,
+      2
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 5
+      },
+      {
+       "farve": "H",
+       "stik": 5
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "C",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "6NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -1,
+    "maerker": [
+     {
+      "maerke": "top",
+      "tal": null
+     },
+     {
+      "maerke": "udspil",
+      "tal": 1
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 20,
@@ -6544,7 +7851,69 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 7
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "H",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "4H"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": [
+     {
+      "maerke": "bund",
+      "tal": null
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     },
+     {
+      "maerke": "uheldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 21,
@@ -6870,7 +8239,80 @@
      ],
      "vinder": "N"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "maaske",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 10
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 10
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "D",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "4H"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -6,
+    "maerker": [
+     {
+      "maerke": "udgangMisset",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 6
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 22,
@@ -7180,7 +8622,69 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "D",
+     "kort": 10,
+     "fordeling": [
+      6,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "D",
+       "stik": 10
+      }
+     ],
+     "borde": 1,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "D",
+       "kort": 10
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "4D"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -2,
+    "maerker": [
+     {
+      "maerke": "top",
+      "tal": null
+     },
+     {
+      "maerke": "udspil",
+      "tal": 1
+     },
+     {
+      "maerke": "heldigt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 23,
@@ -7520,7 +9024,69 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 8,
+     "fordeling": [
+      4,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 6
+      },
+      {
+       "farve": "D",
+       "stik": 6
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "H",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "3NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": [
+     {
+      "maerke": "top",
+      "tal": null
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 24,
@@ -7828,7 +9394,73 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "D",
+     "kort": 8,
+     "fordeling": [
+      4,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "D",
+       "stik": 8
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "D",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 7
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "3DX"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -6,
+    "maerker": [
+     {
+      "maerke": "bund",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 2
+     },
+     {
+      "maerke": "modspil",
+      "tal": 2
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 25,
@@ -8134,7 +9766,73 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "C",
+     "kort": 9,
+     "fordeling": [
+      7,
+      2
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "C",
+       "stik": 9
+      }
+     ],
+     "borde": 1,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "C",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "3C"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -8,
+    "maerker": [
+     {
+      "maerke": "bund",
+      "tal": null
+     },
+     {
+      "maerke": "meldinger",
+      "tal": 1
+     },
+     {
+      "maerke": "modspil",
+      "tal": 1
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 26,
@@ -8424,7 +10122,60 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 8,
+     "fordeling": [
+      5,
+      3
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 8
+      },
+      {
+       "farve": "D",
+       "stik": 8
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "2S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": []
+   }
   },
   {
    "nummer": 27,
@@ -8752,7 +10503,56 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "D",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "D",
+       "stik": 7
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "D",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "6S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": []
+   }
   },
   {
    "nummer": 28,
@@ -9069,7 +10869,61 @@
      ],
      "vinder": "W"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "C",
+     "kort": 9,
+     "fordeling": [
+      5,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "C",
+       "stik": 8
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "C",
+       "kort": 9
+      },
+      "modparten": {
+       "farve": "S",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "2S"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": [
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 29,
@@ -9367,7 +11221,69 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 8,
+     "fordeling": [
+      4,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "NT",
+       "stik": 8
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "C",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "1NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -8,
+    "maerker": [
+     {
+      "maerke": "meldinger",
+      "tal": 4
+     },
+     {
+      "maerke": "spilfoering",
+      "tal": 1
+     },
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 30,
@@ -9650,7 +11566,61 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "H",
+     "kort": 8,
+     "fordeling": [
+      4,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "H",
+       "stik": 9
+      }
+     ],
+     "borde": 2,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": false,
+    "ejer": {
+     "side": "jer",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "H",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "C",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "4CX"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": [
+     {
+      "maerke": "andenKontrakt",
+      "tal": null
+     }
+    ]
+   }
   },
   {
    "nummer": 31,
@@ -9950,7 +11920,56 @@
      ],
      "vinder": "E"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "S",
+     "kort": 8,
+     "fordeling": [
+      7,
+      1
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "S",
+       "stik": 7
+      }
+     ],
+     "borde": 0,
+     "af": 7,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": false,
+     "trumf": {
+      "jer": {
+       "farve": "S",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "H",
+       "kort": 9
+      }
+     },
+     "bedst": {
+      "spilfoerer": "modparten",
+      "kontrakter": [
+       "3NT"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": 0,
+    "maerker": []
+   }
   },
   {
    "nummer": 32,
@@ -10259,7 +12278,61 @@
      ],
      "vinder": "S"
     }
-   ]
+   ],
+   "meldesamtale": {
+    "fit": {
+     "svar": "ja",
+     "farve": "D",
+     "kort": 8,
+     "fordeling": [
+      4,
+      4
+     ]
+    },
+    "udgang": {
+     "svar": "nej",
+     "stik": [
+      {
+       "farve": "D",
+       "stik": 9
+      }
+     ],
+     "borde": 0,
+     "af": 6,
+     "meldt": false
+    },
+    "slem": null,
+    "overstikAfgoerende": true,
+    "ejer": {
+     "side": "modparten",
+     "konkurrence": true,
+     "trumf": {
+      "jer": {
+       "farve": "D",
+       "kort": 8
+      },
+      "modparten": {
+       "farve": "H",
+       "kort": 8
+      }
+     },
+     "bedst": {
+      "spilfoerer": "jer",
+      "kontrakter": [
+       "4DX"
+      ]
+     }
+    }
+   },
+   "vaerd": {
+    "omkostning": -2.2857142857142856,
+    "maerker": [
+     {
+      "maerke": "meldinger",
+      "tal": 2.2857142857142856
+     }
+    ]
+   }
   }
  ]
 }

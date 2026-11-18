@@ -12,6 +12,11 @@
 // analysevinduet ved både parturnering og holdturnering; --billeder gemmer også ⓘ åben ved holdturnering og i
 // analysevinduet ved 390 og 1280 px.
 //
+// SPEC-postmortem-2a-vaerd-at-se-paa.md (accepttest 6): kortet "Spil værd at se på" med "Vis alle" åben, valget under
+// Udskriv og vinduet til mailen (`#/mail`) for alle tre testsvar, uden vandret rulning og med 44 px trykflader; "Vis alle"
+// åbner og lukker med Enter og har aria-expanded, og en lukket fold i Meldesamtalen åbner med Enter. --billeder gemmer
+// også skærmbillederne af det nye ved 390 og 1280 px for 16. november (filerne begynder med "2a-").
+//
 // Appen køres med Vites udviklingsserver, og svarene fra src/test/data/ lægges i sessionStorage som efter en analyse,
 // så testen ikke kalder funktionen. Kræver Node 22+. Stien til browseren kan gives i CHROME.
 import { spawn } from 'node:child_process';
@@ -136,6 +141,15 @@ try {
     const b = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: 0, width: cssContentSize.width, height: cssContentSize.height, scale: 1 } });
     writeFileSync(join(BILLEDER, navn), Buffer.from(b.result.data, 'base64'));
   };
+  // Et skærmbillede af ét element (fx kortet "Spil værd at se på") med 16 px luft omkring.
+  const elementBillede = async (navn, vælger) => {
+    if (!BILLEDER) return;
+    mkdirSync(BILLEDER, { recursive: true });
+    const r = await kør(`(() => { const e = document.querySelector(${JSON.stringify(vælger)}); if (!e) return null; const r = e.getBoundingClientRect(); return { x: Math.max(0, r.left + scrollX - 16), y: Math.max(0, r.top + scrollY - 16), width: Math.min(document.documentElement.clientWidth, r.width + 32), height: r.height + 32 }; })()`);
+    if (!r) return tjek(false, `skærmbillede ${navn}: ${vælger} findes`);
+    const b = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { ...r, scale: 1 } });
+    writeFileSync(join(BILLEDER, navn), Buffer.from(b.result.data, 'base64'));
+  };
 
   // ⓘ ved "Hvor gik pointene?" (accepttest 6): mus, tryk og tastatur i browseren, med ⓘ's midte som mål.
   const FIND_INFO = `[...document.querySelectorAll('button')].find((b) => b.getAttribute('aria-label') === ${JSON.stringify(INFO)})`;
@@ -246,6 +260,34 @@ try {
       tjek(teknik.kort && teknik.filter === 'Indspil · 1' && vist === 1, `${bredde} px, aftenen, ${navn}: kortet med teknikker står der, og filteret Indspil viser ét spil`, JSON.stringify({ teknik, vist }));
       await mål(`aftenen, ${navn}, Indspil`);
       }
+      // SPEC-postmortem-2a: "Spil værd at se på" med "Vis alle" åben (med Enter), valget under Udskriv og mailen.
+      await indlæs('#/aften');
+      const vis = await kør(`(() => {
+        const k = [...document.querySelectorAll('button')].find((b) => /^Vis alle \\(\\d+\\)$/.test(b.textContent.trim()));
+        return { kort: !!document.querySelector('#h-vaerd'), knap: k ? k.textContent.trim() : null, før: document.querySelectorAll('.vaerd-liste li').length };
+      })()`);
+      tjek(vis.kort, `${bredde} px, aftenen, ${navn}: kortet "Spil værd at se på" står der`, JSON.stringify(vis));
+      if (vis.knap) {
+        await kør(`[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === ${JSON.stringify(vis.knap)}).focus(); true`);
+        await tast('Enter', 'Enter', 13);
+        const åben = await kør(`({ udvidet: document.activeElement.getAttribute('aria-expanded'), efter: document.querySelectorAll('.vaerd-liste li').length })`);
+        const n = Number(/\((\d+)\)/.exec(vis.knap)[1]);
+        tjek(åben.udvidet === 'true' && åben.efter === n && vis.før === Math.min(8, n), `${bredde} px, aftenen, ${navn}: "${vis.knap}" åbner med Enter og viser ${n} spil`, JSON.stringify({ vis, åben }));
+        await mål(`aftenen, ${navn}, Vis alle åben`);
+        await tast('Enter', 'Enter', 13);
+        const lukket = await kør(`document.querySelectorAll('.vaerd-liste li').length`);
+        tjek(lukket === vis.før, `${bredde} px, aftenen, ${navn}: knappen lukker igen med Enter`, String(lukket));
+      }
+      await kør(`[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Udskriv')?.click(); true`);
+      await vent(30);
+      tjek(await kør(`!!document.querySelector('fieldset.udskriv-valg')`), `${bredde} px, aftenen, ${navn}: Udskriv viser valget af spil`);
+      // Tre valg (Franks svar 3, 18. nov. 2026): "De 8", "Alle med mærker (N)" og "Alle spil".
+      const valgene = await kør(`[...document.querySelectorAll('fieldset.udskriv-valg input[type=radio]')].map((r) => r.labels[0]?.textContent.trim())`);
+      tjek(valgene.length === 3 && /^De \d+$/.test(valgene[0]) && /^Alle med mærker \(\d+\)$/.test(valgene[1]) && valgene[2] === 'Alle spil', `${bredde} px, aftenen, ${navn}: Udskriv har de tre valg`, JSON.stringify(valgene));
+      await mål(`aftenen, ${navn}, valget under Udskriv`);
+      await gåTil('#/mail');
+      const mail = await mål(`mailen, ${navn}`);
+      tjek(mail.h1 === 'Aftenen til makker', `${bredde} px, mailen, ${navn}: overskriften er "Aftenen til makker"`, mail.h1);
       // ⓘ ved "Hvor gik pointene?" i analysevinduet (Franks svar 17. nov. 2026).
       await gåTil(`#/spil/${INFO_SPIL[navn]}`);
       await tjekInfo(bredde, `analysevinduet, ${navn}, spil ${INFO_SPIL[navn]}`, svar.turnering.form);
@@ -260,6 +302,14 @@ try {
         }
       }
       tjek(værst === 0, `${bredde} px, ${navn}: alle ${svar.spil.length} spil i analysevinduet uden vandret rulning og med 44 px trykflader`);
+      // Meldesamtalen: en lukket fold åbner med Enter på dens summary (tastatur).
+      await gåTil(`#/spil/${svar.spil.find((s) => s.spillet).nummer}`);
+      const fold = await kør(`(() => { const d = document.querySelector('.meldesamtale details:not([open])'); if (!d) return false; d.querySelector('summary').focus(); return true; })()`);
+      tjek(fold, `${bredde} px, ${navn}: Meldesamtalen står i analysevinduet med en lukket fold`);
+      if (fold) {
+        await tast('Enter', 'Enter', 13);
+        tjek(await kør(`document.activeElement.parentElement.open === true`), `${bredde} px, ${navn}: en lukket fold i Meldesamtalen åbner med Enter`);
+      }
     }
 
     // Fra 1000 px står bordet til venstre for resten i analysevinduet.
@@ -328,6 +378,31 @@ try {
         await kør('window.scrollTo(0, 0); true');
         await billede(`${bredde}-${fil}.png`);
       }
+    }
+    // SPEC-postmortem-2a: det nye for 16. november ved 390 og 1280 px.
+    for (const bredde of [390, 1280]) {
+      await størrelse(bredde, 900);
+      await gemSvar(PAR_3287, PAR_3287_URL);
+      await indlæs('#/aften');
+      await billede(`2a-${bredde}-1-aften-hele-siden.png`);
+      await elementBillede(`2a-${bredde}-1-spil-vaerd-at-se-paa-8-spil-og-uheldige.png`, '.vaerd');
+      await elementBillede(`2a-${bredde}-1-linjen-med-de-uheldige.png`, '.vaerd-uheldige');
+      await kør(`[...document.querySelectorAll('button')].find((b) => /^Vis alle/.test(b.textContent.trim())).click(); true`);
+      await vent(50);
+      await elementBillede(`2a-${bredde}-1-vis-alle-18-aaben.png`, '.vaerd');
+      await kør(`document.querySelector('.vaerd details').open = true; true`);
+      await vent(50);
+      await elementBillede(`2a-${bredde}-1-hvorfor-er-et-spil-med.png`, '.vaerd details');
+      await indlæs('#/aften');
+      await kør(`[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Udskriv').click(); true`);
+      await vent(50);
+      await elementBillede(`2a-${bredde}-1-knapperne-og-valget-under-udskriv.png`, '.del-aftenen');
+      for (const nr of [1, 17]) {
+        await indlæs(`#/spil/${nr}`);
+        await elementBillede(`2a-${bredde}-2-meldesamtalen-spil-${nr}.png`, '.meldesamtale');
+      }
+      await indlæs('#/mail');
+      await billede(`2a-${bredde}-3-mail-spil-vaerd-at-se-paa.png`);
     }
     console.log(`Skærmbillederne ligger i ${BILLEDER}`);
   }

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>Post Mortem – aftenens læring (v2b)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,'Segoe UI',Roboto,sans-serif;color:#1a1a1a}
+a{color:#1a1a1a}a:hover{color:#4a4a4a}
+</style>
+</helmet>
+<div style="width: 390px; height: 1400px; box-sizing: border-box; background: #f2f3f4; display: flex; flex-direction: column; font-size: 17px; line-height: 1.45">
+
+  <div style="background: #1a1a1a; color: #f2f3f4; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+    <a href="Main.dc.html" aria-label="Tilbage til oversigten" style="flex: none; width: 44px; height: 44px; margin: -8px 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f2f3f4; text-decoration: none"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+    <span style="font-weight: 600; font-size: 15px; flex: 1">Kontraktbridge · <span style="color: #ff9f4a">Post Mortem</span></span>
+  </div>
+
+  <div style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4a4a4a">16. november 2026 · 8 spil med notat</span>
+      <h1 style="margin: 0; font-family: Manrope, Inter, sans-serif; font-weight: 800; font-size: 1.6rem; line-height: 1.2">Aftenens læring</h1>
+    </div>
+
+    <section style="background: #1a1a1a; color: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff9f4a" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5" fill="#ff9f4a"></circle></svg>Næste gang gør vi …</h2>
+      <ol style="margin: 0; padding-left: 20px; font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px">
+        <li>Med fit og 31+ hp undersøger vi altid slem, før vi melder udgang. <span style="color: #c8ccd2">(spil 1)</span></li>
+        <li>Første afkast er O/E, også når makker har spillet ud i sans. <span style="color: #c8ccd2">(spil 24)</span></li>
+        <li>Vi tæller modpartens point før stik 2 i modspil. <span style="color: #c8ccd2">(spil 8)</span></li>
+      </ol>
+      <span style="font-size: 0.8rem; color: #c8ccd2">De 3 vigtigste: dem, I har markeret med en stjerne i notatet, ellers dem fra spil med forkert beslutning og dårligt resultat.</span>
+    </section>
+
+    <section style="background: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 1.1rem; font-weight: 600">Hvor lå fejlene?</h2>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; font-size: 0.95rem; align-items: center">
+        <span>Systemfejl <span style="font-size: 0.8rem; color: #4a4a4a">(aftale uklar eller ingen)</span></span><span style="font-weight: 600">2</span>
+        <span>Meldingsfejl <span style="font-size: 0.8rem; color: #4a4a4a">(meldeteknik, håndvurdering, konkurrence)</span></span><span style="font-weight: 600">1</span>
+        <span>Spilleplansfejl <span style="font-size: 0.8rem; color: #4a4a4a">(spilleplan, teknisk spilføring)</span></span><span style="font-weight: 600">1</span>
+        <span>Modspilsfejl <span style="font-size: 0.8rem; color: #4a4a4a">(udspil, modspil, signaler)</span></span><span style="font-weight: 600">3</span>
+        <span style="color: #4a4a4a">Ingen reel fejl</span><span style="font-weight: 600; color: #4a4a4a">1</span>
+      </div>
+    </section>
+
+    <section style="background: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 1.1rem; font-weight: 600">Beslutning eller resultat?</h2>
+      <div style="display: grid; grid-template-columns: auto 1fr 1fr; gap: 6px; font-size: 0.85rem; text-align: center; align-items: center">
+        <span></span><span style="font-weight: 600">Godt resultat</span><span style="font-weight: 600">Dårligt resultat</span>
+        <span style="font-weight: 600; text-align: left">Rigtig</span><span style="background: #d8efe9; border-radius: 8px; padding: 8px 0; font-weight: 600; color: #0d6e63">1</span><span style="background: #eceff3; border-radius: 8px; padding: 8px 0; font-weight: 600">2</span>
+        <span style="font-weight: 600; text-align: left">Forkert</span><span style="background: #d6e4f5; border-radius: 8px; padding: 8px 0; font-weight: 600; color: #163e73">1</span><span style="background: #fde4d0; border-radius: 8px; padding: 8px 0; font-weight: 600; color: #7a3410">4</span>
+      </div>
+      <p style="margin: 0; font-size: 0.85rem; color: #4a4a4a">De 4 med forkert beslutning og dårligt resultat skal trænes. De 2 med rigtig beslutning og dårligt resultat skal ikke rettes.</p>
+    </section>
+
+    <section style="background: #ffffff; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 1.1rem; font-weight: 600">Nye aftaler i dag</h2>
+      <ul style="margin: 0; padding-left: 20px; font-size: 0.92rem; display: flex; flex-direction: column; gap: 6px">
+        <li>Efter 2 over 1 og fit er 4♠ minimum; med ekstra værdier meldes 3♠ først. <span style="color: #4a4a4a">(spil 1)</span></li>
+        <li>Første afkast er O/E, også mod sans. <span style="color: #4a4a4a">(spil 24)</span></li>
+      </ul>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+        <button type="button" style="height: 48px; border-radius: 12px; border: 1px solid rgba(26,26,26,0.15); background: #ffffff; font: inherit; font-size: 0.88rem; font-weight: 600; color: #1a1a1a">Alle aftaler</button>
+        <button type="button" style="height: 48px; border-radius: 12px; border: 0; background: #1a1a1a; color: #ffffff; font: inherit; font-size: 0.88rem; font-weight: 600">Send til makker</button>
+      </div>
+    </section>
+
+    <p style="margin: 0; padding: 0 4px; font-size: 0.78rem; color: #4a4a4a">Eksempeldata: årsager, vurderinger og aftaler er opdigtede for at vise layoutet.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -270,6 +270,186 @@ export const T = {
     },
   } satisfies { label: string } & Record<'par' | 'hold', { tekst: string; punkter: string[]; slut: string }>,
 
+  // SPEC-postmortem-2a-vaerd-at-se-paa.md: knapperne til at dele aftenen (skærm 1), valget under Udskriv og mailen.
+  del: {
+    gruppe: 'Del aftenen',
+    udskriv: 'Udskriv',
+    mail: 'Mail',
+    kopier: 'Kopiér',
+    hvilke: 'Hvilke spil?',
+    // Tre valg (Franks svar 3, 18. nov. 2026). "De 8" står med listens antal, hvis en aften har færre.
+    valg: {
+      vaerd: (n: number) => `De ${n}`,
+      maerker: (n: number) => `Alle med mærker (${n})`,
+      alle: (_n: number) => 'Alle spil',
+    },
+    udskrivNu: 'Udskriv nu',
+    kopieret: 'Gennemgangen er kopieret.',
+    ikkeKopieret: 'Teksten kunne ikke kopieres. Den står i vinduet Mail og kan markeres dér.',
+  },
+
+  // Kortet "Spil værd at se på" (afsnit 1, Franks svar 2, 17. nov. 2026).
+  vaerd: {
+    titel: 'Spil værd at se på',
+    antal: (vist: number, af: number) => `${vist} af ${af}`,
+    intro: 'Sorteret efter, hvor meget jeres egne beslutninger kostede. Beslutningen bedømmes, ikke kun resultatet.',
+    ingen: 'Ingen af aftenens spil kostede noget på jeres egne beslutninger.',
+    visAlle: (n: number) => `Vis alle (${n})`,
+    visFaerre: 'Vis færre',
+    uheldige: 'Uheldige, ingen fejl: spil ',
+    hvorfor: 'Hvorfor er et spil med?',
+    regel: {
+      par: [
+        'Listen viser de 8 spil, hvor jeres egne beslutninger kostede mest: den negative del af meldinger, spilføring og modspil.',
+        'Under "Vis alle" står også de andre spil, hvor de kostede 2 point eller mere, og spil med udgang eller slem misset eller meldt uden dækning, strafdobling, et udspil, der kostede et stik, eller et heldigt resultat.',
+        'Heldigt er mindst 50 %, selv om jeres egne beslutninger kostede point. Uheldige spil, bund (under 25 %) uden egne fejl, står på én linje under listen.',
+        'Bund, top og anden kontrakt end feltet er kun ekstra mærker: de vises, men bringer ikke et spil med.',
+      ],
+      hold: [
+        'Listen viser de 8 spil, hvor jeres egne beslutninger kostede mest: den negative del af meldinger, spilføring og modspil.',
+        'Under "Vis alle" står også de andre spil, hvor de kostede 2 imp eller mere, og spil med udgang eller slem misset eller meldt uden dækning, strafdobling, et udspil, der kostede et stik, eller et heldigt resultat.',
+        'Heldigt er 0 imp eller mere, selv om jeres egne beslutninger kostede imp. Uheldige spil, under 0 imp uden egne fejl, står på én linje under listen.',
+        'Anden kontrakt end feltet er kun et ekstra mærke: det vises, men bringer ikke et spil med. Bund og top findes ikke ved holdturnering.',
+      ],
+    } satisfies Record<'par' | 'hold', string[]>,
+    filter: (n: number) => `Værd at se på · ${n}`,
+    linje: (spilfoerer: string, kontrakt: string, stik: number, score: string) => `${spilfoerer} ${kontrakt} · ${stik} stik · ${score}`,
+    imp: (imp: string) => `${imp} imp`,
+    enhed: { par: 'point', hold: 'imp' },
+    maerke: {
+      bund: 'Bund',
+      top: 'Top',
+      udgangMisset: 'Udgang misset',
+      slemMisset: 'Slem misset',
+      udgangUdenDaekning: 'Udgang meldt uden dækning',
+      slemUdenDaekning: 'Slem meldt uden dækning',
+      strafdobling: 'Strafdobling',
+      udspil: (stik: number) => `Udspillet kostede ${stik} stik`,
+      meldinger: (tal: string, enhed: string) => `Meldinger −${tal} ${enhed}`,
+      spilfoering: (stik: number) => `Spilføring −${stik} stik`,
+      modspil: (stik: number) => `Modspil −${stik} stik`,
+      andenKontrakt: 'Anden kontrakt end feltet',
+      heldigt: (grund: string) => `Heldigt: ${grund}`,
+      uheldigt: (grund: string) => `Uheldigt: ${grund}`,
+    },
+    // Grunden i Heldigt og Uheldigt (forslag 10): resultatet først, så spillets andre mærker.
+    grund: { top: 'top', godt: 'godt resultat', bund: 'bund', daarligt: 'dårligt resultat', ingenFejl: 'ingen fejl' },
+  },
+
+  // Kortet Meldesamtalen øverst i analysevinduet (afsnit 2). Ja, måske og nej følger reglen i specen (stik med åbne
+  // kort og feltet), ikke mock-up'ens tekster om sidning og kipning (Franks svar 17. nov. 2026).
+  meldesamtale: {
+    titel: 'Meldesamtalen',
+    navn: { fit: 'Fit', udgang: 'Udgang', slem: 'Slem' },
+    ord: { ja: 'Ja', maaske: 'Måske', nej: 'Nej' },
+    symbol: { ja: '✓', maaske: '~', nej: '✗' },
+    ingen: '–',
+    kunVedUdgang: 'kun ved udgang',
+    fold: (navn: string, ord: string) => `${navn}: ${ord}`,
+    fitFelt: (kort: number, farve: string) => `${kort} ${farve}`,
+    fitJa: (kort: number, farve: string, fordeling: string) => `${kort} ${farve} (${fordeling}).`,
+    fitNej: (kort: number, farve: string, fordeling: string) => `${kort} ${farve} (${fordeling}): ingen farve med 8 kort.`,
+    stik: (n: number, benaevnelser: string) => `${n} stik i ${benaevnelser}`,
+    borde: (borde: number, af: number) => `${borde} af ${af} borde`,
+    andetBord: 'det andet bord',
+    ikkeAndetBord: 'ikke det andet bord',
+    niveau: { udgang: 'udgang', slem: 'slem' },
+    facit: (stik: string, borde: string, niveau: string) => `Facit: ${stik} med åbne kort; ${borde} meldte ${niveau}.`,
+    facitHold: (stik: string, var_: boolean, niveau: string) =>
+      `Facit: ${stik} med åbne kort; det andet bord meldte ${var_ ? '' : 'ikke '}${niveau}.`,
+    benaevnelse: { NT: 'sans', S: 'spar', H: 'hjerter', D: 'ruder', C: 'klør' },
+    // "Spørg hinanden" er afsnittets navn i specen og står på bydeformtestens UNDTAGELSER.
+    spoergTitel: 'Spørg hinanden',
+    // Fra tjeklistens punkt 2–3 (specens afsnit 2) med husets ord: "et muligt majorfit".
+    spoerg: {
+      fit: ['Undersøgte vi majorfarverne?', 'Viste vi vores længder?', 'Stoppede vi i 3NT før et muligt majorfit?'],
+      udgangMaaske: ['Inviterede vi, da vi skulle?', 'Passede en af os for tidligt?'],
+      udgangUden: ['Meldte vi udgang uden nok information?'],
+      slemMaaske: ['Undersøgte vi slem?', 'Havde vi styr på esser og nøglekort?', 'Var 6NT eller slem i farve rigtigst ved parturnering?'],
+      slemUden: ['Pressede vi for hårdt?', 'Havde vi kontrol i sidefarverne?'],
+      // Fit "Ja", men I spillede en farvekontrakt uden for fittets farve (Franks svar 3, 18. nov. 2026).
+      trumf: ['Var trumffarven den rigtige?'],
+    },
+    overstik: 'Var overstikket afgørende?',
+    ejer: 'Hvem ejede spillet?',
+    side: { jer: 'I', modparten: 'Modparten' },
+    konkurrence: (side: string) => `${side} (konkurrence)`,
+    ingenKonkurrence: (side: string) => `${side} (ingen konkurrence)`,
+    ingenEjer: 'Ingen (par er pas)',
+    trumf: (jer: string, modparten: string, sum: number) => `Trumf: jer ${jer}, modparten ${modparten}, i alt ${sum} (loven om totale stik).`,
+    // Specens "spil selv / forsvar mod X" i beskrivende form (husets regel).
+    bedstSelv: (kontrakter: string) => ` Bedst for jer: selv at spille ${kontrakter}.`,
+    bedstForsvar: (kontrakter: string) => ` Bedst for jer: at forsvare mod ${kontrakter}.`,
+    // Kort form til mailen og udskriften: "Fit: ja (9♥). Udgang: ja. Slem: måske, 12 stik i sans og hjerter; 0 af 7 borde."
+    kortFit: (ord: string, kort: number, symbol: string) => `Fit: ${ord} (${kort}${symbol}).`,
+    kortNiveau: (navn: string, ord: string, grund: string) => `${navn}: ${ord}${grund ? `, ${grund}` : ''}.`,
+  },
+
+  // Udskriften (afsnit 3, skærm 4): side 1 og én side pr. spil.
+  udskrift: {
+    top: (dato: string, navn: string) => `Post Mortem · ${dato} · ${navn}`,
+    side: (n: number, af: number) => `Side ${n} af ${af}`,
+    titel: 'Gennemgang af aftenen',
+    spil: (n: number) => `Spil ${n}`,
+    point: (point: string, top: string) => ` · ${point} af ${top} point`,
+    vedBordet: 'Ved jeres bord:',
+    feltet: 'Feltet:',
+    aabneKort: 'Med åbne kort:',
+    par: (par: string, score: string) => `par ${par}, ${score}.`,
+    faktorer: 'Hvor gik pointene?',
+    // Overskriften over listen på side 1 for de tre valg.
+    liste: {
+      vaerd: (n: number) => `Spil værd at se på (${n})`,
+      maerker: (n: number) => `Alle med mærker (${n})`,
+      alle: (n: number) => `Alle spil (${n})`,
+    },
+    spoerg: 'Spørg hinanden:',
+    beslutning: 'Beslutning eller resultat?',
+    beslutninger: ['Rigtig, godt', 'Rigtig, dårligt', 'Forkert, godt', 'Forkert, dårligt'],
+    aftale: 'Aftalestatus',
+    aftaler: ['Klar aftale', 'Uklar aftale', 'Ingen aftale'],
+    aarsag: 'Primær årsag:',
+    naesteGang: 'Næste gang gør vi … / ny aftale',
+    kommentarer: 'Kommentarer',
+    fod: 'www.kontraktbridge.dk/postmortem/ · ingen navne',
+    giver: (plads: string) => `Giver ${plads}`,
+    boks: '☐',
+  },
+
+  // Vinduet "Aftenen til makker" (`#/mail`, skærm 3; mock-up'ens "Send aftenen til makker" i beskrivende form) og
+  // teksten, der kopieres og sendes (afsnit 4).
+  mail: {
+    tilbage: 'Tilbage til oversigten',
+    titel: 'Aftenen til makker',
+    kopier: '1. Kopiér gennemgangen',
+    aabn: '2. Åbn mail, og sæt ind',
+    hjaelp: (emne: string) =>
+      `Mailen åbner med emnet "${emne}". Teksten sættes ind i mailen. På telefonen åbner del-knappen i stedet, og teksten kommer med af sig selv.`,
+    forhaand: 'Sådan ser teksten ud',
+    note: 'Ingen navne, kun "I" og "modparten". Makker skriver under "Kommentar:" og svarer på mailen.',
+    emnePar: (dato: string, procent: string) => `Post Mortem: ${dato}, ${procent} %`,
+    emneHold: (dato: string, imp: string) => `Post Mortem: ${dato}, ${imp} imp`,
+    krop: 'Gennemgangen er kopieret og sættes ind her.',
+  },
+  gennemgang: {
+    titel: (dato: string) => `Post Mortem · ${dato}`,
+    aften: (navn: string, antal: number) => `${navn} · ${antal} spil`,
+    bord: (bord: number, retning: string, antal: number) => `Bord ${bord}, ${retning} · ${antal} spil`,
+    resultatPar: (procent: string, point: string, top: string) => `Resultat: ${procent} % (${point} af ${top} point)`,
+    resultatHold: (imp: string) => `Resultat: ${imp} imp mod jeres andet bord`,
+    faktorer: { par: 'Hvor gik pointene? (mod middel)', hold: 'Hvor gik pointene? (imp)' },
+    faktorNavn: { meldinger: 'Meldinger', spilfoering: 'Spilføring', modspil: 'Modspil', held: 'Held og uheld' } satisfies Record<Faktor, string>,
+    overskrift: {
+      vaerd: (n: number) => `SPIL VÆRD AT SE PÅ (${n})`,
+      maerker: (n: number) => `ALLE MED MÆRKER (${n})`,
+      alle: (n: number) => `ALLE SPIL (${n})`,
+    },
+    spil: (n: number, linje: string, resultat: string) => `Spil ${n} · ${linje} · ${resultat}`,
+    kommentar: 'Kommentar:',
+    uheldige: (numre: string) => `Uheldige, ingen fejl: spil ${numre}`,
+    adresse: 'www.kontraktbridge.dk/postmortem/',
+  },
+
   // Én linje pr. faktor i analysevinduet.
   forklaring: {
     meldingerBedre: (par: string) => `${par} var bedre.`,

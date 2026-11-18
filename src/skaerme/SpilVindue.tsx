@@ -5,6 +5,7 @@ import { feltGrupper, forkertUdspil, viSpillede } from '../udledt';
 import { Bridgebord } from '../ui/Bridgebord';
 import { InfoKnap, PointInfo, useInfo } from '../ui/Info';
 import { Farver, Side, Sidefod, TopBar } from '../ui/Ramme';
+import { MeldesamtaleKort } from './Meldesamtale';
 import { Raad } from './Raad';
 
 const KOLONNER: [Benaevnelse, string][] = [['C', '♣'], ['D', '♦'], ['H', '♥'], ['S', '♠'], ['NT', 'NT']];
@@ -117,6 +118,9 @@ export function SpilVindue({ svar, nummer }: { svar: Analyse; nummer: number }) 
             <span className="rund tom" aria-hidden="true" />
           )}
         </div>
+
+        {/* SPEC-postmortem-2a: Meldesamtalen øverst i analysevinduet (skærm 2). */}
+        <MeldesamtaleKort key={s.nummer} a={a} s={s} />
 
         <div className="spil-gitter">
           <div className="kort bord-kort">
