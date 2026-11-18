@@ -1,6 +1,6 @@
 # SPEC – Post Mortem v2a: spil værd at se på, meldesamtalen, udskrift og mail
 
-17. november 2026 · repo `Postmortem` · gren `vaerd-at-se-paa`, tag før: `v-foer-vaerd-at-se-paa`. Planen er `docs/specs/PLAN-postmortem-v2.md`.
+17. november 2026 · repo `Postmortem` · gren `vaerd-at-se-paa`, tag før: `v-foer-vaerd-at-se-paa`. Godkendt af Frank og udgivet 18. november 2026 (`7b05d61`); grenen er slettet. Planen er `docs/specs/PLAN-postmortem-v2.md`.
 
 ## Formål
 
@@ -162,7 +162,7 @@ Tre statusfelter: **FIT**, **UDGANG** og **SLEM**. Hvert felt har et symbol og e
 
 (udfyldes af Claude Code. Tokenforbruget skrives i fire tal: nye input, skrevet til cachen, læst fra cachen og output.)
 
-**Status (18. november 2026):** Franks svar 3 og godkendelse er kommet. Rettelserne bygges i fjerde session; når alt er grønt, flettes, pushes, udrulles og live-tjekkes der.
+**Status (18. november 2026): godkendt af Frank og udgivet.** Franks svar 3 er bygget i fjerde session, og alle tests er grønne. 2a er flettet ind på `main` (`7b05d61`), pushet, udrullet med zip og tjekket live på aftenen 16. november (se Udgivelse under fjerde session nedenfor).
 
 **Bekræftet af Frank 18. nov. (svar 3):**
 - grænserne for bund og top (25 % og 75 %);
@@ -420,7 +420,7 @@ Afsnit 1–4 og accepttest 1, 3, 4 og 5 er rettet efter svaret. **Sådan er svar
 
 ### Fjerde session (18. november 2026): rettelserne og udgivelsen
 
-- **Status:** Franks svar 3 er bygget på grenen `vaerd-at-se-paa`, og alle tests er grønne, så 2a er godkendt efter svaret.
+- **Status:** Franks svar 3 er bygget på grenen `vaerd-at-se-paa`, og alle tests er grønne, så 2a er godkendt efter svaret. 2a er flettet, pushet, udrullet og tjekket live, og grenen er slettet.
 - **Commits på grenen:** `7ef1266` (Franks svar 3 ordret og specen rettet), `14733c0` (accepttestene, røde før rettelsen), `6a00fee` (rettelsen) og denne med status.
 - **Rød → grøn:**
 
@@ -437,6 +437,18 @@ Afsnit 1–4 og accepttest 1, 3, 4 og 5 er rettet efter svaret. **Sådan er svar
 - **Funktionen** er ændret på to punkter: mærket Uheldigt kræver bund ved parturnering, og `vaerdAtSePaa.medMaerker` er nyt (`api/SVAR.md`). Testsvarene i `src/test/data/` er lavet igen som i README; kun de to ting er ændret (`test_7_alt_andet_i_svaret_er_som_foer` består).
 - **Listen for 16. november:** de 8 er 1, 4, 8, 25, 29, 6, 24 og 9, "Vis alle (18)" viser derudover 5, 21, 14, 11, 13, 32, 17, 18, 22 og 19, og linjen er "Uheldige, ingen fejl: spil 15 og 20". "Alle med mærker (26)" er de 18 og 7, 15, 20, 28, 30, 2, 16 og 23.
 - **`CLAUDE.md` og README** har hver en linje om `tools/tjek_udskrift.mjs`.
+- **Udgivelse (18. november 2026):**
+  - Flettet: `7b05d61` (06:38 UTC) fletter grenen (`1467c72`) ind på `main` (`d973315`) med `git merge --no-ff` og er pushet; `main` er lig med `origin/main`. Tagget `v-foer-vaerd-at-se-paa` (`d973315`) er pushet.
+  - GitHub Actions for `7b05d61`: "api" (44252835409) er grøn, og "Udgiv på GitHub Pages" (44252835471) er grøn. Tagget satte også en "api"-kørsel i gang på `d973315` (44252838251), som er grøn.
+  - Funktionen er udrullet med zip som i README (14 filer, `C:\Users\frank\Kontraktbridge\postmortem.zip`): deployment `c7ca2196` sluttede kl. 06:42:16 UTC med status 4 (Success), færdig og aktiv, og `analyse` og `slet_ip_vinduer` er på plads. Ingen app-indstillinger er ændret.
+  - Live-tjek på www.kontraktbridge.dk/postmortem/ ved 390 px kl. 06:45 UTC i Chrome, én kørsel med én analyse af 16. november, par 1:
+    - den udgivne app har spørgsmålet om trumffarven;
+    - oversigten har 50,4 %, listen viser de 8 (spil 1, 4, 8, 25, 29, 6, 24 og 9) med "8 af 32", knappen "Vis alle (18)" og linjen "Uheldige, ingen fejl: spil 15 og 20";
+    - Udskriv har de tre valg "De 8", "Alle med mærker (26)" og "Alle spil" med 9, 27 og 33 sider, og mailen har de samme tre valg;
+    - spil 7's meldesamtale har folden "Fit: ja" åben med "Spørg hinanden: Var trumffarven den rigtige?";
+    - ingen vandret rulning i spil 7 og ingen fejl i browserens konsol.
+  - Skærmbillede af spil 7's meldesamtale fra live-sitet (kun kortet Meldesamtalen, 358 × 460 px, ingen spillernavne; uden for git): `C:\Users\frank\Kontraktbridge\skaermbilleder\vaerd-at-se-paa\live-spil-7-meldesamtale.png`.
+  - Grenen `vaerd-at-se-paa` er slettet lokalt og findes ikke på GitHub (den blev aldrig pushet).
 
 ## Arbejdsgang
 
